@@ -1,0 +1,14 @@
+master: 
+  host: 10.104.64.76
+  port: 3306
+  username: blue3200
+#  password: bluemain3200
+  password: q1w2e3r4t5
+  database: blue3200_godomall_com
+slave1:
+  host: 10.104.64.76
+  port: 3306
+  username: blue3200
+ # password: bluemain3200
+  password: q1w2e3r4t5
+  database: blue3200_godomall_com
