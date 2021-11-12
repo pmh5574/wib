@@ -536,7 +536,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         $validator->add('account', '', ''); // 계좌 정보
         $validator->add('delFl', 'yn', true); // 삭제여부
         
-        //211112 디자인위브 추가 필드
+        /* 211112 디자인위브 mh 추가 필드 */
         $validator->add('scmVat', 'number', false); // 협력사 관부가세
         $validator->add('scmUrl', '', false); // 협력사 홈페이지
         $validator->add('scmEmail', '', false); // 협력사 이메일
