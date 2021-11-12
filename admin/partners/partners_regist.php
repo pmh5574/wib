@@ -11,7 +11,7 @@
         display:none !important;
     }
 </style>
-<form id="frmScm" name="frmScm" action="scm_ps.php" method="post" enctype="multipart/form-data">
+<form id="frmScm" name="frmScm" action="partners_ps.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="<?= $getData['mode'] ?>"/>
     <input type="hidden" name="scmNo" value="<?= $getData['scmNo'] ?>"/>
     <input type="hidden" name="isProvider" value="n"/>
@@ -102,7 +102,7 @@
                 <input type="text" name="" value="" maxlength="20" class="form-control width-sm"/>
             </td>
             <th>
-                업체 이미지
+                업체 대표 이미지
             </th>
             <td class="form-inline">
                 <?php
@@ -149,7 +149,7 @@
                 </div>
             </td>
         </tr>
-        <tr>
+        <tr class="dn">
             <th class="require">
                 판매수수료
             </th>
@@ -248,16 +248,139 @@
         </tr>
         <tr>
             <th>
-                공급사코드
+                업체코드
             </th>
             <td class="form-inline">
-                <input type="text" name="scmCode" value="<?= $getData['scmCode'] ?>" class="form-control width-sm"/>
+                <input type="text" name="scmCode" value="<?= $getData['scmCode'] ?>" class="form-control width-xl"/>
             </td>
             <th>
                 이미지 저장소 기본값
             </th>
             <td class="form-inline">
                 <?=gd_select_box('imageStorage', 'imageStorage', $conf['storage'], null, $getData['imageStorage'], null, null); ?>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                관부가세
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmVat" value="<?= gd_isset($getData['scmVat']); ?>" class="form-control width-xl"/>
+            </td>
+            <th>
+                홈페이지
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmUrl" value="<?= $getData['scmUrl']; ?>" class="form-control width-sm"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                이메일
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmEmail" value="<?= $getData['scmEmail']; ?>" class="form-control width-xl"/>
+            </td>
+            <th>
+                연락처
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmPhone" value="<?= $getData['scmPhone']; ?>" class="form-control width-sm"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                크레딧
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmCredit" value="<?= gd_isset($getData['scmCredit']); ?>" class="form-control width-sm"/>€
+            </td>
+            <th>
+                보증금
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmDeposit" value="<?= gd_isset($getData['scmDeposit']); ?>" class="form-control width-sm"/>€
+            </td>
+        </tr>
+        <tr>
+            <th>
+                화폐
+            </th>
+            <td class="form-inline">
+                <select name="scmUnit" class="form-control">
+                    <option value="E">EUR</option>
+                    <option value="U">USD</option>
+                </select>
+            </td>
+            <th>
+                갱신주기
+            </th>
+            <td class="form-inline">
+                <select name="scmWeeks" class="form-control">
+                    <option value="0">일요일</option>
+                    <option value="1">월요일</option>
+                    <option value="2">화요일</option>
+                    <option value="3">수요일</option>
+                    <option value="4">목요일</option>
+                    <option value="5">금요일</option>
+                    <option value="6">토요일</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                메신저
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmMessenger" value="<?= $getData['scmMessenger']; ?>" class="form-control width-sm"/>
+            </td>
+            <th>
+                메시전 ID
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmMessengerId" value="<?= $getData['scmMessengerId']; ?>" class="form-control width-xl"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                API 시작 경로
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmApiStart" value="<?= $getData['scmApiStart']; ?>" class="form-control width-xl"/>
+            </td>
+            <th>
+                API 종료 경로
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmApiEnd" value="<?= $getData['scmApiEnd']; ?>" class="form-control width-xl"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                상품 URL 연동
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmGoodsUrl" value="<?= $getData['scmGoodsUrl']; ?>" class="form-control width-xl"/>
+            </td>
+            <th>
+                URL 연동방식
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmGoodsUrlFl" value="<?= $getData['scmGoodsUrlFl']; ?>" class="form-control width-xl"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                이미지 연동
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmImageUrl" value="<?= $getData['scmImageUrl']; ?>" class="form-control width-sm"/>
+            </td>
+            <th>
+                이미지 연동 방식
+            </th>
+            <td class="form-inline">
+                <input type="text" name="scmImageUrlFl" value="<?= $getData['scmImageUrlFl']; ?>" class="form-control width-sm"/>
             </td>
         </tr>
         <tr>

@@ -215,7 +215,7 @@
                     <td><?= $row['scmPermissionDelete']; ?></td>
                     <td><?= $row['scmInsertAdminId']; ?></td>
                     <td><?= gd_date_format('Y-m-d', $row['regDt']); ?></td>
-                    <td><a href="../scm/scm_regist.php?scmno=<?= $row['scmNo']; ?>" class="btn btn-dark-gray btn-sm">수정</a></td>
+                    <td><a href="../partners/partners_regist.php?scmno=<?= $row['scmNo']; ?>" class="btn btn-dark-gray btn-sm">수정</a></td>
                 </tr>
                 <?php
             }

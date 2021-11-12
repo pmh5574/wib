@@ -76,7 +76,7 @@ class PartnersRegistController extends \Controller\Admin\Controller
                 $getData['managerId'] = $scmAdmin->getScmSuperManagerId($scmNo);
 
                 $getData['mode'] = 'modifyScmModify';
-                $this->callMenu('scm', 'scm', 'scmModify');
+                $this->callMenu('partners', 'partners', 'partners_list');
 
                 if ($getData['scmNo'] != DEFAULT_CODE_SCMNO) {
                     $this->getView()->setDefine('layoutFunctionAuth', 'policy/_manage_function_auth_scm.php');// 리스트폼
@@ -87,7 +87,7 @@ class PartnersRegistController extends \Controller\Admin\Controller
                 $getData['chkSameUnstoringAddr'] = 'y';
                 $getData['chkSameReturnAddr'] = 'y';
 
-                $this->callMenu('scm', 'scm', 'scmRegist');
+                $this->callMenu('partners', 'partners', 'partners_list');
 
                 $this->getView()->setDefine('layoutFunctionAuth', 'policy/_manage_function_auth_scm.php');// 리스트폼
             }
