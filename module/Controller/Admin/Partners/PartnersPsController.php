@@ -61,7 +61,7 @@ class PartnersPsController extends \Controller\Admin\Controller
                             $postValue['functionAuth']['mainStatisticsSales'] = 'y';
                         }
                     }
-
+                    
                     $scmNo = $scmAdmin->saveScm($postValue, $filesValue);
 
                     // 공급사 권한 저장

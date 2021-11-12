@@ -486,7 +486,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                 unset($arrData['scmCommissionDeliveryNew']);
             }
         }
-
+        
         $validator->add('mode', 'alpha', true); // 모드
         $validator->add('companyNm', '', true); // 공급사명
         $validator->add('scmType', '', true); // 공급사상태-운영('y'), 일시정지('n'), 탈퇴('x')
@@ -535,9 +535,29 @@ class WibScmAdmin extends \Component\Scm\Scm
         $validator->add('staff', '', ''); // 담당자 정보
         $validator->add('account', '', ''); // 계좌 정보
         $validator->add('delFl', 'yn', true); // 삭제여부
+        
+        //211112 디자인위브 추가 필드
+        $validator->add('scmVat', 'number', false); // 협력사 관부가세
+        $validator->add('scmUrl', '', false); // 협력사 홈페이지
+        $validator->add('scmEmail', '', false); // 협력사 이메일
+        $validator->add('scmPhone', '', false); // 협력사 연락처
+        $validator->add('scmCredit', 'number', false); // 협력사 크레딧
+        $validator->add('scmDeposit', 'number', false); // 협력사 보증금
+        $validator->add('scmUnit', '', false); // 협력사 화폐
+        $validator->add('scmWeeks', 'number', false); // 협력사 갱신주기
+        $validator->add('scmMessenger', '', false); // 협력사 메신저
+        $validator->add('scmMessengerId', '', false); // 협력사 메신저 ID
+        $validator->add('scmApiStart', '', false); // 협력사 API 시작 경로
+        $validator->add('scmApiEnd', '', false); // 협력사 API 종료 경로
+        $validator->add('scmGoodsUrl', '', false); // 협력사 상품 URL 연동
+        $validator->add('scmGoodsUrlFl', '', false); // 협력사 URL 연동 방식
+        $validator->add('scmImageUrl', '', false); // 협력사 이미지 연동
+        $validator->add('scmImageUrlFl', '', false); // 협력사 이미지 연동 방식
+       
         if ($validator->act($arrData, true) === false) {
             throw new \Exception(implode("<br/>", $validator->errors));
         }
+
         //        $arrData = ArrayUtils::removeEmpty($arrData);
         switch (substr($arrData['mode'], 0, 6)) {
             case 'insert':
