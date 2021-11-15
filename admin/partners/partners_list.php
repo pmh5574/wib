@@ -7,7 +7,7 @@
 
 <form id="frmSearchScm" method="get" class="js-form-enter-submit">
     <div class="table-title">
-        공급사 검색
+        협력사 검색
     </div>
     <div class="search-detail-box">
         <table class="table table-cols">
@@ -40,44 +40,29 @@
                 </td>
             </tr>
             <tr>
-                <th>상품등록권한</th>
-                <td colspan="3">
-                    <label class="radio-inline">
-                        <input type="radio" name="scmPermissionInsert" value="" <?= $checked['scmPermissionInsert']['']; ?>/>전체
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="scmPermissionInsert" value="a" <?= $checked['scmPermissionInsert']['a']; ?>/>자동승인
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="scmPermissionInsert" value="c" <?= $checked['scmPermissionInsert']['c']; ?>/>관리자승인
-                    </label>
+                <th>화폐</th>
+                <td>
+                    <div class="form-inline">
+                        <select class="form-control">
+                            <option value="">전체</option>
+                            <option value="u">USD</option>
+                            <option value="e">EUR</option>
+                        </select>
+                    </div>
                 </td>
-            </tr>
-            <tr>
-                <th>상품수정권한</th>
-                <td colspan="3">
+                <th>API 연결 상태</th>
+                <td>
                     <label class="radio-inline">
                         <input type="radio" name="scmPermissionModify" value="" <?= $checked['scmPermissionModify']['']; ?>/>전체
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="scmPermissionModify" value="a" <?= $checked['scmPermissionModify']['a']; ?>/>자동승인
+                        <input type="radio" name="scmPermissionModify" value="a" <?= $checked['scmPermissionModify']['a']; ?>/>연결
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="scmPermissionModify" value="c" <?= $checked['scmPermissionModify']['c']; ?>/>관리자승인
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <th>상품삭제권한</th>
-                <td colspan="3">
-                    <label class="radio-inline">
-                        <input type="radio" name="scmPermissionDelete" value="" <?= $checked['scmPermissionDelete']['']; ?>/>전체
+                        <input type="radio" name="scmPermissionModify" value="c" <?= $checked['scmPermissionModify']['c']; ?>/>미등록
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="scmPermissionDelete" value="a" <?= $checked['scmPermissionDelete']['a']; ?>/>자동승인
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="scmPermissionDelete" value="c" <?= $checked['scmPermissionDelete']['c']; ?>/>관리자승인
+                        <input type="radio" name="scmPermissionModify" value="c" <?= $checked['scmPermissionModify']['c']; ?>/>실패
                     </label>
                 </td>
             </tr>
@@ -90,7 +75,7 @@
 
     <div class="table-header">
         <div class="pull-left">
-            공급사 리스트 (검색결과
+            협력사 리스트 (검색결과
             <strong><?= number_format($page->recode['total'], 0); ?></strong>건, 전체<strong><?= number_format($page->recode['amount'], 0); ?></strong>건)
         </div>
         <div class="pull-right">
@@ -128,8 +113,8 @@
             <th><input type="checkbox" class="js-checkall" data-target-name="chkScm[]"/></th>
             <th>상태</th>
             <th>아이디</th>
-            <th>공급사명</th>
-            <th>공급사타입</th>
+            <th>협력사명</th>
+            <th>협력사타입</th>
             <th>상품수수료</th>
             <th>배송수수료</th>
             <th>상품등록권한</th>
@@ -157,7 +142,7 @@
                 if ($row['scmKind'] == 'c') {
                     $row['scmKind'] = '본사';
                 } else if ($row['scmKind'] == 'p') {
-                    $row['scmKind'] = '공급사';
+                    $row['scmKind'] = '협력사';
                 }
                 if ($row['scmPermissionInsert'] == 'a') {
                     $row['scmPermissionInsert'] = '자동승인';
@@ -223,7 +208,7 @@
             ?>
             <tr>
                 <td colspan="13" class="no-data">
-                    검색된 공급사가 없습니다.
+                    검색된 협력사가 없습니다.
                 </td>
             </tr>
             <?php
@@ -257,7 +242,7 @@
             },
             messages: {
                 'chkScm[]': {
-                    required: "삭제할 공급사를 선택해 주세요.",
+                    required: "삭제할 협력사를 선택해 주세요.",
                 }
             }
         });
@@ -266,8 +251,8 @@
             if ($('#frmScmList').valid()) {
                 BootstrapDialog.confirm({
                     type: BootstrapDialog.TYPE_DANGER,
-                    title: '공급사삭제',
-                    message: '선택된 ' + $('input[name*=chkScm]:checked').length + '개의 공급사를 정말로 삭제 하시겠습니까?<br />삭제 시 정보는 복구 되지 않습니다.',
+                    title: '협력사삭제',
+                    message: '선택된 ' + $('input[name*=chkScm]:checked').length + '개의 협력사를 정말로 삭제 하시겠습니까?<br />삭제 시 정보는 복구 되지 않습니다.',
                     closable: false,
                     callback: function (result) {
                         if (result) {

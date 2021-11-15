@@ -20,14 +20,14 @@
         <h3><?php echo end($naviMenu->location); ?></h3>
         <div class="btn-group">
             <?php if($popupMode != 'yes') {?>
-                <input type="button" value="목록" class="btn btn-white btn-icon-list" onclick="goList('./scm_list.php');" />
+                <input type="button" value="목록" class="btn btn-white btn-icon-list" onclick="goList('./partners_list.php');" />
             <?php }?>
             <input type="submit" value="저장" class="btn btn-red"/>
         </div>
     </div>
 
     <div class="table-title">
-        공급사 등록
+        협력사 등록
     </div>
     <table class="table table-cols">
         <colgroup>
@@ -42,7 +42,7 @@
             ?>
             <tr>
                 <th>
-                    공급사 타입
+                    협력사 타입
                 </th>
                 <td colspan="3">
                     <?= $getData['scmKindName']; ?>
@@ -89,7 +89,7 @@
                     ?>
                     <input type="text" name="managerNickNm" value="" maxlength="20" class="form-control width-sm"/>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="scmSameNick" value="Y"/>공급사명과 동일
+                        <input type="checkbox" name="scmSameNick" value="Y"/>협력사명과 동일
                     </label>
                     <?php
                 }
@@ -308,8 +308,8 @@
             </th>
             <td class="form-inline">
                 <select name="scmUnit" class="form-control">
-                    <option value="E">EUR</option>
-                    <option value="U">USD</option>
+                    <option value="e">EUR</option>
+                    <option value="u">USD</option>
                 </select>
             </td>
             <th>
@@ -424,10 +424,10 @@
         </tr>
         </tbody>
     </table>
-    <div class="notice-info">기본수수료는 공급사 상품 등록 시 기본적으로 적용되는 수수료이며 상품 등록 시 상품별로 수수료를 다르게 설정 할 수 있습니다.<br/>특정 기간에 상품에 등록된 수수료가 아닌 별도의 수수료 적용이 필요할 경우 추가수수료를 등록하시기 바랍니다.</div>
-    <div class="notice-info">추가된 수수료는 <a href="./scm_commission_list.php" class="btn-link">[공급사 > 공급사 관리 > 공급사 수수료관리]</a>에서 기간별 설정이 가능합니다.<br/>배송비수수료의 “판매수수료 동일 적용“ 체크시 판매수수료에 등록된 수수료를 배송비수수료로 설정할 수 있으며,<br/>공급사 수수료관리에서 기간별 수수료 설정 시 판매수수료 기준으로 배송비수수료가 동일하게 적용됩니다.</div>
+    <div class="notice-info">기본수수료는 협력사 상품 등록 시 기본적으로 적용되는 수수료이며 상품 등록 시 상품별로 수수료를 다르게 설정 할 수 있습니다.<br/>특정 기간에 상품에 등록된 수수료가 아닌 별도의 수수료 적용이 필요할 경우 추가수수료를 등록하시기 바랍니다.</div>
+    <div class="notice-info">추가된 수수료는 <a href="./scm_commission_list.php" class="btn-link">[협력사 > 협력사 관리 > 협력사 수수료관리]</a>에서 기간별 설정이 가능합니다.<br/>배송비수수료의 “판매수수료 동일 적용“ 체크시 판매수수료에 등록된 수수료를 배송비수수료로 설정할 수 있으며,<br/>협력사 수수료관리에서 기간별 수수료 설정 시 판매수수료 기준으로 배송비수수료가 동일하게 적용됩니다.</div>
     <div class="table-title">
-        공급사 정보
+        협력사 정보
     </div>
     <table class="table table-cols">
         <colgroup>
@@ -657,7 +657,7 @@
     if ($layoutFunctionAuth) {
         ?>
         <div class="table-title">
-            공급사 기능 권한
+            협력사 기능 권한
         </div>
         <?php include $layoutFunctionAuth; ?>
     <?php } ?>
@@ -1022,24 +1022,24 @@
             },
             messages: {
                 companyNm: {
-                    required: '공급사명을 입력해주세요.',
+                    required: '협력사명을 입력해주세요.',
                 },
                 scmType: {
-                    required: '공급사 상태를 선택해주세요.',
+                    required: '협력사 상태를 선택해주세요.',
                 },
                 managerId: {
-                    required: '공급사 로그인ID를 입력해주세요.',
-                    minlength: '공급사 로그인ID는 최소 {0}자 이상 입력해주세요.',
-                    maxlength: '공급사 로그인ID는 최대 {0}자 이하 입력해주세요.',
-                    equalTo: '공급사 로그인ID 중복체크 해주세요.',
+                    required: '협력사 로그인ID를 입력해주세요.',
+                    minlength: '협력사 로그인ID는 최소 {0}자 이상 입력해주세요.',
+                    maxlength: '협력사 로그인ID는 최대 {0}자 이하 입력해주세요.',
+                    equalTo: '협력사 로그인ID 중복체크 해주세요.',
                 },
                 managerPw: {
-                    required: '공급사 로그인비밀번호를 입력해주세요.',
-                    minlength: '공급사 로그인비밀번호는 최소 {0}자 이상 입력해주세요.',
-                    maxlength: '공급사 로그인비밀번호는 최대 {0}자 이하 입력해주세요.',
+                    required: '협력사 로그인비밀번호를 입력해주세요.',
+                    minlength: '협력사 로그인비밀번호는 최소 {0}자 이상 입력해주세요.',
+                    maxlength: '협력사 로그인비밀번호는 최대 {0}자 이하 입력해주세요.',
                 },
                 scmKind: {
-                    required: '공급사 타입을 선택해주세요.',
+                    required: '협력사 타입을 선택해주세요.',
                 },
                 scmPermissionInsert: {
                     required: '상품등록권한을 선택해주세요.',
@@ -1103,7 +1103,7 @@
                 $('.scmcommissionDelivery').addClass('commissionDeliveryRequired');
             }
         });
-        // 닉네임 공급사명과 동일체크
+        // 닉네임 협력사명과 동일체크
         $('input:checkbox[name^="scmSameNick"]').click(function (e) {
             changeSameNickName();
         });
@@ -1427,19 +1427,19 @@
     }
 
     /**
-     * 공급사 번호 리턴
+     * 협력사 번호 리턴
      * @returns {string}
      */
     function get_scmno() {
         var scmNo = ''; // 기본값
-        if ($('#frmScm input:hidden[name="mode"]').val() == 'modifyScmModify' && $('#frmScm input:hidden[name="scmNo"]').length) { // 공급사 사용 중이고 공급사 관리모드가 아닌 경우
+        if ($('#frmScm input:hidden[name="mode"]').val() == 'modifyScmModify' && $('#frmScm input:hidden[name="scmNo"]').length) { // 협력사 사용 중이고 협력사 관리모드가 아닌 경우
             scmNo = $('#frmScm input:hidden[name="scmNo"]').val();
         }
         return scmNo;
     }
 
     /**
-     * 공급사 구분 리턴
+     * 협력사 구분 리턴
      * @returns {string}
      */
     function get_scmfl() {

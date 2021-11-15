@@ -28,10 +28,10 @@ class WibScmAdmin extends \Component\Scm\Scm
     const TEXT_REQUIRE_VALUE = '%s은(는) 필수 항목 입니다.';
     const TEXT_USELESS_VALUE = '%s은(는) 사용할 수 없습니다.';
     const OPENAPI_SUCCESS_VALIDATION    = '000';     // scm 정보 유효성체크 성공 및 이메일 정보 있음
-    const OPENAPI_NOT_MATCH_SCM         = '100';     // 매칭되는 공급사 없음
-    const OPENAPI_EMPTY_MANAGER_EMAIL   = '200';     // 공급사 대표 이메일 없음
+    const OPENAPI_NOT_MATCH_SCM         = '100';     // 매칭되는 협력사 없음
+    const OPENAPI_EMPTY_MANAGER_EMAIL   = '200';     // 협력사 대표 이메일 없음
     const OPENAPI_ERROR_ETC             = '300';     // 그 외 오류사항
-    const OPENAPI_NOT_AUTH_EMAIL        = '400';     // 공급사 대표 이메일은 있지만 미인증 상태인 경우
+    const OPENAPI_NOT_AUTH_EMAIL        = '400';     // 협력사 대표 이메일은 있지만 미인증 상태인 경우
 
     protected $storage;
 
@@ -49,14 +49,14 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 정보 가져오기
+     * 협력사 정보 가져오기
      *
      * @author su
      */
     public function getScm($scmNo)
     {
         $data = [];
-        // 공급사 정보 + 공급사 슈퍼운영자 정보
+        // 협력사 정보 + 협력사 슈퍼운영자 정보
         $this->db->strField = "sm.*, m.managerId as managerId, m.managerNickNm as managerNickNm, m.dispImage as dispImage";
         $join[] = 'LEFT JOIN ' . DB_MANAGER . ' as m ON m.scmNo=sm.scmNo and m.isSuper="y" ';
         $this->db->strJoin = implode('', $join);
@@ -115,13 +115,13 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 상호명 중복확인
+     * 협력사 상호명 중복확인
      *
      * @author su
      */
     public function getDuplicateScmCompanyNm($scmCompanyNm)
     {
-        // 공급사 정보
+        // 협력사 정보
         $this->db->strField = "sm.scmNo";
         $this->db->strWhere = "sm.companyNm=?";
         $this->db->bind_param_push($arrBind, 's', $scmCompanyNm);
@@ -141,11 +141,11 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 최고 관리자 아이디 정보
+     * 협력사 최고 관리자 아이디 정보
      *
-     * @param  int scmNo 공급사 고유번호
+     * @param  int scmNo 협력사 고유번호
      *
-     * @return string managerId 공급사 아이디
+     * @return string managerId 협력사 아이디
      */
     public function getScmSuperManagerId($scmNo)
     {
@@ -159,9 +159,9 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 최고 관리자 정보
+     * 협력사 최고 관리자 정보
      *
-     * @param  int scmNo 공급사 고유번호
+     * @param  int scmNo 협력사 고유번호
      *
      * @return array 관리자 정보
      */
@@ -205,7 +205,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 리스트 가져오기
+     * 협력사 리스트 가져오기
      *
      * @author su
      */
@@ -221,12 +221,12 @@ class WibScmAdmin extends \Component\Scm\Scm
         } else {
             $sort['fieldName'] = 'sm.' . $sort['fieldName'];
         }
-
+        print_r($getValue);
         if ($mode == 'layer') {
             // --- 페이지 기본설정
             if (gd_isset($getValue['pagelink'])) {
                 $getValue['page'] = (int)str_replace('page=', '', preg_replace('/^{page=[0-9]+}/', '', gd_isset($getValue['pagelink'])));
-                // --- 공급사만 출력하기 위해 사용
+                // --- 협력사만 출력하기 위해 사용
                 $getValue['scmCommissionSet'] = strpos($getValue['pagelink'], 'scmCommissionSet=p');
             } else {
                 $getValue['page'] = 1;
@@ -287,7 +287,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 리스트 가져오기 엑셀
+     * 협력사 리스트 가져오기 엑셀
      *
      * @author su
      */
@@ -342,7 +342,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 등록
+     * 협력사 등록
      *
      * @author su
      *
@@ -392,7 +392,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         $staff = gd_htmlspecialchars_addslashes($staff);
         $arrData['staff'] = json_encode($staff, JSON_UNESCAPED_UNICODE);
 
-        if($arrData['isProvider'] == 'n') { // 본사에서 저장 시에만 계좌 정보 값 저장 ( 공급사 > 기본정보설정에서 저장시 제외 )
+        if($arrData['isProvider'] == 'n') { // 본사에서 저장 시에만 계좌 정보 값 저장 ( 협력사 > 기본정보설정에서 저장시 제외 )
             $specialChar = ['<', '>', '\\', '"', '\'', '`']; // 특수문자 제거
             // 계좌 정보
             $account = [];
@@ -422,10 +422,10 @@ class WibScmAdmin extends \Component\Scm\Scm
         // Validation
         $validator = new Validator();
         if (substr($arrData['mode'], 0, 6) == 'modify') {
-            $validator->add('scmNo', 'number', true); // 공급사 고유번호
+            $validator->add('scmNo', 'number', true); // 협력사 고유번호
         } else {
             if ($this->getDuplicateScmCompanyNm($arrData['companyNm'])) {
-                throw new \Exception(__('이미 존재하는 공급사명입니다.'));
+                throw new \Exception(__('이미 존재하는 협력사명입니다.'));
             }
 
             $arrData['scmInsertAdminId'] = Session::get('manager.managerId');
@@ -434,15 +434,15 @@ class WibScmAdmin extends \Component\Scm\Scm
             if ($arrData['managerId'] != $arrData['managerDuplicateId']) {
                 throw new \Exception(__('아이디 중복확인이 되지 않았습니다.'));
             }
-            $validator->add('managerId', 'userid', true, null, true, false); // 공급사 아이디
+            $validator->add('managerId', 'userid', true, null, true, false); // 협력사 아이디
             $validator->add('managerId', 'minlen', true, null, 4); // 아이디 최소길이
             $validator->add('managerId', 'maxlen', true, null, 50); // 아이디 최대길이
-            $validator->add('managerDuplicateId', 'userid', true); // 공급사 아이디 중복확인 아이디
-            $validator->add('managerPw', 'password', true); // 공급사 비밀번호
+            $validator->add('managerDuplicateId', 'userid', true); // 협력사 아이디 중복확인 아이디
+            $validator->add('managerPw', 'password', true); // 협력사 비밀번호
             $validator->add('managerPw', 'minlen', true, null, 10); // 비밀번호 최소길이
             $validator->add('managerPw', 'maxlen', true, null, 16); // 비밀번호 최대길이
-            $validator->add('scmInsertAdminId', 'userid', true); // 공급사 등록하는 관리자 아이디
-            $validator->add('managerNo', 'number', true); // 공급사 관리자 키
+            $validator->add('scmInsertAdminId', 'userid', true); // 협력사 등록하는 관리자 아이디
+            $validator->add('managerNo', 'number', true); // 협력사 관리자 키
         }
 
 
@@ -488,13 +488,13 @@ class WibScmAdmin extends \Component\Scm\Scm
         }
         
         $validator->add('mode', 'alpha', true); // 모드
-        $validator->add('companyNm', '', true); // 공급사명
-        $validator->add('scmType', '', true); // 공급사상태-운영('y'), 일시정지('n'), 탈퇴('x')
+        $validator->add('companyNm', '', true); // 협력사명
+        $validator->add('scmType', '', true); // 협력사상태-운영('y'), 일시정지('n'), 탈퇴('x')
         $validator->add('managerNickNm', '', ''); // 닉네임
         $validator->add('scmCommission', '', true); // 판매수수료-%로 소수점 2자리
         $validator->add('scmCommissionDelivery', '', true); // 배송비수수료-%로 소수점 2자리
-        $validator->add('scmKind', '', true); // 공급사종류 - 공급사('p'),본사('c')
-        $validator->add('scmCode', '', ''); // 공급사코드
+        $validator->add('scmKind', '', true); // 협력사종류 - 협력사('p'),본사('c')
+        $validator->add('scmCode', '', ''); // 협력사코드
         $validator->add('imageStorage', '', ''); // 이미지 저장소 위치
         $validator->add('scmPermissionInsert', '', true); // 상품등록권한-자동승인('a'),관리자승인('c')
         $validator->add('scmPermissionModify', '', true); // 상품수정권한-자동승인('a'),관리자승인('c')
@@ -520,8 +520,8 @@ class WibScmAdmin extends \Component\Scm\Scm
         $validator->add('returnAddressSub', '', ''); // 상세주소
         if (substr($arrData['mode'], 0, 6) == 'modify' && $arrData['scmNo'] == DEFAULT_CODE_SCMNO) { // 본사 수정시 기능권한 저장 패스
             // empty statement
-        } else if (!gd_is_provider()) { // 공급사 등록/수정시 기능권한 저장
-            // 공급사 기능 권한 설정
+        } else if (!gd_is_provider()) { // 협력사 등록/수정시 기능권한 저장
+            // 협력사 기능 권한 설정
             if (count($arrData['functionAuth']) > 0) {
                 $functionAuth = [
                     'functionAuth' => $arrData['functionAuth'],
@@ -530,7 +530,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                 $functionAuth = null;
             }
             $arrData['functionAuth'] = json_encode($functionAuth, JSON_UNESCAPED_UNICODE); // 운영자 기능 권한 설정
-            $validator->add('functionAuth', ''); // 공급사 기능권한
+            $validator->add('functionAuth', ''); // 협력사 기능권한
         }
         $validator->add('staff', '', ''); // 담당자 정보
         $validator->add('account', '', ''); // 계좌 정보
@@ -568,7 +568,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                     $arrBind = $this->db->get_binding(DBTableField::tableScmManage(), $arrData, 'insert', array_keys($arrData), ['scmNo']);
                     $this->db->set_insert_db(DB_SCM_MANAGE, $arrBind['param'], $arrBind['bind'], 'y');
 
-                    // 등록된 공급사고유번호
+                    // 등록된 협력사고유번호
                     $scmNo = $this->db->insert_id();
 
                     //추가 판매수수료, 배송비수수료
@@ -580,7 +580,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                     $scmLog = $scmCommission->getScmLogData($scmNo);
                     $scmCommission->setScmLog('scm', 'insert', $scmNo, '', $scmLog);
 
-                    // 공급사 관리자 등록 / es_manage 에 등록
+                    // 협력사 관리자 등록 / es_manage 에 등록
                     $manager = \App::load(Manager::class);
                     $arrManager = [];
                     $arrManager['scmNo'] = $scmNo;
@@ -629,7 +629,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                     //로그
                     $scmPrevData = $scmCommission->getScmLogData($arrData['scmNo']);
 
-                    // 공급사 수정
+                    // 협력사 수정
                     $arrBind = $this->db->get_binding(DBTableField::tableScmManage(), $arrData, 'update', array_keys($arrData), ['scmNo']);
                     $this->db->bind_param_push($arrBind['bind'], 'i', $arrData['scmNo']);
                     $this->db->set_update_db(DB_SCM_MANAGE, $arrBind['param'], 'scmNo = ?', $arrBind['bind'], false);
@@ -647,7 +647,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                     $scmUpdateData = $scmCommission->getScmLogData($arrData['scmNo']);
                     $scmCommission->setScmLog('scm', 'update', $arrData['scmNo'], $scmPrevData, $scmUpdateData);
 
-                    // 공급사 관련 정보 수정
+                    // 협력사 관련 정보 수정
                     if ($arrData['scmType'] == 'x') {
                         $arrGoodsData['scmNo'] = $arrData['scmNo'];
                         $arrGoodsData['goodsDisplayFl'] = 'n';
@@ -667,7 +667,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                             $this->db->set_update_db(DB_GOODS_SEARCH, $arrGoodsBind['param'], 'scmNo = ?', $arrGoodsBind['bind'], false);
                             unset($arrGoodsBind);
                         }
-                        // 공급사 수수료 일정 삭제(탈퇴)
+                        // 협력사 수수료 일정 삭제(탈퇴)
                         $scmCommission = App::load(\Component\Scm\ScmCommission::class);
                         $scmCommission->deleteScmScheduleCommissionBatch($arrData['scmNo'], 'once');
                     }
@@ -688,7 +688,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     }
 
     /**
-     * 공급사 권한 저장
+     * 협력사 권한 저장
      *
      * @param array $arrData
      * @param string $scmNo
@@ -704,7 +704,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                 $superManagerSno = $tmp['sno'];
             }
 
-            // 공급사 관리자 수정 / es_manage 에 수정
+            // 협력사 관리자 수정 / es_manage 에 수정
             $manager = \App::load(Manager::class);
             if (method_exists($manager, 'saveManagerPermissionData')) {
                 $arrManager = [];
@@ -729,7 +729,7 @@ class WibScmAdmin extends \Component\Scm\Scm
      */
     public function getRepackManagerRegisterPermission($scmData = [])
     {
-        if (empty($scmData['scmNo']) === false) { // 공급사 수정시
+        if (empty($scmData['scmNo']) === false) { // 협력사 수정시
             $managerData = $this->getScmSuperManager($scmData['scmNo']);
             $manager = \App::load(Manager::class);
             if (method_exists($manager, 'getRepackManagerRegisterPermission')) {
@@ -738,7 +738,7 @@ class WibScmAdmin extends \Component\Scm\Scm
             } else {
                 $repack = null;
             }
-        } else { // 공급사 등록시
+        } else { // 협력사 등록시
             $manager = \App::load(Manager::class);
             if (method_exists($manager, 'getRepackManagerRegisterPermission')) {
                 $repack = $manager->getRepackManagerRegisterPermission(['isSuper'=>'y']);
@@ -757,8 +757,8 @@ class WibScmAdmin extends \Component\Scm\Scm
         // 통합 검색
         $this->search['combineSearch'] = [
             'all' => '=' . __('통합검색') . '=',
-            'companyNm' => __('공급사명'),
-            'scmCode' => __('공급사코드'),
+            'memId' => __('아이디'),
+            'scmCode' => __('협력사코드'),
             'businessNo' => __('사업자등록번호'),
             'ceoNm' => __('대표자'),
         ];
@@ -827,7 +827,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         $falseScmCount = 0;
         $manager = new Manager();
         foreach ($scmNoArr as $key => $val) {
-            // 공급사 상품 체크
+            // 협력사 상품 체크
             $this->db->strField = 'count(goodsNo) as count';
             $this->db->strWhere = 'scmNo = ' . $val;
             $this->db->strOrder = 'goodsNo asc';
@@ -841,7 +841,7 @@ class WibScmAdmin extends \Component\Scm\Scm
                 continue;
             }
 
-            // 공급사 주문 체크
+            // 협력사 주문 체크
             $this->db->strField = 'count(sno) as count';
             $this->db->strWhere = 'scmNo = ' . $val;
             $this->db->strOrder = 'sno asc';
@@ -897,7 +897,7 @@ class WibScmAdmin extends \Component\Scm\Scm
             $delivery = \App::load(\Component\Delivery\Delivery::class);
             $delivery->deleteWholeScmDelivery($val);
 
-            // 공급사 수수료 일정 삭제(공급사 삭제)
+            // 협력사 수수료 일정 삭제(협력사 삭제)
             $scmCommission = App::load(\Component\Scm\ScmCommission::class);
             $scmCommission->deleteScmScheduleCommissionBatch($val);
         }
@@ -907,7 +907,7 @@ class WibScmAdmin extends \Component\Scm\Scm
 
     /**
      * getScmFunctionAuth
-     * 공급사 권한 설정 - 기능권한
+     * 협력사 권한 설정 - 기능권한
      *
      * @param $scmNo
      *
@@ -920,7 +920,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         $this->db->bind_param_push($arrBind, 'i', $scmNo);
         $data = $this->db->query_fetch($query, $arrBind, false);
 
-        // 공급사 기능 권한 설정
+        // 협력사 기능 권한 설정
         $functionAuth = json_decode($data['functionAuth'], true);
 
         return $functionAuth;
@@ -929,7 +929,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     /**
      *
      * getScmSelectList
-     * 공급사 선택 리스트
+     * 협력사 선택 리스트
      *
      * @param $scmNo
      *
@@ -948,7 +948,7 @@ class WibScmAdmin extends \Component\Scm\Scm
 
     /**
      * getScmListByName
-     * openApi 공급사 리스트 검색 (공급사명)
+     * openApi 협력사 리스트 검색 (협력사명)
      *
      * @param string $scmNm
      *
@@ -977,7 +977,7 @@ class WibScmAdmin extends \Component\Scm\Scm
 
     /**
      * getScmManagerEmail
-     * 공급사 대표 email 및 API 결과 코드 반환
+     * 협력사 대표 email 및 API 결과 코드 반환
      *
      * @param integer $scmNo
      * @param string $scmId

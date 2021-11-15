@@ -14,11 +14,12 @@ class PartnersListController extends \Controller\Admin\Controller
 {
     public function index()
     {
+        // --- 메뉴 설정
         $this->callMenu('partners', 'partners', 'partners_list');
         
         // --- 모듈 호출
         try {
-            $scmAdmin = \App::load(\Component\Scm\ScmAdmin::class);
+            $scmAdmin = \App::load(\Component\Wib\WibScmAdmin::class);
             $scmCommission = \App::load(\Component\Scm\ScmCommission::class);
             $getData = $scmAdmin->getScmAdminList();
             foreach ($getData['data'] as $key => &$val) {
@@ -32,6 +33,7 @@ class PartnersListController extends \Controller\Admin\Controller
         } catch (Exception $e) {
             throw new LayerException($e->getMessage());
         }
+       
 
         // --- 관리자 디자인 템플릿
         $this->setData('data', gd_isset($getData['data']));
