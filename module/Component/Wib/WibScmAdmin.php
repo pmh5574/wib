@@ -221,7 +221,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         } else {
             $sort['fieldName'] = 'sm.' . $sort['fieldName'];
         }
-        print_r($getValue);
+
         if ($mode == 'layer') {
             // --- 페이지 기본설정
             if (gd_isset($getValue['pagelink'])) {
@@ -537,6 +537,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         $validator->add('delFl', 'yn', true); // 삭제여부
         
         /* 211112 디자인위브 mh 추가 필드 */
+        $validator->add('scmCountry', '', false); // 협력사 국가
         $validator->add('scmVat', 'number', false); // 협력사 관부가세
         $validator->add('scmUrl', '', false); // 협력사 홈페이지
         $validator->add('scmEmail', '', false); // 협력사 이메일

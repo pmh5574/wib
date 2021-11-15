@@ -21,7 +21,7 @@ class PartnersRegistController extends \Controller\Admin\Controller
         try {
             $getData = [];
             // --- 모듈 호출
-            $scmAdmin = \App::load(\Component\Scm\ScmAdmin::class);
+            $scmAdmin = \App::load(\Component\Wib\WibScmAdmin::class);
             $scmCommission = \App::load(\Component\Scm\ScmCommission::class);
             // 공급사 고유 번호
             $scmNo = Request::get()->get('scmno');

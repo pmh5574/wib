@@ -1,6 +1,3 @@
-<style>
-    .partners-tg.dn{display:none;}
-</style>
 <div class="page-header js-affix">
     <h3><?php echo end($naviMenu->location); ?></h3>
     <div class="btn-group">

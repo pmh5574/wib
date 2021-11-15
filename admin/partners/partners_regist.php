@@ -99,7 +99,7 @@
                 국가
             </th>
             <td class="form-inline">
-                <input type="text" name="" value="" maxlength="20" class="form-control width-sm"/>
+                <input type="text" name="scmCountry" value="<?= $getData['scmCountry']; ?>" maxlength="40" class="form-control width-sm"/>
             </td>
             <th>
                 업체 대표 이미지
@@ -293,13 +293,19 @@
                 크레딧
             </th>
             <td class="form-inline">
-                <input type="text" name="scmCredit" value="<?= gd_isset($getData['scmCredit']); ?>" class="form-control width-sm"/>€
+                <span class="scmUnitFl"><?= gd_isset($scmUnitFl, '€')?> </span><input type="text" name="scmCredit" value="<?= gd_isset($getData['scmCredit']); ?>" class="form-control width-sm"/>
             </td>
             <th>
                 보증금
             </th>
             <td class="form-inline">
-                <input type="text" name="scmDeposit" value="<?= gd_isset($getData['scmDeposit']); ?>" class="form-control width-sm"/>€
+                <?php 
+                if($getData['scmUnit'] == 'e'){ 
+                    $scmUnitFl = '€';
+                }else if($getData['scmUnit'] == 'u'){ 
+                    $scmUnitFl = '$';
+                } ?>
+                <span class="scmUnitFl"><?= gd_isset($scmUnitFl, '€')?> </span><input type="text" name="scmDeposit" value="<?= gd_isset($getData['scmDeposit']); ?>" class="form-control width-sm"/>
             </td>
         </tr>
         <tr>
@@ -308,8 +314,8 @@
             </th>
             <td class="form-inline">
                 <select name="scmUnit" class="form-control">
-                    <option value="e">EUR</option>
-                    <option value="u">USD</option>
+                    <option value="e" <?php echo ($getData['scmUnit'] == 'e') ? 'selected':''; ?>>EUR</option>
+                    <option value="u" <?php echo ($getData['scmUnit'] == 'u') ? 'selected':''; ?>>USD</option>
                 </select>
             </td>
             <th>
@@ -317,13 +323,13 @@
             </th>
             <td class="form-inline">
                 <select name="scmWeeks" class="form-control">
-                    <option value="0">일요일</option>
-                    <option value="1">월요일</option>
-                    <option value="2">화요일</option>
-                    <option value="3">수요일</option>
-                    <option value="4">목요일</option>
-                    <option value="5">금요일</option>
-                    <option value="6">토요일</option>
+                    <option value="0" <?php echo ($getData['scmWeeks'] == '0') ? 'selected':''; ?>>일요일</option>
+                    <option value="1" <?php echo ($getData['scmWeeks'] == '1') ? 'selected':''; ?>>월요일</option>
+                    <option value="2" <?php echo ($getData['scmWeeks'] == '2') ? 'selected':''; ?>>화요일</option>
+                    <option value="3" <?php echo ($getData['scmWeeks'] == '3') ? 'selected':''; ?>>수요일</option>
+                    <option value="4" <?php echo ($getData['scmWeeks'] == '4') ? 'selected':''; ?>>목요일</option>
+                    <option value="5" <?php echo ($getData['scmWeeks'] == '5') ? 'selected':''; ?>>금요일</option>
+                    <option value="6" <?php echo ($getData['scmWeeks'] == '6') ? 'selected':''; ?>>토요일</option>
                 </select>
             </td>
         </tr>
@@ -1249,6 +1255,14 @@
                 $('.manage-permission-btn').click(layer_manage_permission);
             }
         }
+        
+        $('select[name="scmUnit"]').change(function(){
+            if($(this).val() == 'e'){
+                $('.scmUnitFl').html('€ ');
+            }else if($(this).val() == 'u'){
+                $('.scmUnitFl').html('$ ');
+            }
+        });
     });
     function staffAdd() {
         var chkTrCount = ($('#table_staff tr').length) - 2; // + 추가 1개 - 기본 tr 2개

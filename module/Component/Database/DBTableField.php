@@ -26,6 +26,8 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         $arrField = parent::tableScmManage();
         
         //211112 디자인위브 mh 협력사 정보 추가
+        
+        $arrField[] = ['val' => 'scmCountry', 'typ' => 's', 'def' => null]; // 협력사 관부과세
         $arrField[] = ['val' => 'scmVat', 'typ' => 'i', 'def' => 0]; // 협력사 관부과세
         $arrField[] = ['val' => 'scmUrl', 'typ' => 's', 'def' => null]; // 협력사 홈페이지
         $arrField[] = ['val' => 'scmEmail', 'typ' => 's', 'def' => null]; // 협력사 이메일
