@@ -167,7 +167,18 @@ $queryString = http_build_query($arrQueryString);
                     <th>상태</th>
                     <td colspan="3">
                         <div class="form-inline">
-                            
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 전체
+                            </label>
+                            <?php 
+                            foreach ($statusList as $key => $value) {
+                            ?>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value="<?= $key; ?>"> <?= $value; ?>
+                            </label>
+                            <?php
+                            } 
+                            ?>
                         </div>
                     </td>
                 </tr>

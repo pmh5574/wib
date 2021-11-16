@@ -13,5 +13,14 @@ class PartnersAdjustListController extends \Controller\Admin\Controller
     {
         // --- 메뉴 설정
         $this->callMenu('partners', 'partners', 'partners_adjust_list');
+        
+        $combineSearch = [
+            'memId' => '아이디',
+            'orderName' => '주문자 이름',
+            'orderNo' => '주문 번호',
+            'orderCode' => '상품 코드'
+        ];
+        
+        $this->setData('combineSearch', $combineSearch);
     }
 }

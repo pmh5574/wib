@@ -56,6 +56,7 @@ class PartnersOrderListController extends \Controller\Admin\Controller
             $getData['orderGridConfigList'] = [
                 'check' => 'check',
                 'no' => '번호',
+                'orderStatus' => '상태',
                 'managerNm' => '업체명',
                 'orderNo' => '주문번호',
                 'regDt' => '주문일자',
@@ -74,25 +75,35 @@ class PartnersOrderListController extends \Controller\Admin\Controller
                 'orderDeliveryKr' => '운송장 (국내)',
                 'scmDescription' => '비고'
             ];
-
-            $getData['orderStatus'] = [
-                'o1' => '입금대기',
-                'p1' => '결제 완료',
-                'g1' => '',
-                'd1' => '',
-                'd2' => '',
-                's1' => '',
-                'b1' => '',
-                'b2' => '',
-                'b3' => '',
-                'b4' => '',
-                'e1' => '',
-                'e2' => '',
-                'e5' => '',
-                'r1' => '',
-                'r3' => ''
+            $statusPolicy = $order->statusPolicy;
+            
+            $orderStatus = [
+                'o1',
+                'p1',
+                'd1',
+                'd1',
+                'd2',
+                's1',
+                'b1',
+                'b4',
+                'c1',
+                'e1',
+                'e5',
+                'r1',
+                'r3'
             ];
-
+            
+            $statusList = [];
+            
+            foreach($statusPolicy as $aVal) {
+                foreach($aVal as $key => $value) {
+                    if($value['admin'] && in_array($key, $orderStatus)) {
+                        $statusList[$key] = $value['admin'];
+                    }
+                }
+            }
+            
+            $this->setData('statusList', $statusList);
             $this->setData('data', gd_isset($getData['data']));
             $this->setData('search', $getData['search']);
             $this->setData('checked', $getData['checked']);
