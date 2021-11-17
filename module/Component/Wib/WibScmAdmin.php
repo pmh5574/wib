@@ -17,6 +17,7 @@ use Component\Category\Category;
 use Component\Database\DBTableField;
 use Component\Validator\Validator;
 use Framework\Utility\ArrayUtils;
+use Component\Wib\WibSql;
 use Request;
 use Session;
 
@@ -34,6 +35,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     const OPENAPI_NOT_AUTH_EMAIL        = '400';     // 협력사 대표 이메일은 있지만 미인증 상태인 경우
 
     protected $storage;
+    public $wibSql;
 
     /**
      * 생성자
@@ -46,6 +48,8 @@ class WibScmAdmin extends \Component\Scm\Scm
             $this->db = \App::load('DB');
         }
         $this->storage = Storage::disk(Storage::PATH_CODE_SCM, 'local');
+        
+        $this->wibSql = new WibSql();
     }
 
     /**
@@ -1025,6 +1029,24 @@ class WibScmAdmin extends \Component\Scm\Scm
         }
 
         return $result;
+    }
+    
+    public function checkScmId($managerId)
+    {
+        if(!$managerId){
+            return array('result' => 1 , 'msg' => '잘못된 접근 입니다.');
+        }
+        
+        $query = "SELECT COUNT(*) cnt FROM es_manager WHERE managerId = '{$managerId}'";
+        $result = $this->wibSql->WibNobind($query)['cnt'];
+        
+        if($result == 0){
+            return array('result' => 1 , 'msg' => '일치하는 협력사가 없습니다.');
+        }else{
+            return array('result' => 0, 'msg' => '');
+        }
+        
+        return array('result' => 1 , 'msg' => '잘못된 접근 입니다.');
     }
 }
 

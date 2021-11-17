@@ -60,17 +60,41 @@ class PartnersOrderListController extends \Controller\Admin\Controller
                 'managerNm' => '업체명',
                 'orderNo' => '주문번호',
                 'regDt' => '주문일자',
+                'paymentDt' => '결제일자', //보이고 안보이고?
+                'payBack' => '환불일자', //보이고 안보이고?
+                'deliveryCompleteDt' => '수령일', //보이고 안보이고?
                 'orderName' => '주문자명/ID',
                 'orderGoodsNm' => '상품명',
                 'orderOptionNm' => '옵션',
                 'orderGoodsCode' => '상품 코드',
                 'orderCnt' => '수량',
+                'address' => '배송지', //보이고 안보이고?
+                'receiverPhone' => '연락처', //보이고 안보이고?
+                'orderMemo' => '메세지', //보이고 안보이고?
+                'orderMemo' => '판매금액', //보이고 안보이고?
+                'orderMargin' => '적용 마진율', //보이고 안보이고?
+                'scmVat' => '관부가세', //보이고 안보이고?
+                'settlePrice' => '결제 금액(KRW)', //보이고 안보이고?
+                'settlePriceFr' => '결제 금액(외화)', //보이고 안보이고?
+                'differencePrice' => '차액', //보이고 안보이고?
+                'exchangeRate' => '적용 환율', //보이고 안보이고?
                 'orderGoodsNo' => '협력사 상품 번호',
                 'scmUnit' => '화폐',
                 'orderGoodsPrice' => '공급가',
                 'scmCredit' => '적용 크레딧',
                 'scmAdjustPrice' => '정산 금액',
                 'scmRefundPrice' => '환불 보증금',
+                'orderRefundPrice' => '환불 금액', //보이고 안보이고?
+                'orderRefundCredit' => '환불 크레딧', //보이고 안보이고?
+                'orderPlusDeliveryPriceFr' => '추가 운송비(해외)', //보이고 안보이고?
+                'orderPlusDeliveryPriceKr' => '추가 운송비(자사)', //보이고 안보이고?
+                'orderPlusDeliveryPriceCl' => '추가 운송비(고객)', //보이고 안보이고?
+                'orderDeliveryCnt' => '배송 횟수', //보이고 안보이고?
+                'memberOrderFl' => '구매 동의', //보이고 안보이고?
+                'a' => '분쟁 조정', //보이고 안보이고?
+                'b' => '협력사 알림', //보이고 안보이고?
+                'orderTypeFl' => '수기 여부', //보이고 안보이고?
+                'c' => '정산 여부', //보이고 안보이고?
                 'orderDeliveryFr' => '운송장 (해외)',
                 'orderDeliveryKr' => '운송장 (국내)',
                 'scmDescription' => '비고'
@@ -165,7 +189,7 @@ class PartnersOrderListController extends \Controller\Admin\Controller
             //        $this->setData('statusMode', gd_isset($getValue['statusMode']));
 
             // 공급사와 동일한 페이지 사용
-            $this->getView()->setPageName('order/order_list_all.php');
+            $this->getView()->setPageName('partners/partners_order_list.php');
 
         } catch (Exception $e) {
             throw $e;

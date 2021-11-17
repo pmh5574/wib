@@ -73,7 +73,7 @@ class PartnersPsController extends \Controller\Admin\Controller
                     break;
 
                 case 'deleteScmList':
-                    $scmAdmin = \App::load(\Component\Scm\ScmAdmin::class);
+                    $scmAdmin = \App::load(\Component\Wib\WibScmAdmin::class);
                     $postValue = Request::post()->toArray();
                     $scmReturnCount = $scmAdmin->deleteScm($postValue['chkScm']);
                     if ($scmReturnCount > 0) {
@@ -122,7 +122,7 @@ class PartnersPsController extends \Controller\Admin\Controller
                     break;
 
                 case 'checkScmModify':
-                    $scmAdmin = \App::load(\Component\Scm\ScmAdmin::class);
+                    $scmAdmin = \App::load(\Component\Wib\WibScmAdmin::class);
                     $postValue = Request::post()->toArray();
                     if ($postValue['scmNo'] > 0) {
                         $scmMsg = '';
@@ -146,6 +146,12 @@ class PartnersPsController extends \Controller\Admin\Controller
                     }
                     echo $scmMsg;
                     exit;
+                    break;
+                case 'checkScmManage':
+                    $scmAdmin = \App::load(\Component\Wib\WibScmAdmin::class);
+                    $postValue = Request::post()->toArray();
+                    $result = $scmAdmin->checkScmId($postValue['managerId']);
+                    $this->json($result);
                     break;
                 default:
                     exit();

@@ -24,29 +24,6 @@
                     일괄처리</button>
                 </div>
             <?php } ?>
-            <div class="pull-right">
-                <div class="form-inline">
-                    <?php if ($search['view'] != 'orderGoods') { ?>
-                    <div class="dropdown">
-                        <button type="button" id="btnSmsLayer" class="btn btn-red js-sms-layer-open dropdown-toggle dropdown-arr" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">SMS발송</button>
-                        <ul class="dropdown-menu mgt10" aria-labelledby="btnSmsLayer">
-                            <li class="dropdown-item"><a class="js-sms-send" data-type="select" data-opener="order" data-target-selector="input[name*=statusCheck]:checked">선택 주문 배송</a></li>
-                            <li class="dropdown-item"><a class="js-sms-send" data-type="search" data-opener="order" data-target-selector="#frmSearchOrder">검색 주문 배송</a></li>
-                        </ul>
-                    </div>
-                    <?php } ?>
-                    <?= gd_select_box(
-                        'orderPrintMode', null, [
-                        'report'         => '주문내역서',
-                        'customerReport' => '주문내역서 (고객용)',
-                        'reception'      => '간이영수증',
-                        'particular'     => '거래명세서',
-                        'taxInvoice'     => '세금계산서',
-                    ], null, null, '=인쇄 선택=', null
-                    ) ?>
-                    <input type="button" onclick="order_print_popup($('#orderPrintMode').val(), 'frmOrderPrint', 'frmOrderStatus', 'statusCheck[', <?= $isProvider ? 'true' : 'false' ?>);" value="프린트" class="btn btn-white btn-icon-print"/>
-                </div>
-            </div>
         </div>
     </div>
 

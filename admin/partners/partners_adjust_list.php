@@ -1,6 +1,3 @@
-<style>
-    .partners-tg.dn{display:none;}
-</style>
 <div class="page-header js-affix">
     <h3><?php echo end($naviMenu->location); ?></h3>
     <div class="btn-group">
@@ -10,7 +7,7 @@
 
 <form id="frmSearchScm" method="get" class="js-form-enter-submit">
     <div class="table-title">
-        협력사 검색
+        정산 검색
     </div>
     <div class="search-detail-box">
         <table class="table table-cols">
@@ -63,30 +60,35 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>화폐</th>
-                    <td>
+                    <th>상태</th>
+                    <td colspan="3">
                         <div class="form-inline">
-                            <select class="form-control">
-                                <option value="">전체</option>
-                                <option value="e">EUR</option>
-                                <option value="u">USD</option>
-                            </select>
+                            
                         </div>
                     </td>
-                    <th>API 연결 상태</th>
-                    <td>
-                        <label class="radio-inline">
-                            <input type="radio" name="scmPermissionModify" value="" <?= $checked['scmPermissionModify']['']; ?>/>전체
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="scmPermissionModify" value="a" <?= $checked['scmPermissionModify']['a']; ?>/>연결
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="scmPermissionModify" value="c" <?= $checked['scmPermissionModify']['c']; ?>/>미등록
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="scmPermissionModify" value="c" <?= $checked['scmPermissionModify']['c']; ?>/>실패
-                        </label>
+                </tr>
+                <tr>
+                    <th>주문일자 검색</th>
+                    <td colspan="3">
+                        <div class="form-inline">
+                            <div class="input-group js-datepicker">
+                                <input type="text" name="treatDate[]" value="<?= $search['treatDate'][0]; ?>" class="form-control width-xs">
+                                    <span class="input-group-addon">
+                                        <span class="btn-icon-calendar">
+                                        </span>
+                                    </span>
+                            </div>
+                            ~
+                            <div class="input-group js-datepicker">
+                                <input type="text" name="treatDate[]" value="<?= $search['treatDate'][1]; ?>" class="form-control width-xs">
+                                    <span class="input-group-addon">
+                                        <span class="btn-icon-calendar">
+                                        </span>
+                                    </span>
+                            </div>
+
+                            <?= gd_search_date(gd_isset($search['searchPeriod'], 6), 'treatDate[]', false) ?>
+                        </div>
                     </td>
                 </tr>
             </tbody>
@@ -136,36 +138,41 @@
             <thead>
             <tr>
                 <th><input type="checkbox" class="js-checkall" data-target-name="chkScm[]"/></th>
+                <th>번호</th>
                 <th>상태</th>
                 <th>업체명</th>
-                <th class="partners-tg dn">담당자</th>
-                <th>아이디</th>
-                <th>업체코드</th>
-                <th>국가</th>
-                <th>관부가세</th>
-                <th>홈페이지</th>
-                <th>이메일</th>
-                <th>연락처</th>
-                <th class="partners-tg dn">메신저</th>
-                <th class="partners-tg dn">메신저 ID</th>
-                <th class="partners-tg dn">API 시작 경로</th>
-                <th class="partners-tg dn">API 종료 경로</th>
-                <th class="partners-tg dn">상품 URL 연동</th>
-                <th class="partners-tg dn">URL 연동방식</th>
-                <th class="partners-tg dn">이미지 연동</th>
-                <th class="partners-tg dn">이미지 연동 방식</th>
-                <th>api 연결상태</th>
-                <th>전체 상품 수</th>
-                <th>등록 상품 수</th>
+                <th>정산 번호</th>
+                <th>등록 일자</th>
+                <th>정산 일자</th>
+                <th>주문 번호</th>
                 <th>화폐</th>
-                <th>크레딧</th>
-                <th>보증금</th>
+                <th>공급가</th>
+                <th>적용 크레딧</th>
+                <th>미정산 금액</th>
+                <th>정산 금액</th>
+                <th>정산 초과 금액</th>
+                <th>환불 보증금</th>
+                <th>환불 일자</th>
+                <th>환불 금액(KRW)</th>
+                <th>환불 크레딧</th>
+                <th>충전 금액</th>
+                <th>증빙</th>
                 <th>비고</th>
-                <th class="partners-tg dn">갱신주기</th>
-                <th class="partners-tg dn">최근 주문일</th>
-                <th class="partners-tg dn">등록일</th>
-                <th>카테고리 매핑</th>
-                <th>수정</th>
+                <th>확인 여부</th>
+                <th class="partners-tg dn">확인 일자</th>
+                <th class="partners-tg dn">판매 금액(KRW)</th>
+                <th class="partners-tg dn">판매 금액(외화)</th>
+                <th class="partners-tg dn">적용 마진율</th>
+                <th class="partners-tg dn">관부가세/운송비</th>
+                <th class="partners-tg dn">결제 금액(KRW)</th>
+                <th class="partners-tg dn">결제 금액(외화)</th>
+                <th class="partners-tg dn">차액(외화)</th>
+                <th class="partners-tg dn">적용 환율</th>
+                <th class="partners-tg dn">운송비(해외)</th>
+                <th class="partners-tg dn">운송비(국내)</th>
+                <th class="partners-tg dn">추가 운송비(자사)</th>
+                <th class="partners-tg dn">추가 운송비(고객)</th>
+                <th class="partners-tg dn">배송 횟수</th>
             </tr>
             </thead>
             <tbody>
@@ -315,8 +322,8 @@
             } else {
                 ?>
                 <tr>
-                    <td colspan="13" class="no-data">
-                        검색된 협력사가 없습니다.
+                    <td colspan="22" class="no-data">
+                        검색된 정산 결과가 없습니다.
                     </td>
                 </tr>
                 <?php
@@ -333,9 +340,10 @@
             <button type="button" class="btn btn-white btn-icon-excel js-excel-download" data-target-form="frmSearchScm" data-target-list-form="frmScmList" data-target-list-sno="chkScm" data-search-count="<?=$page->recode['total']?>" data-total-count="<?=$page->recode['amount']?>">엑셀다운로드</button>
         </div>
     </div>
+    
 </form>
 
-<div class="center"><?= $page->getPage(); ?></div>
+<div class="center"></div>
 
 <script type="text/javascript">
     <!--
@@ -369,15 +377,6 @@
                     }
                 });
             }
-        });
-        
-        $('.js-partners-toggle').click(function(e){
-            if($('.partners-tg').hasClass('dn')){
-                $('.partners-tg').removeClass('dn');
-            }else{
-                $('.partners-tg').addClass('dn');
-            }
-            
         });
     });
     //-->

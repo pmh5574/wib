@@ -230,21 +230,7 @@ $queryString = http_build_query($arrQueryString);
                 $actionClass = 'orderGoodsSimple';
             }
     ?>
-        <ul class="nav nav-tabs mgb0" role="tablist">
-            <li role="presentation" <?=$search['view'] == $actionClass ? 'class="active"' : ''?>>
-                <a href="../order/<?=$page->page['url']?>?view=<?=$actionClass?>&<?=$queryString ? 'searchFl=y&' . $queryString : ''?>">주문번호별</a>
-            </li>
-            <li role="presentation" <?=$search['view'] == 'orderGoods' ? 'class="active"' : ''?>>
-                <a href="../order/<?=$page->page['url']?>?view=orderGoods&<?=$queryString ? 'searchFl=y&' . $queryString : ''?>">상품주문번호별</a>
-            </li>
-            <?php if ($search['userHandleAdmFl'] == 'y') { ?>
-            <li>
-                <div style="margin:8px 0 0 10px;">
-                    <label><input type="checkbox" name="userHandleViewFl" value="y" <?=gd_isset($checked['userHandleViewFl']['y']); ?> onclick="$('#frmSearchOrder').submit();"> 고객 클레임 신청 주문 제외</label>
-                </div>
-            </li>
-            <?php } ?>
-        </ul>
+        
     <?php
         }
     }
@@ -254,19 +240,13 @@ $queryString = http_build_query($arrQueryString);
         <div class="pull-left">
             검색 <strong class="text-danger"><?= number_format(gd_isset($page->recode['total'], 0)); ?></strong>개 /
             전체 <strong class="text-danger"><?= number_format(gd_isset($page->recode['amount'], 0)); ?></strong>개
-            ( 검색된 주문 총 <?php if (!$isProvider) { ?>결제<?php } ?>금액 : <?= gd_currency_symbol() ?><span class="text-danger"><?=gd_money_format($page->recode['totalPrice'])?></span><?=gd_currency_string()?>
+            <!--( 검색된 주문 총 <?php if (!$isProvider) { ?>결제<?php } ?>금액 : <?= gd_currency_symbol() ?><span class="text-danger"><?=gd_money_format($page->recode['totalPrice'])?></span><?=gd_currency_string()?>-->
             <?php if (false && !$isProvider) { // 아직 환불에 대한 처리방법 결정되지 않음 ?>
             | 총 실결제금액 : <?= gd_currency_symbol() ?><span class="text-danger"><?=gd_money_format($page->recode['totalGoodsPrice'] + $page->recode['totalDeliveryPrice'])?></span><?=gd_currency_string()?>
                 - <small>테스트확인용 상품금액: <?=number_format($page->recode['totalGoodsPrice'])?>/
                 배송비: <?=number_format($page->recode['totalDeliveryPrice'])?></small>
             <?php } ?>
-            )
-        </div>
-        <div class="pull-right">
-            <div class="form-inline">
-                <?= gd_select_box('sort', 'sort', $search['sortList'], null, $search['sort']); ?>
-                <?= gd_select_box('pageNum', 'pageNum', gd_array_change_key_value([10,20,30,40,50,60,70,80,90,100,200,300,500,]), '개 보기', $page->page['list']); ?>
-            </div>
+            <!--)-->
         </div>
     </div>
     <input type="hidden" name="view" value="<?=$search['view']?>"/>

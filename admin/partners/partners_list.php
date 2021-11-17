@@ -295,7 +295,7 @@
             } else {
                 ?>
                 <tr>
-                    <td colspan="13" class="no-data">
+                    <td colspan="20" class="no-data">
                         검색된 협력사가 없습니다.
                     </td>
                 </tr>
@@ -349,15 +349,6 @@
                     }
                 });
             }
-        });
-        
-        $('.js-partners-toggle').click(function(e){
-            if($('.partners-tg').hasClass('dn')){
-                $('.partners-tg').removeClass('dn');
-            }else{
-                $('.partners-tg').addClass('dn');
-            }
-            
         });
     });
     //-->
