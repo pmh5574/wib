@@ -1,0 +1,241 @@
+{*** 상단 기본파일 | main/index.php ***}
+
+<header> 
+	<div class="banner-area">
+		
+	</div>
+	<div class="header-area">
+		<div class="top-menu">
+			<div class="shop">
+				<ul>
+					<li><a href="javascript:;"><span>BLU</span></a></li>
+					<li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+					<li><a href="javascript:;"><span>NEWNIA</span></a></li>
+				</ul>
+			</div>
+			<div class="link">
+				<ul>
+					<!--{ ? gd_is_login() === false }-->
+					<li><a href="../member/login.php">로그인</a></li>
+					<li><a href="../member/join_method.php">회원가입</a></li>
+					<!--{ : }-->
+					<li><a href="../member/logout.php?returnUrl={=logoutReturnUrl}">로그아웃</a></li>
+					<li><a href="../mypage/index.php">마이페이지</a></li>
+					<!--{ / }-->
+					<li><a href="../mypage/order_list.php">배송안내</a></li>
+					<li>
+						<a href="javascript:;" class="cs">고객센터</a>
+						<ul>
+							<li><a href="../service/index.php">고객센터</a></li>
+							<li><a href="javascript:;">FAQ</a></li>
+							<li><a href="../mypage/mypage_qa.php">1:1 문의</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="bottom-menu">
+			<div class="inner">
+				<div class="left">
+					<a href="javascript:;" class="menu">
+						<span></span>
+						<span></span>
+						<span></span>
+					</a>
+					<h1>
+						<!--{ @dataBanner('1744488262') }-->{.tag}<!--{ / }-->
+					</h1>
+					<div class="category">
+						<ul>
+							<li><a href="javascript:;">라이브<i></i>쇼핑</a></li>
+							<li><a href="javascript:;">국내배송</a></li>
+							<li><a href="javascript:;">해외배송</a></li>
+						</ul>
+						<ul>
+							<li><a href="javascript:;">브랜드</a></li>
+							<li><a href="javascript:;">여성</a></li>
+							<li><a href="javascript:;">남성</a></li>
+							<li><a href="javascript:;">키즈</a></li>
+							<li><a href="javascript:;">신상품</a></li>
+							<li><a href="javascript:;">베스트</a></li>
+							<li><a href="javascript:;">SALE</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="right">
+					<div class="popular-search">
+						<dl>
+							<dt>인기검색어</dt>
+							<dd>
+								<!--{ @ dataHitKeyword() }-->
+									<ul class="popular-area">
+										<!--{ @ .value_ }-->
+										<li class="popular-rank"><a href="/goods/goods_search.php?keyword={=urlencode(..value_)}">{=..value_}</a></li>
+										<!--{ / }-->
+									</ul>
+								<!--{ / }-->
+								<a href="javascript:;" class="popular-more"></a>
+							</dd>
+							<div class="rank-view">
+								<ul></ul>
+							</div>
+						</dl>
+						
+						
+					</div>
+					<ul>
+						<li><a href="javascript:;" class="search-toggle">서치</a></li>
+						<li><a href="javascript:;">찜</a></li>
+						<li><a href="../mypage/index.php">마이페이지</a></li>
+						<li>
+							<a href="javascript:;">
+								<strong>{=dataCartGoodsCnt()}</strong>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+<!-- opacity black 70% 딤 -->
+<div class="wibDim"></div>
+
+<!-- 전체 메뉴 -->
+<div class="all-menu">
+	<div class="top">
+		<!--{ ? gd_is_login() === false }-->
+		<div class="log">
+			<b><a href="../member/login.php">로그인</a></b> 해주세요.
+		</div>
+		<div class="member">
+			<a href="../member/join_method.php">회원가입</a>
+		</div>
+		<!-- { : } -->
+		<div class="log">
+			<b>{=__('%s%s%s', gMemberInfo.memNm,'<span>','</span>')}</b>님 반갑습니다.
+		</div>
+		<div class="member">
+			<a href="../member/logout.php?returnUrl={=logoutReturnUrl}">로그아웃</a>
+		</div>
+		<!-- { / } -->
+		<a href="javascript:;" class="all-menu-close"></a>
+	</div>
+	<div class="tab">
+		<ul>
+			<li class="on"><a href="javascript:;">카테고리</a></li>
+			<li><a href="javascript:;">브랜드</a></li>
+		</ul>
+	</div>
+	<div class="contents-wrap">
+		<div class="content category">
+			<!-- 상단 카테고리 출력 시작 -->
+			{=includeWidget('proc/category_side', 'type', 'top','cateType','cate','menuType','all')}
+			<!-- 상단 카테고리 출력 끝 -->
+                        <!-- 브랜드 위젯 -->
+                        {=includeWidget('goods/_brand')}
+                        <!--// 브랜드 위젯 -->
+		</div>
+		<div class="content brand">
+			
+		</div>
+	</div>
+	<div class="fixed">
+		<ul>
+			<li><a href="javascript:;">공지사항</a></li>
+			<li><a href="javascript:;">고객센터</a></li>
+			<li><a href="javascript:;">매장안내</a></li>
+			<li><a href="javascript:;">고객서비스</a></li>
+		</ul>
+	</div>
+</div>
+
+
+<!-- 검색 -->
+<div class="search-area">
+	<a href="javascript:;" class="search-close"></a>
+	<div class="inner">
+		<!-- 검색 폼 -->
+		{=includeWidget('proc/_header_search.html')}
+		<!-- 검색 폼 -->
+	</div>
+</div>
+
+
+<div id="header" style="display:none;">
+
+    <div class="header_top">
+        <div class="header_top_cont">
+
+            <!-- 멀티상점 선택 -->
+            {=includeWidget('proc/_global_select.html')}
+            <!-- 멀티상점 선택 -->
+
+            <ul class="top_member_box">
+                <!--{ ? gd_is_login() === false }-->
+                    <li><a href="../member/login.php">LOGIN</a><span class="txt_bar"></span></li>
+                <li><a href="../member/join_method.php">JOIN</a><span class="txt_bar"></span>
+                    <!--<span class="accent">
+                        <span><strong>2,000 P</strong></span>
+                    </span>-->
+                </li>
+                <!--{ : }-->
+                <li><a href="../member/logout.php?returnUrl={=logoutReturnUrl}">LOGOUT</a><span class="txt_bar"></span></li>
+                <!--{ / }-->
+                <li>
+                    <div class="top_mypage_cont">
+                        <span class="top_mypage_tit"><a href="../mypage/index.php">MYPAGE</a></span>
+                        <ul style="display:none;">
+                            <li><a href="../mypage/order_list.php">{=__('주문조회')}</a></li>
+                            <li><a href="../mypage/my_page_password.php">{=__('내정보수정')}</a></li>
+                            <li><a href="../mypage/wish_list.php">{=__('찜 리스트')}</a></li>
+                            <li><a href="../mypage/mypage_qa.php">1:1 {=__('문의')}</a></li>
+                        </ul>
+                    </div>
+                    <span class="txt_bar"></span>
+                </li>
+                <li><a href="../order/cart.php">{=__('장바구니')}( <strong>{=dataCartGoodsCnt()}</strong> )</a><span class="txt_bar"></span></li>
+                <li><a href="../service/index.php">{=__('고객센터')}</a></li>
+            </ul>
+
+        </div>
+        <!-- //header_top_cont -->
+    </div>
+    <!-- //header_top -->
+    <div class="header_search">
+        <div class="header_search_cont">
+            <div class="h1_logo"><!--{ @dataBanner('4238483832') }-->{.tag}<!--{ / }--></div>
+
+            
+
+        </div>
+        <!-- //header_search_cont -->
+    </div>
+    <!-- //header_search -->
+    <div class="header_gnb">
+
+
+        <div class="gnb">
+            <!-- 전체 카테고리 출력 레이어 시작 -->
+            {=includeWidget("proc/category_all.html")}
+            <!-- 전체 카테고리 출력 레이어 끝 -->
+
+            <!-- 상단 카테고리 출력 시작 -->
+            {=includeWidget('proc/category_side', 'type', 'top','cateType','cate','menuType','all')}
+            <!-- 상단 카테고리 출력 끝 -->
+
+            <!--스크롤 게시글 시작-->
+            {=includeWidget('board/board_article_scrolling', 'bdId', noticeBdId, 'listCount', 10, 'strCut', 15)}
+            <!--스크롤 게시글 끝-->
+
+        </div>
+        <!-- //gnb -->
+
+        <!-- //gnb_allmenu -->
+    </div>
+    <!-- //header_gnb -->
+</div>
+<!-- //header -->
