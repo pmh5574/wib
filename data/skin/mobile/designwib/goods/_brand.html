@@ -200,7 +200,7 @@
         $.ajax({
             method: "POST",
             cache: false,
-            url: "./goods_ps.php",
+            url: "../goods/goods_ps.php",
             data: "mode=get_brand&brand="+brand,
             success: function(data) {
                 toggle_brand('search');
