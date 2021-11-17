@@ -3,7 +3,8 @@
  *
  */
 $(function(){
-    //협력사 검색
+    
+    //211117 디자인위브 mh 협력사 검색
     $('.js-artners-check').on('click', function(e){
         e.preventDefault();
         $('input[name="scmNmSearch"]').css('border-color', '#D5D5D5');
@@ -27,15 +28,22 @@ $(function(){
         });
     });
     
+    //211117 디자인위브 mh 협력사 접기/펼치기
     $('.js-partners-toggle').click(function(e){
         if($('.partners-tg').hasClass('dn')){
+            
             $('.partners-tg').removeClass('dn');
+            
+            // 검색 결과 없을때 colspan값 맞춰주기
             if($('.no-data').length > 0){
                 var thLength = $('thead tr th').length;
                 $('.no-data').attr('colspan', thLength);
             }
         }else{
+            
             $('.partners-tg').addClass('dn');
+            
+            // 검색 결과 없을때 colspan값 맞춰주기
             if($('.no-data').length > 0){
                 var thLength = $('thead tr th').not('.partners-tg').length;
                 $('.no-data').attr('colspan', thLength);
