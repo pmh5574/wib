@@ -63,7 +63,33 @@
                     <th>상태</th>
                     <td colspan="3">
                         <div class="form-inline">
-                            
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 전체
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 정산
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 미정산
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 정산초과
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 환불 대기
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 환불
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 취소
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 충전
+                            </label>
+                            <label class="checkbox-inline" style="margin: 0 10px 0 0;">
+                                <input type="checkbox" name="" value=""> 충전 대기
+                            </label>
                         </div>
                     </td>
                 </tr>

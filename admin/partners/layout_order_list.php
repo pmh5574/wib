@@ -30,6 +30,36 @@ use Framework\Utility\StringUtils;
                     if($gridKey === 'orderGoodsNm'){
                         $addClass = " class='orderGoodsNm' ";
                     }
+                    
+                    if(
+                            $gridKey == 'paymentDt' 
+                            || $gridKey == 'payBack' 
+                            || $gridKey == 'deliveryCompleteDt' 
+                            || $gridKey == 'address' 
+                            || $gridKey == 'receiverPhone' 
+                            || $gridKey == 'orderMemo' 
+                            || $gridKey == 'settlePrice' 
+                            || $gridKey == 'orderMargin' 
+                            || $gridKey == 'scmVat' 
+                            || $gridKey == 'settlePriceKr' 
+                            || $gridKey == 'settlePriceFr' 
+                            || $gridKey == 'differencePrice' 
+                            || $gridKey == 'exchangeRate' 
+                            || $gridKey == 'orderRefundPrice' 
+                            || $gridKey == 'orderRefundCredit' 
+                            || $gridKey == 'orderPlusDeliveryPriceFr' 
+                            || $gridKey == 'orderPlusDeliveryPriceKr' 
+                            || $gridKey == 'orderPlusDeliveryPriceCl' 
+                            || $gridKey == 'orderDeliveryCnt' 
+                            || $gridKey == 'memberOrderFl' 
+                            || $gridKey == 'a' 
+                            || $gridKey == 'b' 
+                            || $gridKey == 'orderTypeFl' 
+                            || $gridKey == 'c'
+                        ){
+                        $addClass = " class='partners-tg dn' ";
+                    }
+                    
                     if($gridKey === 'check'){
                         echo "<th><input type='checkbox' value='y' class='js-checkall' data-target-name='statusCheck'/></th>";
                     }
@@ -419,7 +449,7 @@ use Framework\Utility\StringUtils;
         else {
             ?>
             <tr>
-                <td colspan="<?=count($orderGridConfigList)?>" class="no-data">
+                <td colspan="20" class="no-data">
                     검색된 주문이 없습니다.
                 </td>
             </tr>

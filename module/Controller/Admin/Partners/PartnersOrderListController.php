@@ -71,10 +71,10 @@ class PartnersOrderListController extends \Controller\Admin\Controller
                 'address' => '배송지', //보이고 안보이고?
                 'receiverPhone' => '연락처', //보이고 안보이고?
                 'orderMemo' => '메세지', //보이고 안보이고?
-                'orderMemo' => '판매금액', //보이고 안보이고?
+                'settlePrice' => '판매금액', //보이고 안보이고?
                 'orderMargin' => '적용 마진율', //보이고 안보이고?
                 'scmVat' => '관부가세', //보이고 안보이고?
-                'settlePrice' => '결제 금액(KRW)', //보이고 안보이고?
+                'settlePriceKr' => '결제 금액(KRW)', //보이고 안보이고?
                 'settlePriceFr' => '결제 금액(외화)', //보이고 안보이고?
                 'differencePrice' => '차액', //보이고 안보이고?
                 'exchangeRate' => '적용 환율', //보이고 안보이고?

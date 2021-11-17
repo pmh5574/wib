@@ -1034,7 +1034,7 @@ class WibScmAdmin extends \Component\Scm\Scm
     public function checkScmId($managerId)
     {
         if(!$managerId){
-            return array('result' => 1 , 'msg' => '잘못된 접근 입니다.');
+            return array('result' => 1 , 'msg' => '협력사를 입력해 주세요.');
         }
         
         $query = "SELECT COUNT(*) cnt FROM es_manager WHERE managerId = '{$managerId}'";
@@ -1045,8 +1045,7 @@ class WibScmAdmin extends \Component\Scm\Scm
         }else{
             return array('result' => 0, 'msg' => '');
         }
-        
-        return array('result' => 1 , 'msg' => '잘못된 접근 입니다.');
+
     }
 }
 

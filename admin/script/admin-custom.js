@@ -22,7 +22,7 @@ $(function(){
                 if(data.result == '1'){
                     alert(data.msg);
                 }else{
-                    $('input[name="scmNmSearch"]').css('border-color', '#137FD8');
+                    $('input[name="scmNmSearch"]').css('border-color', '#117EF9');
                 }
             }
         });

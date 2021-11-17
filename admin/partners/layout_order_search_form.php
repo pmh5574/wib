@@ -174,7 +174,7 @@ $queryString = http_build_query($arrQueryString);
                             foreach ($statusList as $key => $value) {
                             ?>
                             <label class="checkbox-inline" style="margin: 0 10px 0 0;">
-                                <input type="checkbox" name="" value="<?= $key; ?>"> <?= $value; ?>
+                                <input type="checkbox" name="orderStatus[]" value="<?= $key; ?>"> <?= $value; ?>
                             </label>
                             <?php
                             } 
@@ -247,6 +247,9 @@ $queryString = http_build_query($arrQueryString);
                 배송비: <?=number_format($page->recode['totalDeliveryPrice'])?></small>
             <?php } ?>
             <!--)-->
+        </div>
+        <div class="pull-right">
+            <button type="button" class="btn btn-dark-gray js-partners-toggle">접기/펼치기</button>
         </div>
     </div>
     <input type="hidden" name="view" value="<?=$search['view']?>"/>
