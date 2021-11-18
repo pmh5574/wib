@@ -45,6 +45,35 @@ class GoodsListController extends \Controller\Admin\Controller
             $getIcon = $goods->getManageGoodsIconInfo();
 
             $getData = $goods->getAdminListGoods();
+            
+            $getData['goodsGridConfigList'] = [
+                'check' => '선택',
+                'no' => '번호',
+                'a' => '상태',
+                'b' => '업체명',
+                'aa' => '스타일 코드',
+                'ab' => '원단 코드',
+                'ac' => '색상 코드',
+                'goodsImage' => '이미지',
+                'goodsNo' => '상품 번호',
+                'c' => '등록 상품 번호',
+                'd' => '상품 코드',
+                'goodsNm' => '상품명',
+                'option' => '옵션',
+                'e' => '수량',
+                'f' => '협력사 상품 번호',
+                'cateCd' => '카테고리',
+                'fa' => '원산지',
+                'fb' => '구성',
+                'g' => '화폐',
+                'h' => '공급가(외화)',
+                'i' => '공급가(KRW)',
+                'ia' => '협력사 판매금액',
+                'j' => '공급사 할인율',
+                'regDt' => '등록일/수정일',
+                'k' => '비고'
+            ];
+
             $page = \App::load('\\Component\\Page\\Page'); // 페이지 재설정
 
             $this->setData('stateCount', $getData['stateCount']); // 상품 품절, 노출 개수
@@ -66,7 +95,7 @@ class GoodsListController extends \Controller\Admin\Controller
             $this->addScript([
                 'jquery/jquery.multi_select_box.js',
             ]);
-
+//            print_r($getData['search']);
             $this->setData('goods', $goods);
             $this->setData('cate', $cate);
             $this->setData('brand', $brand);
@@ -85,7 +114,7 @@ class GoodsListController extends \Controller\Admin\Controller
                 $this->getView()->setPageName('goods/goods_list_delete');
                 if(gd_is_provider()) $this->setData('searchConfigButton', 'hide');
             } else {
-                $this->getView()->setPageName('goods/goods_list.php');
+                $this->getView()->setPageName('partners/goods_list.php');
             }
 
             // 그리드 항목에 따른 페이지 include  - (인기, 메인, 카테고리 포함일 경우)

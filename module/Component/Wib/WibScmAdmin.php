@@ -1037,13 +1037,13 @@ class WibScmAdmin extends \Component\Scm\Scm
             return array('result' => 1 , 'msg' => '협력사를 입력해 주세요.');
         }
         
-        $query = "SELECT COUNT(*) cnt FROM es_manager WHERE managerId = '{$managerId}'";
-        $result = $this->wibSql->WibNobind($query)['cnt'];
+        $query = "SELECT sm.scmNo, sm.companyNm FROM es_manager m LEFT JOIN es_scmManage sm ON m.scmNo = sm.scmNo WHERE m.managerId = '{$managerId}'";
+        $result = $this->wibSql->WibNobind($query);
         
-        if($result == 0){
+        if(!$result['scmNo']){
             return array('result' => 1 , 'msg' => '일치하는 협력사가 없습니다.');
         }else{
-            return array('result' => 0, 'msg' => '');
+            return array('result' => 0, 'msg' => '', 'data' => array('scmNo' => $result['scmNo'], 'companyNm' => $result['companyNm'], 'managerId' => $managerId));
         }
 
     }

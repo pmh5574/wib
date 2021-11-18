@@ -7,8 +7,14 @@ $(function(){
     //211117 디자인위브 mh 협력사 검색
     $('.js-artners-check').on('click', function(e){
         e.preventDefault();
+        var _this = this;
         $('input[name="scmNmSearch"]').css('border-color', '#D5D5D5');
         var scmNmSearch = $('input[name="scmNmSearch"]').val();
+        
+        //이전 검색에서 input값에 scmNo가 있으면 제거 후 추가
+        if($('.hideScm').length > 0){
+            $('.hideScm').remove();
+        }
         
         $.ajax({
             url : '../partners/partners_ps.php',
@@ -19,10 +25,14 @@ $(function(){
             },
             success : function(data){
 
-                if(data.result == '1'){
-                    alert(data.msg);
-                }else{
+                if(data.result == '0'){
+                    
                     $('input[name="scmNmSearch"]').css('border-color', '#117EF9');
+
+                    $(_this).closest('form').append('<input type="hidden" class="hideScm" name="scmNo[]" value="'+data.data.scmNo+'">');
+                    $(_this).closest('form').append('<input type="hidden" class="hideScm" name="scmNoNm[]" value="'+data.data.companyNm+'">');
+                }else if(data.result == '1'){
+                    alert(data.msg);
                 }
             }
         });

@@ -20,9 +20,11 @@
             <tbody>
                 <tr>
                     <th>협력사</th>
-                    <td class="form-inline">
-                        <input type="text" name="scmNmSearch" class="form-control width-lg" value="" placeholder="공급사 명을 입력해주세요.">
-                        <input type="button" value="검색" class="btn btn-dark-gray js-artners-check" data-type="scm" data-mode="search" data-scm-commission-set="p">
+                    <td>
+                        <div class="form-inline">
+                            <input type="text" name="scmNmSearch" class="form-control width-lg" value="" placeholder="공급사 명을 입력해주세요.">
+                            <input type="button" value="검색" class="btn btn-dark-gray js-artners-check" data-type="scm" data-mode="search" data-scm-commission-set="p">
+                        </div>
                     </td>
                     <th>정산 확인 여부</th>
                     <td>

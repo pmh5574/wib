@@ -10,27 +10,6 @@
 <form id="frmList" action="" method="get" target="ifrmProcess">
     <input type="hidden" name="mode" value="">
     <input type="hidden" name="modDtUse" value=""/>
-    <div class="table-action" style="margin:0;">
-        <div class="pull-left">
-            <button type="button" class="btn btn-black js-check-sale">상품 노출/판매 수정</button>
-            <?php if(gd_is_provider() === false) {?>
-                <button type="button" class="btn btn-black js-check-populate">인기상품노출수정</button>
-            <?php }?>
-        </div>
-        <div class="pull-right">
-            <button type="button" class="js-layer-register btn btn-sm btn-black" style="height: 27px !important;" data-type="goods_grid_config" data-goods-grid-mode="<?=$goodsAdminGridMode?>">조회항목설정</button>
-        </div>
-        <div class="pull-left" style="width:100%; padding-top: 5px;">
-            <?php if(gd_is_provider() === false) {?>
-            <button type="button" class="btn btn-white js-check-maindisplay">메인상품진열</button>
-            <?php }?>
-            <button type="button" class="btn btn-white js-check-group">분류관리</button>
-            <button type="button" class="btn btn-white js-check-moddt">수정일변경</button>
-            <button type="button" class="btn btn-white js-check-soldout">품절처리</button>
-            <button type="button" class="btn btn-white js-check-copy">선택 복사</button>
-            <button type="button" class="btn btn-white js-check-delete">선택 삭제</button>
-        </div>
-    </div>
     <div class="table-responsive">
         <table class="table table-rows">
             <thead>
@@ -43,6 +22,9 @@
                             if($gridKey === 'display') continue;
                             if($gridKey === 'goodsNm') {
                                 $addClass = " style='min-width: 300px !important;' ";
+                            }
+                            if($gridKey == 'aa' || $gridKey == 'ab' || $gridKey == 'ac' || $gridKey == 'fa' || $gridKey == 'fb' || $gridKey == 'ia'){
+                                $addClass = " class='partners-tg dn' ";
                             }
                             if( $gridKey === 'goodsDisplayFl' || $gridKey ==='goodsSellFl') {
                                 $addClass = " style='min-width: 120px !important;' ";
