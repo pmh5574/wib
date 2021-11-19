@@ -22,7 +22,9 @@
                     <th>협력사</th>
                     <td>
                         <div class="form-inline">
-                            <input type="text" name="scmNmSearch" class="form-control width-lg" value="" placeholder="공급사 명을 입력해주세요.">
+                            <input type="hidden" name="scmFl" value="y" />
+                            <input type="hidden" name="managerId" value="<?= gd_isset($search['managerId']); ?>">
+                            <input type="text" name="scmNmSearch" class="form-control width-lg" value="<?php if($search['scmFl'] != 'all') echo $search['scmNoNm'][0]; ?>" placeholder="협력사 명을 입력해주세요.">
                             <input type="button" value="검색" class="btn btn-dark-gray js-artners-check" data-type="scm" data-mode="search" data-scm-commission-set="p">
                         </div>
                     </td>
