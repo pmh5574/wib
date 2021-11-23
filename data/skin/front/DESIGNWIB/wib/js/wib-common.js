@@ -105,7 +105,25 @@ $(document).ready(function(){
 	}();
 });
 
-
+// 211123 디자인위브 mh 브랜드 좋아요 기능 
+function brandLike(brandCd)
+{
+    $.ajax({
+        url : '../../brand/brand_ps.php',
+        type : 'post',
+        data : {
+            mode : 'brandLike',
+            brandCd : brandCd
+        },
+        success : function(data){
+            if(data == 'on'){
+                
+            }else{
+                
+            }
+        }
+    });
+}
 
 
 

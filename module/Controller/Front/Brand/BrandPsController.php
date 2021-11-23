@@ -21,7 +21,10 @@ class BrandPsController extends \Controller\Front\Controller
 
         switch ($postValue['mode']){
             case 'brandLike':
-                $wibBrand->setBrandLike(Session::get('member.memNo'), $postValue['brandCd']);
+                $result = $wibBrand->setBrandLike(Session::get('member.memNo'), $postValue['brandCd']);
+                $this->json([
+                   'code' => $result 
+                ]);
                 break;
             default :
                 break;

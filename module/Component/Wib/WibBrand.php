@@ -25,9 +25,19 @@ class WibBrand
         
         // 좋아요 삭제
         if($result['sno']){
-            
+            $sql = "DELETE FROM wib_memberBrand WHERE sno = {$result['sno']}";
+            $this->wibSql->WibNobind($sql);
+            return 'off';
         }else{ // 좋아요
-            
+            $data = [
+                'wib_memberBrand',
+                [
+                    'memberNo' => [$memNo, 'i'],
+                    'brandCd' => [$brandCd, 's']
+                ]
+            ];
+            $this->wibSql->WibInsert($data);
+            return 'on';
         }
         
     }
