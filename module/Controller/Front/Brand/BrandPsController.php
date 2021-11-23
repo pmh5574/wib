@@ -5,6 +5,7 @@ namespace Controller\Front\Brand;
 use Request;
 use Component\Wib\WibBrand;
 use Framework\Debug\Exception\AlertRedirectException;
+use Session;
 
 class BrandPsController extends \Controller\Front\Controller
 {
@@ -20,7 +21,7 @@ class BrandPsController extends \Controller\Front\Controller
 
         switch ($postValue['mode']){
             case 'brandLike':
-                $wibBrand->setBrandLike();
+                $wibBrand->setBrandLike(Session::get('member.memNo'), $postValue['brandCd']);
                 break;
             default :
                 break;
