@@ -22,12 +22,11 @@ class LayerDragAndDropController extends \Controller\Admin\Controller
             $cateInfo = array();
 
             $getValue = Request::get()->toArray();
-            $cateGoods = $getValue['cateCd'];
+            $cateGoods = ArrayUtils::last(gd_isset($getValue['cateGoods']));
 //            print_r($getValue['cateCd']);
-            Request::get()->set('cateGoods[]', $cateGoods);
 
             if($cateGoods) {
-                print_r($cateGoods);
+                
                 list($cateInfo)  = $cate->getCategoryData($cateGoods);
                 $cateInfo['pcThemeInfo'] = $display->getInfoThemeConfig($cateInfo['pcThemeCd']);
                 $cateInfo['mobileThemeInfo'] = $display->getInfoThemeConfig($cateInfo['mobileThemeCd']);
@@ -38,9 +37,9 @@ class LayerDragAndDropController extends \Controller\Admin\Controller
                 if($cateInfo['sortAutoFl'] =='y') Request::get()->set('sort',$cateInfo['sortType']);
             }
 
-            $getData = $goods->getAdminListSort('category');
+            $getData = $goods->getAdminListSort('category', false);
             
-            gd_debug($getData);
+//            gd_debug($getData);
 
             $page = \App::load('\\Component\\Page\\Page'); // 페이지 재설정
 
@@ -49,5 +48,14 @@ class LayerDragAndDropController extends \Controller\Admin\Controller
         }
         
         $this->getView()->setDefine('layout', 'layout_blank.php');
+        
+        $this->setData('cateMode', $getValue['cateType']);
+        $this->setData('goods', $goods);
+        $this->setData('cate', $cate);
+        $this->setData('cateInfo', $cateInfo);
+        $this->setData('data', $getData['data']);
+        $this->setData('search', $getData['search']);
+        $this->setData('fixCount', $getData['fixCount']);
+        $this->setData('page', $page);
     }
 }

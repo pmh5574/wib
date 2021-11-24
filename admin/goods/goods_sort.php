@@ -39,12 +39,12 @@ if ($cateMode == 'category') {
                 return false;
             }
             var _url = '/share/layer_drag_and_drop.php?cateGoods[]='+cateCd+'&cateType='+cateType;
-
+            
             popup({
                 url: _url,
                 target: '',
-                width: 1110,
-                height: 800,
+                width: (screen.width - 16),
+                height: (screen.height - 108),
                 scrollbars: 'yes',
                 resizable: 'yes'
             });
