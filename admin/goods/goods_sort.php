@@ -34,10 +34,17 @@ if ($cateMode == 'category') {
             e.preventDefault();
             var cateCd = $(this).data('catecd');
             var cateType = $(this).data('cate-type');
+            var sortAutoFl = $('input[name="sortAutoFl"]').val();
             if(!cateCd){
                 alert('카테고리를 선택 후 클릭해 주세요.');
                 return false;
             }
+            
+            if(sortAutoFl == 'y'){
+                alert('진열타입을 수동진열로 바꿔주세요.');
+                return false;
+            }
+            
             var _url = '/share/layer_drag_and_drop.php?cateGoods[]='+cateCd+'&cateType='+cateType;
             
             popup({

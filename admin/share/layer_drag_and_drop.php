@@ -1,15 +1,16 @@
 <style>
-    #div_goods_result ul{width: 438px;margin: 0 auto;padding-bottom: 100px;box-sizing: border-box;display: flex;flex-wrap: wrap;align-content: flex-start;}
-    #div_goods_result ul li{position: relative; width: 213px;height: 230px;margin: 4px 0 0 4px;}
+    #div_goods_result ul{width: 1089px;margin: 0 auto;padding-bottom: 100px;box-sizing: border-box;display: flex;flex-wrap: wrap;align-content: flex-start;}
+    #div_goods_result ul li{position: relative; width: 150px;height: 150px;margin: 4px 0 0 4px;}
     #div_goods_result ul li .gallery_description{opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;box-sizing: border-box;letter-spacing: -1px;background: rgba(255,255,255,.95);-webkit-transition: .3s ease-out;transition: .3s ease-out;}
     #div_goods_result ul li:hover .gallery_description{opacity: 1;}
     /*#div_goods_result ul li.sortable-chosen:after { content:""; position:absolute; top:0; left:0; display:block; width:213px; height:230px; }*/
     #div_goods_result ul .sortable-chosen.sortable-ghost:hover .gallery_description{ opacity:0 !important; display:none !important; }
     #div_goods_result ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 230px;}
-    #div_goods_result ul li .gallery_thumbnail img{min-width: 100%;min-height: 100%;max-width: 250px;max-height: 250px;}
+    #div_goods_result ul li .gallery_thumbnail img{width: 100%; max-height: 150px;}
     #div_goods_result ul li .gallery_button{position: absolute;top: 9px;left: 11px;z-index: 2;width: 191px;height: 22px;}
     
 </style>
+<button type="button" class="btn btn-red save">저장</button>
 <div id="div_goods_result">
     <ul id="goods_result">
     <?php
@@ -62,6 +63,10 @@
                 $(this).closest('li').removeClass('add_goods_fix').addClass('add_goods_free');
 
             }
+        });
+        
+        $('.save').click(function(){
+            
         });
     });
 </script>
