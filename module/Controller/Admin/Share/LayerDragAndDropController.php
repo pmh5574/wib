@@ -50,6 +50,7 @@ class LayerDragAndDropController extends \Controller\Admin\Controller
         $this->getView()->setDefine('layout', 'layout_blank.php');
         
         $this->setData('cateMode', $getValue['cateType']);
+        $this->setData('cateCd', $cateGoods);
         $this->setData('goods', $goods);
         $this->setData('cate', $cate);
         $this->setData('cateInfo', $cateInfo);
