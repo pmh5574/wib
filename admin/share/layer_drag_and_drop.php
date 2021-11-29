@@ -110,6 +110,8 @@
             onMove: function (evt, originalEvent) {
                 console.log(evt);
                 console.log(originalEvent);
+                
+               
 //                console.log(evt.dragged);
 //                console.log(evt.draggedRect);
 //                console.log(evt.related);
@@ -123,6 +125,10 @@
                 // return true; — keep default insertion point based on the direction
                 // return void; — keep default insertion point based on the direction
             },
+            onChange: function(evt) {
+		console.log(evt); // most likely why this event is used is to get the dragging element's current index
+		// same properties as onEnd
+            }
 //            fallbackOnBody : true
 //            swap : true
         });
