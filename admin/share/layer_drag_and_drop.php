@@ -9,7 +9,7 @@
     #div_goods_result ul li:hover .gallery_description{opacity: 1;}
     /*#div_goods_result ul li.sortable-chosen:after { content:""; position:absolute; top:0; left:0; display:block; width:213px; height:230px; }*/
     #div_goods_result ul .sortable-chosen.sortable-ghost:hover .gallery_description{ opacity:0 !important; display:none !important; }
-    #div_goods_result ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 230px;}
+    #div_goods_result ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 150px;}
     #div_goods_result ul li .gallery_thumbnail img{width: 100%; max-height: 150px;}
     #div_goods_result ul li .gallery_button{position: absolute;top: 9px;left: 11px;z-index: 2;width: 191px;height: 22px;}
     
@@ -87,6 +87,9 @@
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
 <script>
     $(function(){
+        var pid,
+            beforeUl,
+            freezed;
         //sortTable
         var el = document.getElementById('goods_result');
 
@@ -96,41 +99,58 @@
 
             },
 
-            swapThreshold: 1, // 전체가 아닌 절반쯤 갔을때 바뀌게
+//            swapThreshold: 1, // 전체가 아닌 절반쯤 갔을때 바뀌게
             animation: 150, // 속도
             filter : '.add_goods_fix', // sort 안될 클래스
-            draggable : '.add_goods_free', // sort될 클래스
+//            draggable : '.add_goods_free', // sort될 클래스
+            onStart: function (evt) {
+                
+                beforeUl = evt.to;
+                freezed = this.el.querySelector('.add_goods_fix');
+            },
             onClone: function (evt) {
-		var origEl = evt.item;
-		var cloneEl = evt.clone;
-                origEl.before(cloneEl);
+//		var origEl = evt.item;
+//		var cloneEl = evt.clone;
+//                origEl.before(cloneEl);
 //                console.log(origEl);
 //                console.log(cloneEl);
             },
             onMove: function (evt, originalEvent) {
-                console.log(evt);
-                console.log(originalEvent);
-                
-               
-//                console.log(evt.dragged);
-//                console.log(evt.draggedRect);
-//                console.log(evt.related);
-//                console.log(evt.relatedRect);
-//                console.log(evt.willInsertAfter);
-                
- 
-                // return false; — for cancel
-//                 return -1;// — insert before target
-                // return 1; — insert after target
-                // return true; — keep default insertion point based on the direction
-                // return void; — keep default insertion point based on the direction
-            },
-            onChange: function(evt) {
-		console.log(evt); // most likely why this event is used is to get the dragging element's current index
-		// same properties as onEnd
+                clearTimeout(pid);
+                pid = setTimeout(function () {
+                    var list = evt.to;
+                    var _checks = false;
+                    
+                    if(freezed){
+                        for(var i = 0; i<list.children.length; i++){
+                            if(_checks){
+                                break;
+                            }
+                            //원래 li위치에 고정된 값은 다시 삽입시키기
+                            for(var j=0; j<beforeUl.children.length; j++){
+                                if(list.children[i] !== beforeUl.children[j] && beforeUl.children[j].classList.value == 'add_goods_fix'){
+                                    console.log(beforeUl.children[j-1]);
+                                    console.log(beforeUl.children[j]);
+                                    list.insertBefore(beforeUl.children[j], beforeUl.children[j-1]);
+                                    _checks = true;
+                                    break;
+                                }
+                            }
+
+                        }
+                    }
+                    
+                    
+                }, 0);
+
+                if (evt.related.nextElementSibling === freezed) {
+                    return -1;
+                }
+
+                return freezed !== evt.related;
+
             }
-//            fallbackOnBody : true
-//            swap : true
+
         });
         
         var el2 = document.getElementById('goods_sub_result');
