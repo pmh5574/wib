@@ -88,7 +88,7 @@
 <script>
     $(function(){
         var pid,
-            beforeUl,
+            positions,
             freezed;
         //sortTable
         var el = document.getElementById('goods_result');
@@ -105,8 +105,18 @@
 //            draggable : '.add_goods_free', // sort될 클래스
             onStart: function (evt) {
                 
-                beforeUl = evt.to;
-                freezed = this.el.querySelector('.add_goods_fix');
+                console.log(this);
+                
+                //freezed에 add_goods_fix를 배열로 만들어서 넣기
+                freezed = [].slice.call(this.el.querySelectorAll('.add_goods_fix'));
+                
+                console.log(freezed);
+                console.log(Sortable.utils);
+                
+                //몇번째 인덱스에 있는지 넣기
+                positions = freezed.map(function (el) {
+                    return Sortable.utils.index(el); 
+                });
             },
             onClone: function (evt) {
 //		var origEl = evt.item;
@@ -116,41 +126,38 @@
 //                console.log(cloneEl);
             },
             onMove: function (evt, originalEvent) {
+                var vector,
+                    freeze = false;
+                
                 clearTimeout(pid);
                 pid = setTimeout(function () {
                     var list = evt.to;
-                    var _checks = false;
-                    
-                    if(freezed){
-                        for(var i = 0; i<list.children.length; i++){
-                            if(_checks){
-                                break;
-                            }
-                            //원래 li위치에 고정된 값은 다시 삽입시키기
-                            for(var j=0; j<beforeUl.children.length; j++){
-                                if(list.children[i] !== beforeUl.children[j] && beforeUl.children[j].classList.value == 'add_goods_fix'){
-                                    console.log(beforeUl.children[j-1]);
-                                    console.log(beforeUl.children[j]);
-                                    list.insertBefore(beforeUl.children[j], beforeUl.children[j-1]);
-                                    _checks = true;
-                                    break;
-                                }
-                            }
 
+                    freezed.forEach(function (el, i) {
+                        var idx = positions[i];
+
+                        if (list.children[idx] !== el) {
+                            var realIdx = Sortable.utils.index(el);
+                            
+                            //(realIdx < idx) true면 1, false면 0을 더함
+                            list.insertBefore(el, list.children[idx + (realIdx < idx)]);
                         }
-                    }
-                    
-                    
+                    });
                 }, 0);
+    
+    
+                freezed.forEach(function (el, i) {
+                    if (el === evt.related) {
+                        freeze = true;
+                    }
 
-                if (evt.related.nextElementSibling === freezed) {
-                    return -1;
-                }
-
-                return freezed !== evt.related;
-
+                    if (evt.related.nextElementSibling === el && evt.relatedRect.top < evt.draggedRect.top) {
+                        vector = -1;
+                    }
+                });
+    
+                return freeze ? false : vector;
             }
-
         });
         
         var el2 = document.getElementById('goods_sub_result');
