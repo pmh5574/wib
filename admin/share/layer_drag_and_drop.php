@@ -11,7 +11,9 @@
     #div_goods_result ul .sortable-chosen.sortable-ghost:hover .gallery_description{ opacity:0 !important; display:none !important; }
     #div_goods_result ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 150px;}
     #div_goods_result ul li .gallery_thumbnail img{width: 100%; max-height: 150px;}
-    #div_goods_result ul li .gallery_button{position: absolute;top: 9px;left: 11px;z-index: 2;width: 191px;height: 22px;}
+    #div_goods_result ul li .gallery_button{position: absolute;top: 9px;left: 11px;z-index: 2;width: 120px;height: 22px;}
+    #div_goods_result ul li .gallery_button .delete_button{width: 14px;height: 14px;vertical-align: middle;float: right;}
+    
     
     /*
     * 상품 검색 리스트 
@@ -24,7 +26,10 @@
     #searchGoodsList ul li:hover .gallery_description{opacity: 1;}
     #searchGoodsList ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 230px;}
     #searchGoodsList ul li .gallery_thumbnail img{width: 100%; max-height: 150px;}
-    #searchGoodsList ul li .gallery_button{position: absolute;top: 9px;left: 11px;z-index: 2;width: 191px;height: 22px;}
+    #searchGoodsList ul li .gallery_button{display:none;}
+    #searchGoodsList .status{display: table;position: absolute;top: 0;left: 0;z-index: 3;width: 100%;height: 100%;background: rgba(56,64,77,.5);}
+    #searchGoodsList .status span{display: table-cell;position: relative;z-index: 3;vertical-align: middle;font-weight: normal;text-align: center;color: #fff;}
+    
 </style>
 <button type="button" class="btn btn-red save">저장</button>
 <form id="searchFrm" name="searchFrm" method="post">
@@ -71,10 +76,12 @@
                         </div> 
                         <strong class="product"><?= $value['goodsNm']; ?></strong>
                     </div>
+                    <div class="gallery_button">
+                        <input type="checkbox" value="a" <?php if($value['fixSort'] > 0) { echo "checked"; } ?>>
+                        <button type="button" class="delete_button">x</button>
+                    </div>
                 </div>
-                <div class="gallery_button">
-                    <input type="checkbox" value="a" <?php if($value['fixSort'] > 0) { echo "checked"; } ?>>
-                </div>
+                
             </li>
     <?php
         }
@@ -86,44 +93,97 @@
 
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
 <script>
+    /**
+    * pid setTimeOut용
+    * positions 몇번째에 add_goods_fix값이 있는지
+    * add_goods_fix el 배열 값
+    * goodsArrList 상품번호 배열 리스트
+    */
+    var goodsArrList = [];
     $(function(){
         var pid,
             positions,
             freezed;
+
         //sortTable
         var el = document.getElementById('goods_result');
 
         var sortable = new Sortable(el, {
             group: {
                 name: 'shared', // 공유 옵션,
-
+                pull: 'clone'
             },
-
-//            swapThreshold: 1, // 전체가 아닌 절반쯤 갔을때 바뀌게
             animation: 150, // 속도
             filter : '.add_goods_fix', // sort 안될 클래스
-//            draggable : '.add_goods_free', // sort될 클래스
             onStart: function (evt) {
-                
-                console.log(this);
                 
                 //freezed에 add_goods_fix를 배열로 만들어서 넣기
                 freezed = [].slice.call(this.el.querySelectorAll('.add_goods_fix'));
-                
-                console.log(freezed);
-                console.log(Sortable.utils);
                 
                 //몇번째 인덱스에 있는지 넣기
                 positions = freezed.map(function (el) {
                     return Sortable.utils.index(el); 
                 });
             },
-            onClone: function (evt) {
-//		var origEl = evt.item;
-//		var cloneEl = evt.clone;
-//                origEl.before(cloneEl);
-//                console.log(origEl);
-//                console.log(cloneEl);
+            onMove: function (evt, originalEvent) {
+                var vector,
+                    freeze = false;
+                
+                clearTimeout(pid);
+                //뒤에 실행 2
+                pid = setTimeout(function () {
+                    var list = evt.to;
+                    
+                    freezed.forEach(function (el, i) {
+                        var idx = positions[i];
+                        
+                        //freeazed(add_goods_fix)배열안에 엘리먼트값이랑 현재 리스트 엘리먼트 값이 위치가 다를경우
+                        if (list.children[idx] !== el) {
+                            var realIdx = Sortable.utils.index(el);
+                            
+                            //(realIdx < idx) true면 1, false면 0을 더함 앞으로 이동된건지 뒤로 이동된건지 체크
+                            list.insertBefore(el, list.children[idx + (realIdx < idx)]);
+                        }
+                    });
+
+                }, 0);
+                
+                //먼저 실행 1
+                freezed.forEach(function (el, i) {
+                    if (el === evt.related) {
+                        freeze = true;
+                    }
+
+                    if (evt.related.nextElementSibling === el && evt.relatedRect.top < evt.draggedRect.top) {
+                        vector = -1;
+                    }
+                });
+                
+                //freeze가 true면 위치를 바꾸려는 게 add_goods_fix라 false반환
+                return freeze ? false : vector;
+            }
+        });
+        
+        var el2 = document.getElementById('goods_sub_result');
+        
+        //검색 sortable
+        var sortableSearch = new Sortable(el2, {
+            group: {
+                name: 'shared',
+                put: false ,
+                pull: 'clone'
+            },
+            sort: false,
+            animation: 150,
+            draggable: '.add_goods_free',
+            onStart: function (evt) {
+                
+                //freezed에 sortable에 add_goods_fix를 배열로 만들어서 넣기
+                freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
+                
+                positions = freezed.map(function (el) {
+                    return Sortable.utils.index(el); 
+                });
             },
             onMove: function (evt, originalEvent) {
                 var vector,
@@ -138,8 +198,7 @@
 
                         if (list.children[idx] !== el) {
                             var realIdx = Sortable.utils.index(el);
-                            
-                            //(realIdx < idx) true면 1, false면 0을 더함
+
                             list.insertBefore(el, list.children[idx + (realIdx < idx)]);
                         }
                     });
@@ -155,27 +214,28 @@
                         vector = -1;
                     }
                 });
-    
+                
                 return freeze ? false : vector;
+            },
+            onEnd: function(evt){
+                
+                setGoodsArrList();
+                
+                var goodsNo = evt.item.getElementsByClassName('code')[0].innerHTML;
+                console.log(goodsArrList);
+                //해당 goodsNo값이 있으면 추가된걸로 판단
+                if(goodsArrList.indexOf(goodsNo) != -1){
+                    console.log('qqqq');
+                    //evt는 옮겨진 값..
+                    evt.item.classList.remove('add_goods_free');
+                }
+                
+                
+                
             }
         });
         
-        var el2 = document.getElementById('goods_sub_result');
-        
-        var sortable = new Sortable(el2, {
-            group: {
-                name: 'shared',
-                put: false ,
-                clone: true
-            },
-//            fallbackOnBody : true,
-            swapThreshold: 1,
-            sort: false,
-            animation: 150,
-            filter : '.add_goods_fix',
-            draggable : '.add_goods_free'
-        });
-        
+        //저장
         $('.save').click(function(){
             
         });
@@ -186,7 +246,9 @@
             }
         });
         
+        //검색시
         $('.js-search').click(function(){
+            
             if(!$('#searchFrm input[name="keyword"]').val()){
                 alert('상품명을 입력해 주세요.');
                 $('input[name="keyword"]').focus();
@@ -215,8 +277,14 @@
                             }else{
                                 var addClassText = ' class="add_goods_free" ';
                             }
+                            var moreHtml = '';
+                            if(goodsArrList.indexOf(data[i].goodsNo) != -1){
+                                moreHtml += '<div class="status"><span>진열중</span></div>';
+                                addClassText = '';
+                            }
                             
                             _html += '<li id="tbl_add_goods_'+data[i].goodsNo+'"' +addClassText+'>';
+                            _html += moreHtml;
                             _html += '<div class="gallery_thumbnail">';
                             _html += '<img src="/data/goods/'+data[i].imagePath+data[i].imageName+'" alt="'+data[i].goodsNm+'" tile="'+data[i].goodsNm+'">';
                             _html += '</div>';
@@ -227,15 +295,17 @@
                             _html += '</div>';
                             _html += '<strong class="product">'+data[i].goodsNm+'</strong>';
                             _html += '</div>';
-                            _html += '</div>';
                             _html += '<div class="gallery_button">';
                             _html += '<input type="checkbox" value="a" '+_checked+'>';
+                            _html += '<button type="button" class="delete_button">x</button>';
+                            _html += '</div>';
                             _html += '</div>';
                             _html += '</li>';
 
                         }
 
                         $('#searchGoodsList ul').html(_html);
+                        
                     }else if(result.result == '1'){
                         $('#searchGoodsList ul').html('검색하신 상품이 없습니다.');
                     }
@@ -244,14 +314,37 @@
             });
         });
         
+        setGoodsArrList();
     });
     
+    //고정값 사용 여부
     $(document).on('change', '.gallery_button input[type="checkbox"]', function(){
         if($(this).prop('checked')){
             $(this).closest('li').removeClass('add_goods_free').addClass('add_goods_fix');
         }else{
             $(this).closest('li').removeClass('add_goods_fix').addClass('add_goods_free');
-
         }
     });
+    
+    //엘리먼트 삭제
+    $(document).on('click', '.delete_button', function(){
+        $(this).closest('li').remove();
+        setGoodsArrList();
+    });
+    
+    // goodsArrList 세팅
+    function setGoodsArrList()
+    {
+        goodsArrList = [];
+        $('#goods_result .gallery_description .code').each(function(){
+            goodsArrList.push($(this).html());
+        });
+        
+    }
+    
+    function searchRemoveClass()
+    {
+        if(goodsArrList.indexOf()){
+        }
+    }
 </script>
