@@ -236,6 +236,12 @@ class Goods extends \Bundle\Component\Goods\Goods
             
         }
         
+        if($req['filterBrand']){
+            $filterWhere = ' g.brandCd = '.$req['filterBrand'];
+            
+            $this->arrWhere[] = $filterWhere;
+        }
+        
         if($req['pageNum']){
             $pageNum = $req['pageNum'];
         }

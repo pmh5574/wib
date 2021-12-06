@@ -86,18 +86,22 @@ var wibFilter = {
     
     getList : function(){
         var _this = this;
+        var sort =  $('input[name="sort"]:checked').val();
+        var pageNum = $('select[name="pageNum"]').val();
         
         $.ajax({
-            url : '../goods/filter_goods.php',
+            url : _this.ajaxUrl+'?cateCd='+_this.cateCd,
             type : 'post',
             data : {
+                'sort' : sort,
+                'pageNum' : pageNum,
                 'cateCd' : _this.cateCd,
                 'page' : _this.page,
                 'filterBrand' : _this.filterBrand,
                 'filterColor' : _this.filterColor,
             },
             success : function(result){
-                
+                console.log(result);
             }
         });
     },
