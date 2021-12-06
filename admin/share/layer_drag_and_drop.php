@@ -33,65 +33,70 @@
     .searchWall{position: absolute;width: 100%;height: 100%; z-index: 9999;}
     
 </style>
+
 <button type="button" class="btn btn-red save">저장</button>
+
 <form id="searchFrm" name="searchFrm" method="post">
     <input type="hidden" name="mode" value="searchGoods">
     <input type="hidden" name="cateCd" value="<?= $cateCd; ?>">
-<div id="goodsChoiceList">
-    <div>
-        <div>진열할 상품 찾기</div>
-        <div>검색분류</div>
+    <div id="goodsChoiceList">
         <div>
-            <div class="form-inline">
-                <select name="key" class="form-control">
-                    <option value="goodsNm">상품명</option>
-                    <option value="goodsNo">상품번호</option>
-                </select>
-                <input name="keyword" class="form-control">
+            <div>진열할 상품 찾기</div>
+            <div>검색분류</div>
+            <div>
+                <div class="form-inline">
+                    <select name="key" class="form-control">
+                        <option value="goodsNm">상품명</option>
+                        <option value="goodsNo">상품번호</option>
+                    </select>
+                    <input name="keyword" class="form-control">
+                </div>
             </div>
         </div>
-    </div>
-    <div>
-        <div class="form-inline">
-            <button type="button" class="btn btn-gray js-search">추가 상품 검색</button>
+        <div>
+            <div class="form-inline">
+                <button type="button" class="btn btn-gray js-search">추가 상품 검색</button>
+            </div>
+        </div>
+        <div id="searchGoodsList">
+            <ul id="goods_sub_result">검색하신 상품이 없습니다.</ul>
         </div>
     </div>
-    <div id="searchGoodsList">
-        <ul id="goods_sub_result">검색하신 상품이 없습니다.</ul>
-    </div>
-</div>
 </form>
-<div id="div_goods_result">
-    <ul id="goods_result">
-    <?php
-    if($data){
-        foreach ($data as $key => $value) {
-            ?>
-            <li id="tbl_add_goods_<?= $value['goodsNo']; ?>" <?php if($value['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?> data-goods-no="<?= $value['goodsNo']; ?>">
-                <div class="gallery_thumbnail">
-                    <img src="/data/goods/<?= $value['imagePath']; ?><?= $value['imageName']; ?>" alt="<?= $value['goodsNm']; ?>" tile="<?= $value['goodsNm']; ?>">
-                </div>
-                <div class="gallery_description">
-                    <div class="inner">
-                        <div class="info">
-                            <span class="code"><?= $value['goodsNo']; ?></span>
-                        </div> 
-                        <strong class="product"><?= $value['goodsNm']; ?></strong>
-                    </div>
-                    <div class="gallery_button">
-                        <input type="checkbox" value="a" <?php if($value['fixSort'] > 0) { echo "checked"; } ?>>
-                        <button type="button" class="delete_button">x</button>
-                    </div>
-                </div>
-                
-            </li>
-    <?php
-        }
-    }
-    ?>
-    </ul>
-</div>
 
+<form id="listFrm" name="listFrm" method="post" action="layer_drag_and_drop_ps.php">
+    <input type="hidden" name="mode" value="setGoodsList">
+    <div id="div_goods_result">
+        <ul id="goods_result">
+        <?php
+        if($data){
+            foreach ($data as $key => $value) {
+                ?>
+                <li id="tbl_add_goods_<?= $value['goodsNo']; ?>" <?php if($value['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?> data-goods-no="<?= $value['goodsNo']; ?>">
+                    <div class="gallery_thumbnail">
+                        <img src="/data/goods/<?= $value['imagePath']; ?><?= $value['imageName']; ?>" alt="<?= $value['goodsNm']; ?>" tile="<?= $value['goodsNm']; ?>">
+                    </div>
+                    <div class="gallery_description">
+                        <div class="inner">
+                            <div class="info">
+                                <span class="code"><?= $value['goodsNo']; ?></span>
+                            </div> 
+                            <strong class="product"><?= $value['goodsNm']; ?></strong>
+                        </div>
+                        <div class="gallery_button">
+                            <input type="checkbox" value="a" <?php if($value['fixSort'] > 0) { echo "checked"; } ?>>
+                            <button type="button" class="delete_button">x</button>
+                        </div>
+                    </div>
+
+                </li>
+        <?php
+            }
+        }
+        ?>
+        </ul>
+    </div>
+</form>
 
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
 <script type="text/javascript" src="../admin/script/wib/wib-sortable.js"></script>

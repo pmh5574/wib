@@ -151,7 +151,7 @@ $(function () {
 
     //저장
     $('.save').click(function () {
-
+        $('#listFrm').submit();
     });
 
     $('input[name="keyword"]').keydown(function () {
@@ -179,7 +179,7 @@ $(function () {
             success: function (result) {
 
                 if (result.result == '0') {
-
+                    
                     var data = result.data;
 
                     var _html = '';
@@ -191,8 +191,11 @@ $(function () {
                         } else {
                             var addClassText = ' class="add_goods_free" ';
                         }
+                        
                         var moreHtml = '';
-                        if (goodsArrList.indexOf(data[i].goodsNo) != -1) {
+
+                        if (goodsArrList.indexOf(parseInt(data[i].goodsNo)) != -1) {
+                            
                             moreHtml += '<div class="status"><span>진열중</span></div>';
                             addClassText = '';
                         }
@@ -243,7 +246,11 @@ $(function () {
     $(document).on('click', '.delete_button', function () {
         var _this = this;
         
-        //삭제시키는 li에 add_goods_fix가 없을때만 add_goods_fix고정 여러개일때 문제....
+        //삭제시키는 li에 add_goods_fix가 없   을때만 add_goods_fix고정 여러개일때 문제....
+        /*
+         * 211206 잠시 스탑
+         * 
+         */
         freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
         var list = document.getElementById('goods_result');
 
@@ -251,7 +258,7 @@ $(function () {
             return Sortable.utils.index(el);
         });
         
-        var goodsNo = $(this).closest('li').data('goods-no');
+        var goodsNo = parseInt($(this).closest('li').data('goods-no'));
         $(this).closest('li').remove();
         setGoodsArrList();
 
@@ -264,25 +271,24 @@ $(function () {
                 }
             });
         }
-        
-            clearTimeout(pid);
-            pid = setTimeout(function () {
+        console.log(positions);
+        clearTimeout(pid);
+        pid = setTimeout(function () {
+            console.log(freezed);
+            freezed.forEach(function (el, i) {
+                var idx = positions[i];
 
-                freezed.forEach(function (el, i) {
-                    var idx = positions[i];
+                if (list.children[idx] !== el) {
+                    var realIdx = Sortable.utils.index(el);
 
-                    if (list.children[idx] !== el) {
-                        var realIdx = Sortable.utils.index(el);
-                        console.log(_this.closest('li'));
+                    if(!$(_this).closest('li').hasClass('add_goods_fix') && _this.closest('li') !== el){
                         console.log(el);
-                        if(!$(_this).closest('li').hasClass('add_goods_fix') && _this.closest('li') !== el){
-                            console.log(el);
-                            list.insertBefore(el, list.children[idx + (realIdx < idx)]);
-                        }
-                        
+                        list.insertBefore(el, list.children[idx + (realIdx < idx)]);
                     }
-                });
-            }, 0);
+
+                }
+            });
+        }, 0);
         
         
 
@@ -296,7 +302,7 @@ function setGoodsArrList()
 {
     goodsArrList = [];
     $('#goods_result li').each(function () {
-        goodsArrList.push($(this).data('goods-no'));
+        goodsArrList.push(parseInt($(this).data('goods-no')));
     });
 
 }
