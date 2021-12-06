@@ -213,4 +213,47 @@ class Goods extends \Bundle\Component\Goods\Goods
         unset($this->search);
         return $getData;
     }
+    
+    // 리스트 출력데이터
+    public function getGoodsList($cateCd, $cateMode = 'category', $pageNum = 10, $displayOrder = 'sort asc', $imageType = 'list', $optionFl = false, $soldOutFl = true, $brandFl = false, $couponPriceFl = false, $imageViewSize = 0, $displayCnt = 10)
+    {
+        $req = Request::post()->toArray();
+        
+        if($req['filterColor'] && count($req['filterColor']) > 0){
+            
+            $filterWhere = '(';
+            foreach ($req['filterColor'] as $value) {
+
+                $this->db->bind_param_push($this->arrBind,'s','%'.$value.'%');
+                $filterWhere .= " g.goodsColor LIKE ? or";
+                
+            }
+            
+            $filterWhere = substr($filterWhere, 0, -2);
+            $filterWhere .= ")";
+            
+            $this->arrWhere[] = $filterWhere;
+            
+        }
+        
+        if($req['pageNum']){
+            $pageNum = $req['pageNum'];
+        }
+        
+        if($req['page'] && count($req['page']) > 0){
+            $page = \App::load('\\Component\\Page\\Page', $req['page']);
+            $page->page['list'] = $pageNum; // 페이지당 리스트 수
+            $page->block['cnt'] = !Request::isMobile() ? 5 : 10; // 블록당 리스트 개수
+            $page->setPage();
+            $page->setUrl(\Request::getQueryString());
+        }
+        
+        if($req['sort']){
+            Request::get()->set('sort', $req['sort']);
+        }
+        
+        $goodsList = parent::getGoodsList($cateCd, $cateMode, $pageNum, $displayOrder, $imageType, $optionFl, $soldOutFl, $brandFl, $couponPriceFl, $imageViewSize, $displayCnt);
+
+        return $goodsList;
+    }
 }

@@ -13,19 +13,17 @@
  */
 namespace Widget\Front\Goods;
 
-use Framework\Debug\Exception\AlertBackException;
-use Framework\Debug\Exception\AlertOnlyException;
-use Framework\Debug\Exception\Framework\Debug\Exception;
-use Message;
-use Globals;
+use Component\Wib\WibGoods;
 use Request;
-use Cookie;
+
 
 class WibFilterWidget extends \Widget\Front\Widget
 {
     
     public function index()
     {
+        $wibGoods = new WibGoods();
+        
         $getValue = Request::get()->all();
         
         if($getValue['cateCd']){
@@ -33,28 +31,18 @@ class WibFilterWidget extends \Widget\Front\Widget
         }else{
             $getValue['cateType'] = 'brand';
         }
+
+        $cateDisplay = $wibGoods->getCategoryList($getValue['cateCd']);
+        $this->setData('cateDisplay', gd_isset($cateDisplay['list']));
+        $this->setData('cateDisplayNm', gd_isset($cateDisplay['cateNm']));
+        $this->setData('cateParentLink', gd_isset($cateDisplay['parentCateCd']));
         
-        $quickConfig = gd_policy('search.quick');
-
-        if(in_array('category',$getValue['cateType']) || in_array('brand',$getValue['cateType'])) {
-
-            if(in_array('category',$quickConfig['searchType'])) {
-                $cate = \App::load('\\Component\\Category\\Category');
-                $cateDisplay = $cate->getMultiCategoryBox('quickCateGoods',null,null,true);
-                $this->setData('cateDisplay', gd_isset($cateDisplay));
-            }
-
-            if(in_array('brand',$quickConfig['searchType'])) {
-                $brand = \App::load('\\Component\\Category\\Brand');
-                $brandDisplay = $brand->getMultiCategoryBox('quickBrandGoods',null,null,true);
-                $this->setData('brandDisplay', gd_isset($brandDisplay));
-            }
-        }
         
         $goods = \App::load('\\Component\\Goods\\Goods');
         $goodsColorList = $goods->getGoodsColorList();
         $this->setData('goodsColorList', gd_isset($goodsColorList));
 
-        $this->setData('quickConfig',gd_isset($quickConfig));
+        $this->setData('getValue', $getValue);
+        
     }
 }

@@ -1,3 +1,4 @@
+
 {*** 상품 리스트 | goods/goods_list.php ***}
 { # header }
 <div class="content">
@@ -78,7 +79,9 @@
         <!--{ / }-->
        
         <div class="content_wrap">
-            <div class="cate_left"></div>
+            <div class="cate_left">
+                {=includeWidget('goods/_wib_filter.html')}
+            </div>
             <div class="list_right">
                  <div class="goods_pick_list">
                     <span class="pick_list_num">{=__('상품')} <strong>{=number_format(gd_isset(page->recode['total']))}</strong> {=__('개의 상품')}</span> 

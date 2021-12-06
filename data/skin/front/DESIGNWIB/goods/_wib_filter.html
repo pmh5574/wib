@@ -1,15 +1,45 @@
-<div>
-    <dl>
-        <dt>{=__('색상')}</dt>
-        <dd>
-            <div class="color_box">
-                <!--{ @ goodsColorList}-->
-                <span>
-                    <input type="checkbox" id="filterSearchColor{.value_}" name="filterGoodsColor[]" value="{.value_}" />
-                    <label for="filterSearchColor{.value_}" <!--{ ?  .value_ != 'FFFFFF' }-->style="background:#{.value_};border:1px solid #{.value_}"<!--{ / }--> title="{.value_}">{.value_}</label>
-                </span>
-                <!--{ / }-->
-            </div>
-        </dd>
-    </dl>
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-filter.js')}"></script>
+<!--필터 카테고리-->
+<div class="filter_category">
+    <h1>카테고리</h1>
+    <!--{ ? cateParentLink }-->
+    <a href="../goods/goods_list?cateCd={cateParentLink}"><</a>
+    <!--{ / }-->
+    <!--{ ? cateDisplayNm }-->
+        <h2><!--{cateDisplayNm}--></h2>
+    <!--{ / }-->
+    
+    <ul>
+        <!--{@ cateDisplay}-->
+        <li class="{? getValue['cateCd'] == .cateCd}on{/}">
+            <a href="../goods/goods_list?cateCd={.cateCd}"><!--{.cateNm}--></a>
+        </li>
+        <!--{/}-->
+    </ul>
 </div>
+<!--//필터 카테고리-->
+<!--필터 브랜드-->
+<div class="filter_brand">
+    <h1>브랜드</h1>
+    <input type="text" id="filterBrandNm" placeholder="브랜드를 검색해주세요">
+    <div class="brand_order_by">
+        <span class="on" data-order-by="">ABC</span>
+        <span data-order-by="kr">가나다</span>
+    </div>
+    <ul class="filterBrandList">
+    </ul>
+</div>
+<!--//필터 브랜드-->
+<!--필터 컬러-->
+<div class="filter_color">
+    <h1>컬러</h1>
+    <ul>
+        <!--{ @ goodsColorList}-->
+        <li>     
+            <span data-color="{.value_}" <!--{ ? .value_ != 'FFFFFF' }-->style="background:#{.value_}; border:1px solid #{.value_}"<!--{ / }-->>{.value_}</span>
+        </li>
+        <!--{ / }-->
+    </ul>    
+    <div class="hiddenColor" style="display:none"></div>
+</div>
+<!--//필터 컬러-->
