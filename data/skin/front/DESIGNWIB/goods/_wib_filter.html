@@ -1,0 +1,15 @@
+<div>
+    <dl>
+        <dt>{=__('색상')}</dt>
+        <dd>
+            <div class="color_box">
+                <!--{ @ goodsColorList}-->
+                <span>
+                    <input type="checkbox" id="filterSearchColor{.value_}" name="filterGoodsColor[]" value="{.value_}" />
+                    <label for="filterSearchColor{.value_}" <!--{ ?  .value_ != 'FFFFFF' }-->style="background:#{.value_};border:1px solid #{.value_}"<!--{ / }--> title="{.value_}">{.value_}</label>
+                </span>
+                <!--{ / }-->
+            </div>
+        </dd>
+    </dl>
+</div>
