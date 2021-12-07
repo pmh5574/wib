@@ -5,6 +5,8 @@ if ($cateMode == 'category') {
     $cateStr    = '브랜드';
 }
 ?>
+<script type="text/javascript" src="../admin/script/Sortable.js"></script>
+<script type="text/javascript" src="../admin/script/wib/wib-sortable-cate.js"></script>
 
 <script type="text/javascript">
     <!--
@@ -74,6 +76,7 @@ if ($cateMode == 'category') {
 </script>
 <style>
     .add_goods_fix{background:#E8E8E8;}
+    .add_goods_sort_fix{background:#E8E8E8 !important;}
     .goodsChoice_outlineTable .goodsChoice_registeredTdArea #goodsChoice_registerdOutlineDiv {
         min-height:590px;
         overflow-y:auto;
@@ -100,7 +103,6 @@ if ($cateMode == 'category') {
                 <div class="form-inline">
                     <?=$cate->getMultiCategoryBox('cateGoods', $search['cateGoods']); ?>
                     <input type="submit" value="검색" class="btn btn-sm btn-black" />
-                    <button class="btn btn-sm btn-white layer_draw_drop" data-catecd="<?= $search['cateGoods']; ?>" data-cate-type="<?= $cateMode == 'brand'? 'brand' : 'cate'?>">갤러리형 상품진열</button>
                 </div>
                     
             </td>
@@ -260,7 +262,7 @@ if ($cateMode == 'category') {
                                             <col class="width8p center">
                                             <col class="width8p center">
                                         </colgroup>
-                                        <tbody>
+                                        <tbody id="goods_result">
                                         <?php
                                         if ($data) {
 
