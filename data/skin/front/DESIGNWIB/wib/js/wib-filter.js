@@ -61,7 +61,7 @@ var wibFilter = {
                 
                 var data = result.data;
                 
-                if(result.code == '0'){
+                if(result.code == '1'){
                     $('.filterBrandList').html('검색된 브랜드가 없습니다.');
                 }else{
                     var _html = '';

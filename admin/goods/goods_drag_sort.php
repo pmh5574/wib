@@ -29,6 +29,34 @@ if ($cateMode == 'category') {
                 }
             }
         });
+        
+        $('.layer_draw_drop').click(function(e){
+            e.preventDefault();
+            var cateCd = $(this).data('catecd');
+            var cateType = $(this).data('cate-type');
+            var sortAutoFl = $('input[name="sortAutoFl"]').val();
+            if(!cateCd){
+                alert('카테고리를 선택 후 클릭해 주세요.');
+                return false;
+            }
+            
+            if(sortAutoFl == 'y'){
+                alert('진열타입을 수동진열로 바꿔주세요.');
+                return false;
+            }
+            
+            var _url = '/share/layer_drag_and_drop.php?cateGoods[]='+cateCd+'&cateType='+cateType;
+            
+            popup({
+                url: _url,
+                target: '',
+                width: (screen.width - 16),
+                height: (screen.height - 108),
+                scrollbars: 'yes',
+                resizable: 'yes'
+            });
+            
+        });
 
     });
 
@@ -72,6 +100,7 @@ if ($cateMode == 'category') {
                 <div class="form-inline">
                     <?=$cate->getMultiCategoryBox('cateGoods', $search['cateGoods']); ?>
                     <input type="submit" value="검색" class="btn btn-sm btn-black" />
+                    <button class="btn btn-sm btn-white layer_draw_drop" data-catecd="<?= $search['cateGoods']; ?>" data-cate-type="<?= $cateMode == 'brand'? 'brand' : 'cate'?>">갤러리형 상품진열</button>
                 </div>
                     
             </td>

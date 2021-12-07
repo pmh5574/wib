@@ -78,6 +78,8 @@ $(function () {
             put: false,
             pull: 'clone'
         },
+        multiDrag: true, // Enable multi-drag
+	selectedClass: 'selected', // The class applied to the selected items
         sort: false,
         animation: 150,
         draggable: '.add_goods_free',
@@ -158,6 +160,19 @@ $(function () {
         if (window.event.keyCode == 13) {
             $('.js-search').trigger('click');
         }
+    });
+    
+    $('#sort').change(function(){
+        $('.js-search').trigger('click');
+    });
+    
+    $('.allCheck').change(function(){
+       
+       if($('#goods_sub_result li').length > 0){
+           
+       }else{
+           $(this).prop('checked', false); 
+       }
     });
 
     //검색시

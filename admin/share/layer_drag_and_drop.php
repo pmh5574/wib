@@ -18,13 +18,14 @@
     /*
     * 상품 검색 리스트 
     */
-    #goodsChoiceList{position: relative;float: left;width: 210px;height: 100%;}
+    #goodsChoiceList{position: relative;float: left;width: 310px;height: 100%;}
     #searchGoodsList{border:1px solid #888888;}
-    
-    #searchGoodsList ul li{position: relative; width: 150px;height: 150px;margin: 4px 0 0 4px;}
+    #searchGoodsList select{width: 100%;}
+    #searchGoodsList ul{height: 620px;overflow-y: scroll;}
+    #searchGoodsList ul li{position: relative; width: 100px;height: 100px;margin: 4px 0 0 4px;}
     #searchGoodsList ul li .gallery_description{opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;box-sizing: border-box;letter-spacing: -1px;background: rgba(255,255,255,.95);-webkit-transition: .3s ease-out;transition: .3s ease-out;}
     #searchGoodsList ul li:hover .gallery_description{opacity: 1;}
-    #searchGoodsList ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 230px;}
+    #searchGoodsList ul li .gallery_thumbnail{position: relative;overflow: hidden;width: 100%;box-sizing: border-box;height: 100px;}
     #searchGoodsList ul li .gallery_thumbnail img{width: 100%; max-height: 150px;}
     #searchGoodsList ul li .gallery_button{display:none;}
     #searchGoodsList .status{display: table;position: absolute;top: 0;left: 0;z-index: 3;width: 100%;height: 100%;background: rgba(56,64,77,.5);}
@@ -59,6 +60,24 @@
             </div>
         </div>
         <div id="searchGoodsList">
+            <div class="form-inline">
+                <label><input type="checkbox" class="checkbox-inline allCheck" value="">전체 선택</label>
+            </div>
+            <div class="form-inline">
+                <select class="form-control" id="sort" name="sort">
+                    <option value="g.goodsNo desc" selected="selected">등록일 ↓</option>
+                    <option value="g.goodsNo asc">등록일 ↑</option>
+                    <option value="g.goodsNm asc">상품명 ↓</option>
+                    <option value="g.goodsNm desc">상품명 ↑</option>
+                    <option value="g.goodsPrice asc">판매가 ↓</option>
+                    <option value="g.goodsPrice desc">판매가 ↑</option>
+                    <option value="g.orderGoodsCnt desc">결제 ↑</option>
+                    <option value="g.hitCnt desc">조회 ↑</option>
+                    <option value="g.cartCnt desc">담기 ↑</option>
+                    <option value="g.wishCnt desc">관심 ↑</option>
+                    <option value="g.reviewCnt desc">후기 ↑</option>
+                </select>
+            </div>
             <ul id="goods_sub_result">검색하신 상품이 없습니다.</ul>
         </div>
     </div>

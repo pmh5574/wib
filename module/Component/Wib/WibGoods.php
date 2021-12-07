@@ -17,14 +17,19 @@ class WibGoods
     public function getAdminListGoods()
     {
         // --- 검색 설정
-        $getValue = Request::post()->toArray();
+        $postValue = Request::post()->toArray();
         
         $arrWhere[] = "g.delFl = 'n' AND g.applyFl = 'y'";
         $arrWhere[] = "gi.imageKind = 'list'";
-        $arrWhere[] = "g.".$getValue['key']." LIKE '%".$getValue['keyword']."%'";
+        $arrWhere[] = "g.".$postValue['key']." LIKE '%".$postValue['keyword']."%'";
+        if($postValue['sort'] != 'g.goodsNo desc'){
+            $sort = $postValue['sort']. ', g.goodsNo DESC';
+        }else{
+            $sort = $postValue['sort'];
+        }
         
-        $data['result'] = '0';
-        $query = "SELECT g.goodsNo, g.goodsNm, g.imagePath, gi.imageName FROM es_goods g LEFT JOIN es_goodsImage gi ON g.goodsNo = gi.goodsNo WHERE ". implode(' AND ', $arrWhere). " ORDER BY goodsNo DESC";
+        $data['result'] = 0;
+        $query = "SELECT g.goodsNo, g.goodsNm, g.imagePath, gi.imageName FROM es_goods g LEFT JOIN es_goodsImage gi ON g.goodsNo = gi.goodsNo WHERE ". implode(' AND ', $arrWhere). " ORDER BY ".$sort;
         $data['data'] = $this->wibSql->WibAll($query);
         
         foreach ($data['data'] as $key => $value) {
@@ -109,7 +114,7 @@ class WibGoods
         
         $code = 0;
         
-        if(count($data) > 0){
+        if(count($data) == 0){
             $code = 1;
         }
         
