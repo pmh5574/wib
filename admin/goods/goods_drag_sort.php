@@ -81,6 +81,7 @@ if ($cateMode == 'category') {
         min-height:590px;
         overflow-y:auto;
     }
+    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #000;z-index: 1000;}
 </style>
 <div class="page-header js-affix">
     <h3><?=end($naviMenu->location);?> </h3>
@@ -103,6 +104,7 @@ if ($cateMode == 'category') {
                 <div class="form-inline">
                     <?=$cate->getMultiCategoryBox('cateGoods', $search['cateGoods']); ?>
                     <input type="submit" value="검색" class="btn btn-sm btn-black" />
+                    <!--<button class="btn btn-sm btn-white layer_draw_drop" data-catecd="<?= $search['cateGoods']; ?>" data-cate-type="<?= $cateMode == 'brand'? 'brand' : 'cate'?>">갤러리형 상품진열</button>-->
                 </div>
                     
             </td>

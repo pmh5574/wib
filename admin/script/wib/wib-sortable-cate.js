@@ -7,21 +7,29 @@
 var goodsArrList = [];
 $(function () {
     var pid,
-            positions,
-            freezed;
+        positions,
+        freezed,
+        thEl;
 
     //sortTable
     var el = document.getElementById('goods_result');
 
     var sortable = new Sortable(el, {
-        group: {
-            name: 'shared', // 공유 옵션,
-            pull: false
-        },
         animation: 150, // 속도
         filter: '.add_goods_sort_fix', // sort 안될 클래스
-        onStart: function (evt) {
+        swapClass: 'highlight', // The class applied to the hovered swap item
+        // Called when creating a clone of element
+	onClone: function (evt) {
+            var origEl = evt.item;
+            var cloneEl = evt.clone;
+            origEl.before(cloneEl);
 
+        },
+        onStart: function (evt) {
+            console.log(evt.item);
+            thEl = $(evt.item).html();
+            
+//            evt['item'].before($(evt['item'])[0].clone());
             //freezed에 add_goods_sort_fix를 배열로 만들어서 넣기
             freezed = [].slice.call(this.el.querySelectorAll('.add_goods_sort_fix'));
 
@@ -33,8 +41,15 @@ $(function () {
         onMove: function (evt, originalEvent) {
             var vector,
                     freeze = false;
-            console.log(freezed);
-            console.log(positions);
+            if($(evt.item).find('.moveEventImg').length == 0){
+                console.log(originalEvent);
+                console.log(evt);
+                console.log($(evt.item));
+                $(evt.item).html('');
+                $(evt.item).append('<td><span class="moveEventImg"></span></td>');
+            }
+            
+            
             clearTimeout(pid);
             //뒤에 실행 2
             pid = setTimeout(function () {
@@ -46,7 +61,8 @@ $(function () {
                     //freeazed(add_goods_sort_fix)배열안에 엘리먼트값이랑 현재 리스트 엘리먼트 값이 위치가 다를경우
                     if (list.children[idx] !== el) {
                         var realIdx = Sortable.utils.index(el);
-
+                        console.log(idx + (realIdx < idx));
+                        console.log(list.children[idx + (realIdx < idx)]);//........
                         //(realIdx < idx) true면 1, false면 0을 더함 앞으로 이동된건지 뒤로 이동된건지 체크
                         list.insertBefore(el, list.children[idx + (realIdx < idx)]);
                     }
@@ -57,6 +73,7 @@ $(function () {
             //먼저 실행 1
             freezed.forEach(function (el, i) {
                 if (el === evt.related) {
+                    console.log(el);
                     freeze = true;
                 }
 
@@ -68,8 +85,9 @@ $(function () {
             //freeze가 true면 위치를 바꾸려는 게 add_goods_sort_fix라 false반환
             return freeze ? false : vector;
         },
-        onEnd : function(){
+        onEnd : function(evt){
             goodsChoiceFunc.reSort();
+//            $(evt.item).find('.moveEventImg').remove();
         }
     });
     
@@ -81,21 +99,26 @@ $(function () {
            $(this).prop('checked', false); 
        }
     });
+    
+    $('.goodsChoice_fixUpBtn').click(function(){
+        console.log('q?');
+        $("#goods_result tr").removeClass('add_goods_sort_fix');
+    });
+
 
     setGoodsArrList();
     
     //고정값 사용 여부
     $(document).on('click', '#goods_result tr', function () {
         
-        if (!$(this).hasClass('add_goods_sort_fix')) {
+        if (!$(this).hasClass('add_goods_sort_fix') && !$(this).hasClass('add_goods_fix')) {
             $(this).closest('tr').removeClass('add_goods_free').addClass('add_goods_sort_fix');
-        } else {
+        } else if(!$(this).hasClass('add_goods_fix')){
             $(this).closest('tr').removeClass('add_goods_sort_fix').addClass('add_goods_free');
         }
     });
-
+    
 });
-
 
 
 // goodsArrList 세팅
