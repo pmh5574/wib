@@ -70,7 +70,7 @@ var wibFilter = {
                     for(var i=0; i<data.length; i++){
                         
                         if(data[i]['cateKrNm']){
-                            brandKrNm = '<span class="brandKrNm">'+brandKrNm+'</span>';
+                            brandKrNm = '<span class="brandKrNm">'+data[i]['cateKrNm']+'</span>';
                         }else{
                             brandKrNm = '';
                         }

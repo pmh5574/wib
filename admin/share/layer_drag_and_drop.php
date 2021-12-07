@@ -64,8 +64,7 @@
     </div>
 </form>
 
-<form id="listFrm" name="listFrm" method="post" action="layer_drag_and_drop_ps.php">
-    <input type="hidden" name="mode" value="setGoodsList">
+<form id="listFrm" name="listFrm" method="post">
     <div id="div_goods_result">
         <ul id="goods_result">
         <?php

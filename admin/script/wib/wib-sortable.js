@@ -246,11 +246,6 @@ $(function () {
     $(document).on('click', '.delete_button', function () {
         var _this = this;
         
-        //삭제시키는 li에 add_goods_fix가 없   을때만 add_goods_fix고정 여러개일때 문제....
-        /*
-         * 211206 잠시 스탑
-         * 
-         */
         freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
         var list = document.getElementById('goods_result');
 
@@ -271,18 +266,19 @@ $(function () {
                 }
             });
         }
-        console.log(positions);
+
         clearTimeout(pid);
         pid = setTimeout(function () {
-            console.log(freezed);
+
             freezed.forEach(function (el, i) {
                 var idx = positions[i];
 
                 if (list.children[idx] !== el) {
-                    var realIdx = Sortable.utils.index(el);
 
-                    if(!$(_this).closest('li').hasClass('add_goods_fix') && _this.closest('li') !== el){
-                        console.log(el);
+                    var realIdx = Sortable.utils.index(el);
+                    
+                    //삭제시키는 li는 제외
+                    if(_this.closest('li') !== el){
                         list.insertBefore(el, list.children[idx + (realIdx < idx)]);
                     }
 
