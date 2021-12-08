@@ -20,13 +20,13 @@ $(function () {
         swapClass: 'highlight', // The class applied to the hovered swap item
         // Called when creating a clone of element
 	onClone: function (evt) {
-            var origEl = evt.item;
-            var cloneEl = evt.clone;
-            origEl.before(cloneEl);
+//            var origEl = evt.item;
+//            var cloneEl = evt.clone;
+//            origEl.before(cloneEl);
 
         },
         onStart: function (evt) {
-            console.log(evt.item);
+
             thEl = $(evt.item).html();
             
 //            evt['item'].before($(evt['item'])[0].clone());
@@ -41,12 +41,8 @@ $(function () {
         onMove: function (evt, originalEvent) {
             var vector,
                     freeze = false;
-            if($(evt.item).find('.moveEventImg').length == 0){
-                console.log(originalEvent);
-                console.log(evt);
-                console.log($(evt.item));
-                $(evt.item).html('');
-                $(evt.item).append('<td><span class="moveEventImg"></span></td>');
+            if($('.moveEventImg').length == 0){
+                $(evt.dragged).append('<td><span class="moveEventImg"></span></td>');
             }
             
             
@@ -87,7 +83,8 @@ $(function () {
         },
         onEnd : function(evt){
             goodsChoiceFunc.reSort();
-//            $(evt.item).find('.moveEventImg').remove();
+            console.log(evt);
+            $(evt.item).find('.moveEventImg').closest('td').remove();
         }
     });
     

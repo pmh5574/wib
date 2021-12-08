@@ -81,7 +81,8 @@ if ($cateMode == 'category') {
         min-height:590px;
         overflow-y:auto;
     }
-    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #000;z-index: 1000;}
+    .add_goods_free.sortable-chosen.sortable-ghost{position: relative;}
+    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #000;z-index: 1000;top:0;left:0;}
 </style>
 <div class="page-header js-affix">
     <h3><?=end($naviMenu->location);?> </h3>
