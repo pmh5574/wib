@@ -276,7 +276,7 @@ if ($cateMode == 'category') {
                                                 $index = ($key+1)+(($page->page['now']-1)*$page->page['list']);
 
                                                 ?>
-                                                <tr id="tbl_add_goods_<?=$val['goodsNo'];?>" <?php if($val['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?>>
+                                                <tr data-sort="<?=$key?>" id="tbl_add_goods_<?=$val['goodsNo'];?>" <?php if($val['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?>>
                                                     <td style="text-align:center;">
                                                         <input type="hidden" id="goodsSort_<?=$val['goodsNo'];?>" name="goodsSort[]" value="<?=$index?>" />
                                                         <input type="checkbox" name="itemGoodsNo[]" id="layer_goods_<?=$val['goodsNo'];?>"  value="<?=$val['goodsNo']; ?>"/></td>
