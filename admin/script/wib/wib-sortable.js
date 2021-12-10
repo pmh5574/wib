@@ -5,7 +5,9 @@
  * goodsArrList 상품번호 배열 리스트
  */
 var goodsArrList = [];
+var goodsChoice = new GoodsChoiceController();
 $(function () {
+   
     var pid,
             positions,
             freezed;
@@ -38,18 +40,20 @@ $(function () {
             //뒤에 실행 2
             pid = setTimeout(function () {
                 var list = evt.to;
+                for(var j=0; j<freezed.length; j++){
+                    freezed.forEach(function (el, i) {
+                        var idx = positions[i];
+
+                        //freeazed(add_goods_fix)배열안에 엘리먼트값이랑 현재 리스트 엘리먼트 값이 위치가 다를경우
+                        if (list.children[idx] !== el) {
+                            var realIdx = Sortable.utils.index(el);
+
+                            //(realIdx < idx) true면 1, false면 0을 더함 앞으로 이동된건지 뒤로 이동된건지 체크
+                            list.insertBefore(el, list.children[idx + (realIdx < idx)]);
+                        }
+                    });
+                }
                 
-                freezed.forEach(function (el, i) {
-                    var idx = positions[i];
-
-                    //freeazed(add_goods_fix)배열안에 엘리먼트값이랑 현재 리스트 엘리먼트 값이 위치가 다를경우
-                    if (list.children[idx] !== el) {
-                        var realIdx = Sortable.utils.index(el);
-
-                        //(realIdx < idx) true면 1, false면 0을 더함 앞으로 이동된건지 뒤로 이동된건지 체크
-                        list.insertBefore(el, list.children[idx + (realIdx < idx)]);
-                    }
-                });
 
             }, 0);
 
@@ -84,7 +88,6 @@ $(function () {
         animation: 150,
         draggable: '.add_goods_free',
         onStart: function (evt) {
-
             //freezed에 sortable에 add_goods_fix를 배열로 만들어서 넣기
             freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
 
@@ -139,6 +142,7 @@ $(function () {
         onEnd: function (evt) {
 
             setGoodsArrList();
+            setShareSort();
             $('.searchWall').remove();
             var goodsNo = parseInt(evt.item.dataset.goodsNo);
             
@@ -168,7 +172,7 @@ $(function () {
     
     $('.allCheck').change(function(){
        
-       if($('#goods_sub_result li').length > 0){
+       if($('#goods_sub_result tr').length > 0){
            
        }else{
            $(this).prop('checked', false); 
@@ -312,8 +316,69 @@ $(function () {
 function setGoodsArrList()
 {
     goodsArrList = [];
-    $('#goods_result li').each(function () {
-        goodsArrList.push(parseInt($(this).data('goods-no')));
+    $('#goods_result tr').each(function () {
+        goodsArrList.push(parseInt($(this).find('input[name="itemGoodsNo[]"]').val()));
     });
+    console.log(goodsArrList);
+    $('#goods_sub_result tr input[name="itemGoodsNo[]"]').each(function(){
 
+        if(goodsArrList.indexOf(parseInt($(this).val())) != -1){
+            if($(this).closest('tr').hasClass('add_goods_free')){
+                $(this).closest('tr').removeClass('add_goods_free');
+                $(this).closest('tr').append('<div class="status"><span>진열중</span></div>');
+            }
+            
+        }
+    });
+    
+
+}
+
+function setShareSort()
+{
+    var goodsChoiceIframeID = 'iframe_goodsChoiceList'; //상품선택 iframe ID
+    var registeredTableID = 'tbl_add_goods_result';
+    var searchedTableID = 'tbl_add_goods';
+    var fixDataArr = new Array();
+    var countCheckGoods = $('#registeredCheckedGoodsCountMsg').html($("#tbl_add_goods_result").find('input[name="itemGoodsNo[]"]:checked').closest('tr').length);
+    
+    var tblGoods = $("#" + goodsChoiceIframeID).contents();
+        var duplicateCnt = 0;
+        var addCnt = 0;
+        var registerCount = $("#" + registeredTableID).find('input[name="itemGoodsNo[]"]').length;
+        var $this = this;
+
+        tblGoods.find('.add_goods_free.sortable-chosen input[name="itemGoodsNo[]"]').each(function () {
+
+            var sel_id = $(this).attr('id');    // 상품코드
+            var sel_row = $(this);
+            var row = sel_row.closest("tr");
+            var table = sel_row.closest("table");
+
+            if ($("#" + registeredTableID).find('#' + sel_id).length == 0) {
+
+                row.detach();
+                if(registerCount > 0 ) $("#" + registeredTableID).prepend(row);
+                else $("#" + registeredTableID).append(row);
+                $('#'+sel_id).on('click', countCheckGoods);
+
+                addCnt++;
+
+            } else duplicateCnt++;
+
+
+            $("#" + registeredTableID).find('#' + sel_id).prop('checked', false);
+
+            //itemGoodsNo값을 체크하여 선택 리스트에 추가함
+            if (typeof $('#selectedGoodsList').val() !== "undefined") {
+                goodsChoice.setSelectedGoodsList($(this).val(), false);
+            }
+
+        });
+
+
+        if (duplicateCnt > 0 && addCnt > 0) alert('중복된 데이터' + duplicateCnt + '건을 제외한 ' + addCnt + '건의 데이터가 추가되었습니다.');
+        else if (duplicateCnt > 0 && addCnt == 0) alert('중복된 데이터' + duplicateCnt + '건이 있습니다.');
+
+        goodsChoice.getGoodsReSort();
 }

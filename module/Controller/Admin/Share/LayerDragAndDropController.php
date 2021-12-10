@@ -1,62 +1,93 @@
 <?php
 namespace Controller\Admin\Share;
 
+use Component\Board\ArticleListAdmin;
 use Exception;
-use Framework\Utility\ArrayUtils;
-use Globals;
+use Framework\Debug\Exception\AlertCloseException;
 use Request;
 
 class LayerDragAndDropController extends \Controller\Admin\Controller
 {
     public function index()
     {
-
-        // --- 모듈 호출
-        $cate = \App::load('\\Component\\Category\\CategoryAdmin');
-        $display = \App::load('\\Component\\Display\\DisplayConfigAdmin');
-        $goods = \App::load('\\Component\\Goods\\GoodsAdmin');
-
-        // --- 상품 데이터
         try {
 
-            $cateInfo = array();
+            $goods = \App::load('\\Component\\Goods\\GoodsAdmin');
+            $brand = \App::load('\\Component\\Category\\BrandAdmin');
+            $category = \App::load('\\Component\\Category\\categoryAdmin');
 
-            $getValue = Request::get()->toArray();
-            $cateGoods = ArrayUtils::last(gd_isset($getValue['cateGoods']));
-//            print_r($getValue['cateCd']);
+            Request::get()->set('applyFl', 'y');
+            $mobileFl = Request::get()->get('mobileFl');
 
-            if($cateGoods) {
-                
-                list($cateInfo)  = $cate->getCategoryData($cateGoods);
-                $cateInfo['pcThemeInfo'] = $display->getInfoThemeConfig($cateInfo['pcThemeCd']);
-                $cateInfo['mobileThemeInfo'] = $display->getInfoThemeConfig($cateInfo['mobileThemeCd']);
-                $sortTypeNmArray = $display->goodsSortList;
-//                print_r($sortTypeNmArray);
-                $sortTypeNmArray['g.regDt desc'] = '최근 등록 상품 위로';
-                $cateInfo['sortTypeNm'] = $sortTypeNmArray[$cateInfo['sortType']];
-                if($cateInfo['sortAutoFl'] =='y') Request::get()->set('sort',$cateInfo['sortType']);
+            switch ($mobileFl) {
+                case 'all':
+                    Request::get()->set('goodsDisplayMobileFl', 'y');
+                    Request::get()->set('goodsDisplayFl', '');
+                    Request::get()->set('goodsSellMobileFl', 'y');
+                    Request::get()->set('goodsSellFl', '');
+                    Request::get()->set('soldOut', '');
+                    break;
+                case 'y':
+                    Request::get()->set('goodsDisplayMobileFl', 'y');
+                    Request::get()->set('goodsSellMobileFl', 'y');
+                    break;
+                case 'n':
+                    Request::get()->set('goodsDisplayFl', 'y');
+                    Request::get()->set('goodsSellFl', 'y');
+                    break;
             }
 
-            $getData = $goods->getAdminListSort('category', false);
+            $postValue = Request::post()->toArray();
+            if ($postValue) {
+                foreach ($postValue as $k => $v) {
+                    Request::get()->set($k, $v);
+                }
+            }
+
+            $getData = $goods->getAdminListGoods();
+            $page = \App::load('\\Component\\Page\\Page');
+
+            $this->getView()->setDefine('layout', 'layout_blank.php');
+
+            $this->addCss([
+                'goodsChoiceStyle.css?' . time(),
+            ]);
+            $this->addScript([
+                'goodsChoice.js?' . time(),
+                'jquery/jquery.multi_select_box.js',
+            ]);
+
+
+            if (Request::get()->get('checkType') == 'radio') {
+                $this->setData('checkType', 'radio');
+            } else {
+                $this->setData('checkCheckboxType', true);
+                $this->setData('checkType', 'checkbox');
+            }
+            $this->setData('data', gd_htmlspecialchars($getData['data']));
+            $this->setData('search', $getData['search']);
+            $this->setData('sort', $getData['sort']);
+            $this->setData('checked', $getData['checked']);
+            $this->setData('selected', $getData['selected']);
+            $this->setData('page', $page);
+            $this->setData('brand', $brand);
+            $this->setData('category', $category);
+
+            $this->setData('memData', gd_isset($memData));
+            $this->setData('memGroup', gd_isset($memGroup));
+            $this->setData('qnaList', gd_isset($qnaList));
+
+            $this->setData('timeSaleFl', Request::get()->get('timeSaleFl'));
             
-//            gd_debug($getData);
+            $this->setData('setGoodsList', gd_isset(urldecode($postValue['setGoodsList'])));
+            $this->setData('selectedGoodsList', gd_isset($postValue['selectedGoodsList'])); //선택리스트
 
-            $page = \App::load('\\Component\\Page\\Page'); // 페이지 재설정
+            $this->setData('relationFl', Request::get()->get('relationFl')); // 관련상품 수동선택 여부
 
-        } catch (Exception $e) {
-            throw $e;
+
+        } catch (\Exception $e) {
+
+            throw new AlertCloseException($e->ectMessage);
         }
-        
-        $this->getView()->setDefine('layout', 'layout_blank.php');
-        
-        $this->setData('cateMode', $getValue['cateType']);
-        $this->setData('cateCd', $cateGoods);
-        $this->setData('goods', $goods);
-        $this->setData('cate', $cate);
-        $this->setData('cateInfo', $cateInfo);
-        $this->setData('data', $getData['data']);
-        $this->setData('search', $getData['search']);
-        $this->setData('fixCount', $getData['fixCount']);
-        $this->setData('page', $page);
     }
 }

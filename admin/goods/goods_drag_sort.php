@@ -5,9 +5,10 @@ if ($cateMode == 'category') {
     $cateStr    = '브랜드';
 }
 ?>
+<?php if($cateInfo['sortAutoFl'] == "n") { ?>
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
 <script type="text/javascript" src="../admin/script/wib/wib-sortable-cate.js"></script>
-
+<?php } ?>
 <script type="text/javascript">
     <!--
     /**
@@ -82,7 +83,7 @@ if ($cateMode == 'category') {
         overflow-y:auto;
     }
     .add_goods_free.sortable-chosen.sortable-ghost{position: relative;}
-    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #000;z-index: 1000;top:0;left:0;}
+    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #fff; border:1px dashed #4285f4;z-index: 1000;top:0;left:0;}
 </style>
 <div class="page-header js-affix">
     <h3><?=end($naviMenu->location);?> </h3>
@@ -184,7 +185,7 @@ if ($cateMode == 'category') {
                                                     <tr>
                                                         <td width="100"><input type="button" value="상단 고정" class="btn btn-black goodsChoice_fixUpBtn"></td>
                                                         <?php if($cateInfo['sortAutoFl'] == "n") { ?>
-                                                            <td width="150">
+<!--                                                            <td width="150">
 
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-white btn-icon-bottom js-moverow goodsChoice_downArrowMore" data-direction="bottom">
@@ -206,7 +207,8 @@ if ($cateMode == 'category') {
                                                             <td width="180">선택한 상품을 <input type="text" name="goodsChoice_sortText"
                                                                                            class="goodsChoice_sortText" data-page="true" /> 번 위치로
                                                             </td>
-                                                            <td width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_cate_moveBtn"></td> <?php }  else { ?>
+                                                            <td width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_cate_moveBtn"></td> -->
+                                                        <?php }  else { ?>
                                                             <input type="hidden" name="goodsChoice_sortText" class="goodsChoice_sortText" data-page="true"/>
                                                         <?php } ?>
                                                         <td>&nbsp;</td>
@@ -276,7 +278,7 @@ if ($cateMode == 'category') {
                                                 $index = ($key+1)+(($page->page['now']-1)*$page->page['list']);
 
                                                 ?>
-                                                <tr data-sort="<?=$key?>" id="tbl_add_goods_<?=$val['goodsNo'];?>" <?php if($val['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?>>
+                                                <tr id="tbl_add_goods_<?=$val['goodsNo'];?>" <?php if($val['fixSort'] > 0) { echo "class='add_goods_fix'"; } else { echo 'class="add_goods_free"'; } ?>>
                                                     <td style="text-align:center;">
                                                         <input type="hidden" id="goodsSort_<?=$val['goodsNo'];?>" name="goodsSort[]" value="<?=$index?>" />
                                                         <input type="checkbox" name="itemGoodsNo[]" id="layer_goods_<?=$val['goodsNo'];?>"  value="<?=$val['goodsNo']; ?>"/></td>
@@ -346,7 +348,7 @@ if ($cateMode == 'category') {
                                                     <tr>
                                                         <td width="100"><input type="button" value="상단 고정" class="btn btn-black goodsChoice_fixUpBtn"></td>
                                                         <?php if($cateInfo['sortAutoFl'] == "n") { ?>
-                                                            <td width="150">
+<!--                                                            <td width="150">
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-white btn-icon-bottom js-moverow goodsChoice_downArrowMore" data-direction="bottom">
                                                                         맨아래
@@ -367,7 +369,8 @@ if ($cateMode == 'category') {
                                                             <td width="180">선택한 상품을 <input type="text" name="goodsChoice_sortText"
                                                                                            class="goodsChoice_sortText" data-page="true"/> 번 위치로
                                                             </td>
-                                                            <td width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_moveBtn"></td> <?php } else  {  ?>
+                                                            <td width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_moveBtn"></td> -->
+                                                        <?php } else  {  ?>
                                                             <input type="hidden" name="goodsChoice_sortText" class="goodsChoice_sortText" data-page="true"/>
                                                         <?php } ?>
 
