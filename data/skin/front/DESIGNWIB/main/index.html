@@ -131,6 +131,22 @@
 		<p class="main-title">브랜드별 베스트 상품</p>
 		<div class="brand-list">
 			<div>
+                            <!--{ ? !brandListInfo }-->
+                            <!--{ @ brandListInfo }-->
+                                <div>
+                                    <a href="javascript:;">
+                                        <div class="table">
+                                            <div class="table-cell">
+                                                {? .blackBrandImg}
+                                                <img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
+                                                {/}
+                                                <p>{.cateNm}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            <!--{ / }-->
+                            <!--{ / }-->
 				<!--{ @dataBanner('4021273692', true) }-->
 				<!--{ ? .index_ == '0'}-->
 				<div>

@@ -13,6 +13,7 @@
  */
 namespace Controller\Front\Main;
 
+use Component\Wib\WibBrand;
 /**
  * 메인 페이지
  *
@@ -20,4 +21,11 @@ namespace Controller\Front\Main;
  */
 class IndexController extends \Bundle\Controller\Front\Main\IndexController
 {
+    public function post()
+    {
+        $wibBrand = new WibBrand();
+        $data = $wibBrand->getBrandData();
+        
+        $this->setData('brandListInfo', $data);
+    }
 }

@@ -45,6 +45,10 @@ class WibBrand
         
     }
     
+    /**
+     * 
+     * 마이페이지 위시 브랜드 리스트
+     */
     public function getBrandWishData()
     {
         $memNo = Session::get('member.memNo');
@@ -89,6 +93,23 @@ class WibBrand
             
             $data[$key]['likeCnt'] = $res['cnt'];
         }
+        
+        return $data;
+    }
+    /**
+     * 
+     * 메인페이지 브랜드 리스트
+     */
+    public function getBrandData()
+    {
+        if(Request::isMobile()){
+            $arrWhere = "cateDisplayMobileFl = 'y'";
+        }else{
+            $arrWhere = "cateDisplayFl = 'y'";
+        }
+        
+        $query = "SELECT * FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort DESC";
+        $data = $this->wibSql->WibAll($query);
         
         return $data;
     }
