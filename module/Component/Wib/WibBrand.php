@@ -3,6 +3,9 @@
 namespace Component\Wib;
 
 use Session;
+use Request;
+use Component\Member\Util\MemberUtil;
+use Exception;
 
 class WibBrand
 {
@@ -40,6 +43,51 @@ class WibBrand
             return 'on';
         }
         
+    }
+    
+    public function getBrandWishData()
+    {
+        $memNo = Session::get('member.memNo');
+        
+        // 회원 로그인 체크
+        if (gd_is_login() === true) {
+            $arrWhere[] = "mb.memNo = ' . $memNo . '";
+        } else {
+            MemberUtil::logoutGuest();
+            $moveUrl = URI_HOME . 'member/login.php?returnUrl=' . urlencode(Request::getReturnUrl());
+            throw new AlertRedirectException(null, null, null, $moveUrl);
+        }
+
+        if(Request::isMobile()){
+            $arrWhere[] = "cb.cateDisplayMobileFl = 'y'";
+        }else{
+            $arrWhere[] = "cb.cateDisplayFl = 'y'";
+        }
+        
+        $query = "
+            SELECT 
+                cb.cateNm, cb.cateCd, mb.memberNo
+            FROM 
+                wib_memberBrand mb 
+            LEFT JOIN 
+                es_categoryBrand cb 
+            ON 
+                mb.brandCd = cb.cateCd 
+            LEFT JOIN 
+                es_member m 
+            ON 
+                mb.memberNo = m.memNo 
+            WHERE " . implode(' AND ', $arrWhere);
+        $data = $this->wibSql->WibAll($query);
+        
+        foreach ($data as $key => $value) {
+            $sql = "SELECT COUNT(*) cnt FROM wib_memberBrand WHERE brandCd = '{$value['cateCd']}'";
+            $res = $this->wibSql->WibNobind($sql);
+            
+            $data[$key]['brandCnt'] = $res['cnt'];
+        }
+        
+        return $data;
     }
 }
 

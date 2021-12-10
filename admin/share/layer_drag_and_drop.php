@@ -362,7 +362,7 @@
                                 <td>
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
-                                            <td width="150">
+<!--                                            <td width="150">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-white btn-icon-bottom js-moverow goodsChoice_downArrowMore" data-direction="bottom">
                                                         맨아래
@@ -379,10 +379,10 @@
                                                     </button>
                                                 </div>
 
-                                            </td>
-                                            <td colspan="3" class="right pdr10"><span class="action-title">선택한 상품을</span> <input type="text" name="goodsChoice_sortText"
-                                                                           class="goodsChoice_sortText"/> 번 위치로&nbsp;
-                                                <input type="button" value="이동" class="btn btn-white goodsChoice_moveBtn">
+                                            </td>-->
+                                            <td colspan="3" class="right pdr10"><span class="action-title">선택한 상품을</span> 
+<!--                                                <input type="text" name="goodsChoice_sortText" class="goodsChoice_sortText"/> 번 위치로&nbsp;
+                                                <input type="button" value="이동" class="btn btn-white goodsChoice_moveBtn">-->
                                                 <?php
                                                 if ($relationFl != 'm') {
                                                 ?>
@@ -433,7 +433,7 @@
                                 <td>
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr>
-                                            <td width="150">
+<!--                                            <td width="150">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-white btn-icon-bottom js-moverow goodsChoice_downArrowMore" data-direction="bottom">
                                                         맨아래
@@ -450,10 +450,10 @@
                                                     </button>
                                                 </div>
 
-                                            </td>
+                                            </td>-->
                                             <td colspan="3" class="right pdr10"><span class="action-title">선택한 상품을</span>
-                                                <input type="text" name="goodsChoice_sortText" class="goodsChoice_sortText"/> 번 위치로&nbsp;
-                                                <input type="button" value="이동" class="btn btn-white goodsChoice_moveBtn">
+<!--                                                <input type="text" name="goodsChoice_sortText" class="goodsChoice_sortText"/> 번 위치로&nbsp;
+                                                <input type="button" value="이동" class="btn btn-white goodsChoice_moveBtn">-->
                                                 <?php
                                                 if ($relationFl != 'm') {
                                                     ?>

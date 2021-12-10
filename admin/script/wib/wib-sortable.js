@@ -20,6 +20,7 @@ $(function () {
             name: 'shared', // 공유 옵션,
             pull: false
         },
+        scroll: true,
         animation: 150, // 속도
         filter: '.add_goods_fix', // sort 안될 클래스
         onStart: function (evt) {
