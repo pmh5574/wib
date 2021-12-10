@@ -2,7 +2,7 @@
 
 namespace Controller\Front\Main;
 
-class IndexNewController extends \Controller\Front\Controller
+class IndexNewController extends \Bundle\Controller\Front\Main\IndexController
 {
     
 }

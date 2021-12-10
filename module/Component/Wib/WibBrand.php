@@ -51,7 +51,7 @@ class WibBrand
         
         // 회원 로그인 체크
         if (gd_is_login() === true) {
-            $arrWhere[] = "mb.memNo = ' . $memNo . '";
+            $arrWhere[] = "mb.memberNo = '{$memNo}'";
         } else {
             MemberUtil::logoutGuest();
             $moveUrl = URI_HOME . 'member/login.php?returnUrl=' . urlencode(Request::getReturnUrl());
@@ -77,14 +77,17 @@ class WibBrand
                 es_member m 
             ON 
                 mb.memberNo = m.memNo 
-            WHERE " . implode(' AND ', $arrWhere);
+            WHERE 
+                " . implode(' AND ', $arrWhere) . " 
+            ORDER BY mb.regDt DESC 
+            LIMIT 0, 4";
         $data = $this->wibSql->WibAll($query);
         
         foreach ($data as $key => $value) {
             $sql = "SELECT COUNT(*) cnt FROM wib_memberBrand WHERE brandCd = '{$value['cateCd']}'";
             $res = $this->wibSql->WibNobind($sql);
             
-            $data[$key]['brandCnt'] = $res['cnt'];
+            $data[$key]['likeCnt'] = $res['cnt'];
         }
         
         return $data;

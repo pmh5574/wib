@@ -16,7 +16,7 @@ class RelocationController extends \Controller\Front\Controller
 		ini_set('memory_limit', -1);
 		ini_set('max_execution_time', 1024);
 
-		/* //íšŒì› ë¹„ë°€ë²ˆí˜¸ í…ŒìŠ¤íŠ¸
+		/* //È¸¿ø ºñ¹Ğ¹øÈ£ Å×½ºÆ®
 		echo App::getInstance('password')->hash('!Admin1004');
 		exit;
 		*/
@@ -183,7 +183,7 @@ class RelocationController extends \Controller\Front\Controller
 									
 									if(!is_array($value['keys'])) $value['keys'] = array();
 									if(!is_array($arrayBoardTables[$boardKey]['keys'])) $arrayBoardTables[$boardKey]['keys'] = array();
-									/* íŠœë‹ëœ í‚¤(ë³„ë™ ìƒì„±í•œ í‚¤)ê°’ì¼ë•Œ ì‚­ì œ í•˜ëŠ” ê¸°ëŠ¥ ì´ë‚˜ íŠœë‹ëœ ê¸°ëŠ¥ ì‚­ì œ ì‹œ ë¬¸ì œ ìš°ë ¤ê°€ ìˆì–´ ì£¼ì„ì²˜ë¦¬
+									/* Æ©´×µÈ Å°(º°µ¿ »ı¼ºÇÑ Å°)°ªÀÏ¶§ »èÁ¦ ÇÏ´Â ±â´É ÀÌ³ª Æ©´×µÈ ±â´É »èÁ¦ ½Ã ¹®Á¦ ¿ì·Á°¡ ÀÖ¾î ÁÖ¼®Ã³¸®
 									if($result = array_diff_assoc($arrayBoardTables[$boardKey]['keys'], $value['keys'])) {
 										foreach($result as $key_name => $key_value) {
 											if($arrayBoardTables[$boardKey]['keys'][$key_name]) {
@@ -267,7 +267,7 @@ class RelocationController extends \Controller\Front\Controller
 							
 							if(!is_array($value['keys'])) $value['keys'] = array();
 							if(!is_array($arrayTables[$key]['keys'])) $arrayTables[$key]['keys'] = array();
-							/* íŠœë‹ëœ í‚¤(ë³„ë™ ìƒì„±í•œ í‚¤)ê°’ì¼ë•Œ ì‚­ì œ í•˜ëŠ” ê¸°ëŠ¥ ì´ë‚˜ íŠœë‹ëœ ê¸°ëŠ¥ ì‚­ì œ ì‹œ ë¬¸ì œ ìš°ë ¤ê°€ ìˆì–´ ì£¼ì„ì²˜ë¦¬
+							/* Æ©´×µÈ Å°(º°µ¿ »ı¼ºÇÑ Å°)°ªÀÏ¶§ »èÁ¦ ÇÏ´Â ±â´É ÀÌ³ª Æ©´×µÈ ±â´É »èÁ¦ ½Ã ¹®Á¦ ¿ì·Á°¡ ÀÖ¾î ÁÖ¼®Ã³¸®
 							if($result = array_diff_assoc($arrayTables[$key]['keys'], $value['keys'])) {
 								foreach($result as $key_name => $key_value) {
 									if($arrayTables[$key]['keys'][$key_name]) {
@@ -297,17 +297,17 @@ class RelocationController extends \Controller\Front\Controller
 						}
 					}
 
-					// ì¿¼ë¦¬ êµ¬ë¶„
+					// Äõ¸® ±¸ºĞ
 					$arrayQueryMode = array(
-						'create'	=> iconv('euc-kr', 'utf-8', 'í…Œì´ë¸” ì¶”ê°€'),
-						'f_insert'	=> iconv('euc-kr', 'utf-8', 'í•„ë“œ ì¶”ê°€'),
-						'f_modify'	=> iconv('euc-kr', 'utf-8', 'í•„ë“œ ìˆ˜ì •'),
-						'f_drop'	=> iconv('euc-kr', 'utf-8', 'í•„ë“œ ì‚­ì œ'),
-						'keys'		=> iconv('euc-kr', 'utf-8', 'ì¸ë±ìŠ¤(í‚¤)'),
-						'primaryKeys'		=> iconv('euc-kr', 'utf-8', 'í”„ë¼ì´ë¨¸ë¦¬(ê¸°ë³¸í‚¤)'),
-						'deliveryUpdate'	=> iconv('euc-kr', 'utf-8', 'ë°°ì†¡ì‚¬ ë“±ë¡/ìˆ˜ì •'),
-						'adminMenu'	=> iconv('euc-kr', 'utf-8', 'ê´€ë¦¬ì ë©”ë‰´ ë³€ê²½ë“±ë¡'),
-						'escode' => iconv('euc-kr', 'utf-8', 'ì½”ë“œê´€ë¦¬ ì¶”ê°€ë“±ë¡'),
+						'create'	=> iconv('euc-kr', 'utf-8', 'Å×ÀÌºí Ãß°¡'),
+						'f_insert'	=> iconv('euc-kr', 'utf-8', 'ÇÊµå Ãß°¡'),
+						'f_modify'	=> iconv('euc-kr', 'utf-8', 'ÇÊµå ¼öÁ¤'),
+						'f_drop'	=> iconv('euc-kr', 'utf-8', 'ÇÊµå »èÁ¦'),
+						'keys'		=> iconv('euc-kr', 'utf-8', 'ÀÎµ¦½º(Å°)'),
+						'primaryKeys'		=> iconv('euc-kr', 'utf-8', 'ÇÁ¶óÀÌ¸Ó¸®(±âº»Å°)'),
+						'deliveryUpdate'	=> iconv('euc-kr', 'utf-8', '¹è¼Û»ç µî·Ï/¼öÁ¤'),
+						'adminMenu'	=> iconv('euc-kr', 'utf-8', '°ü¸®ÀÚ ¸Ş´º º¯°æµî·Ï'),
+						'escode' => iconv('euc-kr', 'utf-8', 'ÄÚµå°ü¸® Ãß°¡µî·Ï'),
 					);
 					?>
 					<div style='display:none;' id='queryCopyArea'>
@@ -325,7 +325,7 @@ class RelocationController extends \Controller\Front\Controller
 					</div>
 						<table border="1" width="100%" cellspacing="0" cellpadding="5" style="border-collapse:collapse" bordercolor="#999999">
 						<tr>
-							<td colspan="2">&nbsp; <b><?=iconv('euc-kr', 'utf-8', 'ì¿¼ë¦¬ì„ íƒ')?></b></td>
+							<td colspan="2">&nbsp; <b><?=iconv('euc-kr', 'utf-8', 'Äõ¸®¼±ÅÃ')?></b></td>
 						</tr>
 						<?php
 							foreach($arrayQueryMode as $qKey => $qVal)
@@ -342,8 +342,8 @@ class RelocationController extends \Controller\Front\Controller
 						?>
 								<tr>
 									<td width="150" nowrap valign="top">
-										<input type="radio" name="<?php echo $qKey?>[<?php echo $key?>][yn]" value="y" checked /><?=iconv('euc-kr', 'utf-8', 'ì¶”ê°€')?> &nbsp;
-										<input type="radio" name="<?php echo $qKey?>[<?php echo $key?>][yn]" value="n" /><?=iconv('euc-kr', 'utf-8', 'ì¶”ê°€ì•ˆí•¨')?>
+										<input type="radio" name="<?php echo $qKey?>[<?php echo $key?>][yn]" value="y" checked /><?=iconv('euc-kr', 'utf-8', 'Ãß°¡')?> &nbsp;
+										<input type="radio" name="<?php echo $qKey?>[<?php echo $key?>][yn]" value="n" /><?=iconv('euc-kr', 'utf-8', 'Ãß°¡¾ÈÇÔ')?>
 									</td>
 									<td width="100%">
 						<?php
@@ -373,8 +373,8 @@ class RelocationController extends \Controller\Front\Controller
 						</table>
 						<br>
 						<center>
-							<input type="button" value="<?=iconv('euc-kr', 'utf-8', 'ì¿¼ë¦¬ë³µì‚¬')?>" style="cursor:pointer" onclick="window.clipboardData.setData('text', document.getElementById('queryCopyArea').innerText);">
-							<input type="submit" value="<?=iconv('euc-kr', 'utf-8', 'ì¿¼ë¦¬ì‹¤í–‰')?>" onclick="this.form.type.value='exec'">
+							<input type="button" value="<?=iconv('euc-kr', 'utf-8', 'Äõ¸®º¹»ç')?>" style="cursor:pointer" onclick="window.clipboardData.setData('text', document.getElementById('queryCopyArea').innerText);">
+							<input type="submit" value="<?=iconv('euc-kr', 'utf-8', 'Äõ¸®½ÇÇà')?>" onclick="this.form.type.value='exec'">
 						</center>
 						<?php
 							break;
@@ -400,7 +400,7 @@ class RelocationController extends \Controller\Front\Controller
 						?>
 						<table border="1" width="100%" cellspacing="0" cellpadding="5" style="border-collapse:collapse" bordercolor="#999999">
 						<tr>
-							<td colspan="2" >&nbsp; <b><?=iconv('euc-kr', 'utf-8', 'ì¿¼ë¦¬ ê²°ê³¼')?></b></td>
+							<td colspan="2" >&nbsp; <b><?=iconv('euc-kr', 'utf-8', 'Äõ¸® °á°ú')?></b></td>
 						</tr>
 						<?php
 							if(count($ar_querys)) {
@@ -454,11 +454,11 @@ class RelocationController extends \Controller\Front\Controller
 					$updateQuery = "Update es_memberSleep Set encryptData = '" . Encryptor::mysqlAesEncrypt($sleepMemberRow['encryptData']) . "' Where sleepNo=" . $sleepMemberRow['sleepNo'];
 
 					if (!$db->query($updateQuery)) {
-						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì‹¤íŒ¨ : ') . $updateQuery . '</div>';
+						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ½ÇÆĞ : ') . $updateQuery . '</div>';
 						exit;
 					}
 					else {
-						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì„±ê³µ') . '</div>';
+						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ¼º°ø') . '</div>';
 					}
 				}
 			}
@@ -468,7 +468,7 @@ class RelocationController extends \Controller\Front\Controller
 			while ($sleepMemberRow = $db->fetch($sleepMemberResult, 'array')) {
 				foreach ($arrayTargetData as $targetData) {
 					if (preg_match_all("/\"{$targetData}\"\;s\:([[:digit:]]{1,})\:\"?([^\;]+)/", $sleepMemberRow['encryptData'], $result)) {
-						if (preg_match_all("/(\'|\"|\\\|\â™¥|\r\n|\r|\n|\^)+/", substr($result[2][0], 0, (strlen($result[2][0]) - 1)), $subResult)) {
+						if (preg_match_all("/(\'|\"|\\\|\¢¾|\r\n|\r|\n|\^)+/", substr($result[2][0], 0, (strlen($result[2][0]) - 1)), $subResult)) {
 							preg_match_all("/(\"{$targetData}\"\;s\:)([[:digit:]]{1,})(\:[\"][^\;]+)/", $sleepMemberRow['encryptData'], $ttt);
 							$stringLen = $result[1][0] - 1;
 							$sleepMemberRow['encryptData'] = preg_replace("/(\"{$targetData}\"\;s\:)([[:digit:]]{1,})(\:[\"][^\;]+)/", "\"{$targetData}\";s:{$stringLen}$3", $sleepMemberRow['encryptData']);
@@ -482,7 +482,7 @@ class RelocationController extends \Controller\Front\Controller
 				if (!$serializeFl) {
 					foreach ($arrayTargetData as $targetData) {
 						if (preg_match_all("/\"{$targetData}\"\;s\:([[:digit:]]{1,})\:\"?([^\;]+)/", $sleepMemberRow['encryptData'], $result)) {
-							if (preg_match_all("/(\'|\"|\\\|\â™¥|\r\n|\r|\n|\^)+/", substr($result[2][0], 0, (strlen($result[2][0]) - 1)), $subResult)) {
+							if (preg_match_all("/(\'|\"|\\\|\¢¾|\r\n|\r|\n|\^)+/", substr($result[2][0], 0, (strlen($result[2][0]) - 1)), $subResult)) {
 								$stringLen = $result[1][0] - 2;
 								$encryptData = preg_replace("/(\"{$targetData}\"\;s\:)([[:digit:]]{1,})(\:[\"][^\;]+)/", "\"{$targetData}\";s:{$stringLen}$3", $sleepMemberRow['encryptData']);
 								if (unserialize($encryptData)) {
@@ -497,15 +497,15 @@ class RelocationController extends \Controller\Front\Controller
 					$updateQuery = "Update es_memberSleep Set encryptData = '" . Encryptor::mysqlAesEncrypt($sleepMemberRow['encryptData']) . "' Where sleepNo=" . $sleepMemberRow['sleepNo'];
 
 					if (!$db->query($updateQuery)) {
-						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì‹¤íŒ¨ : ') . $updateQuery . '</div>';
+						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ½ÇÆĞ : ') . $updateQuery . '</div>';
 						exit;
 					}
 					else {
-						echo '<div style="color:blue">' . $sleepMemberRow['memId'] . ' : ' . iconv('euc-kr', 'utf-8', 'unserialize ì‹¤íŒ¨ ìˆ˜ì • ì—…ë°ì´íŠ¸ ì„±ê³µ') . '</div>';
+						echo '<div style="color:blue">' . $sleepMemberRow['memId'] . ' : ' . iconv('euc-kr', 'utf-8', 'unserialize ½ÇÆĞ ¼öÁ¤ ¾÷µ¥ÀÌÆ® ¼º°ø') . '</div>';
 					}
 				}
 				else {
-					echo '<div style="color:red">' . $sleepMemberRow['memId'] . ' : ' . iconv('euc-kr', 'utf-8', 'unserialize ì‹¤íŒ¨ ìˆ˜ì • ì—…ë°ì´íŠ¸ ì‹¤íŒ¨') . '</div>';
+					echo '<div style="color:red">' . $sleepMemberRow['memId'] . ' : ' . iconv('euc-kr', 'utf-8', 'unserialize ½ÇÆĞ ¼öÁ¤ ¾÷µ¥ÀÌÆ® ½ÇÆĞ') . '</div>';
 				}
 			}
 			
@@ -527,16 +527,16 @@ class RelocationController extends \Controller\Front\Controller
 						exit;
 					}
 					else {
-						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì„±ê³µ') . '</div>';
+						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ¼º°ø') . '</div>';
 					}
 				}
 				else {
 					$encryptData = Encryptor::mysqlAesDecrypt($sleepMemberRow['encryptData']);
 					if (unserialize($encryptData)) {
-						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ì´ë¯¸ ì—…ë°ì´íŠ¸ ì™„ë£Œ ëœ íœ´ë©´íšŒì›ID : ' . $sleepMemberRow['memId']) . '</div>';
+						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ÀÌ¹Ì ¾÷µ¥ÀÌÆ® ¿Ï·á µÈ ÈŞ¸éÈ¸¿øID : ' . $sleepMemberRow['memId']) . '</div>';
 					}
 					else {
-						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ë˜ì§€ ì•Šì€ íœ´ë©´íšŒì›ID : ' . $sleepMemberRow['memId']) . '</div>';
+						echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® µÇÁö ¾ÊÀº ÈŞ¸éÈ¸¿øID : ' . $sleepMemberRow['memId']) . '</div>';
 					}
 				}
 			}
@@ -550,17 +550,17 @@ class RelocationController extends \Controller\Front\Controller
 			while ($sleepMemberRow = $db->fetch($sleepMemberResult, 'array')) {
 				$encryptData = Encryptor::mysqlAesDecrypt($sleepMemberRow['encryptData']);
 				if (unserialize($encryptData)) {
-					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì™„ë£Œ ëœ íœ´ë©´íšŒì›ID : ' . $sleepMemberRow['memId']) . '</div>';
+					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ¿Ï·á µÈ ÈŞ¸éÈ¸¿øID : ' . $sleepMemberRow['memId']) . '</div>';
 					$cnt++;
 				}
 				else {
-					echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ë˜ì§€ ì•Šì€ íœ´ë©´íšŒì›ID : ' . $sleepMemberRow['memId']) . '</div>';
+					echo '<div style="color:red">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® µÇÁö ¾ÊÀº ÈŞ¸éÈ¸¿øID : ' . $sleepMemberRow['memId']) . '</div>';
 					$noUpdateMember[] = $sleepMemberRow['memId'];
 					$noCnt++;
 				}
 			}
-			echo '<div style="color:blue;font-weight:bold;">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì™„ë£Œ ëœ íœ´ë©´íšŒì› ìˆ˜ : ' . $cnt) . '</div>';
-			echo '<div style="color:red;font-weight:bold;">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ë˜ì§€ ì•Šì€ íœ´ë©´ íšŒì› ìˆ˜ : ' . $noCnt . ' : <br/>') . implode(', ', $noUpdateMember) . '</div>';
+			echo '<div style="color:blue;font-weight:bold;">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ¿Ï·á µÈ ÈŞ¸éÈ¸¿ø ¼ö : ' . $cnt) . '</div>';
+			echo '<div style="color:red;font-weight:bold;">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® µÇÁö ¾ÊÀº ÈŞ¸é È¸¿ø ¼ö : ' . $noCnt . ' : <br/>') . implode(', ', $noUpdateMember) . '</div>';
 		}
 		else if (strpos($requestGetParmeter['mode'], 'dataReplace') !== false) {
 			$chDomain = explode('|', $requestGetParmeter['mode']);
@@ -578,7 +578,7 @@ class RelocationController extends \Controller\Front\Controller
 					exit;
 				}
 				else {
-					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'ì—…ë°ì´íŠ¸ ì„±ê³µ') . '</div>';
+					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', '¾÷µ¥ÀÌÆ® ¼º°ø') . '</div>';
 				}
 			}
 		}
@@ -629,7 +629,7 @@ class RelocationController extends \Controller\Front\Controller
 
 					if($diffMileage < 0) $arrayMinusMileage[$MemberRow['memNo']] += $diffMileage;
 
-					$contents = iconv('euc-kr', 'utf-8', "ë°ì´í„° ì´ì „ : ì‚¬ìš©ê°€ëŠ¥ ì ë¦½ê¸ˆê³¼ ì ë¦½ê¸ˆ ë‚´ì—­ ë™ê¸°í™” ëª©ì  ì¶”ê°€ ë¡œê·¸");
+					$contents = iconv('euc-kr', 'utf-8', "µ¥ÀÌÅÍ ÀÌÀü : »ç¿ë°¡´É Àû¸³±İ°ú Àû¸³±İ ³»¿ª µ¿±âÈ­ ¸ñÀû Ãß°¡ ·Î±×");
 					
 					$insertQuery = "Insert Into es_memberMileage Set memNo = '" . $MemberRow['memNo'] ."', handleCd = '', handleMode = 'm', reasonCd = '01005011', mileage = '" . $diffMileage . "', contents = '" . $contents . "', regDt = now(), deleteFl = 'n', deleteScheduleDt = '9999-12-31 00:00:00';";
 
@@ -638,7 +638,7 @@ class RelocationController extends \Controller\Front\Controller
 							exit;
 						}
 					else {
-						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'insert ì„±ê³µ') . '</div>';
+						echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'insert ¼º°ø') . '</div>';
 					}
 				}
 			}
@@ -705,7 +705,7 @@ class RelocationController extends \Controller\Front\Controller
 						exit;
 					}
 				else {
-					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'update ì„±ê³µ') . '</div>';
+					echo '<div style="color:blue">' . iconv('euc-kr', 'utf-8', 'update ¼º°ø') . '</div>';
 				}
 				
 				$arrayBeforeMileage[$mileageRow['memNo']] = $afterMileage;
@@ -956,7 +956,7 @@ class RelocationController extends \Controller\Front\Controller
 					$deliverySno = 0;
 					$deliveryBasicResult = $db->query("Select min(sno) From es_scmDeliveryBasic Where collectFl = 'later' and fixFl = 'price'");
 					list($deliverySno) = $db->fetch($deliveryBasicResult, 'row');
-					$comment = iconv('EUCKR', 'UTF8', 'ê¸°ë³¸ - ì°©ë¶ˆê¸ˆì•¡ë³„ë°°ì†¡ë¹„');
+					$comment = iconv('EUCKR', 'UTF8', '±âº» - ÂøºÒ±İ¾×º°¹è¼Ûºñ');
 					if (!$deliverySno) {
 						$db->query("Insert Into es_scmDeliveryBasic Set managerNo=1, scmNo=1, method='" . $comment . "', description='" . $comment . "', deleteFl='y', defaultFl='y', collectFl='later', fixFl='price', freeFl='n', goodsDeliveryFl='n', areaFl='n', regDt=now()");
 						$deliverySno = $db->insert_id();

@@ -106,7 +106,7 @@ $(document).ready(function(){
 });
 
 // 211123 디자인위브 mh 브랜드 좋아요 기능 
-function brandLike(brandCd)
+function brandLike(brandCd, obj)
 {
     $.ajax({
         url : '../../brand/brand_ps.php',

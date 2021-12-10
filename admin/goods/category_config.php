@@ -795,6 +795,28 @@ if (preg_match('/MSIE (6|7)/', Request::getUserAgent())) {
                                                 </div>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <th><?=$info['cateTitle'];?><br />큰 이미지</th>
+                                            <td>
+                                                <label><input type="file" name="bigBrandImg"></label> <?php if($data['bigBrandImg']) { ?><label><img src="/data/category/<?=$data['bigBrandImg']?>?<?=time()?>" style="max-width:200px;"><input type="hidden" name="bigBrandImg" value="<?=$data['bigBrandImg']?>"> <input type="checkbox" name="bigBrandImgDel" value="y">삭제</label><?php } ?>
+                                            </td>
+                                            <th><?=$info['cateTitle'];?><br />작은 이미지</th>
+                                            <td>
+                                                <label><input type="file" name="smallBrandImg"></label>  <?php if($data['smallBrandImg']) { ?><label><img src="/data/category/<?=$data['smallBrandImg']?>?<?=time()?>"  style="max-width:200px;"><input type="hidden" name="smallBrandImg" value="<?=$data['smallBrandImg']?>"> <input type="checkbox" name="smallBrandImgDel" value="y">삭제</label><?php } ?>
+                                            </td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><?=$info['cateTitle'];?><br />화이트 로고 이미지</th>
+                                            <td>
+                                                <label><input type="file" name="whiteBrandImg"></label> <?php if($data['whiteBrandImg']) { ?><label><img src="/data/category/<?=$data['whiteBrandImg']?>?<?=time()?>" style="max-width:200px;"><input type="hidden" name="whiteBrandImg" value="<?=$data['whiteBrandImg']?>"> <input type="checkbox" name="whiteBrandImgDel" value="y">삭제</label><?php } ?>
+                                            </td>
+                                            <th><?=$info['cateTitle'];?><br />블랙 로고 이미지</th>
+                                            <td>
+                                                <label><input type="file" name="blackBrandImg"></label>  <?php if($data['blackBrandImg']) { ?><label><img src="/data/category/<?=$data['blackBrandImg']?>?<?=time()?>"  style="max-width:200px;"><input type="hidden" name="blackBrandImg" value="<?=$data['blackBrandImg']?>"> <input type="checkbox" name="blackBrandImgDel" value="y">삭제</label><?php } ?>
+                                            </td>
+                                            </td>
+                                        </tr>
                                         <?php } ?>
 				<?php } ?>
 				<?php if ($data['mode'] == 'register') {?>
