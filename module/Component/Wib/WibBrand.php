@@ -108,10 +108,12 @@ class WibBrand
             $arrWhere = "cateDisplayFl = 'y'";
         }
         
-        $query = "SELECT * FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort DESC";
+        $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, smallBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort ASC";
         $data = $this->wibSql->WibAll($query);
         
         return $data;
     }
+    
+    
 }
 

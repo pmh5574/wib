@@ -147,295 +147,33 @@
                                 </div>
                             <!--{ / }-->
                             <!--{ / }-->
-				<!--{ @dataBanner('4021273692', true) }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '1'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '2'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '3'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '4'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '5'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '6'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '7'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '8'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '9'}-->
-				<div>
-					<a href="javascript:;">
-						<div class="table">
-							<div class="table-cell">
-								<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-								<p>{.bannerImageAlt}</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<!--{ / }-->
-				<!--{ / }-->
+				
 			</div>
 		</div>
 
 		<div class="brand-product-form">
 			<div class="inner">
-				<!--{ @dataBanner('1963871628', true) }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','8')}
-						<a href="/goods/goods_main.php?sno=8" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
+                            <!--{ @ brandListInfo }-->
+                                <div>
+                                    <div class="banner-img">
+                                            {? .bigBrandImg}
+                                            <img src="/data/category/{.bigBrandImg}" alt="{.cateNm}"/>	
+                                            {/}
+                                            <div class="info">
+                                                {? .whiteBrandImg}
+                                                <img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
+                                                {/}
+                                                <p>{.cateHtml1}</p>
+                                                <a href="javascript:;" class="zzim"></a>
+                                            </div>
+                                    </div>
+                                    <div class="pd">
+                                        {=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
+                                        <a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
+                                    </div>
 				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','9')}
-						<a href="/goods/goods_main.php?sno=9" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','10')}
-						<a href="/goods/goods_main.php?sno=10" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','11')}
-						<a href="/goods/goods_main.php?sno=11" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','8')}
-						<a href="/goods/goods_main.php?sno=8" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','9')}
-						<a href="/goods/goods_main.php?sno=9" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim on"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','10')}
-						<a href="/goods/goods_main.php?sno=10" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','11')}
-						<a href="/goods/goods_main.php?sno=11" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','8')}
-						<a href="/goods/goods_main.php?sno=8" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ ? .index_ == '0'}-->
-				<div>
-					<div class="banner-img">
-						<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
-						<div class="info">
-							<img src="../wib/img/gucci-icon.png" alt="GUCCI" />
-							<p>브랜드 설명글이 2줄 노출됩니다.<br>국내 최고 NO.1 셀렉샵 프리미엄 멀티샵 전국 7개 매장을 통한 빠른 서비스 접수</p>
-							<a href="javascript:;" class="zzim"></a>
-						</div>
-					</div>
-					<div class="pd">
-						{=includeWidget('goods/_goods_display_main.html','sno','9')}
-						<a href="/goods/goods_main.php?sno=9" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-					</div>
-				</div>
-				<!--{ / }-->
-				<!--{ / }-->
+                            <!--{ / }-->
+				
 			</div>
 		</div>
 	</div>

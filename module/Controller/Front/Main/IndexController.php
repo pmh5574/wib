@@ -25,7 +25,7 @@ class IndexController extends \Bundle\Controller\Front\Main\IndexController
     {
         $wibBrand = new WibBrand();
         $data = $wibBrand->getBrandData();
-        
+
         $this->setData('brandListInfo', $data);
     }
 }
