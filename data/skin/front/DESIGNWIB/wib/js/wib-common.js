@@ -106,7 +106,7 @@ $(document).ready(function(){
 });
 
 // 211123 디자인위브 mh 브랜드 좋아요 기능 
-function brandLike(brandCd, obj)
+function brandLike(brandCd, obj, name)
 {
     var _this = obj;
     
@@ -119,13 +119,18 @@ function brandLike(brandCd, obj)
         },
         dataType : 'json',
         success : function(data){
-            if(data.code == 'on'){
-                $(_this).addClass('on');
-                alert('브랜드 찜 리스트에 추가 됐습니다.');
-            }else if(data.code == 'off'){
-                $(_this).removeClass('on');
-                alert('브랜드 찜 리스트에서 삭제 됐습니다.');
+            if(name == 'mypage'){
+                location.reload();
+            }else{
+                if(data.code == 'on'){
+                    $(_this).addClass('on');
+                    alert('브랜드 찜 리스트에 추가 됐습니다.');
+                }else if(data.code == 'off'){
+                    $(_this).removeClass('on');
+                    alert('브랜드 찜 리스트에서 삭제 됐습니다.');
+                }  
             }
+            
         }
     });
 }

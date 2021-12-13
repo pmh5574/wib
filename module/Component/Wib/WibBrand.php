@@ -52,15 +52,13 @@ class WibBrand
      */
     public function getBrandWishData()
     {
+        $getValue = Request::get()->get('page');
+        
         $memNo = Session::get('member.memNo');
         
         // 회원 로그인 체크
         if (gd_is_login() === true) {
             $arrWhere[] = "mb.memberNo = '{$memNo}'";
-        } else {
-            MemberUtil::logoutGuest();
-            $moveUrl = URI_HOME . 'member/login.php?returnUrl=' . urlencode(Request::getReturnUrl());
-            throw new AlertRedirectException(null, null, null, $moveUrl);
         }
 
         if(Request::isMobile()){
@@ -69,9 +67,17 @@ class WibBrand
             $arrWhere[] = "cb.cateDisplayFl = 'y'";
         }
         
+        $page = $getValue['page'] ? $getValue['page'] : 1;
+        
+        $page = \App::load('\\Component\\Page\\Page', $page);
+        $page->page['list'] = 4; // 페이지당 리스트 수
+        $page->block['cnt'] = Request::isMobile() ? 5 : 10; // 블록당 리스트 개수
+        $page->setPage();
+        $page->setUrl(\Request::getQueryString());
+        
         $query = "
             SELECT 
-                cb.cateNm, cb.cateCd, mb.memberNo
+                cb.cateNm, cb.cateCd, mb.memberNo, cb.smallBrandImg 
             FROM 
                 wib_memberBrand mb 
             LEFT JOIN 
@@ -85,7 +91,7 @@ class WibBrand
             WHERE 
                 " . implode(' AND ', $arrWhere) . " 
             ORDER BY mb.regDt DESC 
-            LIMIT 0, 4";
+            LIMIT {$page->recode['start']}, 4";
         $data = $this->wibSql->WibAll($query);
         
         foreach ($data as $key => $value) {
@@ -94,6 +100,29 @@ class WibBrand
             
             $data[$key]['likeCnt'] = $res['cnt'];
         }
+        
+        $query = "
+            SELECT 
+                COUNT(*) totalCnt
+            FROM 
+                wib_memberBrand mb 
+            LEFT JOIN 
+                es_categoryBrand cb 
+            ON 
+                mb.brandCd = cb.cateCd 
+            LEFT JOIN 
+                es_member m 
+            ON 
+                mb.memberNo = m.memNo 
+            WHERE 
+                " . implode(' AND ', $arrWhere) . " 
+            ORDER BY mb.regDt DESC 
+            ";
+        $dataCount = $this->wibSql->WibNoBind($query);
+        
+        // 검색 레코드 수
+        $page->recode['total'] = $dataCount['totalCnt']; //검색 레코드 수
+        $page->setPage();
         
         return $data;
     }
@@ -109,7 +138,7 @@ class WibBrand
             $arrWhere = "cateDisplayFl = 'y'";
         }
         
-        $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, smallBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort ASC";
+        $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort ASC";
         $data = $this->wibSql->WibAll($query);
         
         // 회원 로그인 체크

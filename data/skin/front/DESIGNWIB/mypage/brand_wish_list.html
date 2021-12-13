@@ -1,0 +1,29 @@
+{*** 마이페이지 > 찜리스트 | mypage/brand_wish_list.php ***}
+<ul class="brand_list">
+    <!--{ ? brandWishInfo }-->
+        <!--{ @ brandWishInfo }-->
+            <li>
+                <a href="../goods/goods_list.php?brandCd={.cateCd}">
+                    <div class="img">
+                        {? .smallBrandImg}
+                        <img src="/data/category/{.smallBrandImg}" alt="구찌"/>
+                        {/}
+                    </div>
+                    <div class="name">
+                        <h1>{.cateNm}</h1>
+                        <p class="wish_count" data-catecd="{.cateCd}">{.likeCnt}</p>
+                    </div>
+                </a>
+            </li>
+        <!--{ / }-->
+    <!--{ : }-->
+    <li>찜한 브랜드가 없습니다.</li>
+    <!--{ / }-->
+</ul>
+<div class="pagination">{page->getPageWithPageData()}</div>
+<script type="text/javascript">
+    $(function(){
+        $('.pagination ul li a').attr('href', 'javascript:;');
+
+    });
+</script>

@@ -14,15 +14,10 @@
 namespace Controller\Front\Mypage;
 
 use Component\Wib\WibBrand;
-/**
- * 관련상품
- *
- * @author Ahn Jong-tae <qnibus@godo.co.kr>
- * @author Shin Donggyu <artherot@godo.co.kr>
- */
-class WishListController extends \Bundle\Controller\Front\Mypage\WishListController
+
+class BrandWishListController extends \Controller\Front\Controller
 {
-    public function post()
+    public function index()
     {
         $wibBrand = new WibBrand();
         $brandWishInfo = $wibBrand->getBrandWishData();
