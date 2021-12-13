@@ -57,9 +57,10 @@ class TodayController extends \Controller\Front\Controller
         $goods = \App::load('\\Component\\Goods\\Goods');
         
         $goods->setThemeConfig($cateInfo);
-        $goodsData = $goods->goodsDataDisplay('goods', $goodsNoData, (gd_isset($cateInfo['lineCnt']) * gd_isset($cateInfo['rowCnt'])), $orderBy, 'list');
         
-        if($goodsData) $goodsList = array_chunk($goodsData,$cateInfo['lineCnt']);
+        $goodsData = $goods->getGoodsSearchList(8, $orderBy, 'list', $optionFl , $soldOutFl , $brandFl, $couponPriceFl ,8,$brandDisplayFl, true, null, $arrTodayGoodsNo);
+        
+        if($goodsData['listData']) $goodsList = array_chunk($goodsData['listData'],$cateInfo['lineCnt']);
         
         $typeClass = gd_isset($cateInfo['displayType'],'01');
         
@@ -73,7 +74,7 @@ class TodayController extends \Controller\Front\Controller
         }
         
         $page = \App::load('\\Component\\Page\\Page'); // 페이지 재설정
-        
+       
         $this->setData('goodsList', $goodsList);
         $this->setData('themeInfo', $cateInfo);
         $this->setData('mainData', ['sno'=>'widget']);
