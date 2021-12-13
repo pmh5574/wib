@@ -36,7 +36,8 @@ class WibBrand
                 'wib_memberBrand',
                 [
                     'memberNo' => [$memNo, 'i'],
-                    'brandCd' => [$brandCd, 's']
+                    'brandCd' => [$brandCd, 's'],
+                    'regDt' => [date('Y-m-d H:i:s'), 's']
                 ]
             ];
             $this->wibSql->WibInsert($data);
@@ -111,9 +112,29 @@ class WibBrand
         $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, smallBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort ASC";
         $data = $this->wibSql->WibAll($query);
         
+        // 회원 로그인 체크
+        if (gd_is_login() === true) {
+            
+            $memNo = Session::get('member.memNo');
+            
+            $arrWhere = " AND memberNo = '{$memNo}'";
+            
+            foreach ($data as $key => $value) {
+                $sql = "SELECT sno FROM wib_memberBrand WHERE brandCd = '{$value['cateCd']}' {$arrWhere}";
+                $sno = $this->wibSql->WibNobind($sql)['sno'];
+
+                if($sno){
+                    $data[$key]['brandLike'] = 'on';
+                }else{
+                    $data[$key]['brandLike'] = 'off';
+                }
+
+            }
+        }
+        
+        
+        
         return $data;
     }
-    
-    
 }
 

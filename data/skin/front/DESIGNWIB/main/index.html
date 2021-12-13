@@ -131,7 +131,6 @@
 		<p class="main-title">브랜드별 베스트 상품</p>
 		<div class="brand-list">
 			<div>
-                            <!--{ ? !brandListInfo }-->
                             <!--{ @ brandListInfo }-->
                                 <div>
                                     <a href="javascript:;">
@@ -146,8 +145,6 @@
                                     </a>
                                 </div>
                             <!--{ / }-->
-                            <!--{ / }-->
-				
 			</div>
 		</div>
 
@@ -164,7 +161,11 @@
                                                 <img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
                                                 {/}
                                                 <p>{.cateHtml1}</p>
-                                                <a href="javascript:;" class="zzim"></a>
+                                                <!--{ ? gd_is_login() === false }-->
+                                                <a href='javascript:brandLikeNoMember();' class="zzim"></a>
+                                                <!--{ : }-->
+                                                <a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
+                                                <!--{ / }-->
                                             </div>
                                     </div>
                                     <div class="pd">
@@ -173,7 +174,6 @@
                                     </div>
 				</div>
                             <!--{ / }-->
-				
 			</div>
 		</div>
 	</div>

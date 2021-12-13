@@ -4,6 +4,7 @@ var wibFilter = {
     cateCd : '',
     page : '',
     sort : '',
+    brandCheck : '',
     filterBrand : '',
     filterColor : [],
     
@@ -14,6 +15,7 @@ var wibFilter = {
         this.cateCd = option.cateCd;
         this.page = option.page;
         this.sort = option.sort;
+        this.brandCheck = option.brandCheck;
         
         //브랜드 필터 정렬기준
         $('.filter_brand .brand_order_by span').on('click', function(e){
@@ -90,7 +92,7 @@ var wibFilter = {
         var pageNum = $('select[name="pageNum"]').val();
         
         $.ajax({
-            url : _this.ajaxUrl+'?cateCd='+_this.cateCd,
+            url : _this.ajaxUrl+'?'+_this.brandCheck+_this.cateCd,
             type : 'post',
             data : {
                 'sort' : sort,
@@ -187,16 +189,27 @@ var wibFilter = {
 };
 
 $(function(){
-    var _url = location.search;
     
-    var cateCcd = _url.split('cateCd=')[1];
-    var cateCd = cateCcd.split('&')[0];
+    var cateCd = getParameterByName('cateCd');
+    var brandCd = 'cateCd=';
+    
+    if(!cateCd){
+        cateCd = getParameterByName('brandCd');
+        brandCd = 'brandCd=';
+    }
     
     wibFilter.init({
         'url' : '/goods/filter_goods.php',
         'cateCd' : cateCd,
+        'brandCheck' : brandCd,
         'page' : 1
     });
 
     wibFilter.getBrand();
 });
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}

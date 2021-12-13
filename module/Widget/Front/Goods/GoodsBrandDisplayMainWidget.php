@@ -49,16 +49,35 @@ class GoodsBrandDisplayMainWidget extends \Widget\Front\Widget
         $couponPriceFl = in_array('coupon', array_values($cateInfo['displayField'])) ? true : false;     // 쿠폰가 출력 여부
         $cateMode = 'brand';
 
-
-
         $goods->setThemeConfig($cateInfo);
         $goodsData = $goods->getGoodsList($cateCd, $cateMode, $pageNum, $displayOrder, gd_isset($cateInfo['imageCd']), $optionFl, $soldOutFl, $brandFl, $couponPriceFl);
+        
+        //품절상품 설정
+        $soldoutDisplay = gd_policy('soldout.pc');
+
+        // 마일리지 정보
+        $mileage = gd_mileage_give_info();
+        // 카테고리 노출항목 중 상품할인가
+        if (in_array('goodsDcPrice', $cateInfo['displayField'])) {
+            foreach ($goodsList as $key => $val) {
+                foreach ($val as $key2 => $val2) {
+                    $goodsList[$key][$key2]['goodsDcPrice'] = $goods->getGoodsDcPrice($val2);
+                }
+            }
+        }
+
+        
         
         if ($goodsData['listData']) {
             $goodsList = array_chunk($goodsData['listData'], $cateInfo['lineCnt']);
         }
 
+        $this->setData('mileageData', gd_isset($mileage['info']));
+        $this->setData('soldoutDisplay', gd_isset($soldoutDisplay));
+        $this->setData('cateType', 'brand');
+        $this->setData('cateCd', $cateCd);
+        $this->setData('themeInfo', gd_isset($cateInfo));
         $this->setData('goodsList', $goodsList);
-        $this->getView()->setDefine('goodsTemplate', 'goods/list/list_'.$cateInfo['displayType'].'.html');
+        $this->getView()->setDefine('goodsTemplate', 'goods/list/list_15.html');
     }
 }
