@@ -165,5 +165,14 @@ class WibBrand
         
         return $data;
     }
+    
+    public function getBrandNm($brandCd)
+    {
+        
+        $query = "SELECT cateNm FROM es_categoryBrand WHERE cateCd = '{$brandCd}'";
+        $brandNm = $this->wibSql->WibNobind($query)['cateNm'];
+  
+        return $brandNm;
+    }
 }
 
