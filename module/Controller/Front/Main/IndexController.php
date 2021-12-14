@@ -14,6 +14,7 @@
 namespace Controller\Front\Main;
 
 use Component\Wib\WibBrand;
+use Component\Wib\WibBoard;
 /**
  * 메인 페이지
  *
@@ -24,8 +25,12 @@ class IndexController extends \Bundle\Controller\Front\Main\IndexController
     public function post()
     {
         $wibBrand = new WibBrand();
+        $wibBoard = new WibBoard();
+        
         $brandListInfo = $wibBrand->getBrandData();
+        $reviews = $wibBoard->getMainReview();
 
+        $this->setData('reviews',$reviews);
         $this->setData('brandListInfo', $brandListInfo);
     }
 }
