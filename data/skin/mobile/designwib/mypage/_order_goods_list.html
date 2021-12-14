@@ -48,8 +48,8 @@
 							<!--{ / }-->
 
 							<dl>
+								<dt class="prd_brand">{...brandNm}</dt>
 								<dt class="prd_name">{...goodsNm}</dt>
-								<dt class="prd_name">{...brandNm}</dt>
 								<!--
 								{ ? ...optionInfo }
 									{ @ ...optionInfo }
@@ -247,33 +247,33 @@
 				<!--{ / }-->
 			</li>
 		</ul>
-		<!--{ ? ...index_ == key(array_slice(..goods, -1, 1, true)) }-->
-		<ul>
-				<!--{ ? mode === 'backRegist' || mode === 'refundRegist' || mode === 'exchangeRegist' }-->
-				<li><button class="order_btn all_check_goods" value="n">{=__('전체선택')}</button></li>
-				<!--{ : substr(...orderStatus, 0, 1) == 'o' }-->
-				<!--{ ? ..orderChannelFl != 'naverpay' }-->
-				<li><a href="#" order-no="{..orderNo}" class="order_btn btn_order_cancel">{=__('주문취소')}</a></li>
-				<!--{ / }-->
-				<!--{ : }-->
-				<!--{ ? ..orderSettleButton == true }-->
-				<li><a href="../mypage/layer_order_settle.php?orderNo={..orderNo}" data-toggle="modal" data-target="#popupSettle" data-type="post" data-cache="false" class="order_btn">{=__('구매확정')}</a></li>
-				<!--{ / }-->
-				<!--{ ? gd_is_plus_shop(c.PLUSSHOP_CODE_USEREXCHANGE) === true && userHandleFl === true  && ..orderChannelFl != 'naverpay'}-->
-				<!--{ ? ..canRefund == true || ..canBack == true || ..canExchange == true }-->
-				<!--{ ? ..canRefund == true }-->
-				<li><a href="../mypage/layer_order_refund_regist.php?mode=refundRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupRefund" data-type="post" data-cache="false" class="order_btn">{=__('환불신청')}</a></li>
-				<!--{ / }-->
-				<!--{ ? ..canBack == true }-->
-				<li><a href="../mypage/layer_order_back_regist.php?mode=backRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupBack" data-type="post" data-cache="false" class="order_btn">{=__('반품신청')}</a></li>
-				<!--{ / }-->
-				<!--{ ? ..canExchange == true }-->
-				<li><a href="../mypage/layer_order_exchange_regist.php?mode=exchangeRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupExchange" data-type="post" data-cache="false" class="order_btn">{=__('교환신청')}</a></li>
-				<!--{ / }-->
-				<!--{ / }-->
-				<!--{ / }-->
-				<!--{ / }-->
-			</ul>
+		<!--{ ? ...key_ == key(array_slice(..goods, -1, 1, true)) }-->
+		<ul class="order_btn_box">
+			<!--{ ? mode === 'backRegist' || mode === 'refundRegist' || mode === 'exchangeRegist' }-->
+			<li><button class="order_btn all_check_goods" value="n">{=__('전체선택')}</button></li>
+			<!--{ : substr(...orderStatus, 0, 1) == 'o' }-->
+			<!--{ ? ..orderChannelFl != 'naverpay' }-->
+			<li><a href="#" order-no="{..orderNo}" class="order_btn btn_order_cancel">{=__('주문취소')}</a></li>
+			<!--{ / }-->
+			<!--{ : }-->
+			<!--{ ? ..orderSettleButton == true }-->
+			<li><a href="../mypage/layer_order_settle.php?orderNo={..orderNo}" data-toggle="modal" data-target="#popupSettle" data-type="post" data-cache="false" class="order_btn">{=__('구매확정')}</a></li>
+			<!--{ / }-->
+			<!--{ ? gd_is_plus_shop(c.PLUSSHOP_CODE_USEREXCHANGE) === true && userHandleFl === true  && ..orderChannelFl != 'naverpay'}-->
+			<!--{ ? ..canRefund == true || ..canBack == true || ..canExchange == true }-->
+			<!--{ ? ..canRefund == true }-->
+			<li><a href="../mypage/layer_order_refund_regist.php?mode=refundRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupRefund" data-type="post" data-cache="false" class="order_btn">{=__('환불신청')}</a></li>
+			<!--{ / }-->
+			<!--{ ? ..canBack == true }-->
+			<li><a href="../mypage/layer_order_back_regist.php?mode=backRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupBack" data-type="post" data-cache="false" class="order_btn">{=__('반품신청')}</a></li>
+			<!--{ / }-->
+			<!--{ ? ..canExchange == true }-->
+			<li><a href="../mypage/layer_order_exchange_regist.php?mode=exchangeRegist&orderNo={..orderNo}&orderGoodsNo={...sno}&orderStatus={...orderStatus}" data-toggle="modal" data-target="#popupExchange" data-type="post" data-cache="false" class="order_btn">{=__('교환신청')}</a></li>
+			<!--{ / }-->
+			<!--{ / }-->
+			<!--{ / }-->
+			<!--{ / }-->
+		</ul>
 		<!--{ / }-->
 		<!--{ / }-->
 
