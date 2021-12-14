@@ -292,9 +292,6 @@
 	</div>
 </div>
 
-
-<!-- 개발 : 관리자에서 특정후기 선택해서 노출 ex)담터 -->
-<!-- 개발 : 노출 개수 3개 이상으로 늘리면 네이버후기작성 나오는데 이거 걸러야될 것 같음 -->
 <div class="mcon09">
 	<p class="main-title">후기로 증명하는 블루</p>	
 	<ul>
@@ -302,13 +299,13 @@
                 <li>
                     <div class='photo-box'>
                         <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                                <p class="thumb">
-                                    <!--{ ? .saveFileNm }-->
-                                    <img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
-                                    <!--{ : }-->
-                                    <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
-                                    <!--{ / }-->
-                                </p>
+                            <p class="thumb">
+                                <!--{ ? .saveFileNm }-->
+                                <img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
+                                <!--{ : }-->
+                                <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+                                <!--{ / }-->
+                            </p>
                         </a>
                         <div class="prd-box">
                             <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
@@ -320,20 +317,22 @@
                                     <!--{ / }-->
                                 </div>
                                 <div class="goods-des">
-                                    <p class="brand">KENZO 겐조</p>
+                                    <p class="brand">{.brandNm}</p>
                                     <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
                                     <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
-                                    <p class="discount-rate">23<em>%</em></p>
+                                    {? .fixedPrice > 0}
+                                    <p class="discount-rate">{=round((1-(.goodsPrice/.fixedPrice))*100)}<em>%</em></p>
+                                    {/}
                                 </div>
                             </a>
                         </div>
-                        <div class="txt-box">
-                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                                <p class="tit">{.subject}</p>
-                                <p class="sub">{=gd_htmlspecialchars_stripslashes(gd_html_cut(.contents,'150'))}</p>
-                                <p class="writer">{.writerNm}님의 후기</p>
-                            </a>
-			</div>
+                    </div>
+                    <div class="txt-box">
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                            <p class="tit">{.subject}</p>
+                            <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),300,'...')}</p>
+                            <p class="writer">{.writerNm}님의 후기</p>
+                        </a>
                     </div>
                 </li>
                 <!--{ / }-->

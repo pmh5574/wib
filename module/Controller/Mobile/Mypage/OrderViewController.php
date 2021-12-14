@@ -21,7 +21,7 @@ class OrderViewController extends \Bundle\Controller\Mobile\Mypage\OrderViewCont
             foreach ($value as $k => $val) {
                 foreach ($val['goods'] as $lKey => $lValue) {
 
-                    $ordersByRegisterDay[$key][$k]['goods'][$lKey]['brandNm'] = $wibBrand->getBrandNm($lValue['brandCd']);
+                    $ordersByRegisterDay[$key][$k]['goods'][$lKey]['brandNm'] = $wibBrand->getBrandNm($lValue['brandCd'])['cateNm'];
                 }
             }
         

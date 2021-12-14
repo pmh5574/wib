@@ -2,20 +2,30 @@ $(document).ready(function(){
 	var $header = $("header"),
 		$body = $("body"),
 		$dim = $(".wibDim"),
-		$csBtn = $("header .header-area .top-menu .link > ul > li:last-of-type a"),				// 헤더 CS 버튼
+		$csBtn = $("header .header-area .top-menu .link > ul > li:last-of-type a"),							// 헤더 CS 버튼
 		$searchBtn = $("a.search-toggle"),																						// 헤더 검색 버튼
-		$rankMoreView = $("a.popular-more"),																			// 인기검색어 전체보기
+		$rankMoreView = $("a.popular-more"),																					// 인기검색어 전체보기
 		$searchArea = $(".search-area"),																							// 검색창
-		$searchOpenBtn = $("a.search-toggle"),																			// 검색창 열기
-		$searchCloseBtn = $("a.search-close"),																				// 검색창 닫기
-		$depth1 = $(".all-menu .contents-wrap .category > ul > li"),										// 뎁스 1
-		$depth2Open = $(".all-menu .contents-wrap .category > ul > li > span"),				// 뎁스1 우측 select 버튼
-		$depth2Area = $(".all-menu .contents-wrap .category > ul > li > ul"),						// 뎁스2 영역
-		$allMenuOpen = $("header .header-area .bottom-menu .inner .left a.menu"),	// 전체메뉴열기 버튼
-		$allMenuClose = $(".all-menu .top a.all-menu-close"),													// 전체메뉴닫기 버튼
-		$allMenu = $(".all-menu"),																										// 전체메뉴
+		$searchOpenBtn = $("a.search-toggle"),																				// 검색창 열기
+		$searchCloseBtn = $("a.search-close"),																					// 검색창 닫기
+		$depth1 = $(".all-menu .contents-wrap .category > ul > li"),													// 뎁스 1
+		$depth2Open = $(".all-menu .contents-wrap .category > ul > li > span"),								// 뎁스1 우측 select 버튼
+		$depth2Area = $(".all-menu .contents-wrap .category > ul > li > ul"),									// 뎁스2 영역
+		$allMenuOpen = $("header .header-area .bottom-menu .inner .left a.menu"),					// 전체메뉴열기 버튼
+		$allMenuClose = $(".all-menu .top a.all-menu-close"),															// 전체메뉴닫기 버튼
+		$allMenu = $(".all-menu");																										// 전체메뉴
 
 		
+	// 스크롤시 헤더 픽스
+	$(window).on("load scroll", function(){
+		if ( $( document ).scrollTop() > 222 ) {
+			$("#header_warp").addClass("scroll");
+		}
+		else {
+			$("#header_warp").removeClass("scroll");
+		}
+	});
+
 	// 헤더 고객센터 슬라이드다운 메뉴
 	csToggle = function(){
 		$csBtn.click(function(){

@@ -29,7 +29,7 @@ class IndexController extends \Bundle\Controller\Front\Mypage\IndexController
         $orderData = $this->getData('orderData');
         foreach ($orderData as $key => $value) {
             foreach ($value['goods'] as $k => $val) {
-                $orderData[$key]['goods'][$k]['brandNm'] = $wibBrand->getBrandNm($val['brandCd']);
+                $orderData[$key]['goods'][$k]['brandNm'] = $wibBrand->getBrandNm($val['brandCd'])['cateNm'];
             }
         }
         

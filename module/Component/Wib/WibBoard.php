@@ -49,10 +49,11 @@ class WibBoard
      */
     public function getMainReview()
     {
-        $query = "SELECT bgr.*, g.goodsNm,g.goodsPrice, g.imagePath, gi.imageName "
+        $query = "SELECT bgr.*, g.goodsNm, g.goodsPrice, g.fixedPrice, cb.cateNm AS brandNm, g.imagePath, gi.imageName "
                 . "FROM es_bd_goodsreview bgr "
                 . "LEFT JOIN es_goods g ON g.goodsNo = bgr.goodsNo "
                 . "LEFT JOIN es_goodsImage gi ON gi.goodsNo = bgr.goodsNo "
+                . "LEFT JOIN es_categoryBrand cb ON cb.cateCd = g.brandCd "
                 . "WHERE bgr.mainListFl = 'y' AND bgr.isDelete = 'n' AND gi.imageKind = 'main' "
                 . "ORDER BY bgr.sno DESC "
                 . "LIMIT 20";
@@ -76,9 +77,6 @@ class WibBoard
                 $saveFileNm = explode('^|^', $value['saveFileNm']);
                 $reviews[$key]['saveFileNm'] = $saveFileNm[0];
             }
-            
-            $reviews[$key]['contents'] = preg_replace("/<img[^>]+\>/i", "", $value['conents']);
-            
         }
         
         return $reviews;

@@ -120,5 +120,14 @@ class WibGoods
         
         return json_encode(['code' => $code,'data' => $data]);
     }
+    
+    public function getWishList($memNo, $goodsNo)
+    {
+        
+        $query = "SELECT COUNT(*) cnt FROM es_wish WHERE memNo = '{$memNo}' AND goodsNo = '{$goodsNo}'";
+        $cnt = $this->wibSql->WibNobind($query)['cnt'];
+        
+        return $cnt;
+    }
 }
 
