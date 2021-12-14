@@ -24,8 +24,8 @@ class IndexController extends \Bundle\Controller\Front\IndexController
     public function post()
     {
         $wibBrand = new WibBrand();
-        $data = $wibBrand->getBrandData();
+        $brandListInfo = $wibBrand->getBrandData();
 
-        $this->setData('brandListInfo', $data);
+        $this->setData('brandListInfo', $brandListInfo);
     }
 }
