@@ -33,6 +33,7 @@ class WibFilterWidget extends \Widget\Front\Widget
         }
 
         $cateDisplay = $wibGoods->getCategoryList($getValue['cateCd']);
+
         $this->setData('cateDisplay', gd_isset($cateDisplay['list']));
         $this->setData('cateDisplayNm', gd_isset($cateDisplay['cateNm']));
         $this->setData('cateParentLink', gd_isset($cateDisplay['parentCateCd']));

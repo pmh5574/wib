@@ -3750,6 +3750,27 @@ if ($data['mode'] == 'modify') {
             </tr>
         </table>
     </div>
+    
+    <div class="table-title gd-help-manual">
+        상점 설정
+    </div>
+
+    <div id="depth-toggle-layer-setImage">
+        <table class="table table-cols">
+            <colgroup>
+                <col class="width-lg"/>
+                <col/>
+            </colgroup>
+            <tr>
+                <th>상점 선택</th>
+                <td>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" value=""/>BLU</label>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" value="2"/>PREMIUMMULTISHOP</label>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" value="3"/>NEWNIA</label>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <?php if (gd_is_provider() === false) { ?>
         <div class="table-title gd-help-manual">

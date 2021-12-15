@@ -45,8 +45,7 @@ class WibGoods
         
     }
     
-    /*
-     * 
+    /**
      * 상품리스트 필터 카테고리 리스트 
      * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스
      */
@@ -68,19 +67,21 @@ class WibGoods
             $data['parentCateCd'] = substr($cateCd, 0, ($cateLength-3));
         }
         
+        $parentCateLength = $cateLength+3;
+        
+        $sql = "SELECT COUNT(*) cnt FROM es_categoryGoods WHERE length(cateCd) = {$parentCateLength} AND cateCd LIKE '{$cateCd}%'";
+        $lastDepthCheck = $this->wibSql->WibNobind($sql)['cnt'];
+        
         //마지막뎁스 아니면 하위뎁스
-        if($cateLength < 12){
-            $cateLength = $cateLength+3;
+        if($lastDepthCheck > 0){
+            $cateLength += 3;
+            $whereStr = "cateCd LIKE '{$cateCd}%' AND length(cateCd) = '{$cateLength}' AND divisionFl = 'n'" . gd_isset($userWhere);
         }else{
-            $lastWhere = " AND cateCd != \''.$lastWhere.'\'";
+            $lastWhere = " AND cateCd != {$cateCd}";
+            $whereStr = "cateCd LIKE '{$data['parentCateCd']}%' AND length(cateCd) = '{$cateLength}' AND divisionFl = 'n'" . gd_isset($userWhere) . gd_isset($lastWhere);
         }
         
         
-        if($cateCd){
-            $whereStr = "cateCd LIKE '{$cateCd}%' AND length(cateCd) = '{$cateLength}' AND divisionFl = 'n'" . gd_isset($userWhere) . gd_isset($lastWhere);
-        }else{
-            
-        }
         
         $query = "SELECT sno, cateNm, cateCd FROM es_categoryGoods WHERE {$whereStr} ORDER BY cateCd";
         $result = $this->wibSql->WibAll($query);
@@ -98,6 +99,10 @@ class WibGoods
         return $data;
     }
     
+    /**
+     * 상품리스트 필터 카테고리 리스트 
+     * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스
+     */
     public function getBrandList($brandNm = null, $orderBy)
     {
         if($brandNm){
