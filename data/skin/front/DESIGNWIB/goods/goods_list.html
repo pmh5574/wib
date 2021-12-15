@@ -84,7 +84,7 @@
             </div>
             <div class="list_right">
                  <div class="goods_pick_list">
-                    <span class="pick_list_num">{=__('상품')} <strong>{=number_format(gd_isset(page->recode['total']))}</strong> {=__('개의 상품')}</span> 
+                    <span class="pick_list_num">{=__('총')} <strong>{=number_format(gd_isset(page->recode['total']))}</strong>{=__('개의 상품')}</span> 
                     <form name="frmList" action="">
                         <input type="hidden" name="{cateType}Cd" value="{cateCd}"/>
                         <div class="pick_list_box">
@@ -115,13 +115,13 @@
                                     <label for="sort6">{=__('등록일순')}</label>
                                 </li>
                             </ul>
-                            <div class="choice_num_view">
+<!--                            <div class="choice_num_view">
                                 <select class="chosen-select" name="pageNum">
-                                    <!--{ @ goodsData.multiple }-->
-                                    <option value="{=.value_}"  <!--{ ? pageNum == .value_ }-->selected='selected'<!--{ / }-->>{=.value_}{=__('개씩보기')}</option>
-                                    <!--{ / }-->
+                                    { @ goodsData.multiple }
+                                    <option value="{=.value_}"  { ? pageNum == .value_ }selected='selected'{ / }>{=.value_}{=__('개씩보기')}</option>
+                                    { / }
                                 </select>
-                            </div>
+                            </div>-->
                             <!-- //choice_num_view -->
                         </div>
                         <!-- //pick_list_box -->
@@ -130,17 +130,18 @@
                
                 
                 <!-- //goods_pick_list -->
-
-                <div class="goods_list">
-                    <div class="goods_list_cont">
-                        <!-- 상품 리스트 -->
-                        { # goodsTemplate }
-                        <!-- //상품 리스트 -->
+                <div class='filter_goods_list'>    
+                    <div class="goods_list">
+                        <div class="goods_list_cont">
+                            <!-- 상품 리스트 -->
+                            { # goodsTemplate }
+                            <!-- //상품 리스트 -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="pagination">
-                    {page->getPage()}
+                    <div class="pagination">
+                        {page->getPage()}
+                    </div>
                 </div>
             </div>
         </div>
