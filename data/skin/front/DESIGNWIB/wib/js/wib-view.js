@@ -70,7 +70,7 @@ $(function(){
 	// 스크롤시 헤더 픽스
 	$(window).on("load scroll", function(){
 		var tabOffsetTop = $(".item_goods_sec").offset().top;
-		console.log("dd" + tabOffsetTop);
+		
 		if ( $( document ).scrollTop() > tabOffsetTop - 120) {
 			$detailTab.addClass("scroll");
 			$("body").addClass("scroll");
@@ -99,7 +99,11 @@ $(function(){
 		var go01off = $(".go01").offset().top - $(".detail-tab").outerHeight() - $("header .bottom-menu").outerHeight() - 1;
 		var go02off = $(".go02").offset().top - $(".detail-tab").outerHeight() - $("header .bottom-menu").outerHeight() - 1;
 		var go03off = $(".go03").offset().top - $(".detail-tab").outerHeight() - $("header .bottom-menu").outerHeight() - 1;
-		var go04off = $(".go04").offset().top - $(".detail-tab").outerHeight() - $("header .bottom-menu").outerHeight() - 1;
+                
+                //관심상품이 없는 경우도 있어서
+                if($('.go04').length > 0){
+                    var go04off = $(".go04").offset().top - $(".detail-tab").outerHeight() - $("header .bottom-menu").outerHeight() - 1;
+                }
 		
 		var $position = $(window).scrollTop();
 		if ($position > go01off)

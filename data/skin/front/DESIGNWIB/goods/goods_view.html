@@ -593,8 +593,14 @@
             if(goodsNoCnt == 0) {
                 $('#frmView input[name="cartMode"]').val('{=goodsView["goodsNo"]}');
             }
-
-            $('#frmView input[name="mode"]').val('wishIn');
+            
+            {? wishCheck == 'on'}
+                $('#frmView input[name="mode"]').val('delete');
+                $('#frmView').append('<input type="hidden" name="sno[]" value="{goodsView['wishSno']}">');
+            {:}
+                $('#frmView input[name="mode"]').val('wishIn');
+            {/}
+            
             $('#frmView').attr('action','../mypage/wish_list_ps.php');
             <!--{ / }-->
         } else {
@@ -1068,7 +1074,7 @@
 						<div class="brand">
 							<span>{goodsView['brandNm']}</span>
 							<em>{goodsView['brandKrNm']}</em>
-							<a href="javascript:;">브랜드샵<i></i></a>
+							<a href="../goods/goods_list.php?brandCd={=goodsView['brandCd']}">브랜드샵<i></i></a>
 						</div>
 						<div class="item_detail_tit">
 							<!--{ ? in_array('goodsIcon',displayAddField) && goodsView['goodsIcon'] }-->
@@ -1192,23 +1198,23 @@
 								<div class="origin-price">
 									<dl>
 										<dt>정상가</dt>
-										<dd>541,000원</dd>
+										<dd>{=number_format(goodsView['goodsPrice'])}원</dd>
 									</dl>	
 								</div>
 								<div class="benefit-price">
 									<dl>
 										<dt>회원혜택가</dt>
-										<dd>- 541,000원</dd>
+										<dd>- {=number_format(gMemberInfo.mileage)}원</dd>
 									</dl>
 									<dl>
 										<dt>쿠폰적용가</dt>
-										<dd>- 41,000원</dd>
+										<dd>- {=number_format(wibDcPrice)}원</dd>
 									</dl>
 								</div>
 								<div class="total-price">
 									<dl>
 										<dt>최종 할인가</dt>
-										<dd>541,000원</dd>
+										<dd>{=number_format(wibLastDcPrice)}원</dd>
 									</dl>
 								</div>
 								<!--{ @ displayField }-->
