@@ -13,7 +13,23 @@
  */
 namespace Controller\Front\Goods;
 
+use Component\Wib\WibWish;
+use Session;
 
 class GoodsListController extends \Bundle\Controller\Front\Goods\GoodsListController
 {
+    public function post()
+    {
+        if(Session::has('member')) {
+            $wibWish = new WibWish();
+            
+            $goodsListData = $this->getData('goodsList');
+            $memNo = Session::get('member.memNo');
+            
+            $goodsList = $wibWish->getGoodsWishList($goodsListData, $memNo);
+            
+            $this->setData('goodsList', $goodsList);
+        }
+        
+    }
 }

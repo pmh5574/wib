@@ -11,7 +11,7 @@
  * @copyright ⓒ 2016, NHN godo: Corp.
  * @link http://www.godo.co.kr
  */
-namespace Controller\Front\Mypage;
+namespace Controller\Mobile\Mypage;
 
 use Component\Wib\WibBrand;
 /**
@@ -20,7 +20,7 @@ use Component\Wib\WibBrand;
  * @author Ahn Jong-tae <qnibus@godo.co.kr>
  * @author Shin Donggyu <artherot@godo.co.kr>
  */
-class WishListController extends \Bundle\Controller\Front\Mypage\WishListController
+class WishListController extends \Bundle\Controller\Mobile\Mypage\WishListController
 {
     public function post()
     {

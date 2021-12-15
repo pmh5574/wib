@@ -16,7 +16,7 @@ namespace Widget\Front\Goods;
 use Component\Wib\WibWish;
 use Session;
 
-class GoodsDisplayMainWidget extends \Bundle\Widget\Front\Goods\GoodsDisplayMainWidget
+class GoodsDisplayWidget extends \Bundle\Widget\Front\Goods\GoodsDisplayWidget
 {
     public function post()
     {

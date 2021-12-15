@@ -22,7 +22,7 @@
                     <!--{ ? ..soldOut != 'y' }-->
                     <div class="item_link">
 						<button type="button" href="#optionViewLayer" class="btn_basket_cart btn_add_cart_{mainData.sno} btn_open_layer" data-mode="cartIn" data-goods-no="{..goodsNo}"><img src="../../img/icon/goods_icon/icon_basket_cart.png" alt="{=__('장바구니')}"><span>{=__('장바구니')}</span></button>
-                        <button type="button" class="btn_basket_get btn_add_wish_{mainData.sno}{mainData.groupSno}" data-goods-no="{..goodsNo}" data-goods-nm="{=gd_remove_only_tag(..goodsNm)}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-option-sno="{..optionSno}" data-goods-image="{..social}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"><img src="../../img/icon/goods_icon/icon_basket_get.png" alt="{=__('찜하기')}"><span>{=__('찜하기')}</span></button>
+                        <button type="button" class="btn_basket_get btn_add_wish_{mainData.sno}{mainData.groupSno} {? ..wishCheck == 'on'}on{/}" data-sno="{..wishSno}" data-goods-no="{..goodsNo}" data-goods-nm="{=gd_remove_only_tag(..goodsNm)}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-option-sno="{..optionSno}" data-goods-image="{..social}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"><img src="../../img/icon/goods_icon/icon_basket_get.png" alt="{=__('찜하기')}"><span>{=__('찜하기')}</span></button>
                     </div>
                     <!--{ / }-->
                     <!-- //item_link -->
@@ -182,6 +182,7 @@
     <input type="hidden" name="mode" value="wishIn"/>
     <input type="hidden" name="cartMode" value=""/>
     <input type="hidden" name="optionFl" value=""/>
+    <input type="hidden" name="sno[]" value=""/>
 </form>
 <!-- //cart template -->
 <script type="text/javascript">
@@ -202,9 +203,23 @@
                     alert(__('최소 %s개 이상 구매가능합니다', minOrderCnt));
                 }
             }
-            $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
-            $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
-            $('#frmWishTemplateView input[name=\'mode\']').val('wishIn');
+            <!--{ ? cartInfo.wishPageMoveDirectFl == 'y' }-->
+            //211215 디자인위브 mh data-sno값 있으면 삭제 처리
+            if($(this).data('sno')){
+                $('#frmWishTemplateView input[name=\'sno[]\']').val($(this).data('sno'));
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('delete');
+            }else{
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('wishIn');
+            }
+            <!--{ : }-->
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('wishIn');
+            <!--{ / }-->
 
             var params = $('#frmWishTemplateView').serialize();
 
@@ -224,7 +239,7 @@
                     location.href = "../mypage/wish_list.php";
                     return false;
                     <!--{ / }-->
-
+                    
                     $("#addWishLayer").removeClass('dn');
                     $('#layerDim').removeClass('dn');
                     $("#addWishLayer").find('> div').center();

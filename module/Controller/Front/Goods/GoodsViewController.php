@@ -14,7 +14,7 @@
 namespace Controller\Front\Goods;
 
 use Component\Wib\WibBrand;
-use Component\Wib\WibGoods;
+use Component\Wib\WibWish;
 use Session;
 use Request;
 
@@ -29,24 +29,25 @@ class GoodsViewController extends \Bundle\Controller\Front\Goods\GoodsViewContro
         //브랜드 한글명 추가 노출
         $goodsView['brandKrNm'] = $wibBrand->getBrandNm($goodsView['brandCd'])['cateKrNm'];
         
-        $this->setData('goodsView', $goodsView);
-        
         //회원일때 위시리스트에 있는지 체크
         if(Session::has('member')) {
-            $wibGoods = new WibGoods();
+            $wibWish = new WibWish();
             
             $memNo = Session::get('member.memNo');
             $goodsNo = Request::get()->get('goodsNo');
             
-            $cnt = $wibGoods->getWishList($memNo, $goodsNo);
+            $sno = $wibWish->getWishList($memNo, $goodsNo);
             
-            if($cnt > 0){
+            if($sno){
                 $wishCheck = 'on';
+                $goodsView['wishSno'] = $sno;
             }else{
                 $wishCheck = '';
             }
 
             $this->setData('wishCheck', $wishCheck);
         }
+        
+        $this->setData('goodsView', $goodsView);
     }
 }
