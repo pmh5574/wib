@@ -50,30 +50,54 @@ $(document).ready(function(){
 	});
 
 
-	/* 상품 이미지 슬라이드 */
-	$(".mcon05 .brand-list > div").slick({
-		// vertical: true,
-		asNavFor: ".brand-product-form .inner",
-		focusOnSelect: true,
-		centerMode: true,
-		variableWidth: true,
-		slidesToShow: 9,
-		loop: true,
-		// pauseOnHover: false, 
-		// cssEase: 'cubic-bezier(.76,.09,.215,1)'
-	});
 
-	//상품 상세이미지 슬라이드
-	$(".brand-product-form .inner").slick({
-		loop: true,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		arrows: true,
-		fade: true,
-		asNavFor: ".mcon05 .brand-list > div",
-		dots: true,
+	var swiper = new Swiper(".brand-list .swiper-container", {
+		slidesPerView: 'auto',
+		preventClicks: true,
+		preventClicksPropagation: false,
+		observer: true, // 리프레쉬
+		observeParents: true,
+		touchRatio: 0, // 드래그 금지
+		
 	});
+	var $snbSwiperItem = $('.brand-list .swiper-container .swiper-slide a');
+	$snbSwiperItem.click(function(){
+		var target = $(this).parent();
+		$snbSwiperItem.parent().removeClass('on')
+		target.addClass('on');
+		muCenter(target);
+	})
+
+	$snbSwiperItem.parent().eq(4).addClass("on").siblings("li").removeClass("on");
+
+	function muCenter(target){
+		var snbwrap = $('.brand-list .swiper-wrapper');
+		var targetPos = target.position();
+		var box = $('.brand-list');
+		var boxHarf = box.width()/2;
+		var pos;
+		var listWidth=0;
+		
+		snbwrap.find('.swiper-slide').each(function(){ listWidth += $(this).outerWidth(); })
+		
+		var selectTargetPos = targetPos.left + target.outerWidth()/2;
+		if (selectTargetPos <= boxHarf) { // left
+			pos = 0;
+		}else if ((listWidth - selectTargetPos) <= boxHarf) { //right
+			pos = listWidth-box.width();
+		}else {
+			pos = selectTargetPos - boxHarf;
+		}
+		
+		setTimeout(function(){snbwrap.css({
+			"transform": "translate3d("+ (pos*-1) +"px, 0, 0)",
+			"transition-duration": "500ms"
+		})}, 200);
+	}
+
+
 	
+
 	tab(".mcon07 .tab ul li");
 
 	

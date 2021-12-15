@@ -141,9 +141,11 @@
 			<!-- 상단 카테고리 출력 시작 -->
 			{=includeWidget('proc/category_side', 'type', 'top','cateType','cate','menuType','all')}
 			<!-- 상단 카테고리 출력 끝 -->
+                        { ? gThisPageName != 'brand.php'}
                         <!-- 브랜드 위젯 -->
                         {=includeWidget('goods/_brand')}
                         <!--// 브랜드 위젯 -->
+                        {/}
 		</div>
 		<div class="content brand">
 			

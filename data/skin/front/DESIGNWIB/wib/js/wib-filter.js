@@ -54,7 +54,10 @@ var wibFilter = {
 
     },
     
-    getBrand : function(){  
+    getBrand : function(){
+        
+        var _this = this;
+        
         $.ajax({
             url : '../goods/goods_filter_ps.php',
             type : 'post',
@@ -82,10 +85,16 @@ var wibFilter = {
                             brandKrNm = '';
                         }
                         
-                        _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                        if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
+                            _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                        }else{
+                            _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                        }
+                        
                     }
                     
                     $('.filterBrandList').html(_html);
+                    
                 }
             }
         });
@@ -189,7 +198,7 @@ var wibFilter = {
         var code = obj.data('brand');
         var paCode = obj.parent();
         $('.hiddenBrand').append('<input type="hidden" class="br_'+code+'" value="'+code+'">');
-        
+        console.log(paCode.hasClass('on'));
         if(paCode.hasClass('on')){
             _this.delBrand(code);
             paCode.removeClass('on');
