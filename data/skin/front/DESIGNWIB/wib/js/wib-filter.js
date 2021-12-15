@@ -5,7 +5,7 @@ var wibFilter = {
     page : '',
     sort : '',
     brandCheck : '',
-    filterBrand : '',
+    filterBrand : [],
     filterColor : [],
     
     init : function(option){
@@ -45,6 +45,11 @@ var wibFilter = {
             e.preventDefault();
             
             _this.setColor($(this));
+        });
+        
+        $(document).on('click', '.pagination ul li a', function(e){
+            e.preventDefault();
+            _this.setPage($(this));
         });
 
     },
@@ -103,7 +108,11 @@ var wibFilter = {
                 'filterColor' : _this.filterColor,
             },
             success : function(result){
-                console.log(result);
+                
+                var listNum = $(result).filter('.filter_pick_list_num').html();
+
+                $('.pick_list_num strong').html(listNum);
+                $('.filter_goods_list').empty().append(result);
             }
         });
     },
@@ -155,28 +164,47 @@ var wibFilter = {
     },
     
     delBrand : function(code){
-        var _this = this;
         
-        _this.filterBrand = '';
+        var _this = this;
+        _this.page = 1;
+        
+        $('.br_'+code).remove();
+        $('.brpa_'+code).removeClass('on');
+        
+        _this.filterBrand = [];
+        
+        $('.filterBrand > input').each(function(){
+            var eThis = $(this).val();
+            _this.filterBrand.push(eThis);
+        });
         
         _this.getList();
     },
     
     setBrand : function(obj){
+        
         var _this = this;
+        _this.page = 1;
         
-        var dataCode = obj.data('brand');
-        var pa = obj.parent();
+        var code = obj.data('brand');
+        var paCode = obj.parent();
+        $('.hiddenBrand').append('<input type="hidden" class="br_'+code+'" value="'+code+'">');
         
-        if(pa.hasClass('on')){
-            _this.delBrand(dataCode);
-            pa.removeClass('on');
+        if(paCode.hasClass('on')){
+            _this.delBrand(code);
+            paCode.removeClass('on');
             return false;
         }
+
+        paCode.addClass('on brpa_'+code);
+        var appendData = '';
+        _this.filterBrand = [];
         
-        obj.closest('li').addClass('on');
-        _this.filterBrand = dataCode;
-        
+        $('.hiddenBrand > input').each(function(){
+            var eThis = $(this).val();
+            _this.filterBrand.push(eThis);
+        });
+
         _this.getList();
     },
     
@@ -184,7 +212,17 @@ var wibFilter = {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     
-    
+    setPage : function(obj){
+        
+        var _this = this;
+        var _href = obj.attr('href');
+        var _split = _href.split('?page=');
+        var filterPage = _split[1].split('&');            
+        
+        _this.page = filterPage[0];
+        
+        _this.getList();
+    }
     
 };
 

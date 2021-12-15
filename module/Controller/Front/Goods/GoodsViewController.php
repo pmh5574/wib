@@ -17,13 +17,14 @@ use Component\Wib\WibBrand;
 use Component\Wib\WibWish;
 use Session;
 use Request;
+use Cookie;
 
 class GoodsViewController extends \Bundle\Controller\Front\Goods\GoodsViewController
 {
     public function post()
     {
         $wibBrand = new WibBrand();
-        
+
         $goodsView = $this->getData('goodsView');
         
         //브랜드 한글명 추가 노출

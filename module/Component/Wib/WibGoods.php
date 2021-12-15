@@ -104,12 +104,12 @@ class WibGoods
             $where = " AND cateNm LIKE '%{$brandNm}%' OR cateKrNm LIKE '%{$brandNm}%' ";
         }
         
-        $cateNm = 'cateNm';
+        $cateNm = 'cateNm ASC';
         if($orderBy){
-            $cateNm = 'cateKrNm';
+            $cateNm = 'CASE WHEN cateKrNm Is null Then 1 WHEN cateKrNm = "" Then 1 Else 0 END, cateKrNm ASC, cateNm ASC';
         }
         
-        $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} ORDER BY {$cateNm} ASC";
+        $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} ORDER BY {$cateNm} ";
         $data = $this->wibSql->WibAll($query);
         
         $code = 0;

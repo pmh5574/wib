@@ -205,7 +205,7 @@
             }
             <!--{ ? cartInfo.wishPageMoveDirectFl == 'y' }-->
             //211215 디자인위브 mh data-sno값 있으면 삭제 처리
-            if($(this).data('sno')){
+            if($(this).data('sno') && $(this).hasClass('on')){
                 $('#frmWishTemplateView input[name=\'sno[]\']').val($(this).data('sno'));
                 $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
                 $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));

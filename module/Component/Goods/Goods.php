@@ -236,10 +236,21 @@ class Goods extends \Bundle\Component\Goods\Goods
             
         }
         
-        if($req['filterBrand']){
-            $filterWhere = ' g.brandCd = '.$req['filterBrand'];
+        if($req['filterBrand'] && count($req['filterBrand']) > 0){
+            
+            $filterWhere = '(';
+            foreach ($req['filterBrand'] as $value) {
+
+                $this->db->bind_param_push($this->arrBind,'s','%'.$value.'%');
+                $filterWhere .= " g.brandCd LIKE ? or";
+                
+            }
+            
+            $filterWhere = substr($filterWhere, 0, -2);
+            $filterWhere .= ")";
             
             $this->arrWhere[] = $filterWhere;
+            
         }
         
         if($req['pageNum']){
