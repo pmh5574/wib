@@ -131,49 +131,49 @@
 		<p class="main-title">브랜드별 베스트 상품</p>
 		<div class="brand-list">
 			<div>
-                            <!--{ @ brandListInfo }-->
-                                <div>
-                                    <a href="javascript:;">
-                                        <div class="table">
-                                            <div class="table-cell">
-                                                {? .blackBrandImg}
-                                                <img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
-                                                {/}
-                                                <p>{.cateNm}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <!--{ / }-->
+				<!--{ @ brandListInfo }-->
+					<div>
+						<a href="javascript:;">
+							<div class="table">
+								<div class="table-cell">
+									{? .blackBrandImg}
+									<img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
+									{/}
+									<p>{.cateNm}</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				<!--{ / }-->
 			</div>
 		</div>
 
 		<div class="brand-product-form">
 			<div class="inner">
-                            <!--{ @ brandListInfo }-->
-                                <div>
-                                    <div class="banner-img">
-                                            {? .bigBrandImg}
-                                            <img src="/data/category/{.bigBrandImg}" alt="{.cateNm}"/>	
-                                            {/}
-                                            <div class="info">
-                                                {? .whiteBrandImg}
-                                                <img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
-                                                {/}
-                                                <p>{.cateHtml1}</p>
-                                                <!--{ ? gd_is_login() === false }-->
-                                                <a href='javascript:brandLikeNoMember();' class="zzim"></a>
-                                                <!--{ : }-->
-                                                <a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
-                                                <!--{ / }-->
-                                            </div>
-                                    </div>
-                                    <div class="pd">
-                                        {=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
-                                        <a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-                                    </div>
+			<!--{ @ brandListInfo }-->
+				<div>
+					<div class="banner-img">
+						{? .bigBrandImg}
+						<img src="/data/category/{.bigBrandImg}" alt="{.cateNm}"/>	
+						{/}
+						<div class="info">
+							{? .whiteBrandImg}
+							<img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
+							{/}
+							<p>{.cateHtml1}</p>
+							<!--{ ? gd_is_login() === false }-->
+							<a href='javascript:brandLikeNoMember();' class="zzim"></a>
+							<!--{ : }-->
+							<a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
+							<!--{ / }-->
+						</div>
+					</div>
+					<div class="pd">
+						{=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
+						<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
+					</div>
 				</div>
-                            <!--{ / }-->
+                <!--{ / }-->
 			</div>
 		</div>
 	</div>

@@ -14,12 +14,31 @@
 namespace Controller\Front\Goods;
 
 use Component\Wib\WibWish;
+use Component\Wib\WibBrand;
 use Session;
 
 class GoodsListController extends \Bundle\Controller\Front\Goods\GoodsListController
 {
     public function post()
     {
+        $cateType = $this->getData('cateType');
+        
+        if($cateType == 'brand'){
+            $wibBrand = new WibBrand();
+            
+            $themeInfo = $this->getData('themeInfo');
+            $brandMoreInfo = $wibBrand->getBrandNm($themeInfo['cateCd']);
+            
+            $themeInfo['bigBrandImg'] = $brandMoreInfo['bigBrandImg'];
+            $themeInfo['whiteBrandImg'] = $brandMoreInfo['whiteBrandImg'];
+            $themeInfo['blackBrandImg'] = $brandMoreInfo['blackBrandImg'];
+            $themeInfo['brandLike'] = $brandMoreInfo['brandLike'];
+            
+            $this->setData('themeInfo', $themeInfo);
+        }
+        
+
+        
         if(Session::has('member')) {
             $wibWish = new WibWish();
             

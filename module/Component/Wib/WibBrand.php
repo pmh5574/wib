@@ -126,6 +126,7 @@ class WibBrand
         
         return $data;
     }
+    
     /**
      * 
      * 메인페이지 브랜드 리스트
@@ -166,13 +167,35 @@ class WibBrand
         return $data;
     }
     
+    /**
+     * 브랜드 추가 정보
+     */
     public function getBrandNm($brandCd)
     {
         
-        $query = "SELECT cateNm, cateKrNm FROM es_categoryBrand WHERE cateCd = '{$brandCd}'";
+        $query = "SELECT cateNm, cateKrNm, bigBrandImg, smallBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE cateCd = '{$brandCd}'";
         $brandNm = $this->wibSql->WibNobind($query);
+        
+        $sno = $this->getWishBrandList($brandCd);
+        
+        if($sno){
+            $brandNm['brandLike'] = 'on';
+        }else{
+            $brandNm['brandLike'] = 'off';
+        }
   
         return $brandNm;
+    }
+    
+    /**
+     * 찜 브랜드 체크
+     */
+    public function getWishBrandList($brandCd)
+    {
+        $sql = "SELECT sno FROM wib_memberBrand WHERE brandCd = '{$brandCd}'";
+        $sno = $this->wibSql->WibNobind($sql)['sno'];
+
+        return $sno;
     }
 }
 

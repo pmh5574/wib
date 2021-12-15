@@ -27,25 +27,45 @@
         <div class="goods_list_item_tit">
             <h2>{=goodsCategoryList[cateCd]['cateNm']}</h2>
         </div>
-        <!--{ ? naviDisplay.naviUse =='y' }-->
-        <!--{ ? themeInfo.cateHtml1 }-->
-        <!-- 상단 꾸미기 영역 -->
-        <div class="addition_zone">
-            {=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1))}
-        </div>
-        <!--{ / }-->
-        <!--{ ? dataSubCategory( cateCd,cateType ) }-->
-        <div class="list_item_category">
-            <ul>
-                <!--{ @ dataSubCategory( cateCd,cateType ) }-->
-                <li class="<!--{ ? cateCd == .cateCd }-->on<!--{ / }-->">
-                    <a href="?{cateType}Cd={.cateCd}"><span>{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><em>({.goodsCnt+0})</em><!--{ / }--></span></a>
-                </li>
-                <!--{ / }-->
-            </ul>
-        </div>
-        <!--{ / }-->
-        <!--{ / }-->
+        {? cateType == 'brand'}
+            <div class="banner-img">
+                {? themeInfo.bigBrandImg}
+                <img src="/data/category/{themeInfo.bigBrandImg}" alt="{themeInfo.cateNm}"/>	
+                {/}
+                <div class="info">
+                    {? themeInfo.whiteBrandImg}
+                    <img src="/data/category/{themeInfo.whiteBrandImg}" alt="{themeInfo.cateNm}" />
+                    {/}
+                    <p>{themeInfo.cateHtml1}</p>
+                    <!--{ ? gd_is_login() === false }-->
+                    <a href='javascript:brandLikeNoMember();' class="zzim"></a>
+                    <!--{ : }-->
+                    <a href="javascript:;" onclick="brandLike('{cateCd}', this);" class="zzim {? themeInfo.brandLike == 'on'}on{/}"></a>
+                    <!--{ / }-->
+                </div>
+            </div>
+        {:}
+            <!--{ ? naviDisplay.naviUse =='y' }-->
+            <!--{ ? themeInfo.cateHtml1 }-->
+            <!-- 상단 꾸미기 영역 -->
+            <div class="addition_zone">
+                {=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1))}
+            </div>
+            <!--{ / }-->
+        {/}
+            <!--{ ? dataSubCategory( cateCd,cateType ) }-->
+            <div class="list_item_category">
+                <ul>
+                    <!--{ @ dataSubCategory( cateCd,cateType ) }-->
+                    <li class="<!--{ ? cateCd == .cateCd }-->on<!--{ / }-->">
+                        <a href="?{cateType}Cd={.cateCd}"><span>{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><em>({.goodsCnt+0})</em><!--{ / }--></span></a>
+                    </li>
+                    <!--{ / }-->
+                </ul>
+            </div>
+            <!--{ / }-->
+            <!--{ / }-->
+        
 
         <!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
 
