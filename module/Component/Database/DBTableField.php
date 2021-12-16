@@ -62,4 +62,23 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         
         return $arrField;
     }
+    
+    public static function tableGoods($conf = null)
+    {
+        $arrField = parent::tableGoods($conf);
+        
+        // 211216 디자인위브 mh 추가
+        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+        
+        return $arrField;
+    }
+    public static function tableGoodsSearch()
+    {
+        $arrField = parent::tableGoodsSearch();
+        
+        // 211216 디자인위브 mh 추가
+        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+        
+        return $arrField;
+    }
 }

@@ -16,9 +16,15 @@
         background: #f91d11 url(<?=PATH_ADMIN_GD_SHARE;?>img/btn_icon_check_on.png) no-repeat 50% 40px;
     }
     
+    #goods_sub_result {position: relative;}
     #goods_sub_result tr{position: relative;}
     #goods_sub_result .status{display: table;position: absolute;top: 0;left: 0;z-index: 3;width: 100%;height: 100%;background: rgba(56,64,77,.5);}
     #goods_sub_result .status span{display: table-cell;position: relative;z-index: 3;vertical-align: middle;font-weight: normal;text-align: center;color: #fff;}
+    
+    .add_goods_free.sortable-chosen.sortable-ghost{position: relative;}
+    .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #fff; border:1px dashed #4285f4;z-index: 1000;top:0;left:0;}
+    
+    .searchWall{position: absolute !important;width: 100%;height: 100%; z-index: 9999;top: 0;left: 0;}
 </style>
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
 <script type="text/javascript" src="../admin/script/wib/wib-sortable.js"></script>

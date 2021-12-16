@@ -3764,9 +3764,9 @@ if ($data['mode'] == 'modify') {
             <tr>
                 <th>상점 선택</th>
                 <td>
-                    <label class="radio-inline"><input type="radio" name="shopSetting" value=""/>BLU</label>
-                    <label class="radio-inline"><input type="radio" name="shopSetting" value="2"/>PREMIUMMULTISHOP</label>
-                    <label class="radio-inline"><input type="radio" name="shopSetting" value="3"/>NEWNIA</label>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" <?php if(!$data['shopSetting']) echo 'checked'; ?> value=""/>BLU</label>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '2') echo 'checked'; ?> value="2"/>PREMIUMMULTISHOP</label>
+                    <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '3') echo 'checked'; ?> value="3"/>NEWNIA</label>
                 </td>
             </tr>
         </table>

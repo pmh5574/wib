@@ -37,7 +37,13 @@ $(function () {
             var vector,
                     freeze = false;
 
+            if($('.moveEventImg').length == 0){
+                $(evt.dragged).append('<td><span class="moveEventImg"></span></td>');
+            }
+            
             clearTimeout(pid);
+            
+
             //뒤에 실행 2
             pid = setTimeout(function () {
                 var list = evt.to;
@@ -71,6 +77,9 @@ $(function () {
 
             //freeze가 true면 위치를 바꾸려는 게 add_goods_fix라 false반환
             return freeze ? false : vector;
+        },
+        onEnd : function(evt){
+            $(evt.item).find('.moveEventImg').closest('td').remove();
         }
     });
 
@@ -83,8 +92,6 @@ $(function () {
             put: false,
             pull: 'clone'
         },
-        multiDrag: true, // Enable multi-drag
-	selectedClass: 'selected', // The class applied to the selected items
         sort: false,
         animation: 150,
         draggable: '.add_goods_free',
@@ -100,7 +107,17 @@ $(function () {
             var vector,
                     freeze = false;
             
-            $('#goods_sub_result').before('<div class="searchWall"></div>');
+            if($('#goods_sub_result .searchWall').length == 0){
+                $('#goods_sub_result').append('<div class="searchWall"></div>');
+            }
+            
+            if($('.moveEventImg').length == 0){
+                $(evt.dragged).append('<td><span class="moveEventImg"></span></td>');
+            }
+            
+            console.log('???');
+            console.log(evt);
+            sortableSearch.disabled = false;
             
             if (evt.to === evt.from) {
                 evt.to.append(evt.dragged);
@@ -144,8 +161,12 @@ $(function () {
 
             setGoodsArrList();
             setShareSort();
+            
+            $(evt.item).find('.moveEventImg').closest('td').remove();
             $('.searchWall').remove();
+            
             var goodsNo = parseInt(evt.item.dataset.goodsNo);
+            
             
             //해당 goodsNo값이 있으면 추가된걸로 판단
             if (goodsArrList.indexOf(goodsNo) != -1) {
@@ -320,7 +341,7 @@ function setGoodsArrList()
     $('#goods_result tr').each(function () {
         goodsArrList.push(parseInt($(this).find('input[name="itemGoodsNo[]"]').val()));
     });
-    console.log(goodsArrList);
+
     $('#goods_sub_result tr input[name="itemGoodsNo[]"]').each(function(){
 
         if(goodsArrList.indexOf(parseInt($(this).val())) != -1){

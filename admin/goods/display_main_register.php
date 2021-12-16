@@ -714,7 +714,7 @@
         <div class="pull-right">
             <button class="btn btn-white checkRegister" type="button"  onclick="layer_register('display_main')">기존 진열상품 불러오기</button>
             <!--<button class="btn btn-white checkRegister" type="button"  onclick="goods_search_popup()">상품 선택</button>-->
-            <button class="btn btn-white checkRegister" type="button"  onclick="gallery_goods_search_popup()">갤러리형 상품 선택</button>
+            <button class="btn btn-white checkRegister" type="button"  onclick="gallery_goods_search_popup()">드래그형 상품 선택</button>
         </div>
 
     </div>

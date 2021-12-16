@@ -2110,88 +2110,87 @@
 							</div>
 						</div>
 						<!--{ : }-->
-                                                    <div class="item_choice_list">
-                                                            <table class="option_display_area" border="0" cellpadding="0" cellspacing="0">
-                                                                    <colgroup>
-                                                                            <col width="330px" />
-                                                                            <col />
-                                                                            <col width="80px" />
-                                                                            <col width="40px" />
-                                                                    </colgroup>
-                                                                    <tbody id="option_display_item_0">
-                                                                    <tr class="check optionKey_0">
-                                                                            <td class="cart_prdt_name">
-                                                                                    <input type="hidden" name="goodsNo[]" value="{=goodsView['goodsNo']}" />
-                                                                                    <input type="hidden" name="optionSno[]" value="{=gd_isset(goodsView['option'][0]['sno'])}" />
-                                                                                    <input type="hidden" name="goodsPriceSum[]" value="0" />
-                                                                                    <input type="hidden" name="addGoodsPriceSum[]" value="0" />
-                                                                                    <!--{ ? couponUse == 'y' }-->
-                                                                                    <input type="hidden" name="couponApplyNo[]" value="" />
-                                                                                    <input type="hidden" name="couponSalePriceSum[]" value="" />
-                                                                                    <input type="hidden" name="couponAddPriceSum[]" value="" />
-                                                                                    <!--{ / }-->
-                                                                                    <div class="cart_tit_box">
-                                                                                            <strong class="cart_tit">
-                                                                                                    <span>{=gd_isset(goodsView['goodsNmDetail'])}</span>
-                                                                                                    <!--{ ? couponUse == 'y' && couponConfig['chooseCouponMemberUseType'] != 'member'}-->
-                                                                                                    <span class="cart_btn_box">
-                                                                                                                    <!--{ ? gd_is_login() === false }-->
-                                                                                                                    <button type="button" class="btn_alert_login"><img src="../img/common/btn/btn_coupon_apply.png" alt="{=__('쿠폰적용')}"/></button>
-                                                                                                            <!--{ : }-->
-                                                                                                                    <a href="#lyCouponApply" id="coupon_apply_0" class="btn_open_layer" data-key="0">
-                                                                                                                            <img src="../img/common/btn/btn_coupon_apply.png" alt="{=__('쿠폰적용')}"/>
-                                                                                                                    </a>
-                                                                                                            <!--{ / }-->
-                                                                                                            </span>
-                                                                                                    <!--{ / }-->
-                                                                                                    <span id="option_text_display_0"></span></span>
-                                                                                            </strong>
-                                                                                    </div>
-                                                                                    <!-- //cart_tit_box -->
-                                                                            </td>
-                                                                            <!-- //cart_prdt_name -->
-                                                                            <td>
-                                                                                            <span class="count">
-                                                                                                    <span class="goods_qty">
-                                                                                                            <input type="text" name="goodsCnt[]" class="text goodsCnt_0" title="{=__('수량')}" value="{=gd_isset(goodsView['defaultGoodsCnt'])}" data-key="0" data-value="{=gd_isset(goodsView['defaultGoodsCnt'])}" data-stock="{=goodsView['totalStock']}" onchange="goodsViewController.input_count_change(this, '1');return false;" />
-                                                                                                            <span>
-                                                                                                                    <button type="button" class="up goods_cnt" title="{=__('증가')}"  value="up{=c.STR_DIVISION}0">{=__('증가')}</button>
-                                                                                                                    <button type="button" class="down goods_cnt" title="{=__('감소')}" value="dn{=c.STR_DIVISION}0">{=__('감소')}</button>
-                                                                                                            </span>
-                                                                                                    </span>
-                                                                                            </span>
-                                                                                    <!-- //count -->
-                                                                            </td>
-                                                                            <td class="item_choice_price">
-                                                                                    <input type="hidden" name="optionPriceSum[]"value="{=gd_isset(goodsView['option'][0]['optionPrice'], 0)}" />
-                                                                                    <input type="hidden" name="option_price_0" value="{=gd_isset(goodsView['option'][0]['optionPrice'], 0)}" />
-                                                                                    {=gd_global_currency_symbol()}<strong class="option_price_display_0">{=gd_global_money_format(gd_isset(goodsView['option'][0]['optionPrice'],0),false)}</strong>{=gd_global_currency_string()}
-                                                                            </td>
-                                                                            <!-- //item_choice_price -->
-                                                                            <td></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                            </table>
-                                                            <div class="item_price_cont">
-                                                                    <div class="end_price item_tatal_box">
-                                                                            <dl class="total_goods">
-                                                                                    <dt>{=__('총 상품금액')}</dt>
-                                                                                    <dd><strong class="goods_total_price"></strong></dd>
-                                                                            </dl>
-                                                                            <dl class="total_discount">
-                                                                                    <dt>{=__('총 할인금액')}</dt>
-                                                                                    <dd><strong class="total_benefit_price"></strong></dd>
-                                                                            </dl>
-                                                                            <dl class="total_amount">
-                                                                                    <dt>합계금액</dt>
-                                                                                    <dd><strong class="total_price"></strong></dd>
-                                                                            </dl>
-                                                                    </div>
-                                                                    <!-- //item_tatal_box -->
-                                                            </div>
-                                                            <!-- //item_price_cont -->
-                                                    </div>
-                                                </div>
+						<div class="item_choice_list">
+							<table class="option_display_area" border="0" cellpadding="0" cellspacing="0">
+								<colgroup>
+									<col width="330px" />
+									<col />
+									<col width="80px" />
+									<col width="40px" />
+								</colgroup>
+								<tbody id="option_display_item_0">
+								<tr class="check optionKey_0">
+									<td class="cart_prdt_name">
+										<input type="hidden" name="goodsNo[]" value="{=goodsView['goodsNo']}" />
+										<input type="hidden" name="optionSno[]" value="{=gd_isset(goodsView['option'][0]['sno'])}" />
+										<input type="hidden" name="goodsPriceSum[]" value="0" />
+										<input type="hidden" name="addGoodsPriceSum[]" value="0" />
+										<!--{ ? couponUse == 'y' }-->
+										<input type="hidden" name="couponApplyNo[]" value="" />
+										<input type="hidden" name="couponSalePriceSum[]" value="" />
+										<input type="hidden" name="couponAddPriceSum[]" value="" />
+										<!--{ / }-->
+										<div class="cart_tit_box">
+											<strong class="cart_tit">
+												<span>{=gd_isset(goodsView['goodsNmDetail'])}</span>
+												<!--{ ? couponUse == 'y' && couponConfig['chooseCouponMemberUseType'] != 'member'}-->
+												<span class="cart_btn_box">
+														<!--{ ? gd_is_login() === false }-->
+														<button type="button" class="btn_alert_login"><img src="../img/common/btn/btn_coupon_apply.png" alt="{=__('쿠폰적용')}"/></button>
+													<!--{ : }-->
+														<a href="#lyCouponApply" id="coupon_apply_0" class="btn_open_layer" data-key="0">
+															<img src="../img/common/btn/btn_coupon_apply.png" alt="{=__('쿠폰적용')}"/>
+														</a>
+													<!--{ / }-->
+													</span>
+												<!--{ / }-->
+												<span id="option_text_display_0"></span></span>
+											</strong>
+										</div>
+										<!-- //cart_tit_box -->
+									</td>
+									<!-- //cart_prdt_name -->
+									<td>
+											<span class="count">
+												<span class="goods_qty">
+													<input type="text" name="goodsCnt[]" class="text goodsCnt_0" title="{=__('수량')}" value="{=gd_isset(goodsView['defaultGoodsCnt'])}" data-key="0" data-value="{=gd_isset(goodsView['defaultGoodsCnt'])}" data-stock="{=goodsView['totalStock']}" onchange="goodsViewController.input_count_change(this, '1');return false;" />
+													<span>
+														<button type="button" class="up goods_cnt" title="{=__('증가')}"  value="up{=c.STR_DIVISION}0">{=__('증가')}</button>
+														<button type="button" class="down goods_cnt" title="{=__('감소')}" value="dn{=c.STR_DIVISION}0">{=__('감소')}</button>
+													</span>
+												</span>
+											</span>
+										<!-- //count -->
+									</td>
+									<td class="item_choice_price">
+										<input type="hidden" name="optionPriceSum[]"value="{=gd_isset(goodsView['option'][0]['optionPrice'], 0)}" />
+										<input type="hidden" name="option_price_0" value="{=gd_isset(goodsView['option'][0]['optionPrice'], 0)}" />
+										{=gd_global_currency_symbol()}<strong class="option_price_display_0">{=gd_global_money_format(gd_isset(goodsView['option'][0]['optionPrice'],0),false)}</strong>{=gd_global_currency_string()}
+									</td>
+									<!-- //item_choice_price -->
+									<td></td>
+								</tr>
+								</tbody>
+							</table>
+							<div class="item_price_cont">
+								<div class="end_price item_tatal_box">
+									<dl class="total_goods">
+										<dt>{=__('총 상품금액')}</dt>
+										<dd><strong class="goods_total_price"></strong></dd>
+									</dl>
+									<dl class="total_discount">
+										<dt>{=__('총 할인금액')}</dt>
+										<dd><strong class="total_benefit_price"></strong></dd>
+									</dl>
+									<dl class="total_amount">
+										<dt>합계금액</dt>
+										<dd><strong class="total_price"></strong></dd>
+									</dl>
+								</div>
+								<!-- //item_tatal_box -->
+							</div>
+							<!-- //item_price_cont -->
+						</div>
 						<!-- //item_choice_list -->
 						<!--{ / }-->
 						<div class="item_price_cont">
@@ -2240,7 +2239,7 @@
 		 </div>
 		<!-- //item_info_box -->
     </form>
-	
+	<!--// 이상한 폼체크-->
 </div>
 <!-- //item_photo_info_sec -->
 <!-- //상품 상단 끝 -->

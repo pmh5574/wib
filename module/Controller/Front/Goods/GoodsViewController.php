@@ -76,9 +76,6 @@ class GoodsViewController extends \Bundle\Controller\Front\Goods\GoodsViewContro
         $allCoupon = [];
         $dcCoupon = [];
         $wibDcPrice = [];
-        echo '<!--';
-        print_R($goodsCouponArrData);
-        echo '-->';
 
         //최저가 쿠폰 리스트 + 가격
         foreach ($goodsCouponArrData as $key => $value) {
