@@ -98,7 +98,11 @@ $(function () {
         onStart: function (evt) {
             //freezed에 sortable에 add_goods_fix를 배열로 만들어서 넣기
             freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
-
+            
+            if($('#goods_result tr').length == 0){
+//                $('#tbl_add_goods_result').css('margin-bottom', '500px');   
+            }
+            
             positions = freezed.map(function (el) {
                 return Sortable.utils.index(el);
             });
@@ -107,16 +111,14 @@ $(function () {
             var vector,
                     freeze = false;
             
-            if($('#goods_sub_result .searchWall').length == 0){
-                $('#goods_sub_result').append('<div class="searchWall"></div>');
+            if($('.searchWall').length == 0){
+                $('#goods_sub_result').closest('#frmList').append('<div class="searchWall"></div>');
             }
             
             if($('.moveEventImg').length == 0){
                 $(evt.dragged).append('<td><span class="moveEventImg"></span></td>');
             }
-            
-            console.log('???');
-            console.log(evt);
+
             sortableSearch.disabled = false;
             
             if (evt.to === evt.from) {
@@ -128,20 +130,23 @@ $(function () {
             clearTimeout(pid);
             pid = setTimeout(function () {
                 var list = evt.to;
-                if (evt.to === evt.from) {
-                    evt.to.append(evt.dragged);
-                    return false;
-                }
-
-                freezed.forEach(function (el, i) {
-                    var idx = positions[i];
-
-                    if (list.children[idx] !== el) {
-                        var realIdx = Sortable.utils.index(el);
-
-                        list.insertBefore(el, list.children[idx + (realIdx < idx)]);
+                for(var j=0; j<freezed.length; j++){
+                    if (evt.to === evt.from) {
+                        evt.to.append(evt.dragged);
+                        return false;
                     }
-                });
+
+                    freezed.forEach(function (el, i) {
+                        var idx = positions[i];
+
+                        if (list.children[idx] !== el) {
+                            var realIdx = Sortable.utils.index(el);
+
+                            list.insertBefore(el, list.children[idx + (realIdx < idx)]);
+                        }
+                    });
+                }
+                
             }, 0);
 
 
@@ -161,6 +166,10 @@ $(function () {
 
             setGoodsArrList();
             setShareSort();
+            
+            if($('#goods_result tr').length == 1){
+//                $('#tbl_add_goods_result').css('margin-bottom', '20px');   
+            }
             
             $(evt.item).find('.moveEventImg').closest('td').remove();
             $('.searchWall').remove();
@@ -201,77 +210,6 @@ $(function () {
        }
     });
 
-    //검색시
-    $('.js-search').click(function () {
-
-        if (!$('#searchFrm input[name="keyword"]').val()) {
-            alert('상품명을 입력해 주세요.');
-            $('input[name="keyword"]').focus();
-            return false;
-        }
-
-        var dataList = $('#searchFrm').serialize();
-
-        $.ajax({
-            url: '../share/layer_drag_and_drop_ps.php',
-            type: 'post',
-            data: dataList,
-            dataType: 'json',
-            success: function (result) {
-
-                if (result.result == '0') {
-                    
-                    var data = result.data;
-
-                    var _html = '';
-                    for (var i = 0; i < data.length; i++) {
-                        var _checked = '';
-                        if (data[i].fixSort > 0) {
-                            var addClassText = ' class="add_goods_fix" ';
-                            _checked = 'checked';
-                        } else {
-                            var addClassText = ' class="add_goods_free" ';
-                        }
-                        
-                        var moreHtml = '';
-
-                        if (goodsArrList.indexOf(parseInt(data[i].goodsNo)) != -1) {
-                            
-                            moreHtml += '<div class="status"><span>진열중</span></div>';
-                            addClassText = '';
-                        }
-
-                        _html += '<li id="tbl_add_goods_' + data[i].goodsNo + '"' + addClassText + ' data-goods-no="'+data[i].goodsNo+'">';
-                        _html += moreHtml;
-                        _html += '<div class="gallery_thumbnail">';
-                        _html += '<img src="/data/goods/' + data[i].imagePath + data[i].imageName + '" alt="' + data[i].goodsNm + '" tile="' + data[i].goodsNm + '">';
-                        _html += '</div>';
-                        _html += '<div class="gallery_description">';
-                        _html += '<div class="inner">';
-                        _html += '<div class="info">';
-                        _html += '<span class="code">' + data[i].goodsNo + '</span>';
-                        _html += '</div>';
-                        _html += '<strong class="product">' + data[i].goodsNm + '</strong>';
-                        _html += '</div>';
-                        _html += '<div class="gallery_button">';
-                        _html += '<input type="checkbox" value="a" ' + _checked + '>';
-                        _html += '<button type="button" class="delete_button">x</button>';
-                        _html += '</div>';
-                        _html += '</div>';
-                        _html += '</li>';
-
-                    }
-
-                    $('#searchGoodsList ul').html(_html);
-
-                } else if (result.result == '1') {
-                    $('#searchGoodsList ul').html('검색하신 상품이 없습니다.');
-                }
-
-            }
-        });
-    });
-
     setGoodsArrList();
     
     //고정값 사용 여부
@@ -284,8 +222,16 @@ $(function () {
     });
 
     //엘리먼트 삭제
-    $(document).on('click', '.delete_button', function () {
+    $(document).on('click', '#delGoods', function () {
+        
         var _this = this;
+        
+        var goodsNo = [];
+
+        $('#goods_result input[name="itemGoodsNo[]"]').each(function(){
+            goodsNo.push($(this).val());
+        });
+        
         
         freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
         var list = document.getElementById('goods_result');
@@ -294,19 +240,37 @@ $(function () {
             return Sortable.utils.index(el);
         });
         
-        var goodsNo = parseInt($(this).closest('li').data('goods-no'));
-        $(this).closest('li').remove();
+        if(goodsArrList.length > 0){
+
+            for(var i=0;i<goodsArrList.length;i++){
+                
+                if(goodsNo.indexOf(goodsArrList[i]) == -1){
+                    
+                    $('#goods_sub_result tr input[name="itemGoodsNo[]"]').each(function(){
+
+                        if($(this).val() == goodsArrList[i]){
+
+                            $(this).closest('tr').addClass('add_goods_free');
+                            $(this).closest('tr').find('.status').remove();
+                        }
+                    });
+
+                }
+            }
+
+        }
+
+
         setGoodsArrList();
 
-        if(goodsArrList.indexOf(goodsNo) == -1){
-            $('#searchGoodsList li').each(function(){
-                var goods_no = $(this).data('goods-no');
-                if(goods_no == goodsNo){
-                    $(this).addClass('add_goods_free');
-                    $(this).find('.status').remove();
-                }
-            });
-        }
+        $('#goods_sub_result tr input[name="itemGoodsNo[]"]').each(function(){
+            var goods_no = $(this).val();
+
+            if(goods_no == goodsNo){
+
+            }
+        });
+            
 
         clearTimeout(pid);
         pid = setTimeout(function () {
@@ -317,7 +281,7 @@ $(function () {
                 if (list.children[idx] !== el) {
 
                     var realIdx = Sortable.utils.index(el);
-                    
+
                     //삭제시키는 li는 제외
                     if(_this.closest('li') !== el){
                         list.insertBefore(el, list.children[idx + (realIdx < idx)]);
@@ -326,9 +290,9 @@ $(function () {
                 }
             });
         }, 0);
-        
-        
 
+        
+        
     });
 });
 
@@ -353,7 +317,6 @@ function setGoodsArrList()
         }
     });
     
-
 }
 
 function setShareSort()
