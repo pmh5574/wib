@@ -4,6 +4,7 @@ namespace Component\Wib;
 
 use Session;
 use Request;
+use Component\Wib\WibSql;
 
 class WibCoupon
 {

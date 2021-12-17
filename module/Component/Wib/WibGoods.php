@@ -4,6 +4,7 @@ namespace Component\Wib;
 
 use Session;
 use Request;
+use Component\Wib\WibSql;
 
 class WibGoods
 {
@@ -126,6 +127,54 @@ class WibGoods
         return json_encode(['code' => $code,'data' => $data]);
     }
     
+    public function setGoodsPmsNna() 
+    {
+        $query = "SELECT goodsNo, goodsNm, shopSetting FROM es_goods WHERE (shopSetting != '1' AND shopSetting != '2') OR shopSetting Is Null";
+        $data = $this->wibSql->WibAll($query);
+        
+        foreach ($data as $key => $value) {
+            if(strpos($value['goodsNm'], 'PMS') !== false){
+                unset($sql);
+                $sql = [
+                    'es_goods',
+                    ['shopSetting' => ['2', 's']],
+                    ['goodsNo' => [$value['goodsNo'], 'i']]
+                ];
+                $this->wibSql->WibUpdate($sql);
+
+                unset($sql);
+                
+                $sql = [
+                    'es_goodsSearch',
+                    ['shopSetting' => ['2', 's']],
+                    ['goodsNo' => [$value['goodsNo'], 'i']]
+                ];
+                $this->wibSql->WibUpdate($sql);
+            }
+            
+            if(strpos($value['goodsNm'], 'NNA') !== false){
+                unset($sql);
+                $sql = [
+                    'es_goods',
+                    ['shopSetting' => ['3', 's']],
+                    ['goodsNo' => [$value['goodsNo'], 'i']]
+                ];
+                
+                $this->wibSql->WibUpdate($sql);
+                
+                unset($sql);
+                
+                $sql = [
+                    'es_goodsSearch',
+                    ['shopSetting' => ['3', 's']],
+                    ['goodsNo' => [$value['goodsNo'], 'i']]
+                ];
+                $this->wibSql->WibUpdate($sql);
+            }
+        }
+        
+        return count($data);
+    }
     
 }
 

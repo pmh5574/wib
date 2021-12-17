@@ -6,6 +6,7 @@ use Session;
 use Request;
 use Component\Member\Util\MemberUtil;
 use Exception;
+use Component\Wib\WibSql;
 
 class WibBrand
 {
