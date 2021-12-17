@@ -82,5 +82,43 @@ class WibBoard
         return $reviews;
     }
     
+    public function updateStoreData($req)
+    {   
+        $sno = 0;
+        
+        if($req['sno']){
+            $sno = $req['sno'];
+        }else{
+            //방금 저장된 sno가져오기
+            $sno = $this->bdStoreGetSno();
+        }
+
+        $data = [
+            'es_bd_store',
+            array(
+                'storeSearch' => [$req['storeSearch'],'s'],
+                'storePhoneNum' => [$req['storePhoneNum'],'s'],
+                'storeOpenTime' => [$req['storeOpenTime'],'s'],
+                'storeHoliday' => [$req['storeHoliday'],'s'],
+                'address' => [$req['address'],'s'],
+                'addressSub' => [$req['addressSub'],'s'],
+                'addressLat' => [$req['addressLat'],'s'],
+                'addressLng' => [$req['addressLng'],'s']
+            ),
+            array('sno' => [$sno,'i'])
+        ];
+        
+        $this->wibSql->WibUpdate($data);
+        
+    }
+    
+    public function bdStoreGetSno()
+    {
+        
+        $wql = "SELECT sno FROM es_bd_store ORDER BY sno DESC LIMIT 1";
+        $lastSno = $this->wibSql->WibNobind($wql);
+        
+        return $lastSno['sno'];
+    }
     
 }

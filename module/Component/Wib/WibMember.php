@@ -84,7 +84,7 @@ class WibMember
             'appFl' => 'y',
             'approvalDt' => date('Y-m-d H:i:s'),
             'memberFl' => 'personal',
-            'email' => $params['email'],
+            'email' => gd_isset($params['email']),
             'phoneCountryCode' => 'kr',
             'cellPhone' => gd_isset($params['cellPhone']),
             'entryDt' => date('Y-m-d H:i:s'),
