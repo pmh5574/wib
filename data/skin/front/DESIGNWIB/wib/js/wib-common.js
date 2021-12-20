@@ -15,7 +15,29 @@ $(document).ready(function(){
 		$allMenuClose = $(".all-menu .top a.all-menu-close"),															// 전체메뉴닫기 버튼
 		$allMenu = $(".all-menu");																										// 전체메뉴
 
-		
+	
+	// 탑배너 쿠키
+	if ($.cookie("topBanner") == undefined) {
+		$("header .banner-area").show();
+		$("#header_warp").removeClass("no-banner").addClass("y-banner");
+	}
+	else if ($.cookie('topBanner') == '1'){
+		$("header .banner-area").hide();
+		$("#header_warp").addClass("no-banner").removeClass("y-banner");
+	}        
+	else if ($.cookie('topBanner') == '0'){
+		$("header .banner-area").show();		
+		$("#header_warp").removeClass("no-banner").addClass("y-banner");
+	}        
+	$("header .banner-area em.close").click(function() {
+		$("header .banner-area").slideUp();
+		$("#header_warp").addClass("no-banner").removeClass("y-banner");
+		$.cookie('topBanner', '1', {
+			expires: 1,
+			path: '/'
+		});
+	});
+
 	// 스크롤시 헤더 픽스
 	$(window).on("load scroll", function(){
 		if ( $( document ).scrollTop() > 222 ) {
@@ -113,6 +135,27 @@ $(document).ready(function(){
 			$allMenu.removeClass("on");
 		}
 	}();
+
+	var footerBanner = new Swiper("footer .bottom-area .right .banner .swiper-container", {
+		slidesPerView: "1",
+		loop : true,
+		autoplay : { 
+			delay : 6000, 
+		},
+		speed: 1200,
+		creativeEffect: {
+			prev: {
+				shadow: true,
+				translate: ["-20%", 0, -1],
+			},
+			next: {
+				translate: ["100%", 0, 0],
+			},
+		},
+		pagination: {
+			el: "footer .bottom-area .right .banner .swiper-pagination",
+        },
+	});
 });
 
 // 211123 디자인위브 mh 브랜드 좋아요 기능 
