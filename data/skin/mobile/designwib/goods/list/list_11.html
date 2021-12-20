@@ -107,7 +107,7 @@
 				</a>
 				<!--{ ?..soldOut != 'y' }-->
 				<ul class="btn_area">
-					<li><input type="button" value="{=__('찜하기')}" class="btn_add_wish{mainData.sno}{mainData.groupSno} related_wish_btn {? ..wishCheck == 'on'}on{/}" data-goods-no="{..goodsNo}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-goods-nm="{..goodsNm}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"/></li>
+					<li><input type="button" value="{=__('찜하기')}" class="btn_add_wish{mainData.sno}{mainData.groupSno} related_wish_btn {? ..wishCheck == 'on'}on{/}" data-sno="{..wishSno}" data-goods-no="{..goodsNo}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-goods-nm="{..goodsNm}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"/></li>
 					<li><input type="button" value="{=__('장바구니')}" data-key="optionViewLayer" data-type="directCart" class="js_option_layer related_cart_btn" data-goodsno="{..goodsNo}"/></li>
 					<li><input type="button" value="{=__('바로구매')}" data-key="optionViewLayer" data-type="directOrder" class="js_option_layer related_buy_btn" data-goodsno="{..goodsNo}"/></li>
 				</ul>
@@ -162,6 +162,7 @@
     <input type="hidden" name="mode" value="wishIn"/>
     <input type="hidden" name="cartMode" value=""/>
     <input type="hidden" name="optionFl" value=""/>
+    <input type="hidden" name="sno[]" value=""/>
 </form>
 
 <script type="text/javascript">
@@ -191,8 +192,24 @@ $(document).ready(function() {
                 alert(__('최소 %s개 이상 구매가능합니다', minOrderCnt));
             }
         }
-        $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
-        $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+        <!--{ ? cartInfo.wishPageMoveDirectFl == 'y' }-->
+            //211215 디자인위브 mh data-sno값 있으면 삭제 처리
+            if($(this).data('sno') && $(this).hasClass('on')){
+                $('#frmWishTemplateView input[name=\'sno[]\']').val($(this).data('sno'));
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('delete');
+            }else{
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('wishIn');
+            }
+            <!--{ : }-->
+                $('#frmWishTemplateView input[name=\'cartMode\']').val($(this).data('goods-no'));
+                $('#frmWishTemplateView input[name=\'optionFl\']').val($(this).data('optionfl'));
+                $('#frmWishTemplateView input[name=\'mode\']').val('wishIn');
+            <!--{ / }-->
+
 
         var params = $('#frmWishTemplateView').serialize();
 

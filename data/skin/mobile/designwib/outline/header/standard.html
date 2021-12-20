@@ -1,97 +1,187 @@
-{*** 상단 기본파일 | main/index.php ***}
+<!--{ ? goodsCategoryList }-->
+					<!--{ @ goodsCategoryList }-->
+					<!--{ @ .data }-->
+					<li><a href="/brand/brand_list.php?brandCd={=cateCd}&cateCd={=..cateCd}"><span>{=..cateNm}</span></a></li>
+					<!--{ / }-->
+					<!--{ / }-->
+					<!--{ / }-->{*** 상단 기본파일 | main/index.php ***}
 <div id="header_wrap">
-	<header>
-		<div class="header_box">
-			<div class="h_logo"><!--{ @dataBanner('3669836725') }-->{.tag}<!--{ / }--></div> <!-- 로고 -->
-			<!-- 좌측 메뉴 -->
-			<ul class="left_menu">
-				<li><a href="#" class="side_menu"><span>{=__('메뉴')}</span></a></li>
-				<li><button class="top_search bn_srch"><span>{=__('검색')}</span></button></li>
-			</ul>
-			<!-- 우측 메뉴 -->
-			<ul class="right_menu">
-				<li><a href="../mypage/index.php" class="mypage"><span>=__('마이페이지')}</span></a></li>
-				<li>
-					<a href="../order/cart.php" class="cart"><span>=__('장바구니')}</span></a>
-					<span class="cart_count">{=dataCartGoodsCnt()}</span>
-				</li>
-			</ul>
-			<!-- 네비게이터 -->
-			<!--{ ? layout.current_page == 'y' && layout.page_name }-->
-			<div class="navi_g">
-				<ul>
-					<li>{=__('홈')}</li>
-					<!--{ ? gCurrentPageName == 'goods/goods_list' }-->
-					<li>{=dataCategoryPosition(cateCd,'</li>
-					<li>',cateType)}</li>
-					<!--{ : }-->
-					<li>{=layout.page_name}</li>
-					<!--{ / }-->
-				</ul>
-			</div>
-			<!--{ / }-->
-			<!--{ ? gCurrentPageName != 'main/index' }-->
-			<div class="sub_top">
-				<div class="sub_top_left">
-					<!--{ ? gReturnUrl }-->
-					<a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
-					<!--{ : }-->
-					<a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
-					<!--{ / }-->
-				</div>
-				<h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
-				<!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
-				<div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
-				<!--{ / }-->
-				<!--{ ? gCurrentPageName == 'board/view' }-->
-				<div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
-				<!--{ / }-->
-				<!--{ ? gCurrentPageName == 'board/plus_review_article' || gCurrentPageName == 'board/plus_review_photo' || gCurrentPageName == 'board/plus_review_goods' }-->
-				<div class="sub_top_right2 btn_plus_review_register"><a href="../board/plus_review_popup_write.php?mode=addPopup" class="ogl_reviewrite" data-toggle="modal" data-target="#popupBoard">{=__('리뷰등록')}</a></div>
-				<!--{ / }-->
-			</div>
-			<!--{ / }-->
-		</div>
-	</header>
+    
+    <!-- 네비게이터 -->
+    
+    <!-- 서브페이지 전용 헤더 -->
+    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view'}-->
+    <div class="sub_top">
+        <div class="sub_top_left">
+            <!--{ ? gReturnUrl }-->
+            <a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
+            <!--{ : }-->
+            <a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
+            <!--{ / }-->
+        </div>
+        <h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
+        <div class="cart">
+                <a href="javascript:;">
+                    <strong>{=dataCartGoodsCnt()}</strong>
+                </a>
+        </div>
+        <!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+        <div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+        <!--{ / }-->
+        <!--{ ? gCurrentPageName == 'board/view' }-->
+        <div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+        <!--{ / }-->
+    </div>
+    <!--{ / }-->
+    <!--{ ? gCurrentPageName == 'goods/goods_view'}-->
+        <div>asdass</div>
+    <!--{ / }-->
+    <!-- 메인페이지 전용 헤더 -->
+    <!--{ ? gCurrentPageName == 'main/index' }-->
+    <header> 
+        <!--탑 배너 -->
+        <div class="top_re">
+            <span>Renewal</span><span>새로운 모습으로 인사드려요. 리뉴얼 이벤트!</span><button><img src="/data/skin/mobile/designwib/wib/img/topx.png"></button>
+        </div>
+        <script>
+            $('.top_re button').click(function(){
+                $('.top_re').toggle();
+            });
+        </script>
+        <!-- 픽스 메뉴 -->
+        <div class="fix_bt">
+          <ul class="left_menu" >
+            <li><a href="#" class="side_menu"><img src="/data/skin/mobile/designwib/wib/img/ham.png" alt=""></a></li>
+         </ul>  
+         <ul class="right_menu">
+            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix01.png" alt="검색"><p>검색</p></a></li>
+            <li><a href="http://m.blue3200.godomall.com/mypage/wish_list.php#"><img src="/data/skin/mobile/designwib/wib/img/mofix02.png" alt="홈"><p>홈</p></a></li>
+            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix03.png" alt="상품"><p>최근 본 상품</p></a></li>
+            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix04.png" alt="마이페이지"><p>마이페이지</p></a></li>
+         </ul>
+        </div>
+        
+        <div class="header-area">
+            <div class="top-menu">
+                <div class="shop">
+                    <ul>
+                        <li><a href="javascript:;"><span>BLU</span></a></li>
+                        <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+                        <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                    </ul>
+                </div>
+            
+            </div>
+            <div class="bottom-menu">
+                <div class="inner">
+                   
+                    <div class="left">
+                        <a href="javascript:;" class="menu" style="display: none;">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                        <div class="box01">
+                            <h1>
+                            <a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a> 
+                            </h1>
+                            <div class="search">
+                                <!-- 검색 폼 -->
+                                {=includeWidget('proc/_header_search.html')}
+                                <!-- 검색 폼 -->
+                            </div>
+                            <div class="cart">
+                                    <a href="javascript:;">
+                                        <strong>{=dataCartGoodsCnt()}</strong>
+                                    </a>
+                            </div>
+                        </div>
+                        <div class="category swiper">
+                            <ul class="swiper-wrapper">
+                                <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
+                                <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
+                                <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
+                                <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
+                                <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                            </ul>
+                            
+                        </div>
+                        <script>
+                            var swiper = new Swiper('.category.swiper', {
+                            slidesPerView: 4,
+                           
+                            });
+                         
+                       </script>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--{ / }-->
+
+
+	
+
+    <!-- 검색 -->
+    <div class="search-area">
+        <a href="javascript:;" class="search-close"></a>
+        <div class="inner">
+            <!-- 검색 폼 -->
+            {=includeWidget('proc/_header_search.html')}
+            <!-- 검색 폼 -->
+	</div>
+</div>
 </div>
 <!-- //header_wrap -->
 <nav>
 	<div class="bg"></div>
-	<div class="left_close"></div>
+	<div class="left_close"> <img src="/data/skin/mobile/designwib/wib/img/nav02.svg"></div>
 	<div class="nav_bg_box">
 		<div class="nav_box">
 			<div class="nav_iscroll_box">
 				<div class="nav_content_box">
-					<div class="nav_language">
-						{=includeWidget('proc/_global_select.html')}
-					</div>
-					<!-- //nav_language -->
+
 					<div class="nav_banner">
-						<!--{ @dataBanner('569534203') }-->{.tag}<!--{ / }-->
+
+
+						<!--{ ? gd_is_login() === false }-->
+						<div class="left_logo">
+							<!-- 배너값 좌측배너로 수정 1865762709-->
+							<!--{ @dataBanner('4215522117') }-->{.tag}<!--{ / }--></div>
+						<!--{ : }-->
+						<!-- <div class="login_txt">
+							{=__('%s님 반갑습니다.', '<p class="name"><strong>' + gd_get_login_name() + '</strong>', '</p>')}
+						</div> -->
+						<!--{ / }-->
+
+
 						<div class="nav_login">
 							<ul>
 								<!--{ ? gd_is_login() === false }-->
-								<li><a href="../member/login.php">{=__('로그인')}</a></li>
+								<li><a href="../member/login.php">{=__('로그인')} <span>해주세요.</span> <img src="/data/skin/mobile/designwib/wib/img/nav01.svg"> </a></li>
 								<li><a href="../member/join_method.php">{=__('회원가입')}</a></li>
 								<!--{ : }-->
+                                <li>
+                                    <div class="login_txt">
+                                        {=__('%s님 반갑습니다.', '<p class="name"><strong>' + gd_get_login_name() + '</strong>', '</p>')}
+                                    </div>
+                                </li>
 								<li><a href="../member/logout.php">{=__('로그아웃')}</a></li>
-								<li><a href="../mypage/index.php">{=__('마이페이지')}</a></li>
+								<!-- <li><a href="../mypage/index.php">{=__('마이페이지')}</a></li> -->
 								<!--{ / }-->
 							</ul>
 						</div>
-						<!--{ ? gd_is_login() === false }-->
-						<div class="left_logo"><!--{ @dataBanner('1865762709') }-->{.tag}<!--{ / }--></div>
-						<!--{ : }-->
-						<div class="login_txt">
-							{=__('%s님%s방문을 환영합니다.', '<p class="name"><strong>' + gd_get_login_name() + '</strong>', '</p>')}
-						</div>
-						<!--{ / }-->
+
 					</div>
 					<!-- //nav_banner -->
 					<div class="nav_link">
 						<ul>
-							<li><a href="../board/list.php?bdId=goodsqa">{=__('Q&A')}</a></li>
 							<li><a href="../goods/goods_today.php">{=__('최근본상품')}</a></li>
+							<li><a href="../order/cart.php">{=__('장바구니')}</a></li>
+
 							<li><a href="../mypage/wish_list.php">{=__('찜리스트')}</a></li>
 						</ul>
 					</div>
@@ -99,21 +189,18 @@
 					<div class="nav_category">
 						<div class="nav_tabmenu_box">
 							<ul class="nav_tabmenu">
-								<li class="on"><span>CATEGORY</span></li>
-								<li><span>BRAND</span></li>
+								<li class="on"><span>카테고리</span></li>
+								<li><span>브랜드</span></li>
 							</ul>
 							<div class="tab_menu0">
 								<div class="prd_cate">
 									{=includeWidget("proc/category_all.html",'cateType','category')}
-                                                                        <!-- 브랜드 위젯 -->
-                                                                        {=includeWidget('goods/_brand')}
-                                                                        <!--// 브랜드 위젯 -->
 								</div>
 								<!-- //prd_cate -->
 							</div>
 							<!-- //tab_menu0 -->
 							<div class="tab_menu1" style="display:none;">
-								<a href="../goods/brand.php" class="btn_nav_brand_search">{=__('브랜드 검색')}</a>
+								<a href="../goods/brand.php" class="btn_nav_brand_search">{=__('브랜드를 검색해주세요')} <img src="/data/skin/mobile/designwib/wib/img/serch_nav.png" >  </a>
 								<div class="brand_cate">
 									{=includeWidget("proc/category_all.html",'cateType','brand')}
 								</div>
@@ -121,7 +208,7 @@
 							</div>
 							<!-- //tab_menu1 -->
 							<div class="nav_community_box">
-								<p class="comm_tit">COMMUNITY</p>
+								
 								<ul class="board_cate">
 									<!--{ @defaultBoardList }-->
 									<li><a href="../board/list.php?bdId={.key_}">{=__(.value_)}</a></li>
@@ -131,6 +218,14 @@
 							</div>
 						</div>
 					</div>
+
+
+					<div class="nav_language">
+						{=includeWidget('proc/_global_select.html')}
+					</div>
+					<!-- //nav_language -->
+
+
 				</div>
 				<!-- //nav_content_box -->
 			</div>
@@ -144,4 +239,16 @@
 
 
 
+<script>
+    $('._header_search .layer_search_box dl dd .keyword_box input').attr("placeholder","21 S/S 블루 클리어런스 SALE")
+    $(".keyword_box").click(function(){
+        if($('.layer_search_content').hasClass('on')){ 
+            $('.layer_search_content').removeClass('on'); 
+        }else{ $('.layer_search_content').addClass('on'); 
+        }
+        
+    });
 
+
+
+</script>

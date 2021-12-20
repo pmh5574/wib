@@ -46,7 +46,7 @@ class GoodsViewController extends \Bundle\Controller\Mobile\Goods\GoodsViewContr
             }else{
                 $wishCheck = '';
             }
-
+            
             $this->setData('wishCheck', $wishCheck);
         }
         
