@@ -11,7 +11,7 @@
  * @copyright ⓒ 2016, NHN godo: Corp.
  * @link http://www.godo.co.kr
  */
-namespace Widget\Front\Mypage;
+namespace Widget\Mobile\Mypage;
 
 use Session;
 use Component\Wib\WibMember;
@@ -19,7 +19,7 @@ use Component\Wib\WibMember;
  *
  * @author Lee Seungjoo <slowj@godo.co.kr>
  */
-class MemberSummaryWidget extends \Bundle\Widget\Front\Mypage\MemberSummaryWidget
+class MemberSummaryWidget extends \Bundle\Widget\Mobile\Mypage\MemberSummaryWidget
 {
     public function post()
     {
