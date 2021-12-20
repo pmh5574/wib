@@ -6,22 +6,13 @@
 
 <div class="today">
 	<ul>
-		<li>
-			<div class="img">
-				<img src="/data/goods/21/10/40/1000000009/1000000009_main_072.png"/>
-			</div>
-			<div class="info">
-				<h1>메종키츠네 사선식 완장 클래식 여성 가디건</h1>
-				<p>￦ 1,630,000</p>
-			</div>
-		</li>
+		{# goodsTemplate}
 	</ul>
 	<div class="page_btn_box">
-		<button type="button" class="prev_btn">이전</button>
-		<span class="page_number"><strong>1</strong> / 1</span>
-		<button type="button" class="next_btn">이후</button>
+		<button type="button" class="prev_btn" data-page="{prevPage}">이전</button>
+		<span class="page_number"><strong>{nowPage}</strong> / 1</span>
+		<button type="button" class="next_btn" data-page="{nextPage}">이후</button>
 	</div>
-	<div class="nolist">최근 본 상품이 없습니다.</div>
 </div>
 
 { # footer }

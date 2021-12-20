@@ -13,7 +13,6 @@ jQuery(document).ready(function() {
 
 
 
-
 $(document).ready(function(){
 	var $header = $("header"),
 		$body = $("body"),
@@ -121,10 +120,18 @@ $(document).ready(function(){
 	}();
 });
 
+var runCheck = false;
+
 // 211123 디자인위브 mh 브랜드 좋아요 기능 
 function brandLike(brandCd, obj, name)
 {
     var _this = obj;
+    
+    if(runCheck == true){
+        return false;
+    }
+    
+    runCheck = true;
     
     $.ajax({
         url : '../brand/brand_ps.php',
@@ -146,6 +153,8 @@ function brandLike(brandCd, obj, name)
                     alert('브랜드 찜 리스트에서 삭제 됐습니다.');
                 }  
             }
+            
+            runCheck = false;
         }
     });
 }

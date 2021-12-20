@@ -75,10 +75,16 @@ class TodayController extends \Controller\Mobile\Controller
         
         $page = \App::load('\\Component\\Page\\Page'); // 페이지 재설정
        
+        $nowPage = $page->page['now'];
+        $prevPage = $nowPage-1 == 0 ? 1:$nowPage-1;
+        $nextPage = gd_isset($this->page['end'],1);
+        
         $this->setData('goodsList', $goodsList);
         $this->setData('themeInfo', $cateInfo);
         $this->setData('mainData', ['sno'=>'widget']);
-        $this->setData('page', gd_isset($page));
+        $this->setData('nowPage', $nowPage);
+        $this->setData('prevPage', $prevPage);
+        $this->setData('nextPage', $nextPage);
         $this->getView()->setPageName('mypage/today');
         $this->getView()->setDefine('goodsTemplate', 'goods/list/list_' . $typeClass . '.html');
     }
