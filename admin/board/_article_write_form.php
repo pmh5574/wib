@@ -1,6 +1,5 @@
-<?php if($req['bdId'] == 'stores'){ ?>
-
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a083da45d2941f59e36b174df2ca2b96&libraries=services,clusterer,drawing"></script>
+<?php if($req['bdId'] == 'store'){ ?>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66e36baebcee59ff46c436c79a26e167&libraries=services,clusterer,drawing"></script>
     <script>
         $(function(){
             wibMap('<?= $bdWrite['data']['address']; ?>');
@@ -9,8 +8,6 @@
                 var address = $('#wibAddress').val();
                 wibMap(address);
             });
-            
-            
             
         });
         
@@ -31,7 +28,7 @@
             
             // 지도를 클릭한 위치에 표출할 마커입니다
             var marker = new kakao.maps.Marker(); 
-            var imageSrc = '/data/skin/front/r_jw03/wib/img/icon/map_kakao.png', // 마커이미지의 주소입니다    
+            var imageSrc = '/data/skin/front/DESIGNWIB/wib/img/kakaoMapPing.png', // 마커이미지의 주소입니다    
             imageSize = new kakao.maps.Size(22, 30); // 마커이미지의 크기입니다
 
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
@@ -51,7 +48,7 @@
                     var marker = new kakao.maps.Marker({
                         map: map,
                         position: coords,
-                        image: markerImage
+//                        image: markerImage
                     });
                     
                     $('.addressLat').val(result[0].y);
@@ -63,6 +60,13 @@
                         
                         // 클릭한 위도, 경도 정보를 가져옵니다 
                         var latlng = mouseEvent.latLng; 
+                        
+                        var callback = function(result, status){
+                            if (status === kakao.maps.services.Status.OK) {
+                                console.log(result[0].address.address_name);
+                                $('#wibAddress').val(result[0].address.address_name);
+                            }
+                        };
 
                         // 마커 위치를 클릭한 위치로 옮깁니다
                         marker.setPosition(latlng);
@@ -72,7 +76,9 @@
 
                         $('.addressLat').val(messageLat);
                         $('.addressLng').val(messageLng);
-
+                        
+                        // 좌표로 법정동 상세 주소 정보를 요청합니다
+                        geocoder.coord2Address(messageLng, messageLat, callback);
 
                     });
 
@@ -764,7 +770,7 @@
             <tr>
                 <th>지도</th>
                 <td class="form-inline">
-                    <!--<div id="mmap" style="width: 1000px;height: 400px;"></div>-->
+                    <div id="mmap" style="width: 1000px;height: 400px;"></div>
                     <div style="padding-top: 10px;">
                         위도 : <input type="text" class="addressLat form-control" name="addressLat" value="" /> 경도 : <input type="text" class="addressLng form-control" name="addressLng" value="" />
                     </div>

@@ -84,6 +84,8 @@ if ($cateMode == 'category') {
     }
     .add_goods_free.sortable-chosen.sortable-ghost{position: relative;}
     .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #fff; border:1px dashed #4285f4;z-index: 1000;top:0;left:0;}
+    
+    .dn{display:none;}
 </style>
 <div class="page-header js-affix">
     <h3><?=end($naviMenu->location);?> </h3>
@@ -185,8 +187,7 @@ if ($cateMode == 'category') {
                                                     <tr>
                                                         <td width="100"><input type="button" value="상단 고정" class="btn btn-black goodsChoice_fixUpBtn"></td>
                                                         <?php if($cateInfo['sortAutoFl'] == "n") { ?>
-<!--                                                            <td width="150">
-
+                                                            <td class="dn" width="150">
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-white btn-icon-bottom js-moverow goodsChoice_downArrowMore" data-direction="bottom">
                                                                         맨아래
@@ -204,10 +205,10 @@ if ($cateMode == 'category') {
                                                                 </div>
 
                                                             </td>
-                                                            <td width="180">선택한 상품을 <input type="text" name="goodsChoice_sortText"
+                                                            <td class="dn" width="180">선택한 상품을 <input type="text" name="goodsChoice_sortText"
                                                                                            class="goodsChoice_sortText" data-page="true" /> 번 위치로
                                                             </td>
-                                                            <td width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_cate_moveBtn"></td> -->
+                                                            <td class="dn" width="30"><input type="button" value="이동" class="btn btn-black goodsChoice_cate_moveBtn"></td> 
                                                         <?php }  else { ?>
                                                             <input type="hidden" name="goodsChoice_sortText" class="goodsChoice_sortText" data-page="true"/>
                                                         <?php } ?>

@@ -100,7 +100,11 @@ $(function () {
             freezed = [].slice.call(sortable.el.querySelectorAll('.add_goods_fix'));
             
             if($('#goods_result tr').length == 0){
-//                $('#tbl_add_goods_result').css('margin-bottom', '500px');   
+                $('#tbl_add_goods_result').css('height', '500px');
+
+            }else{
+                $('#tbl_add_goods_result').css('height', '');
+                $('#tbl_add_goods_result .moveEventImg').css('height', '100%');
             }
             
             positions = freezed.map(function (el) {
@@ -110,7 +114,10 @@ $(function () {
         onMove: function (evt, originalEvent) {
             var vector,
                     freeze = false;
-            
+    
+            if($('#goods_result tr').length == '0'){
+                $('#tbl_add_goods_result').css('height', '');
+            }
             if($('.searchWall').length == 0){
                 $('#goods_sub_result').closest('#frmList').append('<div class="searchWall"></div>');
             }

@@ -26,8 +26,7 @@
     .add_goods_free.sortable-chosen.sortable-ghost{position: relative;}
     .moveEventImg{position: absolute;width: 100%;height: 100%; background-color: #fff; border:1px dashed #4285f4;z-index: 1000;top:0;left:0;}
     
-    #tbl_add_goods_result{margin-bottom:500px;}
-    
+    /*#tbl_add_goods_result{margin-bottom:500px;}*/
     .searchWall{position: absolute !important;width: 100%;height: 100%; z-index: 9999;top: 0;left: 0;}
 </style>
 <script type="text/javascript" src="../admin/script/Sortable.js"></script>
@@ -51,7 +50,7 @@
             <table cellpadding="0" cellspacing="0" class="goodsChoice_addDelButtonArea" style="margin-top: 215px">
                 <tr>
                 <td>
-<!--                    <p style="margin: 0px"><input type="button" class="btn btn-9 btn-white btn-icon-plus-bottom" value="추가" id="addGoods"/></p>-->
+                    <p style="margin: 0px"><input type="button" class="btn btn-9 btn-white btn-icon-plus-bottom" value="추가" id="addGoods"/></p>
                     <p style="margin: 20px 0"><button class="btn btn-9 btn-icon-check-bottom goodsChoiceConfirm">선택<br>완료</button></p>
                     <p style="margin: 0px"><input type="button" class="btn btn-9 btn-white btn-icon-minus-bottom" value="삭제" id="delGoods"/></p>
                 </td>
