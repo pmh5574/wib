@@ -193,7 +193,15 @@ class WibBrand
      */
     public function getWishBrandList($brandCd)
     {
-        $sql = "SELECT sno FROM wib_memberBrand WHERE brandCd = '{$brandCd}'";
+        $memNo = Session::get('member.memNo');
+        $where = "";
+        
+        if($memNo){
+            $where = " AND memberNo = '{$memNo}'";
+        }else{
+            return false;
+        }
+        $sql = "SELECT sno FROM wib_memberBrand WHERE brandCd = '{$brandCd}' {$where}";
         $sno = $this->wibSql->WibNobind($sql)['sno'];
 
         return $sno;

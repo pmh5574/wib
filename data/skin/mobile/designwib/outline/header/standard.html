@@ -1,10 +1,4 @@
-<!--{ ? goodsCategoryList }-->
-					<!--{ @ goodsCategoryList }-->
-					<!--{ @ .data }-->
-					<li><a href="/brand/brand_list.php?brandCd={=cateCd}&cateCd={=..cateCd}"><span>{=..cateNm}</span></a></li>
-					<!--{ / }-->
-					<!--{ / }-->
-					<!--{ / }-->{*** 상단 기본파일 | main/index.php ***}
+{*** 상단 기본파일 | main/index.php ***}
 <div id="header_wrap">
     
     <!-- 네비게이터 -->
@@ -200,11 +194,10 @@
 							</div>
 							<!-- //tab_menu0 -->
 							<div class="tab_menu1" style="display:none;">
-								<a href="../goods/brand.php" class="btn_nav_brand_search">{=__('브랜드를 검색해주세요')} <img src="/data/skin/mobile/designwib/wib/img/serch_nav.png" >  </a>
-								<div class="brand_cate">
-									{=includeWidget("proc/category_all.html",'cateType','brand')}
-								</div>
-								<!-- //brand_cate -->
+                                                            <!-- 브랜드 위젯 -->
+                                                            {=includeWidget('goods/_brand')}
+                                                            <!--// 브랜드 위젯 -->
+								
 							</div>
 							<!-- //tab_menu1 -->
 							<div class="nav_community_box">
