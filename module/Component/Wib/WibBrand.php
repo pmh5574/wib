@@ -48,8 +48,7 @@ class WibBrand
     }
     
     /**
-     * 
-     * 마이페이지 위시 브랜드 리스트
+     * 마이페이지 찜 브랜드 리스트
      */
     public function getBrandWishData()
     {
@@ -68,9 +67,9 @@ class WibBrand
             $arrWhere[] = "cb.cateDisplayFl = 'y'";
         }
         
-        $page = $getValue['page'] ? $getValue['page'] : 1;
+        $getValue['page'] = $getValue['page'] ? $getValue['page'] : 1;
         
-        $page = \App::load('\\Component\\Page\\Page', $page);
+        $page = \App::load('\\Component\\Page\\Page', $getValue['page']);
         $page->page['list'] = 4; // 페이지당 리스트 수
         $page->block['cnt'] = Request::isMobile() ? 5 : 10; // 블록당 리스트 개수
         $page->setPage();
@@ -124,6 +123,48 @@ class WibBrand
         // 검색 레코드 수
         $page->recode['total'] = $dataCount['totalCnt']; //검색 레코드 수
         $page->setPage();
+        
+        return $data;
+    }
+    
+    /**
+     * 전체 찜 브랜드 리스트
+     */
+    public function getAllBrandWishData()
+    {
+        $memNo = Session::get('member.memNo');
+        
+        // 회원 로그인 체크
+        if (gd_is_login() === true) {
+            $arrWhere[] = "mb.memberNo = '{$memNo}'";
+        }else{
+            return false;
+        }
+
+        if(Request::isMobile()){
+            $arrWhere[] = "cb.cateDisplayMobileFl = 'y'";
+        }else{
+            $arrWhere[] = "cb.cateDisplayFl = 'y'";
+        }
+        
+        $query = "
+            SELECT 
+                cb.cateNm, cb.cateCd, mb.memberNo, cb.bigBrandImg, cb.smallBrandImg, cb.whiteBrandImg, cb.blackBrandImg  
+            FROM 
+                wib_memberBrand mb 
+            LEFT JOIN 
+                es_categoryBrand cb 
+            ON 
+                mb.brandCd = cb.cateCd 
+            LEFT JOIN 
+                es_member m 
+            ON 
+                mb.memberNo = m.memNo 
+            WHERE 
+                " . implode(' AND ', $arrWhere) . " 
+            ORDER BY mb.regDt DESC 
+            ";
+        $data = $this->wibSql->WibAll($query);
         
         return $data;
     }

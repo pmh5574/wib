@@ -42,18 +42,7 @@
                 $('.top_re').toggle();
             });
         </script>
-        <!-- 픽스 메뉴 -->
-        <div class="fix_bt">
-          <ul class="left_menu" >
-            <li><a href="#" class="side_menu"><img src="/data/skin/mobile/designwib/wib/img/ham.png" alt=""></a></li>
-         </ul>  
-         <ul class="right_menu">
-            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix01.png" alt="검색"><p>검색</p></a></li>
-            <li><a href="http://m.blue3200.godomall.com/mypage/wish_list.php#"><img src="/data/skin/mobile/designwib/wib/img/mofix02.png" alt="홈"><p>홈</p></a></li>
-            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix03.png" alt="상품"><p>최근 본 상품</p></a></li>
-            <li><a href="#"><img src="/data/skin/mobile/designwib/wib/img/mofix04.png" alt="마이페이지"><p>마이페이지</p></a></li>
-         </ul>
-        </div>
+        
         
         <div class="header-area">
             <div class="top-menu">
@@ -102,8 +91,12 @@
                         </div>
                         <script>
                             var swiper = new Swiper('.category.swiper', {
-                            slidesPerView: 4,
-                           
+                                freeMode:true,
+                                observer: true,
+                                observeParents: true,
+                                slidesOffsetAfter: 0,
+                                spaceBetween:23,
+                                slidesPerView: 'auto',
                             });
                          
                        </script>
@@ -132,14 +125,14 @@
 <!-- //header_wrap -->
 <nav>
 	<div class="bg"></div>
-	<div class="left_close"> <img src="/data/skin/mobile/designwib/wib/img/nav02.svg"></div>
+	
 	<div class="nav_bg_box">
 		<div class="nav_box">
 			<div class="nav_iscroll_box">
 				<div class="nav_content_box">
 
 					<div class="nav_banner">
-
+                        <div class="left_close"> <img src="/data/skin/mobile/designwib/wib/img/nav02.svg"></div>
 
 						<!--{ ? gd_is_login() === false }-->
 						<div class="left_logo">
@@ -194,6 +187,9 @@
 							</div>
 							<!-- //tab_menu0 -->
 							<div class="tab_menu1" style="display:none;">
+                                                            <!-- 찜 브랜드 위젯 -->
+                                                            {=includeWidget('proc/_my_wish_brand')}
+                                                            <!--// 찜 브랜드 위젯 -->
                                                             <!-- 브랜드 위젯 -->
                                                             {=includeWidget('goods/_brand')}
                                                             <!--// 브랜드 위젯 -->
@@ -241,7 +237,6 @@
         }
         
     });
-
 
 
 </script>

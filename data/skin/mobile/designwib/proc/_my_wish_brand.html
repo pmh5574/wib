@@ -1,0 +1,20 @@
+{*** [위젯] 퀵 검색 | proc/_my_wish_brand.php ***}
+<!--{ ? data }-->
+    <div>My Brand</div>
+<!--{ @ data }-->
+    <div>
+        <a href="../goods/goods_list.php?brandCd={.cateCd}">
+            <!--{ ? .smallBrandImg }-->
+                <img src="/data/category/{.smallBrandImg}">
+            <!--{ / }-->
+            <!--{ ? .whiteBrandImg }-->
+                <img src="/data/category/{.whiteBrandImg}">
+            <!--{ : .blackBrandImg }-->
+                <img src="/data/category/{.whiteBrandImg}">
+            <!--{ : }-->
+                {.cateNm}
+            <!--{ / }-->
+        </a>
+    </div>
+<!--{ / }-->
+<!--{ / }-->

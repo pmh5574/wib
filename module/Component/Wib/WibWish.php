@@ -13,7 +13,9 @@ class WibWish
     {
         $this->wibSql = new WibSql();   
     }
-    
+    /**
+     * 회원번호로 찜 리스트 sno 값 가져오기
+     */
     public function getWishList($memNo, $goodsNo)
     {
         
@@ -23,6 +25,9 @@ class WibWish
         return $sno;
     }
     
+    /**
+     * 상품 리스트에 위시 정보 추가
+     */
     public function getGoodsWishList($goodsList, $memNo)
     {
         foreach ($goodsList as $key => $value) {

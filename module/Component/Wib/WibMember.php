@@ -23,6 +23,9 @@ class WibMember
         return $data;
     }
     
+    /**
+     * 카카오 싱크 정보 가져와서 저장
+     */
     public function saveMember($userInfo,$properties) 
     {       
         $request = \App::getInstance('request');

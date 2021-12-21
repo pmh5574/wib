@@ -33,7 +33,7 @@
 						<a href="javascript:;" class="cs">고객센터</a>
 						<ul>
 							<li><a href="../service/index.php">고객센터</a></li>
-							<li><a href="javascript:;">FAQ</a></li>
+							<li><a href="../service/index.php">FAQ</a></li>
 							<li><a href="../mypage/mypage_qa.php">1:1 문의</a></li>
 						</ul>
 					</li>
@@ -92,10 +92,10 @@
 					</div>
 					<ul>
 						<li><a href="javascript:;" class="search-toggle">서치</a></li>
-						<li><a href="javascript:;">찜</a></li>
+						<li><a href="/mypage/wish_list.php">찜</a></li>
 						<li><a href="../mypage/index.php">마이페이지</a></li>
 						<li>
-							<a href="javascript:;">
+							<a href="../order/cart.php">
 								<strong>{=dataCartGoodsCnt()}</strong>
 							</a>
 						</li>
@@ -141,6 +141,9 @@
 			<!-- 상단 카테고리 출력 시작 -->
 			{=includeWidget('proc/category_side', 'type', 'top','cateType','cate','menuType','all')}
 			<!-- 상단 카테고리 출력 끝 -->
+                        <!-- 찜 브랜드 위젯 -->
+                        {=includeWidget('proc/_my_wish_brand')}
+                        <!--// 찜 브랜드 위젯 -->
                         { ? gThisPageName != 'brand.php'}
                         <!-- 브랜드 위젯 -->
                         {=includeWidget('goods/_brand')}
