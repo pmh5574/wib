@@ -179,10 +179,16 @@ class WibBrand
         
         $sno = $this->getWishBrandList($brandCd);
         
+        $cnt = $this->getWishBrandCnt($brandCd);
+        
         if($sno){
             $brandNm['brandLike'] = 'on';
         }else{
             $brandNm['brandLike'] = 'off';
+        }
+        
+        if($cnt > 0){
+            $brandNm['cnt'] = $cnt;
         }
   
         return $brandNm;
@@ -205,6 +211,17 @@ class WibBrand
         $sno = $this->wibSql->WibNobind($sql)['sno'];
 
         return $sno;
+    }
+    
+    /**
+     * 찜 브랜드 개수
+     */
+    public function getWishBrandCnt($brandCd)
+    {
+        $sql = "SELECT COUNT(*) cnt FROM wib_memberBrand WHERE brandCd = '{$brandCd}'";
+        $cnt = $this->wibSql->WibNobind($sql)['cnt'];
+
+        return $cnt;
     }
 }
 

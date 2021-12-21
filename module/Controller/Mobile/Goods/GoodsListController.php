@@ -33,6 +33,7 @@ class GoodsListController extends \Bundle\Controller\Mobile\Goods\GoodsListContr
             $themeInfo['whiteBrandImg'] = $brandMoreInfo['whiteBrandImg'];
             $themeInfo['blackBrandImg'] = $brandMoreInfo['blackBrandImg'];
             $themeInfo['brandLike'] = $brandMoreInfo['brandLike'];
+            $themeInfo['brandCnt'] = $brandMoreInfo['cnt'];
             
             $this->setData('themeInfo', $themeInfo);
         }

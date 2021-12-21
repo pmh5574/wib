@@ -185,9 +185,13 @@ function brandLike(brandCd, obj, name)
             }else{
                 if(data.code == 'on'){
                     $(_this).addClass('on');
+                    var brandCnt = parseInt($('.brandCnt').html())+1;
+                    $('.brandCnt').html(brandCnt);
                     alert('브랜드 찜 리스트에 추가 됐습니다.');
                 }else if(data.code == 'off'){
                     $(_this).removeClass('on');
+                    var brandCnt = parseInt($('.brandCnt').html())-1;
+                    $('.brandCnt').html(brandCnt);
                     alert('브랜드 찜 리스트에서 삭제 됐습니다.');
                 }  
             }
