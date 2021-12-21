@@ -16,7 +16,6 @@ class BrandPsController extends \Controller\Front\Controller
         
         if (!Request::isAjax()) {
             throw new AlertRedirectException('ajax 전용 페이지 입니다.', 0, null, '/');
-            exit();
         }
 
         switch ($postValue['mode']){
