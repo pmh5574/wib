@@ -320,51 +320,46 @@
 	<p class="main-title">후기로 증명하는 프멀샵</p>	
     <div class="swiper">
         <ul class="swiper-wrapper">
-            <!--{ @getArticles( 'goodsreview' , 7 , 255, 255 ) }-->
-            <li class="swiper-slide">
-                <div class="photo-box">
-                    <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                        <p class="thumb">
-                            <!--{ ? .attachImageSrc }-->
-                            <img src="{.attachImageSrc}" alt="{.goodsNm}" />
-                            <!--{ : }-->
-                            <img src="{.goodsImageSrc}" alt="{.goodsNm}" />
-                            <!--{ / }-->
-                            <img src="/data/skin/mobile/designwib/wib/img/review.png" class="icon02">
-                        </p>
-                    </a> 
-                    <div class="txt-box">
+            <!--{ @ reviews }-->
+                <li class="swiper-slide">
+                    <div class='photo-box'>
                         <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                            <p class="tit">{.subject}</p>
-                            <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),'300')}</p>
-                            <p class="writer">{.writer}님의 후기</p>
-                        </a>		
-                    </div>
-                    <div class="prd-box">
-                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
-                            <div class="goods-thumb">
-                                <!--{ ? .imagePath }-->
-                                    <!--{ ? .imageStorage == 'local' }-->
-                                        <img src="/data/goods/{.imagePath}{.imageName}">
-                                    <!--{ : }-->
-                                        <img src="{.imageStorage}/data/goods/{.imagePath}{.imageName}">
-                                    <!--{ / }-->
+                            <p class="thumb">
+                                <!--{ ? .saveFileNm }-->
+                                <img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
                                 <!--{ : }-->
-                                <img src="/data/commonimg/ico_noimg_100.gif">
+                                <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
                                 <!--{ / }-->
-                                
-                            </div>
-                            <div class="goods-des">
-                                <p class="brand">KENZO 겐조</p>
-                                <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
-                                <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
-                                <p class="discount-rate">23<em>%</em></p>
-                            </div>
+                            </p>
                         </a>
+                        <div class="txt-box">
+                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                                <p class="tit">{.subject}</p>
+                                <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),300,'...')}</p>
+                                <p class="writer">{.writerNm}님의 후기</p>
+                            </a>
+                        </div>
+                        <div class="prd-box">
+                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+                                <div class="goods-thumb">
+                                    <!--{ ? .imagePath }-->
+                                        <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+                                    <!--{ : }-->
+                                    <img src="/data/commonimg/ico_noimg_100.gif">
+                                    <!--{ / }-->
+                                </div>
+                                <div class="goods-des">
+                                    <p class="brand">{.brandNm}</p>
+                                    <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
+                                    <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+                                    {? .fixedPrice > 0}
+                                    <p class="discount-rate">{=round((1-(.goodsPrice/.fixedPrice))*100)}<em>%</em></p>
+                                    {/}
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                
-            </li>
+                </li>
             <!--{ / }-->
         </ul>
     </div>
