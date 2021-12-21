@@ -4,31 +4,30 @@
 <script src="../wib/js/wib-main.js"></script>
 <script src="../wib/js/swiper.js"></script>
 
+
 <div class="main">
     <!-- 슬라이더 -->
     <div class="swiper-container swiper-main">
         <div class="slidebtn"><img src="/data/skin/mobile/designwib/wib/img/slidebtn.png" alt=""></div>
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-          <div class="swiper-slide">
-              <img src="/data/skin/mobile/designwib/wib/img/main_banner.png" alt="배너">
-          </div>
-    
-        </div>
+			<!--{ @dataBanner('1047852993', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			
+			<!--{ / }-->
+		</div>
     
         <div class="swiper-pagination">  </div>
         
@@ -102,23 +101,18 @@
 
 
 
-
-
-
-    
 <!-- 지금, 새로 들어왔어요 -->
 <div class="mcon03">
-	<div class="w1720">
-		<div class="prd">
-			{=includeWidget('goods/_goods_display_main.html','sno','18')}
-			
-		</div>
-	</div>
+    <div class="prd">
+        {=includeWidget('goods/_goods_display_main.html','sno','18')}
+        
+    </div>
+    <div class="view_more">
+        <a href="#">신상품 더보기</a>
+    </div>
 </div>
 
-<script>
-	
-</script>
+
 
 <!-- 관이동 -->
 <div class="mcon04">
@@ -174,7 +168,7 @@
 <!-- 개발 : 찜하기 -->
 <!-- 브랜드별 베스트 상품 -->
 <div class="mcon05">
-	<div class="w1720">
+	
 		<p class="main-title">브랜드별 베스트 상품</p>
 		<div class="brand-list">
 			<div>
@@ -223,13 +217,12 @@
                             <!--{ / }-->
 			</div>
 		</div>
-	</div>
+	
 </div>
 
 
 <!-- 이번주 가장 많이 팔린 상품 -->
 <div class="mcon07 tab-area">
-	<div class="w1720">
 		<p class="main-title">이번주 가장 많이 팔린 상품</p> 
 		<div class="tab">
 			<ul>
@@ -263,7 +256,6 @@
 				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
 			</div>
 		</div>
-	</div>
 </div>
 
 
