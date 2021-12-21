@@ -1,0 +1,9 @@
+#contents .sub_content {width: 100%; margin: 0; padding: 0;}
+#header_warp.y-banner header .header-area .bottom-menu , header .header-area .bottom-menu .inner {background-color:transparent;}
+#header_warp.y-banner.scroll header .header-area .bottom-menu , #header_warp.y-banner.scroll header .header-area .bottom-menu .inner {background-color:#fff;}
+
+.company-wrap {}
+
+.company-wrap .cw-cont {max-width:1700px; margin:0 auto;}
+
+.company-wrap .cw01 {} 
