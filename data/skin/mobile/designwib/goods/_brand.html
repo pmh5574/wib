@@ -1,58 +1,53 @@
 {*** 브랜드 리스트 위젯 | goods/_brand.php ***}
 
 <div class="brand_wrap">
-    <div class="brand_search_box total_search">
-        <div class="search_sec">
-            <input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
-            <button type="button" class="txt_cancel bn_wrg">{=__('취소')}</button>
-            <button type="button" class="btn_brand_search">{=__('검색')}</button>
-        </div>
-        <button type="button" class="btn_brand_cancel">{=__('취소')}</button>
-    </div>
+   
 
     <div class="brand_initial_box">
         <!--{ ? alphabetFl }-->
         <div class="tab_initial_sec">
             <ul class="tab_initial">
-                <li class="on">ㄱㄴㄷ</li>
-                <li>ABC</li>
+                <li class="on"><label for="en"><input type="radio" name="la" id="en">ABC</label> </li>
+                <li><label for="ko"><input type="radio" name="la" id="ko">ㄱㄴㄷ</label> </li>
             </ul>
-            <div class="initial_cate">
-                <ul class="t_type0">
-                    <!--{ @ korea_alphabet }-->
-                    <!--{ ? .key_ == 0 }--><li class="on"><!--{ : }--><li><!--{ / }--><a href="#{=.key_}"><span>{=.value_}</span></a></li>
-                    <!--{ / }-->
-                </ul>
-                <ul class="t_type1" style="display:none;">
-                    <!--{ @ english_alphabet }-->
-                    <!--{ ? .key_ == 0 }--><li class="on"><!--{ : }--><li><!--{ / }--><a href="#{=.value_}"><span>{=.value_}</span></a></li>
-                    <!--{ / }-->
-                    <li><a href="#etc"><span>ETC</span></a></li>
-                </ul>
+            <div class="initial_cate ">
+                <div class="swiper swiper01">
+                    <ul class="t_type0 swiper-wrapper">
+                        <!--{ @ english_alphabet }-->
+                        <!--{ ? .key_ == 0 }--><li class="on swiper-slide"><!--{ : }--><li class="swiper-slide"><!--{ / }--><a href="#{=.value_}"><span>{=.value_}</span></a></li>
+                        <!--{ / }-->
+                        <li><a href="#etc"><span>ETC</span></a></li>
+                    </ul>
+                </div>
+                <div class="swiper swiper02">
+                    <ul class="t_type1 swiper-wrapper" style="display:none;">
+                        <!--{ @ korea_alphabet }-->
+                        <!--{ ? .key_ == 0 }--><li class="on swiper-slide"><!--{ : }--><li class="swiper-slide" ><!--{ / }--><a href="#{=.key_}"><span>{=.value_}</span></a></li>
+                        <!--{ / }-->
+                    </ul>
+                </div>
+                
             </div>
         </div>
         <!--{ / }-->
+        <div class="brand_search_box total_search">
+                <div class="search_sec">
+                    <input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
+                    <button type="button" class="txt_cancel bn_wrg">{=__('취소')}</button>
+                    <button type="button" class="btn_brand_search">{=__('검색')}</button>
+                </div>
+                <button type="button" class="btn_brand_cancel">{=__('취소')}</button>
+            </div>
 
-        <div class="initial_list_sec">
-            <ul class="initial_list b_list0">
-                <!--{ @ korea_alphabet }-->
-                <li>
-                    <strong id="{=.key_}">{=.value_}</strong>
-                    <ul>
-                        <!--{ @ list.korean[.value_] }-->
-                        <li><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
-                        <!--{ / }-->
-                    </ul>
-                </li>
-                <!--{ / }-->
-            </ul>
-            <ul class="initial_list b_list1" style="display:none;">
+
+        <div class="initial_list_sec"> 
+            <ul class="initial_list b_list0" >
                 <!--{ @ english_alphabet }-->
                 <li>
                     <strong id="{=.value_}">{=.value_}</strong>
-                    <ul>
+                    <ul >
                         <!--{ @ list.english[.value_] }-->
-                        <li><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
+                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
                         <!--{ / }-->
                     </ul>
                 </li>
@@ -66,6 +61,19 @@
                     </ul>
                 </li>
             </ul>
+            <ul class="initial_list b_list1" style="display:none;">
+                <!--{ @ korea_alphabet }-->
+                <li>
+                    <strong id="{=.key_}">{=.value_}</strong>
+                    <ul >
+                        <!--{ @ list.korean[.value_] }-->
+                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
+                        <!--{ / }-->
+                    </ul>
+                </li>
+                <!--{ / }-->
+            </ul>
+           
         </div>
     </div>
 
@@ -82,6 +90,16 @@
     <!-- //N:검색결과 없음 안내 -->
 </div>
 <script type="text/javascript">
+    var swiper001 = new Swiper('.initial_cate .swiper01', {
+       freeMode:true,
+       slidesPerView: 'auto',
+    });
+    var swiper002 = new Swiper('.initial_cate .swiper02', {
+        freeMode:true,
+        slidesPerView: 'auto',
+    });
+    
+    $('.input_brand_search').attr('placeholder','브랜드를 검색해주세요');
 
     $(document).ready(function () {
 

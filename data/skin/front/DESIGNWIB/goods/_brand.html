@@ -1,127 +1,266 @@
 {*** 브랜드 리스트 위젯 | goods/_brand.php ***}
 
-<div class="content_box">
-    <div class="goods_brand">
-        <div class="goods_brand_tit">
-            <h2>{=__('브랜드')}</h2>
-        </div>
-        <div class="goods_brand_cont">
-            <div class="brand_all_list">
-                <div class="brand_search_box">
-                    <input type="text"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
-                    <input type="image" src="../img/common/btn/btn_top_search_gray.png" id="" class="btn_brand_search" title="{=__('검색')}" value="{=__('검색')}" alt="{=__('검색')}"/>
-                </div>
-                <div>
-                    <button type="button" class="bnt_all_brand on" data-key="">{=__('전체')}</button>
-                    <!--{ @ korea_alphabet }-->
-                    <button type="button" data-key="{=.value_}">{=.value_}</button>
-                    <!--{ / }-->
-                </div>
-                <div class="alphabet">
-                    <button type="button" class="all"  data-key="etc">{=__('기타')}</button>
-                    <!--{ @ english_alphabet }-->
-                    <button type="button" data-key="{=.value_}">{=.value_}</button>
-                    <!--{ / }-->
-                </div>
-            </div>
-            <!-- //brand_all_list -->
-            <div class="gnb_allmenu_box">
-                <div class="gnb_scroll_box">
-                    <ul id="brandArea">
+<div class="brand_wrap">
+   
+
+    <div class="brand_initial_box">
+        <!--{ ? alphabetFl }-->
+        <div class="tab_initial_sec">
+            <ul class="tab_initial">
+                <li class="on"><label for="en"><input type="radio" name="la" id="en">ABC</label> </li>
+                <li><label for="ko"><input type="radio" name="la" id="ko">ㄱㄴㄷ</label> </li>
+            </ul>
+            <div class="initial_cate ">
+                <div class="">
+                    <ul class="t_type0 ">
+                        <!--{ @ english_alphabet }-->
+                        <!--{ ? .key_ == 0 }--><li class="on "><!--{ : }--><li class=""><!--{ / }--><a href="#{=.value_}"><span>{=.value_}</span></a></li>
+                        <!--{ / }-->
                     </ul>
                 </div>
-                <div class="no_list">
-                    {=__('검색결과가 없습니다.')}
+                <div class="">
+                    <ul class="t_type1" style="display:none;">
+                        <!--{ @ korea_alphabet }-->
+                        <!--{ ? .key_ == 0 }--><li class="on"><!--{ : }--><li class="" ><!--{ / }--><a href="#{=.key_}"><span>{=.value_}</span></a></li>
+                        <!--{ / }-->
+                    </ul>
                 </div>
+                
             </div>
         </div>
-        <!-- //goods_brand_cont -->
+        <!--{ / }-->
+        <div class="brand_search_box total_search">
+                <div class="search_sec">
+                    <input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
+                    <button type="button" class="txt_cancel bn_wrg">{=__('취소')}</button>
+                    <button type="button" class="btn_brand_search">{=__('검색')}</button>
+                </div>
+                <button type="button" class="btn_brand_cancel">{=__('취소')}</button>
+            </div>
+
+
+        <div class="initial_list_sec"> 
+            <ul class="initial_list b_list0" >
+                <!--{ @ english_alphabet }-->
+                <li>
+                    <strong id="{=.value_}">{=.value_}</strong>
+                    <ul >
+                        <!--{ @ list.english[.value_] }-->
+                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<span>{=..cateKrNm}</span></a></li>
+                        <!--{ / }-->
+                    </ul>
+                </li>
+                <!--{ / }-->
+            </ul>
+            <ul class="initial_list b_list1" style="display:none;">
+                <!--{ @ korea_alphabet }-->
+                <li>
+                    <strong id="{=.key_}">{=.value_}</strong>
+                    <ul >
+                        <!--{ @ list.korean[.value_] }-->
+                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateKrNm}<span>{=..cateNm}</span></a></li>
+                        <!--{ / }-->
+                    </ul>
+                </li>
+                <!--{ / }-->
+            </ul>
+           
+        </div>
     </div>
-    <!-- //goods_brand -->
+
+    <div class="brand_search_list" style="display:none;">
+        <ul class="initial_list b_list0" ></ul>
+        <ul class="initial_list b_list1" ></ul>
+    </div>
+
+    <!-- N:검색결과 없음 안내 -->
+    <div class="no_data" style="display:none;">
+        <p>{=__('검색결과가 없습니다.')}</p>
+    </div>
+    <!-- //N:검색결과 없음 안내 -->
 </div>
-<!-- //content_box -->
-
 <script type="text/javascript">
-    <!--
-    $(document).ready(function(){
 
-        $('.brand_all_list button').on('click', function(){
 
-            $('.brand_all_list button').removeClass('on');
-            $(this).addClass('on');
-            show_brand($(this).data('key'), false);
-
-        });
-        show_brand('', false);
-
-        $("#brand_search").on({
-            'keyup':function(e){
-                if(e.keyCode == 13) show_brand($(this).val(), true);
+    $(document).ready(function () {
+        //브랜드 페이지 검색창
+        $(window).on({
+            'scroll':function(){
+                var sc = $(this).scrollTop();
+                var h_offset = $('.top_area').innerHeight();
+                var header_h =  $('#header_wrap header .header_box').outerHeight();
+                if(sc > h_offset){
+                    $('.brand_wrap .brand_search_box').addClass('h_on');
+                    $('.brand_wrap .brand_search_box').css('margin-top', header_h);
+                }else{
+                    $('.brand_wrap .brand_search_box').removeClass('h_on');
+                    $('.brand_wrap .brand_search_box').css('margin-top', 0);
+                }
             }
         });
 
+        //브랜드 페이지 초성 검색 탭
+        var brand_tabmenu_idx = 0;
+        $('.tab_initial_sec .tab_initial li').on({
+            'click':function(){
+                var idx = $(this).index();
+                if(brand_tabmenu_idx == idx) return;
+                brand_tabmenu_idx = idx;
+                $('.tab_initial_sec .tab_initial li').removeClass('on');
+                $(this).addClass('on');
+
+                $('.initial_cate li').removeClass('on');
+                $('.tab_initial_sec .initial_cate .t_type'+idx).find('li:first-child').addClass('on');
+
+                $('.tab_initial_sec .initial_cate .t_type0, .tab_initial_sec .initial_cate .t_type1').hide();
+                $('.tab_initial_sec .initial_cate .t_type'+idx).show();
+
+                $('.initial_list_sec .b_list0, .initial_list_sec .b_list1').hide();
+                $('.initial_list_sec .b_list'+idx).show();
+
+            }
+        });
+
+        <!--{ ? !alphabetFl }-->
+        $('.initial_list_sec .b_list1').show();
+        <!--{ / }-->
+
+        //tag_position
+        $('.initial_cate li a[href*=#]').on({
+            'click':function(e){
+                e.preventDefault;
+                _this = $(this);
+                _href= _this.attr("href");
+                var header_h =  $('#header_wrap header .header_box').outerHeight();
+                var s_bar = $('.brand_search_box').outerHeight();
+                var sum_h = header_h + s_bar;
+
+                $('.initial_cate li').removeClass('on');
+                _this.parents('li').addClass('on');
+                e.preventDefault;
+                $('html,body').animate({
+                    scrollTop: $('' + _href + '').offset().top - sum_h
+                }, 500);
+            }
+        });
+
+        // 검색 버튼 클릭
         $('.btn_brand_search').on({
             'click':function(e){
-                show_brand($("#brand_search").val(), true);
+                show_brand();
             }
         });
-
+        // 취소 버튼 클릭
+        $('.btn_brand_cancel').on({
+            'click':function(e){
+                toggle_brand('list');
+            }
+        });
+        // x 버튼 클릭
+        $('.txt_cancel').on({
+            'click':function(e){
+                $('#brand_search').val('');
+            }
+        });
+        // 검색 인풋 엔터키 입력 시
+        $("#brand_search").on({
+            'keyup':function(e){
+                if(e.keyCode == 13) {
+                    show_brand();
+                }
+            }
+        });
     });
 
-    function show_brand(brand, search)
-    {
-        if(search && !$.trim(brand)) {
+    function toggle_brand(type){
+        if(type == 'list') {
+//            $('.brand_initial_box').show();
+            $('.brand_search_list').hide();
+            $('.brand_search_box').addClass('total_search');
+            $('#brand_search').val('');
+            $(".no_data").hide();
+        } else {
+//            $('.brand_initial_box').hide();
+            $('.brand_search_box').removeClass('total_search');
+            $('html,body').scrollTop(0);
+            $(".no_data").hide();
+            $('.brand_search_list').hide();
+        }
+    }
+
+    function show_brand() {
+        var brand = $('#brand_search').val();
+        if(!$.trim(brand)) {
             alert(__('브랜드명을 입력해주세요.'));
             return false;
         }
-        var data = {
-            'mode' : 'get_brand',
-            'brand' : brand,
-        }
-        if(search) data.search = true;
+        $("#brand_search").blur();
         $.ajax({
             method: "POST",
             cache: false,
-            url: "../goods/goods_ps.php",
-            data: data,
+            url: "../brand/brand_ps.php",
+            data: "mode=get_brand&brand="+brand,
             success: function(data) {
-                $(".no_list").hide();
+                toggle_brand('search');
                 var getData = $.parseJSON(data);
+                console.log(getData);
                 if(data =='false') {
-                    $("#brandArea").html('');
-                    $(".no_list").show();
+                    $(".no_data").show();
                 } else {
                     var addHtml = "";
-                    $.each(getData, function (brandKey, brandVal) {
-                        $.each(brandVal, function (key, val) {
-                            addHtml += '<li style="width:20%;"><div class="all_menu_cont"><a href="../goods/goods_list.php?brandCd='+val.cateCd+'">'+val.cateNm+'</a>';
-                            if(val.children) {
-                                addHtml += '<ul class="all_depth1">';
-                                $.each(val.children, function (key1, val1) {
-                                    addHtml += '<li><a href="../goods/goods_list.php?brandCd='+val1.cateCd+'">'+val1.cateNm+'</a>';
-                                    if(val1.children) {
-                                        addHtml += '<ul class="all_depth2">';
-                                        $.each(val1.children, function (key2, val2) {
-                                            addHtml += '<li><a href="../goods/goods_list.php?brandCd='+val2.cateCd+'">'+val2.cateNm+'</a></li>';
-                                        });
-                                        addHtml += '</ul>';
-                                    }
-                                    addHtml += '</li>';
+                    var cnt = 0;
+//                    var english_alphabet = range('A', 'Z');
+//                    var korea_alphabet = array('ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
+//                    console.log(english_alphabet);
+//                    console.log(korea_alphabet);
+//                    for(var i=0;i<getData.length;i++){
+//                        for(var j=0;j<getData[i].length;i++){
+//                            
+//                        }
+//                    }
+                    if($('input[name="la"]').val() == 'ko'){
+                        if(getData.korean) {
+                            $.each(getData.korean, function (brandKey, brandVal) {
+                                
+                                addHtml += '<li><strong id="'+brandKey+'"></strong><ul>';
+                                
+                                $.each(brandVal, function (key, val) {
+                                    addHtml += '<li><a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateKrNm + '<span>'+val.cateNm+'</span></a></li>';
+                                    cnt++;
                                 });
-                                addHtml += '</ul>';
-                            }
-                            addHtml += '</div></li>';
-                        });
-                    });
+                                
+                                addHtml += '</ul></li>'
+                            });
+                        }
+                    
+                        $('.brand_search_list .b_list1').html(addHtml);
+                    }else{
+                        if(getData.english) {
+                            $.each(getData.english, function (brandKey, brandVal) {
+                                addHtml += '<li><strong id="'+brandKey+'"></strong><ul>';
+                                
+                                $.each(brandVal, function (key, val) {
+                                    addHtml += '<li><a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '<span>'+val.cateKrNm+'</span></a></li>';
+                                    cnt++;
+                                });
+                                
+                                addHtml += '</ul></li>'
+                            });
+                        }
+                    
+                        
+                    
+                        $('.brand_search_list .b_list0').html(addHtml);
+                    }
+                    
+                    $('.brand_search_list').show();
 
-                    $("#brandArea").html(addHtml);
                 }
-
             },
             error: function (data) {
                 alert(data.message);
             }
         });
     }
-    //-->
 </script>
+

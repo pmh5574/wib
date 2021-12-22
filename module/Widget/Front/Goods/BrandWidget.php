@@ -20,44 +20,28 @@ use Message;
 use Globals;
 use Request;
 use Cookie;
+use Session;
 
 class BrandWidget extends \Widget\Front\Widget
 {
     
     public function index()
     {
-        // 모듈 설정
-        $goods = \App::load('\\Component\\Goods\\Goods');
-        $brand = \App::load('\\Component\\Category\\Brand');
-
         try {
-
-
-            $english_alphabet= range('A', 'Z') ;
-            $kored_alphabet = array('ㄱ','ㄴ','ㄷ','ㄹ','ㅁ','ㅂ','ㅅ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ');
+            $brand = \App::load('\\Component\\Wib\\WibBrand');
+            $getData = $brand->getBrandCodeInfo(null, 4, '', false, 'cateNm ASC', false);
+            
+            
+            $english_alphabet = range('A', 'Z');
+            $korea_alphabet = array('ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
 
             $this->setData('english_alphabet', $english_alphabet);
-            $this->setData('korea_alphabet', $kored_alphabet);
-            $this->setData('brand', strtoupper(Request::get()->get('brand')));
-
-
-        } catch (\Exception $e) {
-            // echo ($e->ectMessage);
-            // 설정 오류 : 화면 출력용
-            if ($e->ectName == 'ERROR_VIEW') {
-                $item = ($e->ectMessage ? ' - ' . str_replace('\n', ' - ', $e->ectMessage, $e->ectMessage) : '');
-                if ($e->ectMessage == 'NOT_ACCESS_CATEGORY') {
-                    $return = '/';
-                } else {
-                    $return = -1;
-                }
-                throw new AlertOnlyException(__('안내') . $item);
-
-                // 시스템 오류 : 실패 메시지만 보여주고 자세한 내용은 log 참고
-            } else {
-                $e->actLog();
-                throw new AlertBackException(__('오류') . ' - ' . __('오류가 발생 하였습니다.'));
-            }
+            $this->setData('korea_alphabet', $korea_alphabet);
+            $this->setData('gPageName', __('브랜드'));
+            $this->setData('list', $getData);
+            $this->setData('alphabetFl', !Session::has(SESSION_GLOBAL_MALL));
+        } catch (Exception $e) {
+            throw new AlertBackException($e->getMessage());
         }
 
 

@@ -5,6 +5,7 @@ namespace Controller\Front\Brand;
 use Request;
 use Component\Wib\WibBrand;
 use Framework\Debug\Exception\AlertRedirectException;
+use League\Flysystem\Exception;
 use Session;
 
 class BrandPsController extends \Controller\Front\Controller
@@ -24,6 +25,18 @@ class BrandPsController extends \Controller\Front\Controller
                 $this->json([
                    'code' => $result 
                 ]);
+                break;
+            case 'get_brand':
+                try {
+
+                    $cateNm = $postValue['brand'];
+                    $getData = $wibBrand->getBrandCodeInfo(null, 4, $cateNm, false, null, true);
+
+                    echo json_encode($getData);
+                    exit;
+                } catch (Exception $e) {
+                    echo json_encode(array('message' => $e->getMessage()));
+                }
                 break;
             default :
                 break;

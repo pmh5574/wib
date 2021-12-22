@@ -57,6 +57,7 @@ var wibFilter = {
     getBrand : function(){
         
         var _this = this;
+        var orderBy = $('.filter_brand .brand_order_by span.on').data('order-by');
         
         $.ajax({
             url : '../goods/goods_filter_ps.php',
@@ -65,7 +66,7 @@ var wibFilter = {
             data : {
                 'mode' : 'getBrand',
                 'brandNm' : $('#filterBrandNm').val(),
-                'orderBy' : $('.filter_brand .brand_order_by span.on').data('order-by')
+                'orderBy' : orderBy
             },
             success : function(result){
                 
@@ -76,20 +77,43 @@ var wibFilter = {
                 }else{
                     var _html = '';
                     var brandKrNm = '';
+                    var brandEnNm = '';
                     
                     for(var i=0; i<data.length; i++){
                         
-                        if(data[i]['cateKrNm']){
-                            brandKrNm = '<span class="brandKrNm">'+data[i]['cateKrNm']+'</span>';
+                        //한글 브랜드명일때는 한글명이 위로
+                        if(orderBy == 'kr'){
+                            if(data[i]['cateNm']){
+                                brandEnNm = '<span class="brandEnNm">'+data[i]['cateNm']+'</span>';
+                            }else{
+                                brandEnNm = '';
+                            }
+                            
+                            if(data[i]['cateKrNm']){
+                                brandKrNm = data[i]['cateKrNm'];
+                            }else{
+                                brandKrNm = '';
+                            }
+
+                            if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
+                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                            }else{
+                                _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                            }
                         }else{
-                            brandKrNm = '';
+                            if(data[i]['cateKrNm']){
+                                brandKrNm = '<span class="brandKrNm">'+data[i]['cateKrNm']+'</span>';
+                            }else{
+                                brandKrNm = '';
+                            }
+
+                            if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
+                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                            }else{
+                                _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                            }
                         }
                         
-                        if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
-                            _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
-                        }else{
-                            _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
-                        }
                         
                     }
                     
@@ -198,7 +222,7 @@ var wibFilter = {
         var code = obj.data('brand');
         var paCode = obj.parent();
         $('.hiddenBrand').append('<input type="hidden" class="br_'+code+'" value="'+code+'">');
-        console.log(paCode.hasClass('on'));
+        
         if(paCode.hasClass('on')){
             _this.delBrand(code);
             paCode.removeClass('on');
