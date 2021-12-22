@@ -293,21 +293,20 @@ class Goods extends \Bundle\Component\Goods\Goods
      */
     public function getGoodsSearchList($pageNum = 10, $displayOrder = 'g.regDt asc', $imageType = 'list', $optionFl = false, $soldOutFl = true, $brandFl = false, $couponPriceFl = false, $displayCnt = 10, $brandDisplayFl = false, $usePage = true, $limit = null,array $goodsNo = null)
     {
-        
-        /**
-         * 211121 디자인위브 mh 상품 샵 조건 추가
-         */
-        $shopNum = Session::get('WIB_SHOP_NUM');
-        if($shopNum != '1' && $shopNum){
-            $this->arrWhere[] = "g.shopSetting = '{$shopNum}'";
-        }
-        
-        
         gd_isset($this->goodsTable,DB_GOODS);
         $arrBind = null;
         $mallBySession = SESSION::get(SESSION_GLOBAL_MALL);
 
         $getValue = Request::get()->toArray();
+        
+        /**
+         * 211121 디자인위브 mh 상품 샵 조건 추가
+         */
+        $shopNum = Session::get('WIB_SHOP_NUM');
+        
+        if($shopNum != '1' && $shopNum){
+            $this->arrWhere[] = "g.shopSetting = '{$shopNum}'";
+        }
 
         // --- 정렬 설정
         if (gd_isset($getValue['sort'])) {

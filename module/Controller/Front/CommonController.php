@@ -28,6 +28,8 @@ class CommonController
         }
 
         $pageName = $this->_setPageName($getURI);
+        
+        $shopNum = Session::get('WIB_SHOP_NUM');
 
         switch ($pageName) {
             case '/main/index':
@@ -67,7 +69,7 @@ class CommonController
             default :
                 if ($getURI == "/") {
                     try {
-
+                        print_r('??');
                         $shopNum = "1";
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
