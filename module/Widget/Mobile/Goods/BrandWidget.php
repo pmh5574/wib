@@ -21,20 +21,22 @@ class BrandWidget extends \Widget\Mobile\Widget
     public function index()
     {
         try {
-            $brand = \App::load('\\Component\\Category\\Brand');
+            $brand = \App::load('\\Component\\Wib\\WibBrand');
             $getData = $brand->getBrandCodeInfo(null, 4, '', false, 'cateNm ASC', false);
-
+            
+            
             $english_alphabet = range('A', 'Z');
             $korea_alphabet = array('ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ');
 
             $this->setData('english_alphabet', $english_alphabet);
             $this->setData('korea_alphabet', $korea_alphabet);
-
             $this->setData('gPageName', __('브랜드'));
             $this->setData('list', $getData);
             $this->setData('alphabetFl', !Session::has(SESSION_GLOBAL_MALL));
         } catch (Exception $e) {
             throw new AlertBackException($e->getMessage());
         }
+
+
     }
 }

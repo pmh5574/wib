@@ -60,6 +60,7 @@ class WibBrand
             $globalMall = true;
         }
         if($cateNm) {
+            
             if($search) {
                 if($globalMall === true) {
                     $arrWhere[] = '(g.cateNm LIKE concat(?,\'%\') or g.cateKrNm LIKE concat(?,\'%\'))';
@@ -72,12 +73,17 @@ class WibBrand
                     $this->db->bind_param_push($arrBind, 's', strtolower($cateNm));
                 }
             } else {
+                
                 if (preg_match("/[\xA1-\xFE\xA1-\xFE]/", $cateNm)) {
                     if ($globalMall === true) {
-                        $searchCateNm = 'g.cateNm';
+                        $searchCateNm = 'g.cateKrNm';
                     }
                     else {
-                        $searchCateNm = 'cateNm';
+                        $searchCateNm = 'cateKrNm';
+                    }
+                    
+                    if($orderBy == null && $globalMall !== true){
+                        $orderBy = 'cateKrNm ASC';
                     }
                     switch ($cateNm)    //TODO:GLOBAL 초성검색
                     {
@@ -132,7 +138,7 @@ class WibBrand
                     }else {
                         $arrWhere[] = "cateNm  < '가' AND cateNm NOT REGEXP  '^[a-zA-Z]'";
                     }
-                } else {
+                } else {                   
                     if($globalMall === true) {
                         $arrWhere[] = '(g.cateNm LIKE concat(?,\'%\'))';
                     }
@@ -197,6 +203,17 @@ class WibBrand
 
         if(($cateNm && $arrCateCd) || $cateNm == null)  {
             $getData =  $this->getCategoryData($arrCateCd, null, 'cateCd, cateNm,cateKrNm,cateOverImg,cateImg,cateSort',$arrWhere[0]." AND divisionFl = 'n'", $orderBy);
+            foreach ($getData as $key => $value) {
+                $sno = $this->getWishBrandList($value['cateCd']);
+                if($sno){
+                    $getData[$key]['brandLike'] = 'on';
+                }else{
+                    $getData[$key]['brandLike'] = 'off';
+                }
+            }
+            
+
+            
         }
 
         if (empty($getData) === false) {

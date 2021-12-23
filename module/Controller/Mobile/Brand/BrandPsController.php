@@ -25,6 +25,19 @@ class BrandPsController extends \Controller\Mobile\Controller
                    'code' => $result 
                 ]);
                 break;
+            case 'get_brand':
+                try {
+
+                    $cateNm = $postValue['brand'];
+                    $search = $postValue['search'];
+                    $getData = $wibBrand->getBrandCodeInfo(null, 4, $cateNm, false, null, $search);
+
+                    echo json_encode($getData);
+                    exit;
+                } catch (Exception $e) {
+                    echo json_encode(array('message' => $e->getMessage()));
+                }
+                break;
             default :
                 break;
         }

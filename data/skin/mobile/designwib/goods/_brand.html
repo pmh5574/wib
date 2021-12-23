@@ -1,30 +1,30 @@
 {*** 브랜드 리스트 위젯 | goods/_brand.php ***}
 
 <div class="brand_wrap">
-   
-
     <div class="brand_initial_box">
         <!--{ ? alphabetFl }-->
         <div class="tab_initial_sec">
             <ul class="tab_initial">
-                <li class="on"><label for="en"><input type="radio" name="la" id="en">ABC</label> </li>
-                <li><label for="ko"><input type="radio" name="la" id="ko">ㄱㄴㄷ</label> </li>
+                <li><label for="en"><input type="radio" name="la" id="en" value="alphabet" checked>ABC</label> </li>
+                <li><label for="ko"><input type="radio" name="la" id="ko" value="korean">ㄱㄴㄷ</label> </li>
             </ul>
             <div class="initial_cate ">
+
                 <div class="swiper swiper01">
-                    <ul class="t_type0 swiper-wrapper">
+                    <div class="alphabet swiper-wrapper">
+                        <button type="button" class="bnt_all_brand on swiper-slide" data-key="" style="padding: 0 5px;">ABC</button>
                         <!--{ @ english_alphabet }-->
-                        <!--{ ? .key_ == 0 }--><li class="on swiper-slide"><!--{ : }--><li class="swiper-slide"><!--{ / }--><a href="#{=.value_}"><span>{=.value_}</span></a></li>
+                        <button type="button" data-key="{=.value_}" class="swiper-slide"> {=.value_}</button>
                         <!--{ / }-->
-                        <li><a href="#etc"><span>ETC</span></a></li>
-                    </ul>
+                    </div>
                 </div>
                 <div class="swiper swiper02">
-                    <ul class="t_type1 swiper-wrapper" style="display:none;">
+                  <div class="korean swiper-wrapper" style="display: none;">
+                        <button type="button" class="bnt_all_brand on swiper-slide" data-key="" >ㄱㄴㄷ</button>
                         <!--{ @ korea_alphabet }-->
-                        <!--{ ? .key_ == 0 }--><li class="on swiper-slide"><!--{ : }--><li class="swiper-slide" ><!--{ / }--><a href="#{=.key_}"><span>{=.value_}</span></a></li>
+                        <button type="button" data-key="{=.value_}" class="swiper-slide">{=.value_}</button>
                         <!--{ / }-->
-                    </ul>
+                    </div>  
                 </div>
                 
             </div>
@@ -33,41 +33,45 @@
         <div class="brand_search_box total_search">
                 <div class="search_sec">
                     <input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
-                    <button type="button" class="txt_cancel bn_wrg">{=__('취소')}</button>
                     <button type="button" class="btn_brand_search">{=__('검색')}</button>
                 </div>
-                <button type="button" class="btn_brand_cancel">{=__('취소')}</button>
             </div>
 
 
         <div class="initial_list_sec"> 
-            <ul class="initial_list b_list0" >
+            <ul class="initial_list alphabet" >
                 <!--{ @ english_alphabet }-->
                 <li>
                     <strong id="{=.value_}">{=.value_}</strong>
-                    <ul >
+                    <ul>
                         <!--{ @ list.english[.value_] }-->
-                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
+                        <li>
+                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<span>{=..cateKrNm}</span></a>
+                            <!--{ ? gd_is_login() === false }-->
+                            <a href='javascript:brandLikeNoMember();' class="zzim"></a>
+                            <!--{ : }-->
+                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim"></a>
+                            <!--{ / }-->
+                        </li>
                         <!--{ / }-->
                     </ul>
                 </li>
                 <!--{ / }-->
-                <li>
-                    <strong id="etc">ETC</strong>
-                    <ul>
-                        <!--{ @ list.etc.ETC }-->
-                        <li><a href="../goods/goods_list.php?brandCd={=.cateCd}">{=.cateNm}</a></li>
-                        <!--{ / }-->
-                    </ul>
-                </li>
             </ul>
-            <ul class="initial_list b_list1" style="display:none;">
+            <ul class="initial_list korean" style="display:none;">
                 <!--{ @ korea_alphabet }-->
                 <li>
                     <strong id="{=.key_}">{=.value_}</strong>
                     <ul >
                         <!--{ @ list.korean[.value_] }-->
-                        <li ><a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}</a></li>
+                        <li >
+                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateKrNm}<span>{=..cateNm}</span></a>
+                            <!--{ ? gd_is_login() === false }-->
+                            <a href='javascript:brandLikeNoMember();' class="zzim"></a>
+                            <!--{ : }-->
+                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim {? ..brandLike == 'on'}on{/}"></a>
+                            <!--{ / }-->
+                        </li>
                         <!--{ / }-->
                     </ul>
                 </li>
@@ -77,32 +81,29 @@
         </div>
     </div>
 
-    <div class="brand_search_list" >
-        <p class="total">{=__('검색결과')} <span>4</span>{=__('개')}</p>
-        <ul>
-        </ul>
+    <div class="brand_search_list" style="display:none;">
+        <ul class="initial_list alphabet" ></ul>
+        <ul class="initial_list korean" ></ul>
     </div>
 
     <!-- N:검색결과 없음 안내 -->
-    <div class="no_data">
+    <div class="no_data" style="display:none;">
         <p>{=__('검색결과가 없습니다.')}</p>
     </div>
     <!-- //N:검색결과 없음 안내 -->
 </div>
 <script type="text/javascript">
-    var swiper001 = new Swiper('.initial_cate .swiper01', {
-       freeMode:true,
-       slidesPerView: 'auto',
-    });
-    var swiper002 = new Swiper('.initial_cate .swiper02', {
-        freeMode:true,
+    var swiper001 = new Swiper('.initial_cate .swiper.swiper01', {
         slidesPerView: 'auto',
-    });
+        freeMode: true,
     
-    $('.input_brand_search').attr('placeholder','브랜드를 검색해주세요');
+    });
+    var swiper002 = new Swiper('.initial_cate .swiper.swiper02', {
+         freeMode: true,
+         slidesPerView: 'auto',
+    });
 
     $(document).ready(function () {
-
         //브랜드 페이지 검색창
         $(window).on({
             'scroll':function(){
@@ -120,73 +121,39 @@
         });
 
         //브랜드 페이지 초성 검색 탭
-        var brand_tabmenu_idx = 0;
-        $('.tab_initial_sec .tab_initial li').on({
+        $('.tab_initial_sec .tab_initial li label').on({
             'click':function(){
-                var idx = $(this).index();
-                if(brand_tabmenu_idx == idx) return;
-                brand_tabmenu_idx = idx;
-                $('.tab_initial_sec .tab_initial li').removeClass('on');
-                $(this).addClass('on');
-
-                $('.initial_cate li').removeClass('on');
-                $('.tab_initial_sec .initial_cate .t_type'+idx).find('li:first-child').addClass('on');
-
-                $('.tab_initial_sec .initial_cate .t_type0, .tab_initial_sec .initial_cate .t_type1').hide();
-                $('.tab_initial_sec .initial_cate .t_type'+idx).show();
-
-                $('.initial_list_sec .b_list0, .initial_list_sec .b_list1').hide();
-                $('.initial_list_sec .b_list'+idx).show();
+                var langCheck = $(this).find('input').val();
+                console.log('qq');
+                $('.tab_initial_sec .korean, .tab_initial_sec .alphabet').hide();
+                $('.tab_initial_sec .initial_cate .'+langCheck).show();
+                
+                $('.initial_list_sec .korean, .initial_list_sec .alphabet').hide();
+                $('.initial_list_sec .'+langCheck).show();
 
             }
         });
+        
+        $('.initial_cate button').on('click', function(){
 
-        <!--{ ? !alphabetFl }-->
-        $('.initial_list_sec .b_list1').show();
-        <!--{ / }-->
+            $('.brand_all_list button').removeClass('on');
+            $(this).addClass('on');
+            show_brand($(this).data('key'), false);
 
-        //tag_position
-        $('.initial_cate li a[href*=#]').on({
-            'click':function(e){
-                e.preventDefault;
-                _this = $(this);
-                _href= _this.attr("href");
-                var header_h =  $('#header_wrap header .header_box').outerHeight();
-                var s_bar = $('.brand_search_box').outerHeight();
-                var sum_h = header_h + s_bar;
-
-                $('.initial_cate li').removeClass('on');
-                _this.parents('li').addClass('on');
-                e.preventDefault;
-                $('html,body').animate({
-                    scrollTop: $('' + _href + '').offset().top - sum_h
-                }, 500);
-            }
         });
 
         // 검색 버튼 클릭
         $('.btn_brand_search').on({
             'click':function(e){
-                show_brand();
+                show_brand($('#brand_search').val(), true);
             }
         });
-        // 취소 버튼 클릭
-        $('.btn_brand_cancel').on({
-            'click':function(e){
-                toggle_brand('list');
-            }
-        });
-        // x 버튼 클릭
-        $('.txt_cancel').on({
-            'click':function(e){
-                $('#brand_search').val('');
-            }
-        });
+
         // 검색 인풋 엔터키 입력 시
         $("#brand_search").on({
             'keyup':function(e){
                 if(e.keyCode == 13) {
-                    show_brand();
+                    show_brand($('#brand_search').val(), true);
                 }
             }
         });
@@ -194,13 +161,13 @@
 
     function toggle_brand(type){
         if(type == 'list') {
-            $('.brand_initial_box').show();
+//            $('.brand_initial_box').show();
             $('.brand_search_list').hide();
             $('.brand_search_box').addClass('total_search');
             $('#brand_search').val('');
             $(".no_data").hide();
         } else {
-            $('.brand_initial_box').hide();
+//            $('.brand_initial_box').hide();
             $('.brand_search_box').removeClass('total_search');
             $('html,body').scrollTop(0);
             $(".no_data").hide();
@@ -208,53 +175,128 @@
         }
     }
 
-    function show_brand() {
-        var brand = $('#brand_search').val();
+    function show_brand(brand, search) {
+        
+        var data = {
+            'mode' : 'get_brand',
+            'brand' : brand,
+        };
+
+        if(search) {
+            data.search = true;
+        }
+        
         if(!$.trim(brand)) {
-            alert(__('브랜드명을 입력해주세요.'));
+            $('.initial_list_sec').show();
+            $(".no_data").hide();
+            $('.brand_search_list').hide();
             return false;
         }
+        
         $("#brand_search").blur();
+        
         $.ajax({
             method: "POST",
             cache: false,
-            url: "../goods/goods_ps.php",
-            data: "mode=get_brand&brand="+brand,
+            url: "../brand/brand_ps.php",
+            data: data,
             success: function(data) {
-                toggle_brand('search');
+
                 var getData = $.parseJSON(data);
+                
                 if(data =='false') {
+                    $('.initial_list_sec').hide();
+                    $('.brand_search_list').hide();
                     $(".no_data").show();
                 } else {
                     var addHtml = "";
                     var cnt = 0;
-                    if(getData.korean) {
-                        $.each(getData.korean, function (brandKey, brandVal) {
-                            $.each(brandVal, function (key, val) {
-                                addHtml += '<li><a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '</a></li>';
-                                cnt++;
-                            });
-                        });
+
+                    var english_alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+                    var korea_alphabet = ['ㄱ', 'ㄴ', 'ㄷ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅅ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'];
+                    
+                    var like = '';
+                    
+                    if($('input[name="la"]:checked').val() == 'korean'){
+                        if(getData.korean) {
+                            for(var i=0; i<korea_alphabet.length; i++){
+
+
+                                if(getData.korean[korea_alphabet[i]]){
+
+                                    addHtml += '<li><strong id="'+korea_alphabet[i]+'"></strong><ul>';
+
+                                    $.each(getData.korean[korea_alphabet[i]], function (key, val) {
+                                        like = '';
+                                    
+                                        addHtml += '<li>';
+                                        addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateKrNm + '<span>'+val.cateNm+'</span></a>';
+                                        <!--{ ? gd_is_login() === false }-->
+                                        addHtml += '<a href="javascript:brandLikeNoMember();" class="zzim"></a>';
+                                        <!--{ : }-->
+                                        if(val.brandLike == 'on'){
+                                            like = 'on';
+                                        }
+                                        addHtml += '<a href="javascript:;" onclick="brandLike('+val.cateCd+', this);" class="zzim '+like+'"></a>';
+                                        <!--{ / }-->
+                                        addHtml += '</li>';
+                                        cnt++;
+                                    });  
+                                }
+
+
+                                addHtml += '</ul></li>';
+                            }
+
+
+                        }
+                        
+                        $('.brand_search_list .korean').show();
+                        $('.brand_search_list .alphabet').hide();
+                        $('.brand_search_list .korean').html(addHtml);
+                    }else{
+                        if(getData.english) {
+
+                            for(var i=0; i<english_alphabet.length; i++){
+
+
+                                if(getData.english[english_alphabet[i]]){
+
+                                    addHtml += '<li><strong id="'+english_alphabet[i]+'"></strong><ul>';
+
+                                    $.each(getData.english[english_alphabet[i]], function (key, val) {
+                                        like = '';
+                                    
+                                        addHtml += '<li>';
+                                        addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '<span>'+val.cateKrNm+'</span></a>';
+                                        <!--{ ? gd_is_login() === false }-->
+                                        addHtml += '<a href="javascript:brandLikeNoMember();" class="zzim"></a>';
+                                        <!--{ : }-->
+                                        if(val.brandLike == 'on'){
+                                            like = 'on';
+                                        }
+                                        addHtml += '<a href="javascript:;" onclick="brandLike('+val.cateCd+', this);" class="zzim '+like+'"></a>';
+                                        <!--{ / }-->
+                                        addHtml += '</li>';
+                                        cnt++;
+                                    });
+                                }
+
+
+                                addHtml += '</ul></li>';
+                            }
+
+
+                        }
+                        
+                        $('.brand_search_list .korean').hide();
+                        $('.brand_search_list .alphabet').show();
+                        $('.brand_search_list .alphabet').html(addHtml);
                     }
-                    if(getData.english) {
-                        $.each(getData.english, function (brandKey, brandVal) {
-                            $.each(brandVal, function (key, val) {
-                                addHtml += '<li><a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '</a></li>';
-                                cnt++;
-                            });
-                        });
-                    }
-                    if(getData.etc) {
-                        $.each(getData.etc, function (brandKey, brandVal) {
-                            $.each(brandVal, function (key, val) {
-                                addHtml += '<li><a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '</a></li>';
-                                cnt++;
-                            });
-                        });
-                    }
-                    $(".brand_search_list ul").html(addHtml);
+                    $('.initial_list_sec').hide();
+                    $(".no_data").hide();
                     $('.brand_search_list').show();
-                    $('.brand_search_list .total span').text(cnt);
+                    
                 }
             },
             error: function (data) {

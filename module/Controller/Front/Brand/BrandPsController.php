@@ -30,7 +30,8 @@ class BrandPsController extends \Controller\Front\Controller
                 try {
 
                     $cateNm = $postValue['brand'];
-                    $getData = $wibBrand->getBrandCodeInfo(null, 4, $cateNm, false, null, true);
+                    $search = $postValue['search'];
+                    $getData = $wibBrand->getBrandCodeInfo(null, 4, $cateNm, false, null, $search);
 
                     echo json_encode($getData);
                     exit;
