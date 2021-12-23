@@ -5,8 +5,8 @@
         <!--{ ? alphabetFl }-->
         <div class="tab_initial_sec">
             <ul class="tab_initial">
-                <li><label for="en"><input type="radio" name="la" id="en" value="alphabet" checked>ABC</label> </li>
-                <li><label for="ko"><input type="radio" name="la" id="ko" value="korean">ㄱㄴㄷ</label> </li>
+                <li><input type="radio" name="la" id="en" value="alphabet" checked><label for="en">ABC</label> </li>
+                <li><input type="radio" name="la" id="ko" value="korean"><label for="ko">ㄱㄴㄷ</label> </li>
             </ul>
             <div class="initial_cate ">
 
@@ -121,10 +121,10 @@
         });
 
         //브랜드 페이지 초성 검색 탭
-        $('.tab_initial_sec .tab_initial li label').on({
-            'click':function(){
-                var langCheck = $(this).find('input').val();
-                console.log('qq');
+        $('.tab_initial_sec .tab_initial li input').on({
+            'change':function(){
+                var langCheck = $(this).val();
+                console.log('??');
                 $('.tab_initial_sec .korean, .tab_initial_sec .alphabet').hide();
                 $('.tab_initial_sec .initial_cate .'+langCheck).show();
                 
@@ -136,7 +136,7 @@
         
         $('.initial_cate button').on('click', function(){
 
-            $('.brand_all_list button').removeClass('on');
+            $('.initial_cate button').removeClass('on');
             $(this).addClass('on');
             show_brand($(this).data('key'), false);
 
@@ -224,7 +224,7 @@
 
                                 if(getData.korean[korea_alphabet[i]]){
 
-                                    addHtml += '<li><strong id="'+korea_alphabet[i]+'"></strong><ul>';
+                                    addHtml += '<li><strong id="'+korea_alphabet[i]+'">'+korea_alphabet[i]+'</strong><ul>';
 
                                     $.each(getData.korean[korea_alphabet[i]], function (key, val) {
                                         like = '';
@@ -262,7 +262,7 @@
 
                                 if(getData.english[english_alphabet[i]]){
 
-                                    addHtml += '<li><strong id="'+english_alphabet[i]+'"></strong><ul>';
+                                    addHtml += '<li><strong id="'+english_alphabet[i]+'">'+english_alphabet[i]+'</strong><ul>';
 
                                     $.each(getData.english[english_alphabet[i]], function (key, val) {
                                         like = '';
