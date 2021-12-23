@@ -1,16 +1,21 @@
 {*** 상품리스트 | goods/goods_list.php ***}
 {#header}
+<link rel="stylesheet" href="../wib/css/wib-list.css">
+<script src="../wib/js/wib-list.js"></script>
+
 <div class="goods_list">
 	<!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
 	<!-- gd5 상단 하위 카테고리 -->
 	<!--{ ? themeInfo.cateHtml1Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1Mobile))}</div><!--{ / }-->
 	<!--{ ? naviDisplay.naviUse =='y' }-->
 	<div class="goods_list_category">
-		<ul>
-			<!--{ @ dataSubCategory( cateCd, cateType ) }-->
-			<li {.style} <!--{ ? cateCd == .cateCd }-->class="selected" <!--{ / }-->><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
-			<!--{ / }-->
-		</ul>
+		<div class="swiper-container swiper">
+			<ul class="swiper-wrapper">
+				<!--{ @ dataSubCategory( cateCd, cateType ) }-->
+				<li {.style} <!--{ ? cateCd == .cateCd }-->class="swiper-slide selected" <!--{ / }-->class="swiper-slide"><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
+				<!--{ / }-->
+			</ul> 
+		</div>
 	</div>
 	<!--{ / }-->
 	<!--{ ? themeInfo.recomDisplayMobileFl == 'y'  && widgetGoodsList}-->
@@ -35,28 +40,29 @@
 		<!--{ ? themeInfo.cateHtml3Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml3Mobile))}</div><!--{ / }-->
 		<div class="goods_top_box">
 			<div class="goods_arr_box">
-                            <div class="goods_sort">
-                                    <div class="inp_sel">
-                                            <select name="goods_sort" onchange="gd_get_list(1,true);">
-                                                    <option value="">{=__('상품정렬')}</option>
-                                                    <option value="date">{=__('등록순')}</option>
-                                                    <option value="price_asc">{=__('낮은가격순')}</option>
-                                                    <option value="price_dsc">{=__('높은가격순')}</option>
-                                            </select>
-                                    </div>
-                            </div>
-                            <div>
-                                <span>필터</span>
-                                {=includeWidget('goods/_wib_filter.html')}
-                            </div>
-<!--				<div class="goods_view_type">
-					<input type="hidden" name="displayType" value="{themeInfo.displayType}" />
-					<ul>
-						<li><button class="{ ? themeInfo.displayType =='02' }on{ / }" data-key="02" >list</button></li>
-						<li><button class="{ ? themeInfo.displayType =='09' }on{ / }" data-key="09">gallery_type1</button></li>
-						<li><button class="{ ? themeInfo.displayType =='01' }on{ / }" data-key="01">gallery_type2</button></li>
-					</ul>
-				</div>-->
+				<!-- 상품 개수 -->
+				<div class="product-count">
+					총{=number_format(gd_isset(page->recode['total']))}개의 상품
+				</div>
+
+				<div class="right">
+					<!-- 소팅 -->
+					<div class="goods_sort">
+						<div class="inp_sel">
+							<select name="goods_sort" onchange="gd_get_list(1,true);">
+								<option value="">{=__('상품정렬')}</option>
+								<option value="date">{=__('등록순')}</option>
+								<option value="price_asc">{=__('낮은가격순')}</option>
+								<option value="price_dsc">{=__('높은가격순')}</option>
+							</select>
+						</div>
+					</div>
+					<!-- 필터 열기 -->
+					<div class="filter-button">
+						필터<i></i>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 
@@ -101,7 +107,7 @@
 			$('select[name="goods_sort"]>option[value="' + gdSortType + '"]').prop('selected', true);
 		}
 		$('.btn_box button.more_btn').on('click', function(e){
-//			gd_get_list($(this).data('page'),false);
+			gd_get_list($(this).data('page'),false);
 		});
 
 		$('.goods_view_type ul li').on('click', function(e){
@@ -197,8 +203,8 @@
                 }
 			}
 		});
-//		gd_save_session(key.sortType, sort);
-//		gd_save_session(key.viewType, displayType);
+		gd_save_session(key.sortType, sort);
+		gd_save_session(key.viewType, displayType);
 	}
 
 	//-->
