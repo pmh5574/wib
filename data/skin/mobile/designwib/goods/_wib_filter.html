@@ -1,0 +1,56 @@
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-filter.js')}"></script>
+<!--필터 카테고리-->
+{? cateType == 'cate'}
+<div class="filter_category">
+    <h1>카테고리</h1>
+    <div class="toggle">
+        <!--{ ? cateParentLink }-->
+        <a href="../goods/goods_list?cateCd={cateParentLink}" class="back"><</a>
+        <!--{ / }-->
+        <!--{ ? cateDisplayNm }-->
+        
+            <h2><!--{cateDisplayNm}--></h2>
+        <!--{ / }-->
+        
+        <ul>
+            <!--{@ cateDisplay}-->
+            <li class="{? getValue['cateCd'] == .cateCd}on{/}">
+                <a href="../goods/goods_list?cateCd={.cateCd}"><!--{.cateNm}--></a>
+            </li>
+            <!--{/}-->
+        </ul>
+    </div>
+</div>
+<!--//필터 카테고리-->
+<!--필터 브랜드-->
+<div class="filter_brand">
+    <h1>브랜드</h1>
+    <div class="toggle">
+        <div>
+            <input type="text" id="filterBrandNm" placeholder="브랜드를 검색해주세요">
+            <button class="search"><img src="/data/skin/front/DESIGNWIB/wib/img/serch_fil.png" /></button>
+        </div>
+        <div class="brand_order_by">
+            <span class="on" data-order-by="">ABC</span>
+            <span data-order-by="kr">가나다</span>
+        </div>
+        <ul class="filterBrandList">
+        </ul>
+    </div>
+    <div class="hiddenBrand" style="display:none"></div>
+</div>
+<!--//필터 브랜드-->
+{/}
+<!--필터 컬러-->
+<div class="filter_color">
+    <h1>컬러</h1>
+    <ul class="toggle">
+        <!--{ @ goodsColorList}-->
+        <li>     
+            <span data-color="{.value_}" <!--{ ? .value_ != 'FFFFFF' }-->style="background:#{.value_}; border:1px solid #{.value_}"<!--{ / }-->>{.value_}</span>
+        </li>
+        <!--{ / }-->
+    </ul>    
+    <div class="hiddenColor" style="display:none"></div>
+</div>
+<!--//필터 컬러-->
