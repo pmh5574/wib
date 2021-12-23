@@ -7,25 +7,23 @@
         <!--{ ? alphabetFl }-->
         <div class="tab_initial_sec">
             <ul class="tab_initial">
-                <li class="on"><label for="en"><input type="radio" name="la" id="en">ABC</label> </li>
-                <li><label for="ko"><input type="radio" name="la" id="ko">ㄱㄴㄷ</label> </li>
+                <li class="on"><label for="en"><input type="radio" name="la" id="en" value="alphabet">ABC</label> </li>
+                <li><label for="ko"><input type="radio" name="la" id="ko" value="korean">ㄱㄴㄷ</label> </li>
             </ul>
             <div class="initial_cate ">
-                <div class="">
-                    <ul class="t_type0 ">
-                        <!--{ @ english_alphabet }-->
-                        <!--{ ? .key_ == 0 }--><li class="on "><!--{ : }--><li class=""><!--{ / }--><a href="#{=.value_}"><span>{=.value_}</span></a></li>
-                        <!--{ / }-->
-                    </ul>
-                </div>
-                <div class="">
-                    <ul class="t_type1" style="display:none;">
-                        <!--{ @ korea_alphabet }-->
-                        <!--{ ? .key_ == 0 }--><li class="on"><!--{ : }--><li class="" ><!--{ / }--><a href="#{=.key_}"><span>{=.value_}</span></a></li>
-                        <!--{ / }-->
-                    </ul>
+                <div class="alphabet">
+                    <button type="button" class="bnt_all_brand on" data-key="">ABC</button>
+                    <!--{ @ english_alphabet }-->
+                    <button type="button" data-key="{=.value_}">{=.value_}</button>
+                    <!--{ / }-->
                 </div>
                 
+                <div class="korean">
+                    <button type="button" class="bnt_all_brand on" data-key="">ㄱㄴㄷ</button>
+                    <!--{ @ korea_alphabet }-->
+                    <button type="button" data-key="{=.value_}">{=.value_}</button>
+                    <!--{ / }-->
+                </div>
             </div>
         </div>
         <!--{ / }-->
@@ -108,12 +106,14 @@
                 brand_tabmenu_idx = idx;
                 $('.tab_initial_sec .tab_initial li').removeClass('on');
                 $(this).addClass('on');
-
+                
+                var langCheck = $(this).find('input[name="la"]').val();
                 $('.initial_cate li').removeClass('on');
                 $('.tab_initial_sec .initial_cate .t_type'+idx).find('li:first-child').addClass('on');
 
                 $('.tab_initial_sec .initial_cate .t_type0, .tab_initial_sec .initial_cate .t_type1').hide();
-                $('.tab_initial_sec .initial_cate .t_type'+idx).show();
+                $('.tab_initial_sec .initial_cate .'+langCheck).show();
+                console.log(langCheck);
 
                 $('.initial_list_sec .b_list0, .initial_list_sec .b_list1').hide();
                 $('.initial_list_sec .b_list'+idx).show();
