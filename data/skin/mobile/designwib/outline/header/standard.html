@@ -1,10 +1,10 @@
 {*** 상단 기본파일 | main/index.php ***}
+<div class="black-dim"></div>
 <div id="header_wrap">
-    
     <!-- 네비게이터 -->
     
     <!-- 서브페이지 전용 헤더 -->
-    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view'}-->
+    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view' && gCurrentPageName != 'goods/goods_list'}-->
     <div class="sub_top">
         <div class="sub_top_left">
             <!--{ ? gReturnUrl }-->
@@ -15,7 +15,7 @@
         </div>
         <h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
         <div class="cart">
-                <a href="javascript:;">
+                <a href="http://m.blue3200.godomall.com/order/cart.php">
                     <strong>{=dataCartGoodsCnt()}</strong>
                 </a>
         </div>
@@ -27,13 +27,96 @@
         <!--{ / }-->
     </div>
     <!--{ / }-->
-    <!--{ ? gCurrentPageName == 'goods/goods_view'}-->
-        <div>asdass</div>
+
+	<!-- 분류페이지 헤더 -->
+    <!--{ ? gCurrentPageName == 'goods/goods_list' }-->
+    <div class="sub_top">
+        <div class="sub_top_left">
+            <!--{ ? gReturnUrl }-->
+            <a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
+            <!--{ : }-->
+            <a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
+            <!--{ / }-->
+        </div>
+        <h2>
+			<a href="#" class="js_page_reload ">
+				<!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}-->
+			</a>
+			<em></em>
+		</h2>
+        <div class="cart">
+			<a href="http://m.blue3200.godomall.com/order/cart.php">
+				<strong>{=dataCartGoodsCnt()}</strong>
+			</a>
+        </div>
+        <!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+        <div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+        <!--{ / }-->
+        <!--{ ? gCurrentPageName == 'board/view' }-->
+        <div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+        <!--{ / }-->
+
+		<div class="depth1-menu">
+			{=includeWidget('proc/_list_category_all')}
+		</div>
+    </div>
     <!--{ / }-->
+
+    <!-- 상세페이지 헤더 -->
+    <!--{ ? gCurrentPageName == 'goods/goods_view'}-->
+    <div class="sub_top detail_h">
+         <div class="top-menu">
+            <div class="shop">
+                <ul>
+                    <li><a href="javascript:;"><span>BLU</span></a></li>
+                    <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+                    <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                </ul>
+            </div>
+        
+        </div>
+		<div class="dewrap">
+			<div class="sub_top_left">
+				<!--{ ? gReturnUrl }-->
+				<a href="{=gReturnUrl}" class="all_page_prev">{=__('이전')}</a>
+				<!--{ : }-->
+				<a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
+				<!--{ / }-->
+			</div>
+			<div class="right_click">
+				<div class="menu_click side_menu">
+					
+				</div>
+				<div class="search_click input_box">
+
+				</div>
+				<div class="cart">
+						<a href="http://m.blue3200.godomall.com/order/cart.php">
+							<strong>{=dataCartGoodsCnt()}</strong>
+						</a>
+				</div> 
+			</div>
+		
+			<!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+			<div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+			<!--{ / }-->
+			<!--{ ? gCurrentPageName == 'board/view' }-->
+			<div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+			<!--{ / }-->
+
+			<div class="search">
+				<!-- 검색 폼 -->
+				{=includeWidget('proc/_header_search.html')}
+				<!-- 검색 폼 -->
+			</div>
+		</div> 
+	</div>
+    <!--{ / }-->
+
     <!-- 메인페이지 전용 헤더 -->
     <!--{ ? gCurrentPageName == 'main/index' }-->
     <header> 
-        <!--탑 배너 -->
+        <!--탑 팝업 -->
         <div class="top_re">
             <span>Renewal</span><span>새로운 모습으로 인사드려요. 리뉴얼 이벤트!</span><button><img src="/data/skin/mobile/designwib/wib/img/topx.png"></button>
         </div>
@@ -42,7 +125,21 @@
                 $('.top_re').toggle();
             });
         </script>
-        
+        <!--하단 팝업-->
+        <div class="bottom_pop">
+            <div class="popcen">
+               <img src="../../wib/img/bottom_pop01.png" alt="하단 팝업">
+                <h4>국내 최고 명품 셀렉샵 <br>블루 앱 설치하고<br><strong>10,000</strong>원 할인받자</h4> 
+            </div>
+            
+            <a href="#">블루 앱으로 보기</a>
+            <p class="no_ok">괜찮아요, 모바일 웹으로 볼게요</p>
+        </div>
+        <script>
+            $('.bottom_pop .no_ok').click(function(){
+                $('.bottom_pop').toggle();
+            });
+        </script>
         
         <div class="header-area">
             <div class="top-menu">
@@ -74,7 +171,7 @@
                                 <!-- 검색 폼 -->
                             </div>
                             <div class="cart">
-                                    <a href="javascript:;">
+                                    <a href="http://m.blue3200.godomall.com/order/cart.php">
                                         <strong>{=dataCartGoodsCnt()}</strong>
                                     </a>
                             </div>
@@ -108,19 +205,6 @@
         </div>
     </header>
     <!--{ / }-->
-
-
-	
-
-    <!-- 검색 -->
-    <div class="search-area">
-        <a href="javascript:;" class="search-close"></a>
-        <div class="inner">
-            <!-- 검색 폼 -->
-            {=includeWidget('proc/_header_search.html')}
-            <!-- 검색 폼 -->
-	</div>
-</div>
 </div>
 <!-- //header_wrap -->
 <nav>
@@ -187,13 +271,9 @@
 							</div>
 							<!-- //tab_menu0 -->
 							<div class="tab_menu1" style="display:none;">
-                                                            <!-- 찜 브랜드 위젯 -->
-                                                            {=includeWidget('proc/_my_wish_brand')}
-                                                            <!--// 찜 브랜드 위젯 -->
-                                                            <!-- 브랜드 위젯 -->
-                                                            {=includeWidget('goods/_brand')}
-                                                            <!--// 브랜드 위젯 -->
-								
+								<!-- 브랜드 위젯 -->
+								{=includeWidget('goods/_brand')}
+								<!--// 브랜드 위젯 -->
 							</div>
 							<!-- //tab_menu1 -->
 							<div class="nav_community_box">
@@ -229,14 +309,51 @@
 
 
 <script>
-    $('._header_search .layer_search_box dl dd .keyword_box input').attr("placeholder","21 S/S 블루 클리어런스 SALE")
-    $(".keyword_box").click(function(){
+
+    $('._header_search .layer_search_box dl dd .keyword_box input').attr("placeholder","검색어를 입력해주세요.")
+
+
+    $(" .input_box").click(function(){
         if($('.layer_search_content').hasClass('on')){ 
             $('.layer_search_content').removeClass('on'); 
         }else{ $('.layer_search_content').addClass('on'); 
         }
         
     });
+    $(".input_box").click(function(){
+        if($('.black_cover').hasClass('on')){ 
+            $('.black_cover').removeClass('on'); 
+        }else{ $('.black_cover').addClass('on'); 
+        }
+        
+    });
+
+    $('.black_cover').click(function(){
+        $('.layer_search_content').removeClass('on');
+        $('.black_cover').removeClass('on');
+    });
 
 
+
+
+ //상세 헤더관련
+    // $(".detail_h .right_click .search_click").click(function(){
+    //         if($('.layer_search_content').hasClass('on')){ 
+    //             $('.layer_search_content').removeClass('on'); 
+    //         }else{ $('.layer_search_content').addClass('on'); 
+    //         }
+            
+    //     });
+    // $(".detail_h .right_click .search_click").click(function(){
+    //     if($('.black_cover').hasClass('on')){ 
+    //         $('.black_cover').removeClass('on'); 
+    //     }else{ $('.black_cover').addClass('on'); 
+    //     }
+        
+    // });
+
+    // $('.black_cover').click(function(){
+    //     $('.layer_search_content').removeClass('on');
+    //     $('.black_cover').removeClass('on');
+    // });
 </script>
