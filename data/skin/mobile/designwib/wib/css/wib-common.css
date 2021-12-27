@@ -562,8 +562,8 @@ nav .nav_category{background: #F5F6F7;}
 .brand_initial_box .tab_initial{margin: 0 auto;padding: 0;text-align: center;}
 .brand_initial_box .tab_initial li{float: none; background: none;border:none;width: auto;height: auto;margin-right: 40px; color: #1A1A1A;font-weight: normal; font-size: 15px;}
 .brand_initial_box .tab_initial li:last-child{margin-right: 0;}
-.brand_initial_box .tab_initial li span{width: 17px;height: 40px;margin-right: 7px; background: url('../../wib/img/input_01.svg') no-repeat center 10px;vertical-align: middle;background-size:17px;}
-.brand_initial_box .tab_initial li span.on{background: url('../../wib/img/input_02.svg') no-repeat center 10px;background-size:17px;}
+.brand_initial_box .tab_initial li span{display: inline-block; width: 55px;height: 40px;padding-left: 14px; margin-right: 7px; background: url('../../wib/img/input_01.svg') no-repeat left;vertical-align: middle;background-size:17px;}
+.brand_initial_box .tab_initial li span.on{background: url('../../wib/img/input_02.svg') no-repeat left;background-size:17px;}
 .brand_initial_box .tab_initial li label{display: inline-block; color: #1A1A1A;font-weight: normal; font-size: 15px;}
 .brand_initial_box .initial_cate{border: none;margin: 0 0 20px ;padding: 0;}
 .brand_initial_box .initial_cate ul{margin: 0 !important;}
