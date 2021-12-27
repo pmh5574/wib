@@ -5,8 +5,8 @@
         <!--{ ? alphabetFl }-->
         <div class="tab_initial_sec">
             <ul class="tab_initial">
-                <li><input type="radio" name="la" id="en" value="alphabet" checked><label for="en">ABC</label> </li>
-                <li><input type="radio" name="la" id="ko" value="korean"><label for="ko">ㄱㄴㄷ</label> </li>
+                <li><span class="input_alphabet on" data-alphabet="alphabet" >ABC</span></li>
+                <li><span class="input_alphabet" data-alphabet="korean" >ㄱㄴㄷ</span></li>
             </ul>
             <div class="initial_cate ">
 
@@ -121,10 +121,13 @@
         });
 
         //브랜드 페이지 초성 검색 탭
-        $('.tab_initial_sec .tab_initial li input').on({
-            'change':function(){
-                var langCheck = $(this).val();
-                console.log('??');
+        $('.tab_initial_sec .tab_initial li .input_alphabet').on({
+            'click':function(){
+                var langCheck = $(this).data('alphabet');
+                
+                $('.tab_initial_sec .tab_initial li .input_alphabet').removeClass('on');
+                $(this).addClass('on');
+                
                 $('.tab_initial_sec .korean, .tab_initial_sec .alphabet').hide();
                 $('.tab_initial_sec .initial_cate .'+langCheck).show();
                 
@@ -217,7 +220,7 @@
                     
                     var like = '';
                     
-                    if($('input[name="la"]:checked').val() == 'korean'){
+                    if($('.tab_initial_sec .tab_initial li .input_alphabet.on').data('alphabet') == 'korean'){
                         if(getData.korean) {
                             for(var i=0; i<korea_alphabet.length; i++){
 
