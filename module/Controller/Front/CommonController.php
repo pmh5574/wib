@@ -35,7 +35,7 @@ class CommonController
             case '/main/index':
                 try {
 
-                    $shopNum = "1";
+                    $shopNum = '1';
                     Session::del('WIB_SHOP_NUM');
                     Session::set('WIB_SHOP_NUM', $shopNum);
                     
@@ -46,7 +46,7 @@ class CommonController
             case '/main/index_pre':
                 try {
 
-                    $shopNum = "2";
+                    $shopNum = '2';
                     Session::del('WIB_SHOP_NUM');
                     Session::set('WIB_SHOP_NUM', $shopNum);
                     
@@ -57,7 +57,7 @@ class CommonController
             case '/main/index_new':
                 try {
 
-                    $shopNum = "3";
+                    $shopNum = '3';
                     Session::del('WIB_SHOP_NUM');
                     Session::set('WIB_SHOP_NUM', $shopNum);
                     
@@ -69,13 +69,29 @@ class CommonController
             default :
                 if ($getURI == "/") {
                     try {
-                        print_r('??');
-                        $shopNum = "1";
+
+                        $shopNum = '1';
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
                         
                     } catch (\Exception $e) {
                         echo json_encode($e);
+                    }
+                }else{
+                    $mallKey = Request::get()->get('mallKey');
+                    
+                    if($mallKey && $mallKey == '1'){
+                        $shopNum = '1';
+                        Session::del('WIB_SHOP_NUM');
+                        Session::set('WIB_SHOP_NUM', $shopNum);
+                    }else if($mallKey && $mallKey == '2'){
+                        $shopNum = '2';
+                        Session::del('WIB_SHOP_NUM');
+                        Session::set('WIB_SHOP_NUM', $shopNum);
+                    }else if($mallKey && $mallKey == '3'){
+                        $shopNum = '3';
+                        Session::del('WIB_SHOP_NUM');
+                        Session::set('WIB_SHOP_NUM', $shopNum);
                     }
                 }
                 break;

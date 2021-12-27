@@ -13,6 +13,7 @@
  */
 namespace Controller\Front\Member;
 
+use Bundle\Component\Apple\AppleLogin;
 use Bundle\Component\Godo\GodoKakaoServerApi;
 use Framework\Utility\ArrayUtils;
 
@@ -51,6 +52,7 @@ class JoinController extends \Controller\Front\Controller
         $thirdPartyProfile = $paycoProfile = $naverProfile = $kakaoProfile = [];
         $naverLoginPolicy = gd_policy('member.naverLogin');
         $kakaoLoginPolicy = gd_policy('member.kakaoLogin');
+        $appleLoginPolicy = gd_policy('member.appleLogin');
 
         if ($session->has(\Component\Godo\GodoPaycoServerApi::SESSION_USER_PROFILE)) {
             $paycoProfile = $session->get(\Component\Godo\GodoPaycoServerApi::SESSION_USER_PROFILE);
@@ -93,7 +95,11 @@ class JoinController extends \Controller\Front\Controller
             $isThirdParty = count($thirdPartyProfile) > 0;
             $thirdPartyProfile = $facebook->toJsonEncode($thirdPartyProfile);
             $scripts[] = 'gd_sns.js';
+        } elseif ($session->has(AppleLogin::SESSION_USER_PROFILE) && $appleLoginPolicy['useFl'] === 'y') {
+            $appleProfile =  $session->get(AppleLogin::SESSION_USER_PROFILE);
+            $scripts[] = 'gd_apple.js';
         }
+
 
         $siteLink = new \Component\SiteLink\SiteLink();
         $this->setData('joinField', \Component\Member\Util\MemberUtil::getJoinField(\Component\Mall\Mall::getSession('sno')));
@@ -111,6 +117,9 @@ class JoinController extends \Controller\Front\Controller
             $this->setData('kakaoProfile', json_encode($kakaoProfile));
         }
         $this->setData('isKakaoJoin', count($kakaoProfile) > 0);
+        $this->setData('isAppleJoin', count($appleProfile) > 0);
+        $this->setData('appleProfile', json_encode($appleProfile));
+
         $countries = \Component\Mall\MallDAO::getInstance()->selectCountries();
         $countryPhone = [];
         foreach ($countries as $key => $val) {
@@ -155,13 +164,18 @@ class JoinController extends \Controller\Front\Controller
         }
 
         $DateYear = [];
+        $DateYearMarri = [];
         $DateMonth = [];
         $DateDay = [];
         $startYear = (!empty($limitAge)) ? (int)date("Y") - $limitAge : (int)date("Y");
+        $startYearMarri = (int)date("Y");
         $endYear = 1900;
         $fixFront = '';
         for ($i=$startYear; $i>=$endYear; $i--) {
             $DateYear[$i] = $i;
+        }
+        for ($i=$startYearMarri; $i>=$endYear; $i--) {
+            $DateYearMarri[$i] = $i;
         }
         for ($j=1; $j<=12; $j++) {
             if ($j < 10) {
@@ -179,6 +193,7 @@ class JoinController extends \Controller\Front\Controller
         }
         $this->setData('countryPhone', $countryPhone);
         $this->setData('DateYear', $DateYear);
+        $this->setData('DateYearMarri', $DateYearMarri);
         $this->setData('DateMonth', $DateMonth);
         $this->setData('DateDay', $DateDay);
 
