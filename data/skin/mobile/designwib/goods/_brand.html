@@ -123,16 +123,20 @@
         //브랜드 페이지 초성 검색 탭
         $('.tab_initial_sec .tab_initial li .input_alphabet').on({
             'click':function(){
-                var langCheck = $(this).data('alphabet');
+                if(!$(this).hasClass('on')){
+                    var langCheck = $(this).data('alphabet');
                 
-                $('.tab_initial_sec .tab_initial li .input_alphabet').removeClass('on');
-                $(this).addClass('on');
+                    $('.tab_initial_sec .tab_initial li .input_alphabet').removeClass('on');
+                    $(this).addClass('on');
+
+                    $('.tab_initial_sec .korean, .tab_initial_sec .alphabet').hide();
+                    $('.tab_initial_sec .initial_cate .'+langCheck).show();
+                    $('.tab_initial_sec .initial_cate .'+langCheck+' .bnt_all_brand').trigger('click');
+
+                    $('.initial_list_sec .korean, .initial_list_sec .alphabet').hide();
+                    $('.initial_list_sec .'+langCheck).show();
+                }
                 
-                $('.tab_initial_sec .korean, .tab_initial_sec .alphabet').hide();
-                $('.tab_initial_sec .initial_cate .'+langCheck).show();
-                
-                $('.initial_list_sec .korean, .initial_list_sec .alphabet').hide();
-                $('.initial_list_sec .'+langCheck).show();
 
             }
         });
@@ -231,7 +235,11 @@
 
                                     $.each(getData.korean[korea_alphabet[i]], function (key, val) {
                                         like = '';
-                                    
+                                        
+                                        if(!val.cateKrNm){
+                                            val.cateKrNm = '';
+                                        }
+                                        
                                         addHtml += '<li>';
                                         addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateKrNm + '<span>'+val.cateNm+'</span></a>';
                                         <!--{ ? gd_is_login() === false }-->
@@ -269,6 +277,10 @@
 
                                     $.each(getData.english[english_alphabet[i]], function (key, val) {
                                         like = '';
+                                        
+                                        if(!val.cateKrNm){
+                                            val.cateKrNm = '';
+                                        }
                                     
                                         addHtml += '<li>';
                                         addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '<span>'+val.cateKrNm+'</span></a>';
