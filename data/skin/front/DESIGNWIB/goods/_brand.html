@@ -10,9 +10,9 @@
             </ul>
             <div class="initial_cate ">
                 <div class="alphabet">
-					<div class="swiper-container">
+					<div class="swiper-container swiper">
 						<div class="swiper-wrapper">
-							<button type="button" class="bnt_all_brand on" data-key="">ABC</button>
+							<button type="button" class="bnt_all_brand swiper-slide on" data-key="">ABC</button>
 							<!--{ @ english_alphabet }-->
 							<button type="button" data-key="{=.value_}" class="swiper-slide">{=.value_}</button>
 							<!--{ / }-->
@@ -20,9 +20,9 @@
 					</div>
                 </div>
                 <div class="korean" style="display: none;">
-					<div class="swiper-container">
+					<div class="swiper-container swiper">
 						<div class="swiper-wrapper">
-							<button type="button" class="bnt_all_brand on" data-key="">ㄱㄴㄷ</button>
+							<button type="button" class="bnt_all_brand swiper-slide on" data-key="">ㄱㄴㄷ</button>
 							<!--{ @ korea_alphabet }-->
 							<button type="button" data-key="{=.value_}" class="swiper-slide">{=.value_}</button>
 							<!--{ / }-->
@@ -222,6 +222,10 @@
 
                                     $.each(getData.korean[korea_alphabet[i]], function (key, val) {
                                         like = '';
+
+										if(!val.cateKrNm){
+                                            val.cateKrNm = '';
+                                        }
                                     
                                         addHtml += '<li>';
                                         addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateKrNm + '<span>'+val.cateNm+'</span></a>';
@@ -260,6 +264,10 @@
 
                                     $.each(getData.english[english_alphabet[i]], function (key, val) {
                                         like = '';
+
+										if(!val.cateKrNm){
+                                            val.cateKrNm = '';
+                                        }
                                     
                                         addHtml += '<li>';
                                         addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '<span>'+val.cateKrNm+'</span></a>';
