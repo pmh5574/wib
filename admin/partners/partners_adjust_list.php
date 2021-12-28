@@ -169,40 +169,61 @@
             <tr>
                 <th><input type="checkbox" class="js-checkall" data-target-name="chkScm[]"/></th>
                 <th>번호</th>
+                <th>환불 사유</th>
                 <th>상태</th>
+                <th>이미지</th>
                 <th>업체명</th>
-                <th>정산 번호</th>
-                <th>등록 일자</th>
-                <th>정산 일자</th>
                 <th>주문 번호</th>
+                <th>주문 일자</th>
+                <th class="partners-tg dn">결제 일자</th>
+                <th class="partners-tg dn">수정일</th>
+                <th class="partners-tg dn">환불 일자</th>
+                <th>주문자명/ID</th>
+                <th>상품명</th>
+                <th class="partners-tg dn">협력사 상품 번호</th>
+                <th class="partners-tg dn">배송지</th>
+                <th class="partners-tg dn">연락처1</th>
+                <th class="partners-tg dn">연락처2</th>
+                <th class="partners-tg dn">배송 메시지</th>
+                <th>옵션</th>
+                <th>상품코드</th>
+                <th>수량</th>
                 <th>화폐</th>
                 <th>공급가</th>
-                <th>적용 크레딧</th>
-                <th>미정산 금액</th>
                 <th>정산 금액</th>
-                <th>정산 초과 금액</th>
-                <th>환불 보증금</th>
-                <th>환불 일자</th>
-                <th>환불 금액(KRW)</th>
-                <th>환불 크레딧</th>
-                <th>충전 금액</th>
-                <th>증빙</th>
-                <th>비고</th>
-                <th>확인 여부</th>
-                <th class="partners-tg dn">확인 일자</th>
-                <th class="partners-tg dn">판매 금액(KRW)</th>
-                <th class="partners-tg dn">판매 금액(외화)</th>
-                <th class="partners-tg dn">적용 마진율</th>
-                <th class="partners-tg dn">관부가세/운송비</th>
-                <th class="partners-tg dn">결제 금액(KRW)</th>
-                <th class="partners-tg dn">결제 금액(외화)</th>
-                <th class="partners-tg dn">차액(외화)</th>
+                <th>등록 일자</th>
+                <th>정산 금액</th>
+                <th>판매 금액</th>
+                <th>결제 금액</th>
+                <th>할인 금액</th>
+                <th>상품 금액</th>
                 <th class="partners-tg dn">적용 환율</th>
+                <th class="partners-tg dn">적용 환율 기준일</th>
+                <th class="partners-tg dn">품목</th>
+                <th class="partners-tg dn">관세</th>
+                <th class="partners-tg dn">개별소비세</th>
+                <th class="partners-tg dn">교육세</th>
+                <th class="partners-tg dn">부가세</th>
+                <th class="partners-tg dn">세금 합계</th>
+                <th class="partners-tg dn">마진</th>
+                <th>환불 보증금</th>
+                <th>환불 금액</th>
+                <th>환불 운송장번호(해외)</th>
+                <th>환불 운송장번호(국내)</th>
+                <th class="partners-tg dn">운송장 번호(해외)</th>
+                <th class="partners-tg dn">운송장 번호(국내)</th>
                 <th class="partners-tg dn">운송비(해외)</th>
                 <th class="partners-tg dn">운송비(국내)</th>
-                <th class="partners-tg dn">추가 운송비(자사)</th>
-                <th class="partners-tg dn">추가 운송비(고객)</th>
-                <th class="partners-tg dn">배송 횟수</th>
+                <th class="partners-tg dn">중량</th>
+                <th class="partners-tg dn">부피</th>
+                <th>배송 횟수</th>
+                <th>증빙</th>
+                <th class="partners-tg dn">구매 동의</th>
+                <th class="partners-tg dn">분쟁 조정</th>
+                <th class="partners-tg dn">협력사 알림</th>
+                <th class="partners-tg dn">수기 등록 여부</th>
+                <th class="partners-tg dn">정산 여부</th>
+                <th>비고</th>
             </tr>
             </thead>
             <tbody>

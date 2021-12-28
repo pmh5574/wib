@@ -122,6 +122,7 @@
                 <th>아이디</th>
                 <th>업체코드</th>
                 <th>국가</th>
+                <th>FTA 계약 여부</th>
                 <th>관세</th>
                 <th>부가세</th>
                 <th>홈페이지</th>
@@ -135,7 +136,7 @@
                 <th class="partners-tg dn">URL 연동방식</th>
                 <th class="partners-tg dn">이미지 연동</th>
                 <th class="partners-tg dn">이미지 연동 방식</th>
-                <th>API 연결상태</th>
+                <th>api 연결상태</th>
                 <th>전체 상품 수</th>
                 <th>등록 상품 수</th>
                 <th>화폐</th>

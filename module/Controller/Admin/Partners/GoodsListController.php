@@ -47,8 +47,6 @@ class GoodsListController extends \Controller\Admin\Controller
 
             $getData = $goods->getAdminListGoods();
             
-//            gd_debug($getData);
-            
             $getData['goodsGridConfigList'] = [
                 'check' => '선택',
                 'no' => '번호',

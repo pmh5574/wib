@@ -5,9 +5,6 @@ namespace Controller\Admin\Partners;
 use App;
 use Request;
 
-/**
- * @author  <tomi@godo.co.kr>
- */
 class LayerGoodsListOptionSimpleController extends \Controller\Admin\Controller 
 {
 

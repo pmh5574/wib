@@ -341,7 +341,7 @@
                 <input type="text" name="scmMessenger" value="<?= $getData['scmMessenger']; ?>" class="form-control width-sm"/>
             </td>
             <th>
-                메시전 ID
+                메신저 ID
             </th>
             <td class="form-inline">
                 <input type="text" name="scmMessengerId" value="<?= $getData['scmMessengerId']; ?>" class="form-control width-xl"/>
