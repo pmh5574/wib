@@ -2,12 +2,12 @@
 
 namespace Controller\Admin\Partners;
 
-class PartnersAdjustListController extends \Controller\Admin\Controller
+class PartnersRefundListController extends \Controller\Admin\Controller
 {
     public function index()
     {
         // --- 메뉴 설정
-        $this->callMenu('partners', 'partners', 'partners_adjust_list');
+        $this->callMenu('partners', 'partners', 'partners_refund_list');
         
         $combineSearch = [
             'memId' => '아이디',

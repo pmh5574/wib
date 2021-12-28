@@ -1,7 +1,7 @@
 <div class="page-header js-affix">
     <h3><?php echo end($naviMenu->location); ?></h3>
     <div class="btn-group">
-        <a href="../partners/partners_regist.php" class="btn btn-red-line">협력사 등록</a>
+        <a href="#" class="btn btn-red-line">수기 등록</a>
     </div>
 </div>
 

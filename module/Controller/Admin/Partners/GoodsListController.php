@@ -64,14 +64,21 @@ class GoodsListController extends \Controller\Admin\Controller
                 'e' => '수량',
                 'f' => '협력사 상품 번호',
                 'fc' => '카테고리',
+                'goodsDescription' => '상품 상세설명',
                 'fa' => '원산지',
                 'fb' => '구성',
                 'scmUnit' => '화폐',
                 'h' => '공급가(외화)',
                 'i' => '공급가(KRW)',
                 'ia' => '협력사 판매금액',
+                'l' => '적용 환율',
+                'la' => '적용 환율 기준일',
                 'j' => '공급사 할인율',
-                'regDt' => '등록일/수정일',
+                'regDt' => '등록일',
+                'modDt' => '수정일',
+                'delDt' => '삭제일',
+                'm' => '상품 등록일',
+                'n' => '등록 후 수정 여부',
                 'k' => '비고'
             ];
 
