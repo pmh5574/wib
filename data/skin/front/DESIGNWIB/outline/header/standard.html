@@ -141,17 +141,17 @@
 			<!-- 상단 카테고리 출력 시작 -->
 			{=includeWidget('proc/category_side', 'type', 'top','cateType','cate','menuType','all')}
 			<!-- 상단 카테고리 출력 끝 -->
-                        <!-- 찜 브랜드 위젯 -->
-                        {=includeWidget('proc/_my_wish_brand')}
-                        <!--// 찜 브랜드 위젯 -->
-                        { ? gThisPageName != 'brand.php' && gThisPageName != 'index_new.php'}
-                        <!-- 브랜드 위젯 -->
-                        {=includeWidget('goods/_brand')}
-                        <!--// 브랜드 위젯 -->
-                        {/}
+			
 		</div>
 		<div class="content brand">
-			
+			<!-- 찜 브랜드 위젯 -->
+			{=includeWidget('proc/_my_wish_brand')}
+			<!--// 찜 브랜드 위젯 -->
+			{ ? gThisPageName != 'brand.php'}
+			<!-- 브랜드 위젯 -->
+			{=includeWidget('goods/_brand')}
+			<!--// 브랜드 위젯 -->
+			{/}
 		</div>
 	</div>
 	<div class="fixed">

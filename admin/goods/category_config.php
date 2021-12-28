@@ -810,10 +810,12 @@ if (preg_match('/MSIE (6|7)/', Request::getUserAgent())) {
                                             <th><?=$info['cateTitle'];?><br />화이트 로고 이미지</th>
                                             <td>
                                                 <label><input type="file" name="whiteBrandImg"></label> <?php if($data['whiteBrandImg']) { ?><label><img src="/data/category/<?=$data['whiteBrandImg']?>?<?=time()?>" style="max-width:200px;"><input type="hidden" name="whiteBrandImg" value="<?=$data['whiteBrandImg']?>"> <input type="checkbox" name="whiteBrandImgDel" value="y">삭제</label><?php } ?>
+                                                <p class="notice-info">svg 이미지로 업로드 해주세요.</p>
                                             </td>
                                             <th><?=$info['cateTitle'];?><br />블랙 로고 이미지</th>
                                             <td>
                                                 <label><input type="file" name="blackBrandImg"></label>  <?php if($data['blackBrandImg']) { ?><label><img src="/data/category/<?=$data['blackBrandImg']?>?<?=time()?>"  style="max-width:200px;"><input type="hidden" name="blackBrandImg" value="<?=$data['blackBrandImg']?>"> <input type="checkbox" name="blackBrandImgDel" value="y">삭제</label><?php } ?>
+                                                <p class="notice-info">svg 이미지로 업로드 해주세요.</p>
                                             </td>
                                             </td>
                                         </tr>

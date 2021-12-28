@@ -1,20 +1,42 @@
 {*** [위젯] 퀵 검색 | proc/_my_wish_brand.php ***}
 <!--{ ? data }-->
-    <div>My Brand</div>
-<!--{ @ data }-->
-    <div>
-        <a href="../goods/goods_list.php?brandCd={.cateCd}">
-            <!--{ ? .smallBrandImg }-->
-                <img src="/data/category/{.smallBrandImg}">
-            <!--{ / }-->
-            <!--{ ? .whiteBrandImg }-->
-                <img src="/data/category/{.whiteBrandImg}">
-            <!--{ : .blackBrandImg }-->
-                <img src="/data/category/{.whiteBrandImg}">
-            <!--{ : }-->
-                {.cateNm}
-            <!--{ / }-->
-        </a>
-    </div>
-<!--{ / }-->
-<!--{ / }-->
+<p class="brand-title">My Brand</>
+<div class="my-brand">
+	<div class="swiper-container swiper">
+		<ul class="swiper-wrapper">
+			<!--{ @ data }-->
+			<li class="swiper-slide">
+				<a href="../goods/goods_list.php?brandCd={.cateCd}">
+					<!--{ ? .smallBrandImg }-->
+						<img src="/data/category/{.smallBrandImg}" class="bg">
+					<!--{ / }-->
+					<!--{ ? .whiteBrandImg }-->
+						<img src="/data/category/{.whiteBrandImg}" class="txt">
+					<!--{ : .blackBrandImg }-->
+						<img src="/data/category/{.whiteBrandImg}" class="txt">
+					<!--{ : }-->
+						{.cateNm}
+					<!--{ / }-->
+				</a>
+			</li>
+			<!--{ / }-->
+		</ul>
+		<!--{ / }-->	
+	</div>
+</div>
+
+
+<!-- Premium Multi Shop’s Pick -->
+<p class="brand-title mt35">Premium Multi Shop’s Pick</>
+<div class="my-brand multi-pick">
+	<div class="swiper-container swiper">
+		<ul class="swiper-wrapper">
+			<li class="swiper-slide">
+				<a href="javascript:;">
+					<img src="../wib/img/s1.png" class="bg">
+					<img src="../wib/img/s3.png" class="txt">
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

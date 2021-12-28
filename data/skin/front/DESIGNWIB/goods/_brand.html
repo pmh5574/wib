@@ -10,17 +10,24 @@
             </ul>
             <div class="initial_cate ">
                 <div class="alphabet">
-                    <button type="button" class="bnt_all_brand on" data-key="">ABC</button>
-                    <!--{ @ english_alphabet }-->
-                    <button type="button" data-key="{=.value_}">{=.value_}</button>
-                    <!--{ / }-->
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<button type="button" class="bnt_all_brand on" data-key="">ABC</button>
+							<!--{ @ english_alphabet }-->
+							<button type="button" data-key="{=.value_}" class="swiper-slide">{=.value_}</button>
+							<!--{ / }-->
+						</div>
+					</div>
                 </div>
-                
                 <div class="korean" style="display: none;">
-                    <button type="button" class="bnt_all_brand on" data-key="">ㄱㄴㄷ</button>
-                    <!--{ @ korea_alphabet }-->
-                    <button type="button" data-key="{=.value_}">{=.value_}</button>
-                    <!--{ / }-->
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<button type="button" class="bnt_all_brand on" data-key="">ㄱㄴㄷ</button>
+							<!--{ @ korea_alphabet }-->
+							<button type="button" data-key="{=.value_}" class="swiper-slide">{=.value_}</button>
+							<!--{ / }-->
+						</div>
+					</div>
                 </div>
             </div>
         </div>
