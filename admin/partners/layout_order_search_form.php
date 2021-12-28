@@ -91,7 +91,7 @@ $queryString = http_build_query($arrQueryString);
                 <?php } else { ?>
                 <tr>
                     <th>검색어</th>
-                    <td colspan="3">
+                    <td>
                         <div class="form-inline">
                             <?= gd_select_box('key', 'key', $search['combineSearch'], null, $search['key'], null, null, 'form-control '); ?>
                             <?= gd_select_box('searchKind', 'searchKind', $search['searchKindArray'], null, $search['searchKind'], null, null, 'form-control '); ?>
@@ -100,6 +100,16 @@ $queryString = http_build_query($arrQueryString);
                                 “검색어 부분포함“으로 검색 시 검색량에 따라 로딩 속도가 느릴 수 있으며, 검색 중 페이지가 멈출 수 있습니다.<br/>
                                 안전한 검색을 위해서 “검색어 전체일치＂로 검색할 것을 권고 드립니다.
                             </div>
+                        </div>
+                    </td>
+                    <th>FTA 적용 여부</th>
+                    <td>
+                        <div class="form-inline search-input mgb8">
+                            <select class="form-control">
+                                <option value="A">전체</option>
+                                <option value="Y">동의</option>
+                                <option value="N">미동의</option>
+                            </select>
                         </div>
                     </td>
                 </tr>

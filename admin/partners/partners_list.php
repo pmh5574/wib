@@ -122,7 +122,8 @@
                 <th>아이디</th>
                 <th>업체코드</th>
                 <th>국가</th>
-                <th>관부가세</th>
+                <th>관세</th>
+                <th>부가세</th>
                 <th>홈페이지</th>
                 <th>이메일</th>
                 <th>연락처</th>
@@ -134,7 +135,7 @@
                 <th class="partners-tg dn">URL 연동방식</th>
                 <th class="partners-tg dn">이미지 연동</th>
                 <th class="partners-tg dn">이미지 연동 방식</th>
-                <th>api 연결상태</th>
+                <th>API 연결상태</th>
                 <th>전체 상품 수</th>
                 <th>등록 상품 수</th>
                 <th>화폐</th>
@@ -265,6 +266,7 @@
                         <td><?= $row['managerId'].$row['deleteText']; ?></td>
                         <td><?= $row['scmCode']; ?></td>
                         <td><?= $row['scmCountry']; ?></td>
+                        <td>기본/미대상</td>
                         <td>기본(<?= $row['scmVat']; ?>)%</td>
                         <td><?= $row['scmUrl']; ?></td>
                         <td><?= $row['scmEmail']; ?></td>
@@ -281,8 +283,8 @@
                         <td><?= ''; ?></td>
                         <td><?= ''; ?></td>
                         <td><?= $scmUnit; ?></td>
-                        <td><?= $scmUnitFl; ?><?= $row['scmCredit']; ?></td>
-                        <td><?= $scmUnitFl; ?><?= $row['scmDeposit']; ?></td>
+                        <td><?= $scmUnitFl; ?><?= number_format($row['scmCredit']); ?></td>
+                        <td><?= $scmUnitFl; ?><?= number_format($row['scmDeposit']); ?></td>
                         <td><?= ''; ?></td>
                         <td class="partners-tg dn"><?= $scmWeeks; ?></td>
                         <td class="partners-tg dn"><?= ''; ?></td>

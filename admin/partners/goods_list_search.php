@@ -42,7 +42,7 @@
                 <?php if(gd_use_provider() === true) { ?>
                 <?php if(gd_is_provider() === false) { ?>
                 <tr>
-                    <th>공급사 구분</th>
+                    <th>협력사 구분</th>
                     <td colspan="3">
                         <div class="form-inline">
                             <input type="hidden" name="scmFl" value="y" />

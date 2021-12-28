@@ -262,7 +262,7 @@
         </tr>
         <tr>
             <th>
-                관부가세
+                부가세
             </th>
             <td class="form-inline">
                 <input type="text" name="scmVat" value="<?= gd_isset($getData['scmVat']); ?>" class="form-control width-xl"/>

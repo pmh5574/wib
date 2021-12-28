@@ -33,10 +33,10 @@
         </div>
         <!--{ / }-->
         <div class="brand_search_box total_search">
-                <div class="search_sec">
-                    <input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
-                    <button type="button" class="btn_brand_search">{=__('검색')}</button>
-                </div>
+			<div class="search_sec">
+				<input type="search" class="input_brand_search"  title="{=__('브랜드명 검색')}" placeholder="{=__('브랜드명 검색')}" id="brand_search" autocomplete="off"/>
+				<button type="button" class="btn_brand_search">{=__('검색')}</button>
+			</div>
             </div>
 
 
@@ -48,7 +48,7 @@
                     <ul>
                         <!--{ @ list.english[.value_] }-->
                         <li>
-                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<span>{=..cateKrNm}</span></a>
+                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<!--{ ? ..cateKrNm }--><span>{=..cateKrNm}</span><!--{ / }--></a>
                             <!--{ ? gd_is_login() === false }-->
                             <a href='javascript:brandLikeNoMember();' class="zzim"></a>
                             <!--{ : }-->

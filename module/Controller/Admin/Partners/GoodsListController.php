@@ -24,7 +24,8 @@ class GoodsListController extends \Controller\Admin\Controller
         // 모듈호출
         $cate = \App::load('\\Component\\Category\\CategoryAdmin');
         $brand = \App::load('\\Component\\Category\\BrandAdmin');
-        $goods = \App::load('\\Component\\Goods\\GoodsAdmin');
+        $goods = \App::load('\\Component\\Wib\\WibGoodsAdmin');
+        
 
         // --- 상품 리스트 데이터
         try {
@@ -46,26 +47,28 @@ class GoodsListController extends \Controller\Admin\Controller
 
             $getData = $goods->getAdminListGoods();
             
+//            gd_debug($getData);
+            
             $getData['goodsGridConfigList'] = [
                 'check' => '선택',
                 'no' => '번호',
                 'a' => '상태',
-                'b' => '업체명',
+                'scmNo' => '업체명',
                 'aa' => '스타일 코드',
                 'ab' => '원단 코드',
                 'ac' => '색상 코드',
                 'goodsImage' => '이미지',
-                'goodsNo' => '상품 번호',
-                'c' => '등록 상품 번호',
-                'd' => '상품 코드',
+                'c' => '상품 번호',
+                'goodsNo' => '등록 상품 번호',
+                'goodsModelNo' => '상품 코드',
                 'goodsNm' => '상품명',
                 'option' => '옵션',
                 'e' => '수량',
                 'f' => '협력사 상품 번호',
-                'cateCd' => '카테고리',
+                'fc' => '카테고리',
                 'fa' => '원산지',
                 'fb' => '구성',
-                'g' => '화폐',
+                'scmUnit' => '화폐',
                 'h' => '공급가(외화)',
                 'i' => '공급가(KRW)',
                 'ia' => '협력사 판매금액',

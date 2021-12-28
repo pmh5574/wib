@@ -89,13 +89,13 @@
                                     <!--번호-->
                                     <td class="center number"><?=number_format($page->idx--); ?></td>
                                 <?php }
-                                if($gridKey === 'goodsNo'){ ?>
-                                    <!--상품코드번호-->
-                                    <td class="center number"><?=$val['goodsNo']; ?></td>
+                                if($gridKey === 'a'){ ?>
+                                    <!--상태-->
+                                    <td class="center"></td>
                                 <?php }
-                                if($gridKey === 'goodsCd'){ ?>
-                                    <!--자체상품코드번호-->
-                                    <td class="center number text-nowrap"><?=$val['goodsCd']; ?></td>
+                                if($gridKey === 'scmNo'){ ?>
+                                    <!--업체명-->
+                                    <td class="center"><?=$val['scmNm']; ?></td>
                                 <?php }
                                 if($gridKey === 'goodsImage'){ ?>
                                     <!--상품이미지-->
@@ -103,6 +103,31 @@
                                         <?=gd_html_goods_image($val['goodsNo'], $val['imageName'], $val['imagePath'], $val['imageStorage'], 40, $val['goodsNm'], '_blank'); ?>
                                     </td>
                                 <?php }
+                                if($gridKey === 'c'){ ?>
+                                    <!--상품번호-->
+                                    <td class="center number"></td>
+                                <?php }
+                                if($gridKey === 'goodsNo'){ ?>
+                                    <!--등록 상품 번호-->
+                                    <td class="center number"><?=$val['goodsNo']; ?></td>
+                                <?php }
+                                if($gridKey === 'goodsModelNo'){ ?>
+                                    <!--모델명-->
+                                    <td class="center text-nowrap"><?=$val['goodsModelNo']; ?></td>
+                                <?php }
+                                if($gridKey === 'e'){ ?>
+                                    <!--API 수량-->
+                                    <td class="center"></td>
+                                <?php }
+                                if($gridKey === 'f'){ ?>
+                                    <!--협력사 상품 번호-->
+                                    <td class="center"></td>
+                                <?php }
+                                if($gridKey === 'fc'){ ?>
+                                    <!--API 기준 상품 카테고리-->
+                                    <td class="center"></td>
+                                <?php }
+                                
                                 if($gridKey === 'goodsNm'){ ?>
                                     <!--상품명-->
                                     <td>
@@ -256,10 +281,6 @@
                                         <td class="center lmenu  text-nowrap"><?=$val['purchaseNm']; ?></td>
                                     <?php } ?>
                                 <?php }
-                                if($gridKey === 'scmNo'){ ?>
-                                    <!--공급사-->
-                                    <td class="center text-nowrap"><?=$val['scmNm']; ?></td>
-                                <?php }
                                 if($gridKey === 'brandCd'){ ?>
                                     <!--브랜드-->
                                     <td class="center text-nowrap"><?=$val['brandNm']; ?></td>
@@ -271,10 +292,6 @@
                                 if($gridKey === 'originNm'){ ?>
                                     <!--원산지-->
                                     <td class="center"><?=$val['originNm']; ?></td>
-                                <?php }
-                                if($gridKey === 'goodsModelNo'){ ?>
-                                    <!--모델명-->
-                                    <td class="center text-nowrap"><?=$val['goodsModelNo']; ?></td>
                                 <?php }
                                 if($gridKey === 'goodsDisplayFl'){ ?>
                                     <!--노출상태-->

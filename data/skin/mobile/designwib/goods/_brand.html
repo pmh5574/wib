@@ -46,11 +46,11 @@
                     <ul>
                         <!--{ @ list.english[.value_] }-->
                         <li>
-                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<span>{=..cateKrNm}</span></a>
+                            <a href="../goods/goods_list.php?brandCd={=..cateCd}">{=..cateNm}<!--{ ? ..cateKrNm}--><span>{=..cateKrNm}</span><!--{ / }--></a>
                             <!--{ ? gd_is_login() === false }-->
                             <a href='javascript:brandLikeNoMember();' class="zzim"></a>
                             <!--{ : }-->
-                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim"></a>
+                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim {? ..brandLike == 'on'}on{/}"></a>
                             <!--{ / }-->
                         </li>
                         <!--{ / }-->
