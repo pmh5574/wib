@@ -110,7 +110,9 @@
                                             <!--{ ? ...duplicationGoods === 'y' }-->
                                             <strong class="chk_none">{=__('중복 상품')}</strong>
                                             <!--{ / }-->
-                                            <em>{...brandNm}</em>
+											<!--{ ? ...brandNm }-->
+                                            <em class="brand">{...brandNm}</em>
+											<!-- { / } -->
                                             <em><a href="../goods/goods_view.php?goodsNo={=...goodsNo}">{=...goodsNm}</a></em>
 
                                             <!--{ ? ...payLimitFl =='y' && is_array(...payLimit) }-->
@@ -1014,7 +1016,7 @@
 												<div class="form_element">
 													<input type="checkbox" id="useMileageAll" onclick="gd_mileage_use_all();"/>
 													<label for="useMileageAll" class="check_s">{=__('전액 사용하기')}</label>
-													<span class="money_use_sum">({=__('보유')} {=mileage.name} : <i>{=mileage.unit} {=gd_global_money_format(gMemberInfo.mileage)}</i>)</span>
+													<span class="money_use_sum">({=__('보유')} {=mileage.name} : <i>{=gd_global_money_format(gMemberInfo.mileage)}{=mileage.unit}</i>)</span>
 												</div>
 												<em class="money_use_txt js-mileageInfoArea"></em>
 											</div>
