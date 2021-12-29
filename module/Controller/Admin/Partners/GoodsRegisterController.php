@@ -340,7 +340,29 @@ class GoodsRegisterController extends \Controller\Admin\Controller
         $this->setData('paycoFl', $paycoConfig['paycoFl']);
         $this->setData('disabled', $disabled);
         $this->setData('msgDate1', gd_installed_date('2019-04-03'));
+        
+        /**
+         * api
+         */
+        //전체 상품
+        $url = "https://srv2.best-fashion.net/ApiV3/token/affc472c99627a92620c6a47f452f67d/callType/allStockGroup";
 
+        //특정상품
+        //$url = "https://srv2.best-fashion.net/ApiV3/token/affc472c99627a92620c6a47f452f67d/callType/singleProductCheck/productID/8354554";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+//        $response = curl_exec($ch);
+//        curl_close($ch);
+        
+//        $result = json_decode($response,true);
+//        gd_debug($result);
+        
         // 옵션에 따라 다른 화면 표시
         // 공급사와 동일한 페이지 사용
         $optionType = gd_policy('goods.option_1903');

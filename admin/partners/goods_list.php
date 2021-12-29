@@ -131,7 +131,7 @@
                                 if($gridKey === 'goodsNm'){ ?>
                                     <!--상품명-->
                                     <td>
-                                        <div><a class="text-blue hand" onclick="goods_register_popup('<?=$val['goodsNo']; ?>' <?php if(gd_is_provider() === true) { echo ",'1'"; } ?>);"><?=$val['goodsNm']; ?></a>
+                                        <div><a class="text-blue hand" onclick="goods_wib_register_popup('<?=$val['goodsNo']; ?>' <?php if(gd_is_provider() === true) { echo ",'1'"; } ?>);"><?=$val['goodsNm']; ?></a>
                                         </div>
                                         <div class="notice-ref notice-sm"><?=Globals::get('gDelivery.' . $val['deliveryFl']); ?><?php if ($val['deliveryFl'] == 'free') {
                                                 echo '(' . $arrDeliveryFree[$val['deliveryFree']] . ')';
@@ -664,5 +664,29 @@
 
         layer_add_info(typeStr,addParam);
     }
+    
+    /**
+    * 상품 등록/수정 팝업창
+    *
+    * @author artherot
+    * @param string orderNo 주문 번호
+    */
+    function goods_wib_register_popup(goodsNo, isProvider, page) {
+       if (isProvider) var url = '/provider/goods/goods_register.php?popupMode=yes&goodsNo=' + goodsNo;
+       else var url = '/partners/goods_register.php?popupMode=yes&goodsNo=' + goodsNo;
+
+       if (page) url += page;
+
+       win = popup({
+           url: url,
+           target: '',
+           width: 1110,
+           height: 800,
+           scrollbars: 'yes',
+           resizable: 'yes'
+       });
+       win.focus();
+       return win;
+    };
     //-->
 </script>

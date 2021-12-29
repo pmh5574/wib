@@ -3101,7 +3101,7 @@ if ($data['mode'] == 'modify') {
     }
     //-->
 </script>
-<form id="frmGoods" name="frmGoods" action="./goods_ps.php" method="post" enctype="multipart/form-data">
+<form id="frmGoods" name="frmGoods" action="../goods/goods_ps.php" method="post" enctype="multipart/form-data">
     <input type="hidden" name="mode" value="<?=$data['mode']; ?>"/>
     <input type="hidden" name="goodsNo" value="<?=$data['goodsNo']; ?>"/>
     <input type="hidden" name="applyGoodsCopy" value="<?=$applyGoodsCopy?>"/>
