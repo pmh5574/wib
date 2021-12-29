@@ -2,9 +2,28 @@
 <div class="black-dim"></div>
 <div id="header_wrap">
     <!-- 네비게이터 -->
-    
+     <!-- 서브페이지 전용 헤더 -->
+    <!--{ ? gCurrentPageName == 'service/company' }-->
+    <div class="sub_top_com">
+        <div class="sub_top_left">
+           <a href="http://m.blue3200.godomall.com/"></a>
+        </div>
+        <div class="cart">
+                <a href="http://m.blue3200.godomall.com/order/cart.php">
+                    <strong>{=dataCartGoodsCnt()}</strong>
+                </a>
+        </div>
+        <!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
+        <div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
+        <!--{ / }-->
+        <!--{ ? gCurrentPageName == 'board/view' }-->
+        <div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
+        <!--{ / }-->
+    </div>
+    <!--{ / }-->
+
     <!-- 서브페이지 전용 헤더 -->
-    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view' && gCurrentPageName != 'goods/goods_list'}-->
+    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view' && gCurrentPageName != 'goods/goods_list' && gCurrentPageName != 'service/company'}-->
     <div class="sub_top">
         <div class="sub_top_left">
             <!--{ ? gReturnUrl }-->
@@ -13,7 +32,6 @@
             <a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
             <!--{ / }-->
         </div>
-        <h2><a href="#" class="js_page_reload "><!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}--></a></h2>
         <div class="cart">
                 <a href="http://m.blue3200.godomall.com/order/cart.php">
                     <strong>{=dataCartGoodsCnt()}</strong>

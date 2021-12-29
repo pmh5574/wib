@@ -1,6 +1,6 @@
 <?php
 
-namespace Controller\Front;
+namespace Controller\Mobile;
 
 use Request;
 use Session;

@@ -17,9 +17,25 @@
 		<div class="top-menu">
 			<div class="shop">
 				<ul>
-					<li><a href="javascript:;"><span>BLU</span></a></li>
-					<li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
-					<li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                                    <!--{ ? shopNum == '1' }-->
+                                        <!-- 블루 -->
+                                        <li><a href="javascript:;"><span>BLU</span></a></li>
+                                        <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+                                        <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                                        <!-- //블루 -->
+                                    <!--{ : shopNum == '2' }-->
+                                        <!-- 프리미엄 멀티샵 -->
+                                        <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+                                        <li><a href="javascript:;"><span>BLU</span></a></li>
+                                        <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                                        <!-- //프리미엄 멀티샵 -->
+                                    <!--{ : shopNum == '3' }-->
+                                        <!-- 뉴니아 -->
+                                        <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                                        <li><a href="javascript:;"><span>BLU</span></a></li>
+                                        <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
+                                        <!-- //뉴니아 -->
+                                    <!--{ / }-->
 				</ul>
 			</div>
 			<div class="link">
@@ -53,25 +69,73 @@
 						<span></span>
 						<span></span>
 					</a>
-					<h1>
+                                        <!--{ ? shopNum == '1' }-->
+                                            <!-- 블루 -->
+                                            <h1>
 						<!--{ @dataBanner('1744488262') }-->{.tag}<!--{ / }-->
-					</h1>
-					<div class="category">
+                                            </h1>
+                                            <div class="category">
 						<ul>
-							<li><a href="javascript:;">라이브<i></i>쇼핑</a></li>
-							<li><a href="javascript:;">국내배송</a></li>
-							<li><a href="javascript:;">해외배송</a></li>
+                                                    <li><a href="javascript:;">라이브<i></i>쇼핑</a></li>
+                                                    <li><a href="javascript:;">국내배송</a></li>
+                                                    <li><a href="javascript:;">해외배송</a></li>
 						</ul>
 						<ul>
-							<li><a href="javascript:;">브랜드</a></li>
-							<li><a href="javascript:;">여성</a></li>
-							<li><a href="javascript:;">남성</a></li>
-							<li><a href="javascript:;">키즈</a></li>
-							<li><a href="javascript:;">신상품</a></li>
-							<li><a href="javascript:;">베스트</a></li>
-							<li><a href="javascript:;">SALE</a></li>
+                                                    <li><a href="javascript:;">브랜드</a></li>
+                                                    <li><a href="javascript:;">여성</a></li>
+                                                    <li><a href="javascript:;">남성</a></li>
+                                                    <li><a href="javascript:;">키즈</a></li>
+                                                    <li><a href="javascript:;">신상품</a></li>
+                                                    <li><a href="javascript:;">베스트</a></li>
+                                                    <li><a href="javascript:;">SALE</a></li>
 						</ul>
-					</div>
+                                            </div>
+                                            <!-- //블루 -->
+                                        <!--{ : shopNum == '2' }-->
+                                            <!-- 프리미엄 멀티샵 -->
+                                           <h1>
+						<!--{ @dataBanner('1744488262') }-->{.tag}<!--{ / }-->
+                                            </h1>
+                                            <div class="category">
+						<ul>
+                                                    <li><a href="javascript:;">라이브<i></i>쇼핑</a></li>
+                                                    <li><a href="javascript:;">국내배송</a></li>
+                                                    <li><a href="javascript:;">해외배송</a></li>
+						</ul>
+						<ul>
+                                                    <li><a href="javascript:;">브랜드</a></li>
+                                                    <li><a href="javascript:;">여성</a></li>
+                                                    <li><a href="javascript:;">남성</a></li>
+                                                    <li><a href="javascript:;">키즈</a></li>
+                                                    <li><a href="javascript:;">신상품</a></li>
+                                                    <li><a href="javascript:;">베스트</a></li>
+                                                    <li><a href="javascript:;">SALE</a></li>
+						</ul>
+                                            </div>
+                                            <!-- //프리미엄 멀티샵 -->
+                                        <!--{ : shopNum == '3' }-->
+                                            <!-- 뉴니아 -->
+                                            <h1>
+						<!--{ @dataBanner('1744488262') }-->{.tag}<!--{ / }-->
+                                            </h1>
+                                            <div class="category">
+						<ul>
+                                                    <li><a href="javascript:;">라이브<i></i>쇼핑</a></li>
+                                                    <li><a href="javascript:;">국내배송</a></li>
+                                                    <li><a href="javascript:;">해외배송</a></li>
+						</ul>
+						<ul>
+                                                    <li><a href="javascript:;">브랜드</a></li>
+                                                    <li><a href="javascript:;">여성</a></li>
+                                                    <li><a href="javascript:;">남성</a></li>
+                                                    <li><a href="javascript:;">키즈</a></li>
+                                                    <li><a href="javascript:;">신상품</a></li>
+                                                    <li><a href="javascript:;">베스트</a></li>
+                                                    <li><a href="javascript:;">SALE</a></li>
+						</ul>
+                                            </div>
+                                            <!-- //뉴니아 -->
+                                        <!--{ / }-->
 				</div>
 				<!-- //END 별개 -->
 				<div class="right">
