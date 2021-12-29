@@ -1,6 +1,23 @@
 {*** 쇼핑몰 메인본문 | main/index.php ***}
 { # header }
+<link type="text/css" rel="stylesheet" href="{=setBrowserCache('../wib/css/wib-main.css')}">
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/slick.js')}"></script>
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main.js')}"></script>
 
-NEWNIA
+
+<!-- 지금, 새로 들어왔어요 -->
+<div class="mcon03">
+	<div class="w1720">
+		<p class="main-title">지금, 새로 들어왔어요</p>
+		<div class="prd">
+			{=includeWidget('goods/_goods_display_main.html','sno','24')}
+			<div class="arrow">
+				<div class="prev-slide"></div>
+				<div class="next-slide"></div>
+			</div>
+			<div class="swiper-scrollbar"></div>
+		</div>
+	</div>
+</div>
 
 { # footer }

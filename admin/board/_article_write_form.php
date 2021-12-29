@@ -1,100 +1,3 @@
-<?php if($req['bdId'] == 'store'){ ?>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66e36baebcee59ff46c436c79a26e167&libraries=services,clusterer,drawing"></script>
-    <script>
-        $(function(){
-            wibMap('<?= $bdWrite['data']['address']; ?>');
-            
-            $('input[name="addressSub"]').blur(function(){
-                var address = $('#wibAddress').val();
-                wibMap(address);
-            });
-            
-        });
-        
-        function wibMap(address)
-        {
-            $('#mmap').html('');
-            var mapContainer = document.getElementById('mmap'), // 지도를 표시할 div 
-                mapOption = {
-                    center: new kakao.maps.LatLng(37.3595953, 127.1053971), // 지도의 중심좌표
-                    level: 11 // 지도의 확대 레벨
-                };  
-                
-            // 지도를 생성합니다    
-            var map = new kakao.maps.Map(mapContainer, mapOption); 
-            
-            // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new kakao.maps.services.Geocoder();
-            
-            // 지도를 클릭한 위치에 표출할 마커입니다
-            var marker = new kakao.maps.Marker(); 
-            var imageSrc = '/data/skin/front/DESIGNWIB/wib/img/kakaoMapPing.png', // 마커이미지의 주소입니다    
-            imageSize = new kakao.maps.Size(22, 30); // 마커이미지의 크기입니다
-
-            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-            
-            // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new kakao.maps.services.Geocoder();
-
-            // 주소로 좌표를 검색합니다
-            geocoder.addressSearch(address, function(result, status) {
-
-                // 정상적으로 검색이 완료됐으면 
-                 if (status === kakao.maps.services.Status.OK) {
-
-                    var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-                    // 결과값으로 받은 위치를 마커로 표시합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map,
-                        position: coords,
-//                        image: markerImage
-                    });
-                    
-                    $('.addressLat').val(result[0].y);
-                    $('.addressLng').val(result[0].x);
-                    
-                    // 지도에 클릭 이벤트를 등록합니다
-                    // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-                    kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
-                        
-                        // 클릭한 위도, 경도 정보를 가져옵니다 
-                        var latlng = mouseEvent.latLng; 
-                        
-                        var callback = function(result, status){
-                            if (status === kakao.maps.services.Status.OK) {
-                                console.log(result[0].address.address_name);
-                                $('#wibAddress').val(result[0].address.address_name);
-                            }
-                        };
-
-                        // 마커 위치를 클릭한 위치로 옮깁니다
-                        marker.setPosition(latlng);
-
-                        var messageLat = latlng.getLat();
-                        var messageLng = latlng.getLng();
-
-                        $('.addressLat').val(messageLat);
-                        $('.addressLng').val(messageLng);
-                        
-                        // 좌표로 법정동 상세 주소 정보를 요청합니다
-                        geocoder.coord2Address(messageLng, messageLat, callback);
-
-                    });
-
-                    // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                    map.setCenter(coords);
-                } 
-            }); 
-            
-            
-            
-        }
-        
-    </script>
-    
-    
-<?php }?>
 <script id="selectGoodsTblTr" type="text/html">
     <tr>
         <td>
@@ -762,17 +665,14 @@
                         <input type="text" name="address" id="wibAddress" readonly="readonly" value="<?= $bdWrite['data']['address']; ?>" class="form-control" style="width: 500px; background-color:#ffffff;"/>
                         <input type="text" name="addressSub" value="<?= $bdWrite['data']['addressSub']; ?>" class="form-control"/>
                         <input type="button" onclick="postcode_search('zonecode', 'address', 'zipcode');" value="주소찾기" class="btn btn-gray btn-sm"/>
-                        <div class="notice-info">상세주소입력시 위도 경도가 자동으로 저장됩니다.</div>
-                        <div class="notice-info">주소 검색이 안되시면 카카오 맵을 클릭하셔서 등록해 주세요.</div>
                     </div>
                  </td>
             </tr>
             <tr>
-                <th>지도</th>
+                <th>스타일 값</th>
                 <td class="form-inline">
-                    <div id="mmap" style="width: 1000px;height: 400px;"></div>
                     <div style="padding-top: 10px;">
-                        위도 : <input type="text" class="addressLat form-control" name="addressLat" value="" /> 경도 : <input type="text" class="addressLng form-control" name="addressLng" value="" />
+                        cssLeft : <input type="text" class="addressLat form-control" name="addressLat" value="<?= $bdWrite['data']['addressLat']; ?>" /> cssTop : <input type="text" class="addressLng form-control" name="addressLng" value="<?= $bdWrite['data']['addressLng']; ?>" />
                     </div>
                 </td>
             </tr>
@@ -925,10 +825,10 @@
                     required: '주소를 입력해 주세요.'
                 },
                 addressLat: {
-                    required: '지도에서 위치를 클릭해주세요.'
+                    required: 'cssLeft값을 입력해주세요.'
                 },
                 addressLng: {
-                    required: '지도에서 위치를 클릭해주세요.'
+                    required: 'cssTop값을 입력해주세요.'
                 },
                 contents: {
                     required: '매장소개를 입력해주세요'

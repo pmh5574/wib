@@ -2,10 +2,9 @@
 { # header }
 <link type="text/css" rel="stylesheet" href="{=setBrowserCache('../wib/css/wib-main.css')}">
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/slick.js')}"></script>
-<script type="text/javascript" src="{=setBrowserCache('../wib/js/swiper.js')}"></script>
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main.js')}"></script>
 <div class="mcon01">
-	<div class="swiper-container">
+	<div class="swiper-container swiper">
 		<div class="swiper-wrapper">
 			<!--{ @dataBanner('3229000310', true) }-->
 			<!--{ ? .index_ == '0'}-->
@@ -16,13 +15,6 @@
 			</div>
 			<!--{ / }-->
 			<!--{ ? .index_ == '1'}-->
-			<div class="swiper-slide">
-				<a href="{.bannerLink}">
-					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
-				</a>
-			</div>
-			<!--{ / }-->
-			<!--{ ? .index_ == '2'}-->
 			<div class="swiper-slide">
 				<a href="{.bannerLink}">
 					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
@@ -90,7 +82,7 @@
 	<div class="w1720">
 		<p class="main-title">지금, 새로 들어왔어요</p>
 		<div class="prd">
-			{=includeWidget('goods/_goods_display_main.html','sno','7')}
+			{=includeWidget('goods/_goods_display_main.html','sno','24')}
 			<div class="arrow">
 				<div class="prev-slide"></div>
 				<div class="next-slide"></div>
