@@ -121,4 +121,75 @@ class WibBoard
         return $lastSno['sno'];
     }
     
+    public function setBdList($bdList,$req)
+    {
+        $wibSql = new WibSql();
+        
+        foreach ($bdList['list'] as $key => $value){
+                
+            //db 추가정보
+            $query = "SELECT storeSearch, storePhoneNum, storeOpenTime, storeHoliday, address, addressSub, addressLat, addressLng FROM es_bd_store WHERE sno = {$value['sno']} LIMIT 999";
+            $result = $wibSql->WibNobind($query);
+
+            if($result){
+
+                $bdList['list'][$key]['storeSearch'] = $result['storeSearch'];
+                $bdList['list'][$key]['storePhoneNum'] = $result['storePhoneNum'];
+                $bdList['list'][$key]['storeOpenTime'] = $result['storeOpenTime'];
+                $bdList['list'][$key]['storeHoliday'] = $result['storeHoliday'];
+                $bdList['list'][$key]['address'] = $result['address'];
+                $bdList['list'][$key]['addressSub'] = $result['addressSub'];
+                $bdList['list'][$key]['addressLat'] = $result['addressLat'];
+                $bdList['list'][$key]['addressLng'] = $result['addressLng'];
+            }
+
+
+            $kakaoContents = $result["address"];
+
+
+            $bdList['list'][$key]['wibkakao'] = $kakaoContents;
+
+
+            $saveFileNm = explode('^|^', $value['saveFileNm']);
+
+            if($saveFileNm[0]){
+
+                $arr = [];
+                //이미지 여러개 뿌리기
+                foreach ($saveFileNm as $k => $val){
+                    $arr[$k]['imgList'] = '/data/board/'.$value['bdUploadPath'].$val;
+                }
+
+                $bdList['list'][$key]['saveFileNmList'] = $arr;
+            }
+            
+            //검색관련
+            if($req['storeSearch'] && $req['searchWord']){
+                
+                if($result['storeSearch'] != $req['storeSearch']){
+                    unset($bdList['list'][$key]);
+            
+                    
+                }else if(strpos($bdList['list'][$key]['subject'],$req['searchWord']) === false && strpos($bdList['list'][$key]['address'],$req['searchWord']) === false && strpos($bdList['list'][$key]['addressSub'],$req['searchWord']) === false){
+
+                    unset($bdList['list'][$key]);
+                }
+                    
+                    
+                
+            }else if($req['storeSearch'] && !($req['searchWord'])){
+                   
+                if($req['storeSearch'] != $result['storeSearch']){
+                    unset($bdList['list'][$key]);
+                }
+            }else if(!($req['storeSearch']) && $req['searchWord']){
+                if(strpos($bdList['list'][$key]['subject'],$req['searchWord']) === false && strpos($bdList['list'][$key]['address'],$req['searchWord']) === false && strpos($bdList['list'][$key]['addressSub'],$req['searchWord']) === false){
+                    unset($bdList['list'][$key]);
+                }
+            }
+
+        }
+        return $bdList;
+    }
+    
 }
