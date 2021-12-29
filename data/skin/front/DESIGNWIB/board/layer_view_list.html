@@ -1,0 +1,22 @@
+<span class="back_btn"></span>
+<div class="cont_all">
+    <!--{ @ data }-->
+        <h1 class="board_tit">{.subject}</h1>
+        <p class="board_addr">{.address}, {.addressSub}</p>
+        <p class="board_tel">T.{.storePhoneNum}</p>
+        <p class="board_info"><b>운영시간:</b> {.storeOpenTime} <br/><b>휴무일:</b> {.storeHoliday}</p>
+        <!--{ ? .saveFileNmList }-->
+
+            <div class="attach">
+                <!--{ @ .saveFileNmList }-->
+                <img src="{..imgList}" alt="{=__('파일첨부')}"/>
+                <!--{ / }-->
+            </div>
+
+        <!--{ / }-->
+        <div class="contents">
+            <h3>매장소개</h3>
+            {.contents}
+        </div>
+    <!--{ / }-->
+</div>

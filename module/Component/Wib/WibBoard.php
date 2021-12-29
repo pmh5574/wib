@@ -192,4 +192,29 @@ class WibBoard
         return $bdList;
     }
     
+    public function getStoreBoardData($sno)
+    {
+        $query = "SELECT subject, saveFileNm, bdUploadPath, contents, address, addressSub, storePhoneNum, storeOpenTime, storeHoliday FROM es_bd_store WHERE sno = {$sno}";
+        $data = $this->wibSql->WibAll($query);
+
+        foreach ($data as $key => $value){
+
+            $saveFileNm = explode('^|^', $value['saveFileNm']);
+
+            if($saveFileNm[0]){
+
+                $arr = [];
+
+                //이미지 여러개 뿌리기
+                foreach ($saveFileNm as $k => $val){
+                    $arr[$k]['imgList'] = '/data/board/'.$value['bdUploadPath'].$val;
+                }
+
+                $data[$key]['saveFileNmList'] = $arr;
+            }
+
+        }
+        
+        return $data;
+    }
 }
