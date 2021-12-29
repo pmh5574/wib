@@ -180,9 +180,20 @@
                             <span></span>
                         </a>
                         <div class="box01">
-                            <h1>
-                            <a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a> 
-                            </h1>
+                            <!--{ ? shopNum == '1' }-->
+                                <!-- 블루 -->
+                                <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
+                                <!-- //블루 -->
+                            <!--{ : shopNum == '2' }-->
+                                <!-- 프리미엄 멀티샵 -->
+                                <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
+                                <!-- //프리미엄 멀티샵 -->
+                            <!--{ : shopNum == '3' }-->
+                                <!-- 뉴니아 -->
+                                <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
+                                <!-- //뉴니아 -->
+                            <!--{ / }-->
+                            
                             <div class="search">
                                 <!-- 검색 폼 -->
                                 {=includeWidget('proc/_header_search.html')}
@@ -196,11 +207,32 @@
                         </div>
                         <div class="category swiper">
                             <ul class="swiper-wrapper">
-                                <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
-                                <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
-                                <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
-                                <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
-                                <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                <!--{ ? shopNum == '1' }-->
+                                    <!-- 블루 -->
+                                    <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                    <!-- //블루 -->
+                                <!--{ : shopNum == '2' }-->
+                                    <!-- 프리미엄 멀티샵 -->
+                                    <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                    <!-- //프리미엄 멀티샵 -->
+                                <!--{ : shopNum == '3' }-->
+                                    <!-- 뉴니아 -->
+                                    <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                    <!-- //뉴니아 -->
+                                <!--{ / }-->
+                                
                             </ul>
                             
                         </div>

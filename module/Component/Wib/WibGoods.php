@@ -176,5 +176,12 @@ class WibGoods
         return count($data);
     }
     
+    public function getShopNo($goodsNo)
+    {
+        $query = "SELECT shopSetting FROM es_goods WHERE goodsNo = {$goodsNo}";
+        $data = $this->wibSql->WibNobind($query);
+        
+        return $data['shopSetting'];
+    }
 }
 

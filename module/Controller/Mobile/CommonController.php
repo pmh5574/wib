@@ -30,6 +30,8 @@ class CommonController
         $pageName = $this->_setPageName($getURI);
         
         $shopNum = Session::get('WIB_SHOP_NUM');
+        
+        $goodsNo = Request::get()->get('goodsNo');
 
         switch ($pageName) {
             case '/main/index':
@@ -65,19 +67,24 @@ class CommonController
                     echo json_encode($e);
                 }
                 break;
-            
-            default :
-                if ($getURI == "/") {
-                    try {
+            case '/goods/goods_view':
+                try {
 
-                        $shopNum = "1";
-                        Session::del('WIB_SHOP_NUM');
-                        Session::set('WIB_SHOP_NUM', $shopNum);
-                        
-                    } catch (\Exception $e) {
-                        echo json_encode($e);
+                    $goods = \App::load('\\Component\\Wib\\WibGoods');
+                    $shopSetting = $goods->getShopNo($goodsNo);
+                    if(!$shopSetting){
+                        $shopSetting = '1';
                     }
-                }else{
+                    Session::del('WIB_CATE');
+                    Session::set('WIB_CATE', $shopSetting);
+                    
+                } catch (\Exception $e) {
+                    echo json_encode($e);
+                }
+                break;
+            case '/goods/goods_search':
+                try {
+                    
                     $mallKey = Request::get()->get('mallKey');
                     
                     if($mallKey && $mallKey == '1'){
@@ -92,6 +99,22 @@ class CommonController
                         $shopNum = "3";
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
+                    }
+                    
+                } catch (\Exception $e) {
+                    echo json_encode($e);
+                }
+                break;
+            default :
+                if ($getURI == "/") {
+                    try {
+
+                        $shopNum = "1";
+                        Session::del('WIB_SHOP_NUM');
+                        Session::set('WIB_SHOP_NUM', $shopNum);
+                        
+                    } catch (\Exception $e) {
+                        echo json_encode($e);
                     }
                 }
                 break;
