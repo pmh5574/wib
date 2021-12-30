@@ -5245,7 +5245,7 @@ class WibGoodsAdmin extends \Component\Goods\Goods
 
             // 아이콘  설정
             if (empty($data) === false) {
-                $this->setAdminListGoods($data,",g.goodsBenefitSetFl, g.optionFl, g.goodsModelNo");
+                $this->setAdminListGoods($data,",g.goodsBenefitSetFl, g.optionFl, g.goodsModelNo, g.partnersGoodsNo, g.partnersCategory, g.partnersFixedPrice, g.partnersGoodsPrice, g.partnersExchangeSno, g.partnersExchangeRate, g.partnersExchangeRateDt, g.modDtFl");
             }
 
             // 상품그리드

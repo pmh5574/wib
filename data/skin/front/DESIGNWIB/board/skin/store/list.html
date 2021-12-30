@@ -5,9 +5,9 @@
 </div>
 <!--{/}-->
 
-<h1>실행부분</h1>
+<!-- 카카오맵 주소목록 가져오기 부분-->
 <!--{@ bdList.list}--> 
-<div class="addLatLng" data-addressLat= "{.addressLat}" data-addressLng= "{.addressLng}">{.addressLat},{.addressLng}</div>
+<div class="addLatLng" data-addressLat= "{.addressLat}" data-addressLng= "{.addressLng}"></div>
 <!--{/}-->
 
 <h1>kakao Map</h1>
@@ -128,14 +128,16 @@
                     <!--{ ? bdList.cfg.bdCategoryFl == 'y'}-->
                     <td> <!--{? .category }-->[{.category}]<!--{/}--> </td>
                     <!--{/}-->
+                    
                     <td class="board_tit">
+                        <button id="loadBtn">Load btn</button><br>
+                        <div id ="ajax_view">load 영역</div>
                         {.gapReply}
                         <!--{ ? .groupThread }--><img src="{bdList.cfg.iconImage.re.url}"alt="{=__('답변')}" style="padding:0 5px" /><!--{/}-->
-                        <a onclick="return false" href="javascript:gd_btn_view('{req.bdId}',{.sno} ,'{.auth.view}')" >
+                        <a  href="javascript:gd_btn_view('{req.bdId}',{.sno} ,'{.auth.view}')" >
                             <!--{ ? .isSecret == 'y' }-->
                             <img src="{bdList.cfg.iconImage.secret.url}" alt="{=__('비밀글')}" align=absmiddle>
                             <!--{ / }-->
-
                             <strong>{.subject} <br>번호 : {.storePhoneNum}<br> 주소 : {.address}&nbsp{.addresssub}</br></strong>
                             
                             <!--{? bdList.cfg.bdMemoFl == 'y' && .memoCnt>0}-->
@@ -257,6 +259,8 @@
 </form>
 
 <div id="layerDim" class="dn">&nbsp;</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="\{=c.PATH_SKIN}js/gd_board_list.js" charset="utf-8"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66e36baebcee59ff46c436c79a26e167&libraries=services,clusterer,drawing"></script>
 <script>
@@ -271,6 +275,24 @@
             })
     });
     $("#no_event").removeAttr("href");
+
+    $(function() {
+	    $("#loadBtn").click(function() {
+			$.ajax({
+		    	url : "test_view.php",
+		    	type : "get", 
+				dataType : "html", //, text - 출력하고 보여주기 위한 용도
+				data : {},
+				success : function(res) {
+					$("#ajax_view").html(res);
+					console.log(res);
+				},
+				error : function(err) {
+					console.error(err);
+				}
+			});
+		});		
+    });
 
     /*
      * 카카오 맵 구현 부분
@@ -315,4 +337,12 @@
         marker.setMap(map);
     }
 
+    
+
 </script>
+
+<style>
+	#html{
+		background-color: red;
+	}
+</style>

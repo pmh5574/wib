@@ -1,262 +1,150 @@
 {*** 테스트 | proc/test_board.php ***}
 {# header}
+<!-- 디자인위브 추가 -->
+<link type="text/css" rel="stylesheet" href="../wib/css/wib-store.css">
+<script type="text/javascript" src="../wib/js/wib-store.js"></script>
+
 <div class="content">
-    <!-- 디자인위브 추가 -->
-    <script type="text/javascript" src="../wib/js/wib-store.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=66e36baebcee59ff46c436c79a26e167&libraries=services,clusterer,drawing"></script>
-    <script>
-    function setMap(){
-        $('.map').html('');
-
-        var addressLat = [];
-        var addressLng = [];
-
-
-        $('.total_list').each(function(i,t){
-            addressLat[i] = [];
-            addressLng[i] = [];
-
-
-            $(this).children('li').each(function(index,item){
-                addressLat[i][index] = $(this).data('lat');
-                addressLng[i][index] = $(this).data('lng');
-            });
-
-
-
-        });
-
-        var positions = [];
-
-        // 마커를 표시할 addressLng title 객체 배열입니다
-        for(var i = 0; i<addressLat.length; i++){
-            for(var j = 0; j<5; j++){
-                if(addressLat[i][j]){
-                    positions.push({
-                        'latlng' : new kakao.maps.LatLng(addressLat[i][j], addressLng[i][j])
-                    });
-                }
-            }
-        }
-
-        setMarker(positions);
-
-    }
-
-    function setMarker(positions){
-
-
-        var mapContainer = document.getElementsByClassName('map')[0]; // 지도를 표시할 div  
-        var mapOption = '';
-        var screenWidth = $(window).width();
-
-        if(screenWidth < 769){
-            mapOption = {
-                center: new kakao.maps.LatLng(37.553498, 126.926884), // 지도의 중심좌표
-                level: 11 // 지도의 확대 레벨
-            };
-
-        }else{
-            mapOption = {
-                center: new kakao.maps.LatLng(37.3595953, 127.1053971), // 지도의 중심좌표
-                level: 11 // 지도의 확대 레벨
-            };
-        }
-
-        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-        var imageSrc = '../../../wib/img/icon/map_kakao.png', // 마커이미지의 주소입니다    
-        imageSize = new kakao.maps.Size(22, 30); // 마커이미지의 크기입니다
-
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-        // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-
-
-        // 주소-좌표 변환 객체를 생성합니다
-        var geocoder = new kakao.maps.services.Geocoder();
-        var marker = new kakao.maps.Marker();
-
-        var center_check = 0;
-        for (var i = 0; i < positions.length; i++) {
-
-            // 결과값으로 받은 위치를 마커로 표시합니다
-            marker = new kakao.maps.Marker({
-                map: map,
-                title: positions[i].latlng,
-                position: positions[i].latlng,
-//                image: markerImage // 마커이미지 설정 
-            });
-
-            marker.setMap(map);
-
-
-
-            //카카오 주소값이랑 사용자 주소값이랑 비교해서 같은 li 클릭되게
-            kakao.maps.event.addListener(marker, 'click', function() {
-                //주소값
-                var Fb = $(this).attr('Fb').replace('(',"");
-                Fb = Fb.replace(')',"");
-
-                $('.total_list li').each(function(){
-
-                   var nowAddress = $(this).data('latlng');
-
-                   if(nowAddress.indexOf(Fb) != -1){
-
-                       $(this).trigger('click');
-
-                   }
-                });
-
-            });
-
-
-
-        }
-
-    }
-
-    </script>
-    <!-- 게시판 명(MO) -->
-    <div class="board_zone_tit mo_tit">
-            <h2>{=__(bdList.cfg.bdNm)}</h2>
-    </div>
-    <!--// 게시판 명(PC) -->
-
-    <!-- 지도 영역 -->
-    <div class="map"></div>
-    <!--// 지도 영역 -->
-
+	<div class="map">
+		<div class="img_box">
+			<img src="../wib/img/map.png" alt="지도"/>
+			<div class="point">블루 청담점<span></span></div>
+		</div>
+	</div>
     <div class="store_list">
+		<!--{ ? bdList.cfg.bdHeader && !inList}-->
+		<div class="addition_zone">
+			<p>{=bdList.cfg.bdHeader}</p>
+		</div>
+		<!--{/}-->
 
-            <!--{ ? bdList.cfg.bdHeader && !inList}-->
-            <div class="addition_zone">
-                    <p>{=bdList.cfg.bdHeader}</p>
-            </div>
-            <!--{/}-->
+		<div class="board_zone_sec">
+			<!-- 게시판 명(PC) -->
+			<!--{?!inList}-->
+			<div class="board_zone_tit">
+				<h2>{=__(bdList.cfg.bdNm)}</h2>
+			</div>
+			<!--{/}-->
+			<!--// 게시판 명(PC) -->
 
-            <div class="board_zone_sec">
+			<!-- 검색창 -->
+			<div class="board_search_box">
+				<form name="frmList" id="frmList" action="list.php" method="get">
+					<input type="hidden" name="bdId" value="{bdList.cfg.bdId}"/>
+					<input type="hidden" name="memNo" value="{req.memNo}"/>
+					<input type="hidden" name="noheader" value="{req.noheader}"/>
 
-                    <!-- 게시판 명(PC) -->
-                    <!--{?!inList}-->
-                    <div class="board_zone_tit">
-                            <h2>{=__(bdList.cfg.bdNm)}</h2>
-                    </div>
-                    <!--{/}-->
-                    <!--// 게시판 명(PC) -->
+					<!--{ ? bdList.cfg.bdCategoryFl == 'y'}-->
+					{=gd_select_box('category', 'category', bdList.cfg.arrCategory, null, gd_isset(req.category), __('선택'), 'style="width: 80px;"','chosen-select')}
+					<!--{/}-->
 
-                    <!-- 검색창 -->
-                    <div class="board_search_box">
-                            <form name="frmList" id="frmList" action="list.php" method="get">
-                                <input type="hidden" name="bdId" value="{bdList.cfg.bdId}"/>
-                                <input type="hidden" name="memNo" value="{req.memNo}"/>
-                                <input type="hidden" name="noheader" value="{req.noheader}"/>
+					<select class="chosen-select" name="storeSearch">
+						<option value="">시/도</option>
+						<option value="서울특별시" <!--{ ? req.storeSearch == '서울특별시'}-->selected<!--{/}-->> 서울특별시 </option>
+						<option value="부산광역시" <!--{ ? req.storeSearch == '부산광역시'}-->selected<!--{/}-->> 부산광역시 </option>
+						<option value="대구광역시" <!--{ ? req.storeSearch == '대구광역시'}-->selected<!--{/}-->> 대구광역시 </option>
+						<option value="인천광역시" <!--{ ? req.storeSearch == '인천광역시'}-->selected<!--{/}-->> 인천광역시 </option>
+						<option value="광주광역시" <!--{ ? req.storeSearch == '광주광역시'}-->selected<!--{/}-->> 광주광역시 </option>
+						<option value="대전광역시" <!--{ ? req.storeSearch == '대전광역시'}-->selected<!--{/}-->> 대전광역시 </option>
+						<option value="울산광역시" <!--{ ? req.storeSearch == '울산광역시'}-->selected<!--{/}-->> 울산광역시 </option>
+						<option value="경기도" <!--{ ? req.storeSearch == '경기도'}-->selected<!--{/}-->> 경기도 </option>	
+						<option value="강원도" <!--{ ? req.storeSearch == '강원도'}-->selected<!--{/}-->> 강원도 </option>
+						<option value="충청북도" <!--{ ? req.storeSearch == '충청북도'}-->selected<!--{/}-->> 충청북도 </option>	
+						<option value="충청남도" <!--{ ? req.storeSearch == '충청남도'}-->selected<!--{/}-->> 충청남도 </option>	
+						<option value="전라북도" <!--{ ? req.storeSearch == '전라북도'}-->selected<!--{/}-->> 전라북도 </option>	
+						<option value="전라남도" <!--{ ? req.storeSearch == '전라남도'}-->selected<!--{/}-->> 전라남도 </option>		
+						<option value="경상북도" <!--{ ? req.storeSearch == '경상북도'}-->selected<!--{/}-->> 경상북도 </option>
+						<option value="경상남도" <!--{ ? req.storeSearch == '경상남도'}-->selected<!--{/}-->> 경상남도 </option>		
+						<option value="제주특별자치도" <!--{ ? req.storeSearch == '제주특별자치도'}-->selected<!--{/}-->> 제주특별자치도 </option>
+						<option value="세종특별자치시" <!--{ ? req.storeSearch == '세종특별자치시'}-->selected<!--{/}-->> 세종특별자치시 </option>		
+					</select>
 
-                                <!--{ ? bdList.cfg.bdCategoryFl == 'y'}-->
-                                {=gd_select_box('category', 'category', bdList.cfg.arrCategory, null, gd_isset(req.category), __('선택'), 'style="width: 80px;"','chosen-select')}
-                                <!--{/}-->
-                                <select class="chosen-select" name="storeSearch">
-                                    <option value="">시/도</option>
-                                    <option value="서울특별시" <!--{ ? req.storeSearch == '서울특별시'}-->selected<!--{/}-->> 서울특별시 </option>
-                                    <option value="부산광역시" <!--{ ? req.storeSearch == '부산광역시'}-->selected<!--{/}-->> 부산광역시 </option>
-                                    <option value="대구광역시" <!--{ ? req.storeSearch == '대구광역시'}-->selected<!--{/}-->> 대구광역시 </option>
-                                    <option value="인천광역시" <!--{ ? req.storeSearch == '인천광역시'}-->selected<!--{/}-->> 인천광역시 </option>
-                                    <option value="광주광역시" <!--{ ? req.storeSearch == '광주광역시'}-->selected<!--{/}-->> 광주광역시 </option>
-                                    <option value="대전광역시" <!--{ ? req.storeSearch == '대전광역시'}-->selected<!--{/}-->> 대전광역시 </option>
-                                    <option value="울산광역시" <!--{ ? req.storeSearch == '울산광역시'}-->selected<!--{/}-->> 울산광역시 </option>
-                                    <option value="경기도" <!--{ ? req.storeSearch == '경기도'}-->selected<!--{/}-->> 경기도 </option>	
-                                    <option value="강원도" <!--{ ? req.storeSearch == '강원도'}-->selected<!--{/}-->> 강원도 </option>
-                                    <option value="충청북도" <!--{ ? req.storeSearch == '충청북도'}-->selected<!--{/}-->> 충청북도 </option>	
-                                    <option value="충청남도" <!--{ ? req.storeSearch == '충청남도'}-->selected<!--{/}-->> 충청남도 </option>	
-                                    <option value="전라북도" <!--{ ? req.storeSearch == '전라북도'}-->selected<!--{/}-->> 전라북도 </option>	
-                                    <option value="전라남도" <!--{ ? req.storeSearch == '전라남도'}-->selected<!--{/}-->> 전라남도 </option>		
-                                    <option value="경상북도" <!--{ ? req.storeSearch == '경상북도'}-->selected<!--{/}-->> 경상북도 </option>
-                                    <option value="경상남도" <!--{ ? req.storeSearch == '경상남도'}-->selected<!--{/}-->> 경상남도 </option>		
-                                    <option value="제주특별자치도" <!--{ ? req.storeSearch == '제주특별자치도'}-->selected<!--{/}-->> 제주특별자치도 </option>
-                                    <option value="세종특별자치시" <!--{ ? req.storeSearch == '세종특별자치시'}-->selected<!--{/}-->> 세종특별자치시 </option>		
-                                </select>
+					<!--{ ? bdList.cfg.bdCategoryFl == 'y'}-->
+					{=gd_select_box('category', 'category', bdList.cfg.arrCategory, null, gd_isset(req.category), __('선택'), 'style="width: 80px;"','chosen-select')}
+					<!--{/}-->
 
-                                <div class="search_input_box">
-                                        <input type="text" class="text" name="searchWord" value="{=req.searchWord}" placeholder="매장명 또는 주소 입력"/>
-                                        <button class="btn_board_search"><em>{=__('검색')}</em></button>
-                                </div>
-                            </form>
-                    </div>
-                    <!--// 검색창 -->
+					<select class="chosen-select" name="storeSearch">
+						<option value="">시/도</option>
+						<option value="서울특별시" <!--{ ? req.storeSearch == '서울특별시'}-->selected<!--{/}-->> 서울특별시 </option>
+						<option value="부산광역시" <!--{ ? req.storeSearch == '부산광역시'}-->selected<!--{/}-->> 부산광역시 </option>
+						<option value="대구광역시" <!--{ ? req.storeSearch == '대구광역시'}-->selected<!--{/}-->> 대구광역시 </option>
+						<option value="인천광역시" <!--{ ? req.storeSearch == '인천광역시'}-->selected<!--{/}-->> 인천광역시 </option>
+						<option value="광주광역시" <!--{ ? req.storeSearch == '광주광역시'}-->selected<!--{/}-->> 광주광역시 </option>
+						<option value="대전광역시" <!--{ ? req.storeSearch == '대전광역시'}-->selected<!--{/}-->> 대전광역시 </option>
+						<option value="울산광역시" <!--{ ? req.storeSearch == '울산광역시'}-->selected<!--{/}-->> 울산광역시 </option>
+						<option value="경기도" <!--{ ? req.storeSearch == '경기도'}-->selected<!--{/}-->> 경기도 </option>	
+						<option value="강원도" <!--{ ? req.storeSearch == '강원도'}-->selected<!--{/}-->> 강원도 </option>
+						<option value="충청북도" <!--{ ? req.storeSearch == '충청북도'}-->selected<!--{/}-->> 충청북도 </option>	
+						<option value="충청남도" <!--{ ? req.storeSearch == '충청남도'}-->selected<!--{/}-->> 충청남도 </option>	
+						<option value="전라북도" <!--{ ? req.storeSearch == '전라북도'}-->selected<!--{/}-->> 전라북도 </option>	
+						<option value="전라남도" <!--{ ? req.storeSearch == '전라남도'}-->selected<!--{/}-->> 전라남도 </option>		
+						<option value="경상북도" <!--{ ? req.storeSearch == '경상북도'}-->selected<!--{/}-->> 경상북도 </option>
+						<option value="경상남도" <!--{ ? req.storeSearch == '경상남도'}-->selected<!--{/}-->> 경상남도 </option>		
+						<option value="제주특별자치도" <!--{ ? req.storeSearch == '제주특별자치도'}-->selected<!--{/}-->> 제주특별자치도 </option>
+						<option value="세종특별자치시" <!--{ ? req.storeSearch == '세종특별자치시'}-->selected<!--{/}-->> 세종특별자치시 </option>		
+					</select>
+				</form>
+			</div>
+			<!--// 검색창 -->
 
-                    <div class="board_zone_cont">
-                            <div class="board_zone_list" align="{bdList.cfg.bdAlign}">
+			<!-- 검색수 -->
+			<div class="board_count">
+				<h6>검색결과 총 <span>7</span>개</h6>
+			</div>
+			<!--// 검색수 -->
 
-                                    <!-- 매장리스트 -->
-                                    <div class="board_list">
+			<div class="board_zone_cont">
+				<div class="board_zone_list" align="{bdList.cfg.bdAlign}">
+					<!-- 매장리스트 -->
+					<div class="board_list">
+						<!--{? bdList.list}-->
+						<!--{ @ bdList.list }-->
+							<ul class="total_list page_list">
+								<li data-sno="{.sno}" data-auth="{.auth.view}" data-title="{.subject}" data-address="{.address}" data-addresssub="{.addressSub}" data-number="{.storePhoneNum}" data-latlng="{.addressLat}, {.addressLng}" data-lat="{.addressLat}" data-lng="{.addressLng}">
+									<div class="txt">
+										<h1 class="board_tit">{.subject}</h1>
+										<p class="board_addr">{.address}, {.addressSub}</p>
+										<p class="board_tel">T.{.storePhoneNum}</p>
+									</div>
+									<div class="icon"></div>
+								</li>
+							</ul>
+						<!--{/}-->
+						<!--{:}-->
+						<ul>
+							<li class="nolist">
+								{=__('매장이 존재하지 않습니다.')}
+							</li>
+						</ul>
+						<!--{/}-->
+						<div id="board_detail">
+							<div class="cont_box">
+							</div>
+						</div>
+					</div>
+					<!--// 매장리스트 -->
+				</div>
+				<!-- //board_zone_list -->
 
-                                                <!--{? bdList.list}-->
-                                                <!--{ @ bdList.list }-->
-                                                    <ul class="total_list page_list">
-
-                                                        <li data-sno="{.sno}" data-auth="{.auth.view}" data-title="{.subject}" data-address="{.address}" data-addresssub="{.addressSub}" data-number="{.storePhoneNum}" data-latlng="{.addressLat}, {.addressLng}" data-lat="{.addressLat}" data-lng="{.addressLng}">
-                                                            <div class="txt">
-                                                                    <h1 class="board_tit">{.subject}</h1>
-                                                                    <p class="board_addr">{.address}, {.addressSub}</p>
-                                                                    <p class="board_tel">T.{.storePhoneNum}</p>
-                                                            </div>
-                                                            <div class="icon"></div>
-                                                        </li>
-
-                                                    </ul>
-                                                <!--{/}-->
-                                                <!--{:}-->
-                                                <ul>
-                                                    <li class="nolist">
-                                                        {=__('매장이 존재하지 않습니다.')}
-                                                    </li>
-
-                                                <!--{/}-->
-                                            </ul>
-
-                                            <div id="board_detail">
-
-                                                <div class="cont_box">
-                                                </div>
-
-                                            </div>
-
-
-                                    </div>
-                                    <!--// 매장리스트 -->
-
-
-                            </div>
-                            <!-- //board_zone_list -->
-
-                            <!--{? !inList && bdList.cfg.auth.write == 'y'}-->
-                            <div class="btn_right_box">
-                                    <button type="button" class="btn_write" onclick="gd_btn_write('{req.bdId}')"><strong>{=__('글쓰기')}</strong></button>
-                            </div>
-                            <!--{/}-->
-
-                    </div>
-                    <!-- //board_zone_cont -->
-            </div>
-            <!-- //board_zone_sec -->
-            <!--{?bdList.cfg.bdFooter && !inList}-->
-            <div class="addition_zone">
-                    <p>{=bdList.cfg.bdFooter}</p>
-            </div>
-            <!--{/}-->
+				<!--{? !inList && bdList.cfg.auth.write == 'y'}-->
+				<div class="btn_right_box">
+					<button type="button" class="btn_write" onclick="gd_btn_write('{req.bdId}')"><strong>{=__('글쓰기')}</strong></button>
+				</div>
+				<!--{/}-->
+			</div>
+			<!-- //board_zone_cont -->
+		</div>
+		<!-- //board_zone_sec -->
+		<!--{?bdList.cfg.bdFooter && !inList}-->
+		<div class="addition_zone">
+				<p>{=bdList.cfg.bdFooter}</p>
+		</div>
+		<!--{/}-->
     </div>
 
     <div class="dark_bg"></div>
 
-    <!-- 이미지 팝업 -->
-    <div class="img_pop">
-            <div class="img_pop_all">
-                    <div class="img">
-                    </div>
-                    <span class="pop_close"></span>
-            </div>
-    </div>
-    <!--// 이미지 팝업 -->
+   
 
 
 

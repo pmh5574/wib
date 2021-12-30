@@ -69,6 +69,14 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         
         // 211216 디자인위브 mh 추가
         $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+//        $arrField[] = ['val' => 'partnersGoodsNo', 'typ' => 's', 'def' => null]; // 협력사 상품 번호
+//        $arrField[] = ['val' => 'partnersCategory', 'typ' => 's', 'def' => null]; // API 카테고리
+//        $arrField[] = ['val' => 'partnersFixedPrice', 'typ' => 's', 'def' => null]; // 공급가(외화)
+//        $arrField[] = ['val' => 'partnersGoodsPrice', 'typ' => 's', 'def' => null]; // 협력사 판매금액
+//        $arrField[] = ['val' => 'partnersExchangeSno', 'typ' => 's', 'def' => null]; // 환율 정보 sno
+//        $arrField[] = ['val' => 'partnersExchangeRate', 'typ' => 's', 'def' => null]; // 적용 환율
+//        $arrField[] = ['val' => 'partnersExchangeRateDt', 'typ' => 's', 'def' => null]; // 적용 환율 기준일
+//        $arrField[] = ['val' => 'modDtFl', 'typ' => 's', 'def' => null]; // 수정 확인 여부
         
         return $arrField;
     }
@@ -78,6 +86,14 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         
         // 211216 디자인위브 mh 추가
         $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+//        $arrField[] = ['val' => 'partnersGoodsNo', 'typ' => 's', 'def' => null]; // 협력사 상품 번호
+//        $arrField[] = ['val' => 'partnersCategory', 'typ' => 's', 'def' => null]; // API 카테고리
+//        $arrField[] = ['val' => 'partnersFixedPrice', 'typ' => 's', 'def' => null]; // 공급가(외화)
+//        $arrField[] = ['val' => 'partnersGoodsPrice', 'typ' => 's', 'def' => null]; // 협력사 판매금액
+//        $arrField[] = ['val' => 'partnersExchangeSno', 'typ' => 's', 'def' => null]; // 환율 정보 sno
+//        $arrField[] = ['val' => 'partnersExchangeRate', 'typ' => 's', 'def' => null]; // 적용 환율
+//        $arrField[] = ['val' => 'partnersExchangeRateDt', 'typ' => 's', 'def' => null]; // 적용 환율 기준일
+//        $arrField[] = ['val' => 'modDtFl', 'typ' => 's', 'def' => null]; // 수정 확인 여부
         
         return $arrField;
     }

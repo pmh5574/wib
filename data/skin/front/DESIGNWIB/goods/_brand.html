@@ -218,7 +218,7 @@
 
                                 if(getData.korean[korea_alphabet[i]]){
 
-                                    addHtml += '<li><strong id="'+korea_alphabet[i]+'"></strong><ul>';
+                                    addHtml += '<li><strong id="'+korea_alphabet[i]+'">'+korea_alphabet[i]+'</strong><ul>';
 
                                     $.each(getData.korean[korea_alphabet[i]], function (key, val) {
                                         like = '';
@@ -260,7 +260,7 @@
 
                                 if(getData.english[english_alphabet[i]]){
 
-                                    addHtml += '<li><strong id="'+english_alphabet[i]+'"></strong><ul>';
+                                    addHtml += '<li><strong id="'+english_alphabet[i]+'">'+english_alphabet[i]+'</strong><ul>';
 
                                     $.each(getData.english[english_alphabet[i]], function (key, val) {
                                         like = '';

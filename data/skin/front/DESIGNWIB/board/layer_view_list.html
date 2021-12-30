@@ -9,7 +9,7 @@
 
             <div class="attach">
                 <!--{ @ .saveFileNmList }-->
-                <img src="{..imgList}" alt="{=__('파일첨부')}"/>
+                <img src="{..imgList}" />
                 <!--{ / }-->
             </div>
 
@@ -20,3 +20,25 @@
         </div>
     <!--{ / }-->
 </div>
+
+
+ <!-- 이미지 팝업 -->
+<div class="img_pop">
+    <div class="img_pop_all">
+        <div class="img">
+            <!--{ @ data }-->
+                <!--{ ? .saveFileNmList }-->
+
+                <div class="attach">
+                    <!--{ @ .saveFileNmList }-->
+                    <img src="{..imgList}" />
+                    <!--{ / }-->
+                </div>
+
+                <!--{ / }-->
+            <!--{ / }-->
+        </div>
+        <span class="pop_close"></span>
+    </div>
+</div>
+<!--// 이미지 팝업 -->

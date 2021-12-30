@@ -97,9 +97,9 @@ var wibFilter = {
                             }
 
                             if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
-                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand-nm="'+brandKrNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
                             }else{
-                                _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                                _html += '<li><span class="check_box_img" data-brand-nm="'+brandKrNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
                             }
                         }else{
                             if(data[i]['cateKrNm']){
@@ -109,9 +109,9 @@ var wibFilter = {
                             }
 
                             if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
-                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand-nm="'+data[i]['cateNm']+'" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
                             }else{
-                                _html += '<li><span class="check_box_img" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
+                                _html += '<li><span class="check_box_img" data-brand-nm="'+data[i]['cateNm']+'" data-brand="'+data[i]['cateCd']+'">'+data[i]['cateNm']+brandKrNm+'</span></li>';
                             }
                         }
                         
@@ -243,8 +243,9 @@ var wibFilter = {
         _this.page = 1;
         
         var code = obj.data('brand');
+        var codeNm = obj.data('brand-nm');
         var paCode = obj.parent();
-        $('.hiddenBrand').append('<input type="hidden" data-brand="'+obj.html()+'" class="br_'+code+'" value="'+code+'">');
+        $('.hiddenBrand').append('<input type="hidden" data-brand="'+codeNm+'" class="br_'+code+'" value="'+code+'">');
         
         if(paCode.hasClass('on')){
             _this.delBrand(code);

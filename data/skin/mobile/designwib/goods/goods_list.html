@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="../wib/css/wib-list.css">
 <script src="../wib/js/wib-list.js"></script>
 
+<div class="filter-area">
+	{=includeWidget('goods/_wib_filter.html')}
+</div>
+
 <div class="goods_list">
 	<!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
 	<!-- gd5 상단 하위 카테고리 -->
@@ -42,14 +46,14 @@
 			<div class="goods_arr_box">
 				<!-- 상품 개수 -->
 				<div class="product-count">
-					총{=number_format(gd_isset(page->recode['total']))}개의 상품
+					총 <span>{=number_format(gd_isset(page->recode['total']))}</span>개의 상품
 				</div>
 
 				<div class="right">
 					<!-- 소팅 -->
 					<div class="goods_sort">
 						<div class="inp_sel">
-							<select name="goods_sort">
+							<select name="goods_sort" onchange="gd_get_list(1,true);">
 								<option value="">{=__('상품정렬')}</option>
 								<option value="date">{=__('등록순')}</option>
 								<option value="price_asc">{=__('낮은가격순')}</option>
@@ -69,7 +73,7 @@
 		<div class="goods_list_box">
 			<ul class="goods_product_list">{ # goodsTemplate }</ul>
 			<div class="btn_box">
-				<button type="button" class="more_btn" data-page="2" >{=__('더보기')}</button>
+				<button type="button" class="more_btn" data-page="2" >상품 더보기<i></i></button>
 			</div>
 			<div class="loading_img"></div>
 		</div>
@@ -107,7 +111,7 @@
 			$('select[name="goods_sort"]>option[value="' + gdSortType + '"]').prop('selected', true);
 		}
 		$('.btn_box button.more_btn').on('click', function(e){
-			gd_get_list($(this).data('page'),false);
+//			gd_get_list($(this).data('page'),false);
 		});
 
 		$('.goods_view_type ul li').on('click', function(e){
