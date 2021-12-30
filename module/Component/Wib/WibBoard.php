@@ -56,7 +56,7 @@ class WibBoard
                 . "LEFT JOIN es_categoryBrand cb ON cb.cateCd = g.brandCd "
                 . "WHERE bgr.mainListFl = 'y' AND bgr.isDelete = 'n' AND gi.imageKind = 'main' "
                 . "ORDER BY bgr.sno DESC "
-                . "LIMIT 20";
+                . "LIMIT 3";
         $result = $this->wibSql->WibAll($query);
         
         //이미지 두개이상일때 하나만 보여주기
@@ -128,7 +128,7 @@ class WibBoard
         foreach ($bdList['list'] as $key => $value){
                 
             //db 추가정보
-            $query = "SELECT storeSearch, storePhoneNum, storeOpenTime, storeHoliday, address, addressSub, addressLat, addressLng FROM es_bd_store WHERE sno = {$value['sno']} LIMIT 999";
+            $query = "SELECT storeSearch, storePhoneNum, storeOpenTime, storeHoliday, address, addressSub, addressLat, addressLng FROM es_bd_store WHERE sno = {$value['sno']}";
             $result = $wibSql->WibNobind($query);
 
             if($result){
@@ -214,6 +214,14 @@ class WibBoard
             }
 
         }
+        
+        return $data;
+    }
+    
+    public function getSubjectList($storeSearch)
+    {
+        $query = "SELECT subject FROM es_bd_store WHERE storeSearch = '{$storeSearch}'";
+        $data = $this->wibSql->WibAll($query);
         
         return $data;
     }
