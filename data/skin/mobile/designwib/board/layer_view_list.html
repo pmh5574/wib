@@ -6,13 +6,16 @@
         <p class="board_tel">T.{.storePhoneNum}</p>
         <p class="board_info"><b>운영시간:</b> {.storeOpenTime} <br/><b>휴무일:</b> {.storeHoliday}</p>
         <!--{ ? .saveFileNmList }-->
-
-            <div class="attach">
+		<div class="attach swiper-container">
+            <div class="swiper-wrapper">
                 <!--{ @ .saveFileNmList }-->
-                <img src="{..imgList}" alt="{=__('파일첨부')}"/>
+                <img src="{..imgList}" class="swiper-slide"/>
                 <!--{ / }-->
             </div>
-
+			<div class="swiper-pagination"></div>
+			<div class="swiper-btn prevBtn"></div>
+			<div class="swiper-btn nextBtn"></div>
+		</div>
         <!--{ / }-->
         <div class="contents">
             <h3>매장소개</h3>
@@ -20,3 +23,29 @@
         </div>
     <!--{ / }-->
 </div>
+
+<div class="dark_bg"></div>
+
+<!-- 이미지 팝업 -->
+<div class="img_pop test">
+    <div class="img_pop_all">
+        <div class="img">
+            <!--{ @ data }-->
+                <!--{ ? .saveFileNmList }-->
+				<div class="attach swiper-container">
+					<div class="swiper-wrapper">
+						<!--{ @ .saveFileNmList }-->
+						<img src="{..imgList}" class="swiper-slide"/>
+						<!--{ / }-->
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-btn prevBtn"></div>
+					<div class="swiper-btn nextBtn"></div>
+				</div>
+                <!--{ / }-->
+            <!--{ / }-->
+        </div>
+        <span class="pop_close"></span>
+    </div>
+</div>
+<!--// 이미지 팝업 -->

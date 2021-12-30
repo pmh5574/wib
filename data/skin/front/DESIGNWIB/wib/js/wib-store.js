@@ -15,24 +15,57 @@ $(function(){
                'sno' : sno
             } ,
             success : function(data){
-               $('.morePage').hide();
-               $('#board_detail .cont_box').html('');
-               $('#board_detail .cont_box').html(data);
-               $('#board_detail .cont_box').addClass('on');
-               $(".store_list").addClass('fix');
+				$('.morePage').hide();
+				$('#board_detail .cont_box').html('');
+				$('#board_detail .cont_box').html(data);
+				$('#board_detail .cont_box').addClass('on');
+				$(".store_list").addClass('fix');
+				var img;
+				var imgPop;
+
+				img = new Swiper("#board_detail .attach", {
+					slidesPerView: 1,
+					allowTouchMove: true,
+					observer: true,
+					observeParents: true,
+					pagination: {
+					  el: ".swiper-pagination",
+					  type: "progressbar"
+					},
+					navigation: {
+					  nextEl: "#board_detail .nextBtn",
+					  prevEl: "#board_detail .prevBtn"
+					},
+				});
+
+				imgPop = new Swiper(".img_pop .attach", {
+					speed: 800,
+					observer: true,
+					observeParents: true,
+					navigation: {
+					  nextEl: ".img_pop .nextBtn",
+					  prevEl: ".img_pop .prevBtn"
+					},
+				});
+
+				img.controller.control = imgPop;
+				imgPop.controller.control = img;
+
             }
+
+			
         });
-    });
-    
-    
-    
+    });    
 
 });
 
 
 
+
+
 //이미지 팝업
 $(document).on('click', '#board_detail .cont_box .cont_all .attach img', function(){
+
     $('.dark_bg, .img_pop').addClass('on');
 });
 

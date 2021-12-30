@@ -79,6 +79,7 @@ var wibFilter = {
                     var _html = '';
                     var brandKrNm = '';
                     var brandEnNm = '';
+                    var dataNm = '';
                     
                     for(var i=0; i<data.length; i++){
                         
@@ -92,14 +93,16 @@ var wibFilter = {
                             
                             if(data[i]['cateKrNm']){
                                 brandKrNm = data[i]['cateKrNm'];
+                                dataNm = brandKrNm;
                             }else{
                                 brandKrNm = '';
+                                dataNm = data[i]['cateNm'];
                             }
 
                             if(_this.filterBrand.indexOf(data[i]['cateCd']) != -1){
-                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand-nm="'+brandKrNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                                _html += '<li class="on brpa_'+data[i]['cateCd']+'"><span class="check_box_img" data-brand-nm="'+dataNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
                             }else{
-                                _html += '<li><span class="check_box_img" data-brand-nm="'+brandKrNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
+                                _html += '<li><span class="check_box_img" data-brand-nm="'+dataNm+'" data-brand="'+data[i]['cateCd']+'">'+brandKrNm+brandEnNm+'</span></li>';
                             }
                         }else{
                             if(data[i]['cateKrNm']){

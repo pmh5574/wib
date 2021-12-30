@@ -1,17 +1,10 @@
 {*** 테스트 | proc/test_board.php ***}
-{# header}
 <!-- 디자인위브 추가 -->
-<link type="text/css" rel="stylesheet" href="../../../wib/css/wib-store.css">
+
 <script type="text/javascript" src="../../../wib/js/wib-store.js"></script>
-<script type="text/javascript" src="../../../wib/js/bpopup.min.js"></script>
 
 <div class="content">
-	<div class="map">
-		<div class="img_box">
-			<img src="../../../wib/img/map.png" alt="지도"/>
-			<div class="point">블루 청담점<span></span></div>
-		</div>
-	</div>
+
     <div class="store_list">
 		<!--{ ? bdList.cfg.bdHeader && !inList}-->
 		<div class="addition_zone">
@@ -20,13 +13,6 @@
 		<!--{/}-->
 
 		<div class="board_zone_sec">
-			<!-- 게시판 명(PC) -->
-			<!--{?!inList}-->
-			<div class="board_zone_tit">
-				<h2>{=__(bdList.cfg.bdNm)}</h2>
-			</div>
-			<!--{/}-->
-			<!--// 게시판 명(PC) -->
 
 			<!-- 검색창 -->
 			<div class="board_search_box">
@@ -143,6 +129,20 @@
 		<!--{/}-->
     </div>
 
+    <div class="dark_bg"></div>
+
+    <!-- 이미지 팝업 -->
+    <div class="img_pop">
+		<div class="img_pop_all">
+			<div class="img">
+			</div>
+			<span class="pop_close"></span>
+		</div>
+    </div>
+    <!--// 이미지 팝업 -->
+
+
+
     <form id="frmWritePassword">
         <div id="lyPassword" class="dn layer_wrap password_layer" style="height: 226px">
             <div class="layer_wrap_cont">
@@ -167,21 +167,19 @@
         <!-- //layer_wrap -->
     </form>
 
-    <div id="layerDim" class="dn">&nbsp;</div>
-    <script type="text/javascript" src="\{=c.PATH_SKIN}js/gd_board_list.js" charset="utf-8"></script>
-    <script>
-        $(document).ready(function () {
-            $('img.js_image_load').error(function () {
-                $(this).css('background', 'url("img/etc/noimg.png") no-repeat center center');
-                $(this).attr('src', '../../../img/etc/blank.gif');
+<div id="layerDim" class="dn">&nbsp;</div>
+<script type="text/javascript" src="\{=c.PATH_SKIN}js/gd_board_list.js" charset="utf-8"></script>
+<script>
+    $(document).ready(function () {
+        $('img.js_image_load').error(function () {
+            $(this).css('background', 'url("img/etc/noimg.png") no-repeat center center');
+            $(this).attr('src', '../../../img/etc/blank.gif');
+        })
+            .each(function () {
+                $(this).attr("src", $(this).attr("src"));
             })
-                .each(function () {
-                    $(this).attr("src", $(this).attr("src"));
-                })
-        });
+    });
 
 
 
-    </script>
-</div>
-{# footer}
+</script>

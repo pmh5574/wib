@@ -5,11 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace Controller\Front\Board;
+namespace Controller\Mobile\Board;
 
 use Component\Wib\WibBoard;
 
-class ListController extends \Bundle\Controller\Front\Board\ListController
+class ListController extends \Bundle\Controller\Mobile\Board\ListController
 {
     public function post()
     {
