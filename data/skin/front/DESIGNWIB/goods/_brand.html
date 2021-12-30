@@ -52,7 +52,7 @@
                             <!--{ ? gd_is_login() === false }-->
                             <a href='javascript:brandLikeNoMember();' class="zzim"></a>
                             <!--{ : }-->
-                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim"></a>
+                            <a href="javascript:;" onclick="brandLike('{..cateCd}', this);" class="zzim {? ..brandLike == 'on'}on{/}"></a>
                             <!--{ / }-->
                         </li>
                         <!--{ / }-->
@@ -265,12 +265,15 @@
                                     $.each(getData.english[english_alphabet[i]], function (key, val) {
                                         like = '';
 
-										if(!val.cateKrNm){
-                                            val.cateKrNm = '';
+                                        var _html = '';
+                                        if(!val.cateKrNm){
+                                            _html = '';
+                                        }else{
+                                            _html = '<span>'+val.cateKrNm+'</span>';
                                         }
                                     
                                         addHtml += '<li>';
-                                        addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + '<span>'+val.cateKrNm+'</span></a>';
+                                        addHtml += '<a href="../goods/goods_list.php?brandCd=' + val.cateCd + '">' + val.cateNm + _html+'</a>';
                                         <!--{ ? gd_is_login() === false }-->
                                         addHtml += '<a href="javascript:brandLikeNoMember();" class="zzim"></a>';
                                         <!--{ : }-->

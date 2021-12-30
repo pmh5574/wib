@@ -213,8 +213,8 @@ var wibFilter = {
             appendColor += '</div>';
             _this.filterColor.push(eThis);
         });
-//        $('.filter_result .fColor').empty().append(appendColor).css('display', 'inline-block');
-//        $('.filter_result .fColor').show();
+        $('.filter_result .fColor').empty().append(appendColor).css('display', 'inline-block');
+        $('.filter_result .fColor').show();
         _this.getList();
         
     },
@@ -244,7 +244,7 @@ var wibFilter = {
         
         var code = obj.data('brand');
         var paCode = obj.parent();
-        $('.hiddenBrand').append('<input type="hidden" class="br_'+code+'" value="'+code+'">');
+        $('.hiddenBrand').append('<input type="hidden" data-brand="'+obj.html()+'" class="br_'+code+'" value="'+code+'">');
         
         if(paCode.hasClass('on')){
             _this.delBrand(code);
@@ -258,8 +258,16 @@ var wibFilter = {
         
         $('.hiddenBrand > input').each(function(){
             var eThis = $(this).val();
+            var _html = $(this).data('brand');
+            appendData += '<div class="br_'+eThis+'">';
+            appendData += '<p class="f_brand">'+_html+'</p>';
+            appendData += '<button type="button" class="filter_del" onclick="wibFilter.delBrand(\''+eThis+'\')"></button>';
+            appendData += '</div>';
             _this.filterBrand.push(eThis);
         });
+        
+        $('.filter_result .fBrand').empty().append(appendData).css('display', 'inline-block');
+        $('.filter_result .fBrand').show();
 
         _this.getList();
     },
