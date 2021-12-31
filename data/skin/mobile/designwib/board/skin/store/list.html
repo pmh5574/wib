@@ -17,6 +17,7 @@
 			<!-- 검색창 -->
 			<div class="board_search_box">
 				<form name="frmList" id="frmList" action="list.php" method="get">
+                                        <input type="hidden" name="totalPage" value="{bdList.cnt.totalPage}"/>
 					<input type="hidden" name="bdId" value="{bdList.cfg.bdId}"/>
 					<input type="hidden" name="memNo" value="{req.memNo}"/>
 					<input type="hidden" name="noheader" value="{req.noheader}"/>
@@ -64,7 +65,7 @@
 
 			<!-- 검색수 -->
 			<div class="board_count">
-				<h6>검색결과 총 <span>{totalCnt}</span>개</h6>
+				<h6>검색결과 총 <span>{bdList.cnt.total}</span>개</h6>
 			</div>
 			<!--// 검색수 -->
 
@@ -87,6 +88,11 @@
 								</li>
 							</ul>
 						<!--{/}-->
+                                                <div class="page_btn_box">
+                                                    <button type="button" class="prev_btn" data-page="{req.page - 1}">{=__('이전')}</button>
+                                                    <span class="page_number"><strong>{req.page}</strong> / {bdList.cnt.totalPage}</span>
+                                                    <button type="button" class="next_btn" data-page="{req.page + 1}">{=__('이후')}</button>
+                                                </div>
 						<!--{:}-->
 						<ul>
 							<li class="nolist">
@@ -94,11 +100,7 @@
 							</li>
 						</ul>
 						<!--{/}-->
-                                                <div class="page_btn_box">
-                                                    <button type="button" class="prev_btn" data-page="{req.page - 1}">{=__('이전')}</button>
-                                                    <span class="page_number"><strong>{req.page}</strong> / {bdList.cnt.totalPage}</span>
-                                                    <button type="button" class="next_btn" data-page="{req.page + 1}">{=__('이후')}</button>
-                                                </div>
+                                                
 						<div id="board_detail">
 							<div class="cont_box">
 							</div>
