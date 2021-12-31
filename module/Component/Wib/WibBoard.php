@@ -220,8 +220,24 @@ class WibBoard
     
     public function getSubjectList($storeSearch)
     {
-        $query = "SELECT subject FROM es_bd_store WHERE storeSearch = '{$storeSearch}'";
+        $where = '';
+        if($storeSearch){
+            $where = "WHERE storeSearch = '{$storeSearch}'";
+        }
+        $query = "SELECT subject FROM es_bd_store {$where} ORDER BY sno DESC";
         $data = $this->wibSql->WibAll($query);
+        
+        return $data;
+    }
+    
+    public function getStoreSearchList($subject)
+    {
+        $where = '';
+        if($subject){
+            $where = "WHERE subject = '{$subject}'";
+        }
+        $query = "SELECT storeSearch FROM es_bd_store {$where}";
+        $data = $this->wibSql->WibNobind($query);
         
         return $data;
     }

@@ -26,6 +26,8 @@ class ListController extends \Bundle\Controller\Front\Board\ListController
     {
         $bdId = Request::get()->get('bdId');
         
+        $wibBoard = new WibBoard();
+        
         if($bdId == 'store'){
             try {
                 $locale = \Globals::get('gGlobal.locale');
@@ -41,6 +43,20 @@ class ListController extends \Bundle\Controller\Front\Board\ListController
                 ]);
 
                 $req = Request::get()->toArray();
+                
+                if($req['bdId'] == 'store'){
+                    if(!$req['storeSearch'] && !$req['searchWord']){
+                        $req['searchWord'] = '';
+                        Request::get()->del('searchWord');
+                    }else if(!$req['storeSearch'] && $req['searchWord']){
+                        $storeSearch = $wibBoard->getStoreSearchList($req['searchWord'])['storeSearch'];
+
+                        Request::get()->set('storeSearch', $storeSearch);
+                        $req['storeSearch'] = $storeSearch;
+
+                    }
+                }
+                
 
                 //마이페이지에서 디폴트 기간노출 7일
                 if($req['memNo']>0 && ($req['bdId'] == Board::BASIC_QA_ID || $req['bdId'] == Board::BASIC_GOODS_QA_ID)) {
@@ -96,11 +112,10 @@ class ListController extends \Bundle\Controller\Front\Board\ListController
         if($req['bdId'] == 'store'){
             
             $bdList = $wibBoard->setBdList($bdList,$req);
+           
+            $subjectList = $wibBoard->getSubjectList($req['storeSearch']);
+            $this->setData('subjectList', $subjectList);
             
-            if($req['storeSearch']){
-                $subjectList = $wibBoard->getSubjectList($req['storeSearch']);
-                $this->setData('subjectList', $subjectList);
-            }
             $this->setData('totalCnt', count($bdList['list']));
             $this->setData('bdList', $bdList);
         }
