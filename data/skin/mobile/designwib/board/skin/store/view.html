@@ -1,0 +1,25 @@
+{*** 상세 | board/view.php ***}
+<div class="cont_all">
+
+    <h1 class="board_tit"><!--{ bdView['data']['subject'] }--></h1>
+    <p class="board_addr"><!--{ bdView['data']['address'] }-->, <!--{ bdView['data']['addressSub'] }--></p>
+    <p class="board_tel">T.<!--{ bdView['data']['storePhoneNum'] }--></p>
+    <p class="board_info"><b>운영시간:</b> <!--{ bdView['data']['storeOpenTime'] }--> <br/><b>휴무일:</b> <!--{ bdView['data']['storeHoliday'] }--></p>
+    <!--{ ? bdView['data']['uploadImgTag'] }-->
+        <div class="attach swiper-container">
+            <div class="swiper-wrapper">
+                <!--{ @ bdView['data']['uploadImgTag'] }-->
+                    <!--{ .value_ }-->
+                <!--{ / }-->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-btn prevBtn"></div>
+            <div class="swiper-btn nextBtn"></div>
+            </div>
+    <!--{ / }-->
+    <div class="contents">
+        <h3>매장소개</h3>
+        <!--{ bdView['data']['contents'] }-->
+    </div>
+    
+</div>

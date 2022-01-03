@@ -51,20 +51,23 @@ class ListController extends \Bundle\Controller\Mobile\Board\ListController
                 ]);
                 $req = Request::get()->toArray();
 
-                if($req['bdId'] == 'store'){
-                    if(!$req['storeSearch'] && !$req['searchWord']){
-                        $req['searchWord'] = '';
-                        Request::get()->del('searchWord');
-                    }else if(!$req['storeSearch'] && $req['searchWord']){
-                        $storeSearch = $wibBoard->getStoreSearchList($req['searchWord'])['storeSearch'];
+                
+                if(!$req['storeSearch'] && !$req['searchWord']){
+                    $req['searchWord'] = '';
+                    Request::get()->del('searchWord');
+                }else if(!$req['storeSearch'] && $req['searchWord']){
+                    $storeSearch = $wibBoard->getStoreSearchList($req['searchWord'])['storeSearch'];
 
-                        Request::get()->set('storeSearch', $storeSearch);
-                        $req['storeSearch'] = $storeSearch;
+                    Request::get()->set('storeSearch', $storeSearch);
+                    $req['storeSearch'] = $storeSearch;
 
-                    }
-                    
+                }
+                
+                if($req['storeSearch']){
                     $arrWhere[] = "b.storeSearch = '{$req['storeSearch']}'";
                 }
+                
+                
 
 
                 if ($req['mypageFl'] == 'y') {
