@@ -1,3 +1,7 @@
+/**
+ * 필터 값에 따라 filter--- 배열, set---, del--- 추가 후 사용
+ * Component에도 배열 값 추가 필요
+ */
 var wibFilter = {
     
     ajaxUrl : '',
@@ -47,14 +51,43 @@ var wibFilter = {
             _this.setColor($(this));
         });
         
+        //모바일 더보기
         $(document).on('click', '.btn_box button.more_btn', function(e){
             e.preventDefault();
             _this.setPage($(this));
             
         });
+        
+        //모바일 상품정렬
+        $('select[name="goods_sort"]').on('change', function(e){
+            
+            e.preventDefault();
+            
+            _this.page = 1;
+            _this.getList();
+            
+        });
+        
+        //리셋
+        $(document).on('click', '.btn-reset', function(e){
+            e.preventDefault();
+            _this.filterReset();
+        });
+        
+        //창 닫기시 리셋이랑 같은 효과
+        $(document).on('click', '.filter-close', function(e){
+            e.preventDefault();
+            _this.filterReset();
+            
+            $(".filter-area").hide();
+        });
 
     },
     
+    /**
+     * 브랜드 검색 및 세팅
+     * 필터에 걸린거 있으면 on 처리
+     */
     getBrand : function(){
         
         var _this = this;
@@ -128,9 +161,12 @@ var wibFilter = {
         });
     },
     
+    /**
+     * 필터 값 세팅 후 마지막에 처리
+     */
     getList : function(){
         var _this = this;
-        var sort =  $('input[name="sort"]:checked').val();
+        var sort =  $('select[name="goods_sort"]').val();
         var pageNum = $('select[name="pageNum"]').val();
         
         $.ajax({
@@ -145,6 +181,12 @@ var wibFilter = {
                 'filterColor' : _this.filterColor,
             },
             success : function(data){
+                
+                //필터 총 개수
+                if(_this.page == '1'){
+                    var totalCnt = $(data).filter('.product-count').html();
+                    $('.product-count span').html(totalCnt);
+                }
                 
                 
                 if($(data).filter("li.no_bx").length && _this.page != 1) {
@@ -166,7 +208,7 @@ var wibFilter = {
                         $('.goods_product_list').append(data);
 
                     }
-
+                    
                     $('.btn_box button.more_btn').data('page',parseInt(_this.page)+1);
                     
 
@@ -191,6 +233,10 @@ var wibFilter = {
         
     },
     
+    /**
+     * 컬러칩 필터 세팅
+     * .hiddenColor input 값으로 보낼 값 저장 후 세팅
+     */
     setColor : function(obj){
         var _this = this;
         _this.page = 1;
@@ -240,6 +286,10 @@ var wibFilter = {
         _this.getList();
     },
     
+    /**
+     * 브랜드 필터 세팅
+     * .hiddenBrand에 input 값으로 보낼 값 저장 후 세팅
+     */
     setBrand : function(obj){
         
         var _this = this;
@@ -276,10 +326,34 @@ var wibFilter = {
         _this.getList();
     },
     
-    numberWithCommas : function(x){
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    /**
+     * class, 배열값 삭제 후 초기화
+     */
+    filterReset : function(){
+        var _this = this;
+        _this.page = 1;
+        
+        _this.filterBrand = [];
+        _this.filterColor = [];
+        
+        $('.filterVal').find('li').remove();
+        
+        $('.hiddenColor input').remove();
+        $('.hiddenBrand input').remove();
+        
+        $('[class^=cl_]').remove();
+        $('li[class*=clpa_]').removeClass('on');
+        
+        $('[class^=br_]').remove();
+        $('li[class*=brpa_]').removeClass('on');
+        
+        _this.getList();
+
     },
     
+    /**
+     * 페이지 세팅 후 리스트 페이지
+     */
     setPage : function(obj){
         
         var _this = this;
@@ -294,6 +368,9 @@ var wibFilter = {
 
 $(function(){
     
+    /**
+     * 브랜드인지 카테고리인지 파라미터 값으로 구분 후 세팅
+     */
     var cateCd = getParameterByName('cateCd');
     var brandCd = 'cateCd=';
     
@@ -312,6 +389,7 @@ $(function(){
     wibFilter.getBrand();
 });
 
+//url체크해서 원하는 파라미터 값 추출
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);

@@ -1,5 +1,9 @@
+/**
+ * 필터 값에 따라 filter--- 배열, set---, del--- 추가 후 사용
+ * Component에도 배열 값 추가 필요
+ */
 var wibFilter = {
-    
+
     ajaxUrl : '',
     cateCd : '',
     page : '',
@@ -47,6 +51,7 @@ var wibFilter = {
             _this.setColor($(this));
         });
         
+        //페이징
         $(document).on('click', '.pagination ul li a', function(e){
             e.preventDefault();
             _this.setPage($(this));
@@ -54,6 +59,10 @@ var wibFilter = {
 
     },
     
+    /**
+     * 브랜드 검색 및 세팅
+     * 필터에 걸린거 있으면 on 처리
+     */
     getBrand : function(){
         
         var _this = this;
@@ -124,6 +133,9 @@ var wibFilter = {
         });
     },
     
+    /**
+     * 필터 값 세팅 후 마지막에 처리
+     */
     getList : function(){
         var _this = this;
         var sort =  $('input[name="sort"]:checked').val();
@@ -165,6 +177,10 @@ var wibFilter = {
         
     },
     
+    /**
+     * 컬러칩 필터 세팅
+     * .hiddenColor input 값으로 보낼 값 저장 후 세팅
+     */
     setColor : function(obj){
         var _this = this;
         _this.page = 1;
@@ -190,8 +206,7 @@ var wibFilter = {
             appendColor += '</div>';
             _this.filterColor.push(eThis);
         });
-//        $('.filter_result .fColor').empty().append(appendColor).css('display', 'inline-block');
-//        $('.filter_result .fColor').show();
+
         _this.getList();
         
     },
@@ -214,6 +229,10 @@ var wibFilter = {
         _this.getList();
     },
     
+    /**
+     * 브랜드 필터 세팅
+     * .hiddenBrand에 input 값으로 보낼 값 저장 후 세팅
+     */
     setBrand : function(obj){
         
         var _this = this;
@@ -241,10 +260,9 @@ var wibFilter = {
         _this.getList();
     },
     
-    numberWithCommas : function(x){
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
-    
+    /**
+     * 페이지 세팅 후 리스트 페이지
+     */
     setPage : function(obj){
         
         var _this = this;
@@ -261,6 +279,9 @@ var wibFilter = {
 
 $(function(){
     
+    /**
+     * 브랜드인지 카테고리인지 파라미터 값으로 구분 후 세팅
+     */
     var cateCd = getParameterByName('cateCd');
     var brandCd = 'cateCd=';
     
@@ -279,6 +300,7 @@ $(function(){
     wibFilter.getBrand();
 });
 
+//url체크해서 원하는 파라미터 값 추출
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
