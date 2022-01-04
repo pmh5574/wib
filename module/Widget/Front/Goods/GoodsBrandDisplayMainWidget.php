@@ -17,6 +17,8 @@ use Request;
 use Framework\Utility\ArrayUtils;
 use Framework\Utility\SkinUtils;
 use UserFilePath;
+use Component\Wib\WibWish;
+use Session;
 
 
 class GoodsBrandDisplayMainWidget extends \Widget\Front\Widget
@@ -65,7 +67,11 @@ class GoodsBrandDisplayMainWidget extends \Widget\Front\Widget
                 }
             }
         }
-
+        
+        // 장바구니 설정
+        $cartInfo = gd_policy('order.cart');
+        $this->setData('cartInfo', gd_isset($cartInfo));
+        
         
         
         if ($goodsData['listData']) {
@@ -79,5 +85,19 @@ class GoodsBrandDisplayMainWidget extends \Widget\Front\Widget
         $this->setData('themeInfo', gd_isset($cateInfo));
         $this->setData('goodsList', $goodsList);
         $this->getView()->setDefine('goodsTemplate', 'goods/list/list_15.html');
+    }
+    
+    public function post()
+    {
+        if(Session::has('member')) {
+            $wibWish = new WibWish();
+            
+            $goodsListData = $this->getData('goodsList');
+            $memNo = Session::get('member.memNo');
+            
+            $goodsList = $wibWish->getGoodsWishList($goodsListData, $memNo);
+            
+            $this->setData('goodsList', $goodsList);
+        }
     }
 }

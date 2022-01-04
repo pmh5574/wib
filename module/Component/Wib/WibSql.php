@@ -65,7 +65,7 @@ class WibSql
         $query = $this->db->query_complete();
         $sql = "SELECT " . array_shift($query) . " FROM {$table}" . implode(' ', $query);
 
-        return $this->db->query_fetch($sql, $arrBind, false);
+        return $this->db->query_fetch($sql, $arrBind, true);
     }
     
     /**
@@ -116,7 +116,7 @@ class WibSql
         $query = $this->db->query_complete();
         $sql = "SELECT " . array_shift($query) . " FROM {$table}" . implode(' ', $query);
         
-        $result = $this->db->query_fetch($sql, $arrBind, false);
+        $result = $this->db->query_fetch($sql, $arrBind, true);
 
         return $result;
         
@@ -143,7 +143,7 @@ class WibSql
         $query = $this->db->query_complete();
         $sql = "SELECT " . array_shift($query) . " FROM {$table}" . implode(' ', $query);
         
-        $result = $this->db->query_fetch($sql, $arrBind, false);
+        $result = $this->db->query_fetch($sql, $arrBind, true);
 
         return $result;
     }

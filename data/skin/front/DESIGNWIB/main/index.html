@@ -3,6 +3,9 @@
 <link type="text/css" rel="stylesheet" href="{=setBrowserCache('../wib/css/wib-main.css')}">
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/slick.js')}"></script>
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main.js')}"></script>
+
+
+
 <div class="mcon01">
 	<div class="swiper-container swiper">
 		<div class="swiper-wrapper">
@@ -82,7 +85,7 @@
 	<div class="w1720">
 		<p class="main-title">지금, 새로 들어왔어요</p>
 		<div class="prd">
-			{=includeWidget('goods/_goods_display_main.html','sno','24')}
+			{=includeWidget('goods/_goods_display_main.html','sno','7')}
 			<div class="arrow">
 				<div class="prev-slide"></div>
 				<div class="next-slide"></div>
@@ -132,7 +135,7 @@
 									{? .blackBrandImg}
 									<img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
 									{/}
-									<p>{.cateNm}</p>
+									<p>{.cateKrNm}</p>
 								</div>
 							</div>
 						</a>
@@ -140,8 +143,8 @@
 					<!--{ / }-->
 				</div>
 			</div>
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
+			<div class="swiper-button swiper-button-prev"></div>
+			<div class="swiper-button swiper-button-next"></div>
 		</div>
 
 		<div class="brand-product-form">
@@ -155,15 +158,17 @@
 								<img src="/data/category/{.bigBrandImg}" alt="{.cateNm}"/>	
 								{/}
 								<div class="info">
-									{? .whiteBrandImg}
-									<img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
-									{/}
-									<p>{.cateHtml1}</p>
-									<!--{ ? gd_is_login() === false }-->
-									<a href='javascript:brandLikeNoMember();' class="zzim"></a>
-									<!--{ : }-->
-									<a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
-									<!--{ / }-->
+									<div class="info-cell">
+										{? .whiteBrandImg}
+										<img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
+										{/}
+										<p>{.cateHtml1}</p>
+										<!--{ ? gd_is_login() === false }-->
+										<a href='javascript:brandLikeNoMember();' class="zzim"></a>
+										<!--{ : }-->
+										<a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
+										<!--{ / }-->
+									</div>
 								</div>
 							</div>
 							<div class="pd">
