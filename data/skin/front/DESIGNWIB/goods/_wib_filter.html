@@ -1,9 +1,9 @@
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-filter.js')}"></script>
 <!--필터 카테고리-->
 {? cateType == 'cate'}
-<div class="filter_category">
+<div class="filter_category filter">
     <h1>카테고리</h1>
-    <div class="toggle">
+    <div class="toggle <!--{ ? cateParentLink }-->on<!--{ / }-->">
         <!--{ ? cateParentLink }-->
         <a href="../goods/goods_list?cateCd={cateParentLink}" class="back"><</a>
         <!--{ / }-->
@@ -23,7 +23,7 @@
 </div>
 <!--//필터 카테고리-->
 <!--필터 브랜드-->
-<div class="filter_brand">
+<div class="filter_brand filter">
     <h1>브랜드</h1>
     <div class="toggle">
         <div>
@@ -42,7 +42,7 @@
 <!--//필터 브랜드-->
 {/}
 <!--필터 컬러-->
-<div class="filter_color">
+<div class="filter_color filter">
     <h1>컬러</h1>
     <ul class="toggle">
         <!--{ @ goodsColorList}-->
@@ -54,3 +54,33 @@
     <div class="hiddenColor" style="display:none"></div>
 </div>
 <!--//필터 컬러-->
+
+<script>
+
+
+    // 토글
+    $(".cate_left h1").click(function(){
+        if($(this).hasClass("on")){
+            $(this).removeClass('on');
+            $(this).next().slideDown(400);
+        }else{
+            $(this).addClass('on');
+            $(this).next().slideUp(400);
+        }
+    });
+
+
+    // 카테고리
+    $('.toggle h2').click(function(){
+        
+        if($('.toggle h2').hasClass('on')){
+            $('.toggle h2').removeClass('on');
+            $('.toggle ul').slideDown(400);
+        }else{
+            $('.filter_category h2').addClass('on');
+            $('.toggle ul').slideUp(400);
+        };
+    });
+ 
+  
+</script>

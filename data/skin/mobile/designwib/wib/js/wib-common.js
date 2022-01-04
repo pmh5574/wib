@@ -1,12 +1,15 @@
 jQuery(document).ready(function() {
-	var bodyOffset = jQuery('body').offset();
-	jQuery(window).scroll(function() {
+	var bodyOffset = jQuery('header .header-area .bottom-menu .inner .left .category').offset();
+        if(bodyOffset){
+            jQuery(window).scroll(function() {
 		if (jQuery(document).scrollTop() > bodyOffset.top) {
 			jQuery('header .header-area .bottom-menu .inner .left .category').addClass('scroll');
 		} else {
 			jQuery('header .header-area .bottom-menu .inner .left .category').removeClass('scroll');
 		}
-	});
+            });
+        }
+	
 });
 
 
@@ -88,36 +91,23 @@ $(document).ready(function(){
 		});
 	}();
 
-	// 전체메뉴 카테고리
-	allMenuCategory = function(){
-		$allMenuOpen.on("click", function(){
-			$dim.stop().fadeIn();
-			$allMenu.addClass("on");
-		});
-		$allMenuClose.on("click", function(){
-			closeMenu();
-		});
-		$dim.on("click", function(){
-			closeMenu();
-		});
 
-		$depth2Open.on("click", function(){
-			if ($(this).closest("li").hasClass("on"))
-			{
-				$depth1.removeClass("on");
-				$depth2Area.stop().slideUp();
-			} else{
-				$depth1.removeClass("on");
-				$depth2Area.stop().slideUp();
-				$(this).closest("li").addClass("on");
-				$(this).closest("li").find("ul").stop().slideDown();
-			}
-		});
-		function closeMenu(){
-			$dim.stop().fadeOut();
-			$allMenu.removeClass("on");
-		}
-	}();
+	$(".all-menu-open").click(function(){
+		$("#nav").addClass("on");
+		$("body").css("overflow", "hidden");
+	});
+
+	$(".nav-close").click(function(){
+		$("#nav").removeClass("on");
+		$("body").css("overflow", "visible");
+	});
+
+	$(".nav_tabmenu_box .nav_tabmenu li").click(function(){
+		var tabIdx = $(this).index();
+		$(this).addClass("on").siblings("li").removeClass("on");
+		$(".nav_category .contents-wrap > div").eq(tabIdx).stop().fadeIn().siblings().hide();
+
+	});
 });
 
 var runCheck = false;

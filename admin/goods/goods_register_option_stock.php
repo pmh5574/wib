@@ -3762,9 +3762,15 @@ if ($data['mode'] == 'modify') {
                 <col/>
             </colgroup>
             <tr>
+                <th>상점 선택 여부</th>
+                <td>
+                    <label class="radio-inline"><input type="radio" name="shopSettingFl" onchange='shop_setting_fl()' <?php if($data['shopSettingFl'] == 'y') echo 'checked'; ?> value="y"/>사용함</label>
+                    <label class="radio-inline"><input type="radio" name="shopSettingFl" onchange='shop_setting_fl()' <?php if($data['shopSettingFl'] == 'n' || !$data['shopSettingFl']) echo 'checked'; ?> value="n"/>사용 안함</label>
+                </td>
+            </tr>
+            <tr class='shopSettingFl'>
                 <th>상점 선택</th>
                 <td>
-                    <!--<label class="radio-inline"><input type="radio" name="shopSetting" <?php if(!$data['shopSetting']) echo 'checked'; ?> value=""/>BLU</label>-->
                     <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '2') echo 'checked'; ?> value="2"/>PREMIUMMULTISHOP</label>
                     <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '3') echo 'checked'; ?> value="3"/>NEWNIA</label>
                 </td>
@@ -6792,8 +6798,21 @@ if ($data['mode'] == 'modify') {
     {
         $('#relationGoodsEach_'+ goodsNo).val(value);
     }
+    
+    /*
+    * 220104 디자인위브 mh 상점 선택
+    */
+    function shop_setting_fl()
+    {
+        if($('input[name="shopSettingFl"]:checked').val() == 'y'){
+            $('.shopSettingFl').show();
+        }else if($('input[name="shopSettingFl"]:checked').val() == 'n'){
+            $('.shopSettingFl').hide();
+        }
+    }
 
     $(document).ready(function () {
+        shop_setting_fl();
         /* IE에서 에디터가 display:none 상태일때 로드가 안되는 현상 때문에 evnet 이후 editorLoad 되게 처리 */
         if ($('#depth-toggle-hidden-detailInfo').val() != 1) {
             editorLoad('detailInfoDelivery', '<?=$data['detailInfoDeliveryFl']?>');

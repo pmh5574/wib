@@ -10,16 +10,19 @@
 		<li class="on">
 			<a href="javascript:;">카테고리</a>
 		</li>
+            {? cateType == 'cate'}    
 		<li>
 			<a href="javascript:;">브랜드</a>
 		</li>
+            {/}
 	</ul>	
 </div>
 
 <div class="contents-wrap">
-	{? cateType == 'cate'}
+	
 	<!-- 카테고리 탭 -->
 	<div class="content">
+            {? cateType == 'cate'}
 		<div class="filter_category">
 			<h1>카테고리</h1>
 			<div class="toggle">
@@ -38,6 +41,7 @@
 				</ul>
 			</div>
 		</div>
+            {/}
 		<div class="filter_color">
 			<h1>컬러</h1>
 			<ul class="toggle">
@@ -50,7 +54,7 @@
 			<div class="hiddenColor" style="display:none"></div>
 		</div>
 	</div>
-	
+	{? cateType == 'cate'}
 	<!-- 브랜드 탭 -->
 	<div class="content">
 		<div class="filter_brand">

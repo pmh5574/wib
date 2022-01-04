@@ -269,6 +269,15 @@ class Goods extends \Bundle\Component\Goods\Goods
             Request::get()->set('sort', $req['sort']);
         }
         
+        /**
+         * 211121 디자인위브 mh 상품 샵 조건 추가
+         */
+        $shopNum = Session::get('WIB_SHOP_NUM');
+        
+        if($shopNum != '1' && $shopNum){
+            $this->arrWhere[] = "((g.shopSettingFl = 'y' AND g.shopSetting = '{$shopNum}') or g.shopSettingFl = 'n')";
+        }
+        
         $goodsList = parent::getGoodsList($cateCd, $cateMode, $pageNum, $displayOrder, $imageType, $optionFl, $soldOutFl, $brandFl, $couponPriceFl, $imageViewSize, $displayCnt);
 
         return $goodsList;
@@ -305,7 +314,7 @@ class Goods extends \Bundle\Component\Goods\Goods
         $shopNum = Session::get('WIB_SHOP_NUM');
         
         if($shopNum != '1' && $shopNum){
-            $this->arrWhere[] = "g.shopSetting = '{$shopNum}'";
+            $this->arrWhere[] = "((g.shopSettingFl = 'y' AND g.shopSetting = '{$shopNum}') or g.shopSettingFl = 'n')";
         }
 
         // --- 정렬 설정

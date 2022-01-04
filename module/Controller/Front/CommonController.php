@@ -30,6 +30,11 @@ class CommonController
         $pageName = $this->_setPageName($getURI);
         
         $shopNum = Session::get('WIB_SHOP_NUM');
+        if(!$shopNum){
+            $shopNum = 1;
+            Session::del('WIB_SHOP_NUM');
+            Session::set('WIB_SHOP_NUM', $shopNum);
+        }
         
         $goodsNo = Request::get()->get('goodsNo');
 
