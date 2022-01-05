@@ -49,6 +49,10 @@ class WibGoods
     /**
      * 상품리스트 필터 카테고리 리스트 
      * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스
+     * 
+     * @param string $cateCd 카테고리 번호
+     * 
+     * @return array 카테고리 리스트
      */
     public function getCategoryList($cateCd = null)
     {
@@ -103,28 +107,61 @@ class WibGoods
     /**
      * 상품리스트 필터 카테고리 리스트 
      * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스
+     * 
+     * @param string $brandNm 브랜드 이름
+     * @param string $orderByCheck 정렬순
+     * @param string $cateCd 카테고리 코드
+     * 
+     * @return json 브랜드 정보
      */
-    public function getBrandList($brandNm = null, $orderBy)
+    public function getBrandList($brandNm = null, $orderByCheck = null, $cateCd = null)
     {
         if($brandNm){
             $where = " AND cateNm LIKE '%{$brandNm}%' OR cateKrNm LIKE '%{$brandNm}%' ";
         }
         
-        $cateNm = 'cateNm ASC';
-        if($orderBy){
-            $cateNm = 'CASE WHEN cateKrNm Is null Then 1 WHEN cateKrNm = "" Then 1 Else 0 END, cateKrNm ASC, cateNm ASC';
+        $orderBy = 'cateNm ASC';
+        if($orderByCheck){
+            $orderBy = 'CASE WHEN cateKrNm Is null Then 1 WHEN cateKrNm = "" Then 1 Else 0 END, cateKrNm ASC, cateNm ASC';
         }
         
-        $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} ORDER BY {$cateNm} ";
-        $data = $this->wibSql->WibAll($query);
-        
-        $code = 0;
-        
-        if(count($data) == 0){
-            $code = 1;
+        if($cateCd){
+            //해당 카테고리에 전체에 해당하는 goodsNo를 새롭게 배열로 만듬
+            $sql = "SELECT g.brandCd FROM  es_goods g LEFT JOIN es_goodsLinkCategory glc ON glc.goodsNo = g.goodsNo WHERE glc.cateCd = '{$cateCd}' GROUP BY g.brandCd";
+            $result = $this->wibSql->WibAll($sql);
+            
+            $brandCdArr = [];
+            
+            foreach ($result as $value) {
+                $brandCdArr[] = " cateCd = '{$value['brandCd']}'";
+            }
+            $brandCdWhere = implode(' OR ', $brandCdArr);
+            
+            $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 AND ({$brandCdWhere}) {$where} ORDER BY {$orderBy} ";
+            $data = $this->wibSql->WibAll($query);
+            
+            $code = 0;
+
+            if(count($data) == 0){
+                $code = 1;
+            }
+
+            return json_encode(['code' => $code,'data' => $data]);
+            
+        }else{
+            $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} ORDER BY {$orderBy} ";
+            $data = $this->wibSql->WibAll($query);
+
+            $code = 0;
+
+            if(count($data) == 0){
+                $code = 1;
+            }
+
+            return json_encode(['code' => $code,'data' => $data]);
         }
         
-        return json_encode(['code' => $code,'data' => $data]);
+        
     }
     
     public function setGoodsPmsNna() 

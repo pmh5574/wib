@@ -15,7 +15,7 @@ class GoodsFilterPsController extends \Controller\Front\Controller
         
         switch($postValue['mode']){
             case 'getBrand':
-                $data = $wibGoods->getBrandList(gd_isset($postValue['brandNm']), gd_isset($postValue['orderBy']));
+                $data = $wibGoods->getBrandList(gd_isset($postValue['brandNm']), gd_isset($postValue['orderBy']), $postValue['cateCd']);
                 echo $data;
                 break;
             default :

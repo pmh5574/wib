@@ -100,7 +100,7 @@
                         </span>
                         <!--{ / }-->
                         <!--{ ? in_array('fixedPrice', themeInfo.displayField) && gd_isset(..fixedPrice) && ..fixedPrice > 0 && ..goodsPriceDisplayFl =='y'}-->
-                        <span style="<!--{ ? in_array('fixedPrice', themeInfo.priceStrike)}-->color:#888; text-decoration:line-through;<!--{ / }-->">{=gd_global_currency_symbol()}{=gd_global_money_format(..fixedPrice)}{=gd_global_currency_string()} {=gd_global_add_currency_display(..fixedPrice)}</span>
+                        <span class="origin-price" style="<!--{ ? in_array('fixedPrice', themeInfo.priceStrike)}-->color:#888; text-decoration:line-through;<!--{ / }-->">{=gd_global_currency_symbol()}{=gd_global_money_format(..fixedPrice)}{=gd_global_currency_string()} {=gd_global_add_currency_display(..fixedPrice)}</span>
                         <!--{ / }-->
                         
                     </div>

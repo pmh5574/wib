@@ -75,6 +75,7 @@ var wibFilter = {
             data : {
                 'mode' : 'getBrand',
                 'brandNm' : $('#filterBrandNm').val(),
+                'cateCd' : _this.cateCd,
                 'orderBy' : orderBy
             },
             success : function(result){
