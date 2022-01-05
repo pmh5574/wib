@@ -814,7 +814,7 @@ class WibBrand
     public function getBrandNm($brandCd)
     {
         
-        $query = "SELECT cateNm, cateKrNm, bigBrandImg, smallBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE cateCd = '{$brandCd}'";
+        $query = "SELECT cateNm, cateKrNm, bigBrandImg, smallBrandImg, commonBrandImgMo, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE cateCd = '{$brandCd}'";
         $brandNm = $this->wibSql->WibNobind($query);
         
         $sno = $this->getWishBrandList($brandCd);

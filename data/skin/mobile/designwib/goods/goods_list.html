@@ -9,19 +9,50 @@
 
 <div class="goods_list">
 	<!-- 설문조사 배너 -->{=pollViewBanner()}<!-- 설문조사 배너 -->
-	<!-- gd5 상단 하위 카테고리 -->
-	<!--{ ? themeInfo.cateHtml1Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1Mobile))}</div><!--{ / }-->
-	<!--{ ? naviDisplay.naviUse =='y' }-->
-	<div class="goods_list_category">
-		<div class="swiper-container swiper">
-			<ul class="swiper-wrapper">
-				<!--{ @ dataSubCategory( cateCd, cateType ) }-->
-				<li {.style} <!--{ ? cateCd == .cateCd }-->class="swiper-slide selected" <!--{ / }-->class="swiper-slide"><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
-				<!--{ / }-->
-			</ul> 
-		</div>
-	</div>
-	<!--{ / }-->
+	
+        {? cateType == 'brand'}
+            <div class="banner-img">
+                {? themeInfo.commonBrandImgMo}
+                <img src="/data/category/{themeInfo.commonBrandImgMo}" alt="{themeInfo.cateNm}"/>	
+                {/}
+                <div class="info">
+                    {? themeInfo.whiteBrandImg}
+                    <img src="/data/category/{themeInfo.whiteBrandImg}" alt="{themeInfo.cateNm}" />
+                    {/}
+                    <!--{ ? themeInfo.cateHtml1Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1Mobile))}</div><!--{ / }-->
+                    <!--{ ? gd_is_login() === false }-->
+                    <a href='javascript:brandLikeNoMember();' class="zzim"></a>
+                    <!--{ : }-->
+                    <a href="javascript:;" onclick="brandLike('{cateCd}', this);" class="zzim {? themeInfo.brandLike == 'on'}on{/}"></a>
+                    <!--{ / }-->
+                    <p class="brandCnt">{themeInfo.brandCnt}</p>
+                </div>
+                <div class="goods_list_category">
+                    <div class="swiper-container swiper">
+                            <ul class="swiper-wrapper">
+                                    <!--{ @ dataSubCategory( cateCd, cateType ) }-->
+                                    <li {.style} <!--{ ? cateCd == .cateCd }-->class="swiper-slide selected" <!--{ / }-->class="swiper-slide"><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
+                                    <!--{ / }-->
+                            </ul> 
+                    </div>
+                </div>
+            </div>
+        {:}
+            <!-- gd5 상단 하위 카테고리 -->
+            <!--{ ? themeInfo.cateHtml1Mobile }--><div>{=stripslashes(str_replace('&nbsp;', ' ', themeInfo.cateHtml1Mobile))}</div><!--{ / }-->
+            <!--{ ? naviDisplay.naviUse =='y' }-->
+            <div class="goods_list_category">
+                    <div class="swiper-container swiper">
+                            <ul class="swiper-wrapper">
+                                    <!--{ @ dataSubCategory( cateCd, cateType ) }-->
+                                    <li {.style} <!--{ ? cateCd == .cateCd }-->class="swiper-slide selected" <!--{ / }-->class="swiper-slide"><a href="?{cateType}Cd={.cateCd}" >{.cateNm} <!--{ ? naviDisplay.naviCount =='y' }--><span>({.goodsCnt+0})</span> <!--{ / }--></a></li>
+                                    <!--{ / }-->
+                            </ul> 
+                    </div>
+            </div>
+            <!--{ / }-->
+        {/}
+       
 	<!--{ ? themeInfo.recomDisplayMobileFl == 'y'  && widgetGoodsList}-->
 	<div class="goods_list_recom">
 		<!--{ ? themeInfo.cateHtml2Mobile }-->
