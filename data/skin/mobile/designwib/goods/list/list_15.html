@@ -116,7 +116,7 @@
 				</a>
 				<!--{ ?..soldOut != 'y' }-->
 				<ul class="btn_area">
-					<li><input type="button" value="{=__('찜하기')}" class="btn_add_wish{mainData.sno}{mainData.groupSno} related_wish_btn {? ..wishCheck == 'on'}on{/}" data-sno="{..wishSno}" data-goods-no="{..goodsNo}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-goods-nm="{..goodsNm}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"/></li>
+					<li><input type="button" value="{=__('찜하기')}" class="btn_add_wish{cateCd} related_wish_btn {? ..wishCheck == 'on'}on{/}" data-sno="{..wishSno}" data-goods-no="{..goodsNo}" data-optionfl="{..optionFl}" data-min-order-cnt="{..minOrderCnt}" data-goods-nm="{..goodsNm}" data-goods-price="{..goodsPrice}" data-goods-image-src="{..goodsImageSrc}" data-sales-unit="{=..salesUnit}" data-fixed-sales="{=..fixedSales}" data-fixed-order-cnt="{=..fixedOrderCnt}"/></li>
 					<li><input type="button" value="{=__('장바구니')}" data-key="optionViewLayer" data-type="directCart" class="js_option_layer related_cart_btn" data-goodsno="{..goodsNo}"/></li>
 					<li><input type="button" value="{=__('바로구매')}" data-key="optionViewLayer" data-type="directOrder" class="js_option_layer related_buy_btn" data-goodsno="{..goodsNo}"/></li>
 				</ul>
@@ -185,7 +185,7 @@ $(document).ready(function() {
     }
 
     //찜하기
-	$('.btn_area').on('click', '.btn_add_wish{mainData.sno}{mainData.groupSno}', function(e){
+	$('.btn_area').on('click', '.btn_add_wish{cateCd}', function(e){
         e.stopImmediatePropagation();
         <!--{ ? gd_is_login() === false }-->
         alert("{=__('로그인하셔야 본 서비스를 이용하실 수 있습니다.')}");
