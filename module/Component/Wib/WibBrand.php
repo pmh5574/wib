@@ -32,10 +32,10 @@ class WibBrand
      *
      * @param string  $cateCd     카테고리 코드
      * @param integer $depth      출력 depth
-     * @param boolean $division   구분자 출력 여부
-     * @param boolean $goodsCntFl 상품수 출력 여부
-     * @param boolean $userMode   사용자 화면 출력 (기본 false)
-     * @param boolean $displayFl  노출여부와 상관없이 보이게 (기본 false)
+     * @param boolean $cateNm     카테고리 이름
+     * @param boolean $tree       배열형태 출력 여부
+     * @param boolean $orderBy    order by 조건절 추가
+     * @param boolean $search     조건절 추가
      *
      * @return string 카테고리 정보
      */
@@ -387,6 +387,13 @@ class WibBrand
         return gd_htmlspecialchars_stripslashes($getData);
     }
 
+    /**
+     * 출력된 카테고리 정보로 a~z, ㄱ~ㅎ 순서대로 정렬 재정렬
+     * 
+     * @param array $data 카테고리 정보
+     * 
+     * @return array 카테고리 정보 
+     */
     private function getSortArray($data){
         $return = [];
         $english_alphabet= range('A', 'Z');
@@ -404,6 +411,13 @@ class WibBrand
         return $return;
     }
     
+    /**
+     * 아스키 코드 값으로 해당하는 알파벳 정보 출력
+     * 
+     * @param string $c 카테고리 이름
+     * 
+     * @return string 해당하는 알파벳 정보
+     */
     private function check_uniord($c) {
         $h = $this->uniord($c);
         if($h>=44032 && $h<=45207) return "ㄱ";
@@ -449,6 +463,13 @@ class WibBrand
         return "ETC";
     }
     
+    /**
+     * 아스키 코드로 변환
+     * 
+     * @param string $c 카테고리 이름
+     * 
+     * @return string, boolean 시작 이름이 해당하는 아스키 코드값
+     */
     private function uniord($c) {
         $h = ord($c{0});
         if ($h <= 0x7F) {
@@ -545,7 +566,7 @@ class WibBrand
     /**
      * JSON 형식으로 카테고리 정렬
      *
-     * @param array $arr 카테고리 정보
+     * @param array $arrData 카테고리 정보
      *
      * @return array JSON 형태의 카테고리 트리 정보
      */
@@ -570,7 +591,7 @@ class WibBrand
     /**
      * 카테고리 배열 순서 재정의
      *
-     * @param array $arr 카테고리 정보
+     * @param array $arrData 카테고리 정보
      *
      * @return array 재정의된 카테고리 정보
      */
@@ -587,8 +608,12 @@ class WibBrand
     }
     
     /*
-     * $memNo 회원번호, $brandCd 브랜드 코드
+     * 브랜드 찜하기 기능(삭제, 저장)
      * 
+     * @param integer $memNo 회원번호
+     * @param string $brandCd 브랜드 코드
+     * 
+     * @return string
      */
     public function setBrandLike($memNo, $brandCd)
     {
@@ -617,7 +642,9 @@ class WibBrand
     }
     
     /**
-     * 마이페이지 찜 브랜드 리스트
+     * 회원별 찜 브랜드 리스트(마이페이지용)
+     * 
+     * @return array 재정의된 카테고리 정보
      */
     public function getBrandWishData()
     {
@@ -697,7 +724,9 @@ class WibBrand
     }
     
     /**
-     * 전체 찜 브랜드 리스트
+     * 회원이 찜한 브랜드 리스트(햄버거 메뉴용)
+     * 
+     * @return array, boolean
      */
     public function getAllBrandWishData()
     {
@@ -739,8 +768,9 @@ class WibBrand
     }
     
     /**
+     * 메인페이지 브랜드 리스트(너무 많이 나오면 상품이랑 같이 나와서 로딩이 길어져서 20개로 처리 협의 후 다시 수정 예정)
      * 
-     * 메인페이지 브랜드 리스트
+     * @return array 브랜드 정보
      */
     public function getBrandData()
     {
@@ -773,13 +803,13 @@ class WibBrand
             }
         }
         
-        
-        
         return $data;
     }
     
     /**
      * 브랜드 추가 정보
+     * 
+     * @param string $brandCd 브랜드 코드
      */
     public function getBrandNm($brandCd)
     {
@@ -806,6 +836,10 @@ class WibBrand
     
     /**
      * 찜 브랜드 체크
+     * 
+     * @param string $brandCd 브랜드 코드
+     * 
+     * @return integer sno값
      */
     public function getWishBrandList($brandCd)
     {
@@ -824,7 +858,10 @@ class WibBrand
     }
     
     /**
-     * 찜 브랜드 개수
+     * 해당 브랜드 찜 개수
+     * @param string $brandCd 브랜드 코드
+     * 
+     * @return integer 개수
      */
     public function getWishBrandCnt($brandCd)
     {
