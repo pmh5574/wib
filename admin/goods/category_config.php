@@ -806,6 +806,12 @@ if (preg_match('/MSIE (6|7)/', Request::getUserAgent())) {
                                             </td>
                                             </td>
                                         </tr>
+                                        <tr colspan="3">
+                                            <th><?=$info['cateTitle'];?><br />모바일 이미지</th>
+                                            <td>
+                                                <label><input type="file" name="commonBrandImgMo"></label> <?php if($data['commonBrandImgMo']) { ?><label><img src="/data/category/<?=$data['commonBrandImgMo']?>?<?=time()?>" style="max-width:200px;"><input type="hidden" name="commonBrandImgMo" value="<?=$data['commonBrandImgMo']?>"> <input type="checkbox" name="commonBrandImgMoDel" value="y">삭제</label><?php } ?>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <th><?=$info['cateTitle'];?><br />화이트 로고 이미지</th>
                                             <td>

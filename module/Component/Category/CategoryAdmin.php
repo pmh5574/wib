@@ -98,6 +98,11 @@ class CategoryAdmin extends \Bundle\Component\Category\CategoryAdmin
             $arrData['smallBrandImg'] = '';
         }
         
+        if ($arrData['commonBrandImgMoDel'] == 'y') {
+            $this->storage()->delete($arrData['commonBrandImgMo']);
+            $arrData['commonBrandImgMo'] = '';
+        }
+        
         if ($arrData['whiteBrandImgDel'] == 'y') {
             $this->storage()->delete($arrData['whiteBrandImg']);
             $arrData['whiteBrandImg'] = '';

@@ -6,9 +6,42 @@
 
 
 <div class="main">
+    <div class="slidelook">
+        <div class="look_t">
+            <div class="look_tx">
+              <p>기획전 전체보기</p>
+              <a href="#" class="closedd"></a>  
+            </div>
+            
+            <!--{ @dataBanner('1047852993', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+            <!--{ ? .index_ == '2'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			
+			<!--{ / }-->
+        </div>
+    </div>
     <!-- 슬라이더 -->
     <div class="swiper-container swiper-main">
-        <div class="slidebtn"><img src="/data/skin/mobile/designwib/wib/img/slidebtn.png" alt=""></div>
+        <div class="slidebtn"><a href="#"><img src="../wib/img/clickslide.svg" alt=""></a></div>
         <div class="swiper-wrapper">
 			<!--{ @dataBanner('1047852993', true) }-->
 			<!--{ ? .index_ == '0'}-->
@@ -34,6 +67,7 @@
         <!-- Pagination -->
     
       </div>
+      
 
     <!-- 인기검색어 -->
     <div class="right popular">
@@ -49,24 +83,12 @@
                         </ul>
                     <!--{ / }-->
     
-                    <a href="javascript:;" class="popular-more" style="font-size:11px;"><img src="/data/skin/mobile/designwib/wib/img/poparrow.png" alt=""></a>
+                    <a href="javascript:;" class="popular-more" style="font-size:11px;"><img src="../wib/img/poparrow.png" alt=""></a>
                 </dd>
                 <div class="rank-view">
                     <ul></ul>
                 </div>
-            </dl>
-            <script>
-
-                // 인기검색어 전체보기
-                $(".popular-more").click(function(){
-                    if ($("dl.popwrap").hasClass("on"))
-                    {
-                        $("dl.popwrap").removeClass("on");
-                    } else{
-                        $("dl.popwrap").addClass("on");
-                    }
-                });
-            </script>
+          
             
         </div>
         <ul>
@@ -108,7 +130,7 @@
         
     </div>
     <div class="view_more">
-        <a href="#">신상품 더보기</a>
+        <a href="#">신상품 더보기<span></span> </a>
     </div>
 </div>
 
@@ -123,7 +145,7 @@
             </a>
             <p>NEWNIA</p>
             <p>우리 아이를 위한 가치</p>
-            <p>SHOH NOW</p>
+            <p>SHOP NOW</p>
         </li>
         <li>
             <a href="">
@@ -131,7 +153,7 @@
             </a>
             <p>PRIMIEM MUTI SHOP</p>
             <p>국내 NO.1 셀렉샵 프리미엄 멀티샵</p>
-            <p>SHOH NOW</p>
+            <p>SHOP NOW</p>
         </li>
     </ul>
 </div>
@@ -168,58 +190,65 @@
 <!-- 개발 : 찜하기 -->
 <!-- 브랜드별 베스트 상품 -->
 <div class="mcon05">
-	
+	<div>
 		<p class="main-title">브랜드별 베스트 상품</p>
 		<div class="brand-list">
-			<div>
-                            <!--{ @ brandListInfo }-->
-                                <div>
-                                    <a href="javascript:;">
-                                        <div class="table">
-                                            <div class="table-cell">
-                                                {? .blackBrandImg}
-                                                <img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
-                                                {/}
-                                                <p>{.cateNm}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            <!--{ / }-->
+			<div class="swiper-container swiper">
+				<div class="swiper-wrapper">
+					<!--{ @ brandListInfo }-->
+					<div class="swiper-slide">
+						<a href="javascript:;">
+							<div class="table">
+								<div class="table-cell">
+									{? .blackBrandImg}
+									<img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
+									{/}
+									<p>{.cateKrNm}</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<!--{ / }-->
+				</div>
 			</div>
 		</div>
 
 		<div class="brand-product-form">
 			<div class="inner">
-                            <!--{ @ brandListInfo }-->
-                                <div>
-                                    <div class="banner-img">
-                                            {? .bigBrandImg}
-                                            <img src="/data/category/{.bigBrandImg}" alt="{.cateNm}"/>	
-                                            {/}
-                                            <div class="info">
-                                                {? .whiteBrandImg}
-                                                <img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
-                                                {/}
-                                                <p>{.cateHtml1}</p>
-                                                <!--{ ? gd_is_login() === false }-->
-                                                <a href='javascript:brandLikeNoMember();' class="zzim"></a>
-                                                <!--{ : }-->
-                                                <a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
-                                                <!--{ / }-->
-                                            </div>
-                                    </div>
-                                    <div class="pd">
-                                        {=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
-                                        <a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
-                                    </div>
+				<div class="swiper-container swiper">
+					<div class="swiper-wrapper">
+						<!--{ @ brandListInfo }-->
+						<div class="swiper-slide">
+							<div class="banner-img">
+								{? .commonBrandImgMo}
+								<img src="/data/category/{.commonBrandImgMo}" alt="{.cateNm}"/>	
+								{/}
+								<div class="info">
+									<div class="info-cell">
+										{? .whiteBrandImg}
+										<img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
+										{/}
+										<p>{.cateHtml1}</p>
+										<!--{ ? gd_is_login() === false }-->
+										<a href='javascript:brandLikeNoMember();' class="zzim"><p></p> </a>
+										<!--{ : }-->
+										<a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
+										<!--{ / }-->
+									</div>
+								</div>
+							</div>
+							<div class="pd">
+								{=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
+								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
+							</div>
+						</div>
+						<!--{ / }-->
+					</div>
 				</div>
-                            <!--{ / }-->
 			</div>
 		</div>
-	
+	</div>
 </div>
-
 
 <!-- 이번주 가장 많이 팔린 상품 -->
 <div class="mcon07 tab-area">
@@ -235,25 +264,25 @@
 		</div>
 		<div class="contents-wrap">
 			<div class="content">
-				{=includeWidget('goods/_goods_display_main.html','sno','12')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" >
+				{=includeWidget('goods/_goods_display_main.html','sno','19')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p> 
 				</a>
 			</div>
 			<div class="content">
-				{=includeWidget('goods/_goods_display_main.html','sno','13')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
+				{=includeWidget('goods/_goods_display_main.html','sno','20')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
 			</div>
 			<div class="content">
-				{=includeWidget('goods/_goods_display_main.html','sno','14')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
+				{=includeWidget('goods/_goods_display_main.html','sno','21')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
 			</div>
 			<div class="content">
-				{=includeWidget('goods/_goods_display_main.html','sno','15')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
+				{=includeWidget('goods/_goods_display_main.html','sno','22')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
 			</div>
 			<div class="content">
-				{=includeWidget('goods/_goods_display_main.html','sno','16')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
+				{=includeWidget('goods/_goods_display_main.html','sno','23')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
 			</div>
 		</div>
 </div>
@@ -320,50 +349,55 @@
 	<p class="main-title">후기로 증명하는 프멀샵</p>	
     <div class="swiper">
         <ul class="swiper-wrapper">
-            <!--{ @ reviews }-->
-                <li class="swiper-slide">
-                    <div class='photo-box'>
+            <!--{ @getArticles( 'goodsreview' , 7 , 255, 255 ) }-->
+            <li class="swiper-slide">
+                <div class="photo-box">
+                    <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                        <p class="thumb">
+                            <!--{ ? .attachImageSrc }-->
+                            <img src="{.attachImageSrc}" alt="{.goodsNm}" />
+                            <!--{ : }-->
+                            <img src="{.goodsImageSrc}" alt="{.goodsNm}" />
+                            <!--{ / }-->
+                            <img src="/data/skin/mobile/designwib/wib/img/review.png" class="icon02">
+                        </p>
+                    </a> 
+                    <div class="txt-box">
                         <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                            <p class="thumb">
-                                <!--{ ? .saveFileNm }-->
-                                <img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
-                                <!--{ : }-->
-                                <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
-                                <!--{ / }-->
-                            </p>
-                        </a>
-                        <div class="txt-box">
-                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
-                                <p class="tit">{.subject}</p>
-                                <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),300,'...')}</p>
-                                <p class="writer">{.writerNm}님의 후기</p>
-                            </a>
-                        </div>
-                        <div class="prd-box">
-                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
-                                <div class="goods-thumb">
-                                    <!--{ ? .imagePath }-->
-                                        <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
-                                    <!--{ : }-->
-                                    <img src="/data/commonimg/ico_noimg_100.gif">
-                                    <!--{ / }-->
-                                </div>
-                                <div class="goods-des">
-                                    <p class="brand">{.brandNm}</p>
-                                    <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
-                                    <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
-                                    {? .fixedPrice > 0}
-                                    <p class="discount-rate">{=round((1-(.goodsPrice/.fixedPrice))*100)}<em>%</em></p>
-                                    {/}
-                                </div>
-                            </a>
-                        </div>
+                            <p class="tit">{.subject}</p>
+                            <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),'300')}</p>
+                            <p class="writer">{.writer}님의 후기</p>
+                        </a>		
                     </div>
-                </li>
+                    <div class="prd-box">
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+                            <div class="goods-thumb">
+                                <!--{ ? .imagePath }-->
+                                    <!--{ ? .imageStorage == 'local' }-->
+                                        <img src="/data/goods/{.imagePath}{.imageName}">
+                                    <!--{ : }-->
+                                        <img src="{.imageStorage}/data/goods/{.imagePath}{.imageName}">
+                                    <!--{ / }-->
+                                <!--{ : }-->
+                                <img src="/data/commonimg/ico_noimg_100.gif">
+                                <!--{ / }-->
+                                
+                            </div>
+                            <div class="goods-des">
+                                <p class="brand">KENZO 겐조</p>
+                                <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
+                                <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+                                <p class="discount-rate">23<em>%</em></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+            </li>
             <!--{ / }-->
         </ul>
     </div>
-	<a href="/goods/goods_main.php?sno=10" class="more-view">리뷰 더보기<img src="/data/skin/mobile/designwib/wib/img/more_pro.png" ></a>
+	<a href="/goods/goods_main.php?sno=10" class="more-view">리뷰 더보기 <p></p></a>
 </div>
 
 <!-- LOOKBOOK -->

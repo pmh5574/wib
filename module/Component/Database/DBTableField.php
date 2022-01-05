@@ -55,8 +55,9 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         //211206 디자인위브 mh 브랜드 카테고리 추가
         
         $arrField[] = ['val' => 'cateKrNm', 'typ' => 's', 'def' => null]; // 한글 브랜드명
-        $arrField[] = ['val' => 'bigBrandImg', 'typ' => 's', 'def' => null]; // 큰 브랜드 이미지
-        $arrField[] = ['val' => 'smallBrandImg', 'typ' => 's', 'def' => null]; // 작은 브랜드 이미지
+        $arrField[] = ['val' => 'bigBrandImg', 'typ' => 's', 'def' => null]; // 큰 브랜드 이미지(pc)
+        $arrField[] = ['val' => 'smallBrandImg', 'typ' => 's', 'def' => null]; // 작은 브랜드 이미지(pc)
+        $arrField[] = ['val' => 'commonBrandImgMo', 'typ' => 's', 'def' => null]; // 브랜드 모바일 이미지
         $arrField[] = ['val' => 'whiteBrandImg', 'typ' => 's', 'def' => null]; // 화이트 로고 이미지
         $arrField[] = ['val' => 'blackBrandImg', 'typ' => 's', 'def' => null]; // 블랙 로고 이미지
         

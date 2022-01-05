@@ -780,7 +780,7 @@ class WibBrand
             $arrWhere = "cateDisplayFl = 'y'";
         }
         
-        $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort DESC LIMIT 20";
+        $query = "SELECT cateNm, cateCd, sortType, sortAutoFl, cateHtml1, cateHtml1Mobile, cateKrNm, bigBrandImg, commonBrandImgMo, whiteBrandImg, blackBrandImg FROM es_categoryBrand WHERE {$arrWhere} AND length(cateCd) = 3 ORDER BY cateSort DESC LIMIT 20";
         $data = $this->wibSql->WibAll($query);
         
         // 회원 로그인 체크
