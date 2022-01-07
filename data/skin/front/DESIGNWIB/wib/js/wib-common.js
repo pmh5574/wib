@@ -1,3 +1,69 @@
+//고객센터 클릭하면 밑에 나오게
+
+$(function() {
+    'use strict';
+
+    var color = {
+        brown: "color:#560000;font-size:11px;",
+        blue: "color:#4da4e0;font-size:24px;margin-top:20px"
+    };
+
+    if (typeof console === "object" && console.log && typeof console.log === "function") {
+        if (isUA('chrome') && !isUA('edge')) {
+            console.log(
+                "%c██████     ███████    ███████    ██       ██████      ███    ██    ██       ██w     ██████\
+                \n%c██   ██    ██         ██         ██     ██            ████   ██    ██       ██w     ██        ██\
+                \n%c██   ██    █████      ███████    ██     ██    ███     ██ ██  ██    ██   █   ██w     ██████\
+                \n%c██   ██    ██              ██    ██     ██     ██     ██  ██ ██     ██ ███ ██w     ██        ██\
+                \n%c██████     ███████    ███████    ██       ██████      ██   ████      ███ ███w     ██████\
+                \n%c디자인에 감성을 더하다.\n", 
+                
+				color.brown, 
+				color.brown, 
+				color.brown, 
+				color.brown, 
+				color.brown, 
+				color.blue, 
+            );
+        }
+        console.log("\x3e \x3e \x3e https://www.designwib.co.kr/\n")
+    }
+
+    function isUA(userAgent) {
+        return navigator.userAgent.toLowerCase().indexOf(userAgent) > -1;
+    }
+});
+
+
+
+$(function(){
+    $('.custlist .cs').click(function(){
+        $(this).next().slideToggle();
+    });
+}); 
+
+//스크롤 때 퀵메뉴 효과
+
+$(window).on('scroll load' , function (){
+    var scrollValue = $(document).scrollTop();
+    var headerH = $("header .header-area .bottom-menu .inner").outerHeight();
+    var footerposition = $('#footer_wrap').offset().top - 800; 
+
+
+    if($('#header_warp').hasClass('scroll')){
+        $('#quick-menu').addClass('look');
+    }else{
+        $('#quick-menu').removeClass('look');
+    };
+
+    if(footerposition < scrollValue){
+        $('#quick-menu').removeClass('look');  
+    }
+
+}); 
+
+
+
 $(document).ready(function(){
 	var $header = $("header"),
 		$body = $("body"),
@@ -156,7 +222,54 @@ $(document).ready(function(){
 			el: "footer .bottom-area .right .banner .swiper-pagination",
         },
 	});
+
+	categoryTab(".all-menu .tab ul li", ".all-menu .contents-wrap .content");
+
+
+
+	var listCate = new Swiper(".my-brand .swiper.swiper-container", {
+		freeMode: true,
+		observer : true,
+		observeParents: true,
+		slidesPerView: 'auto',
+		// slidesOffsetBefore: 15,
+		slidesOffsetAfter: 30,
+	});
+
+	var listCate = new Swiper(".initial_cate .swiper-container", {
+		freeMode: true,
+		observer : true,
+		observeParents: true,
+		slidesPerView: 'auto',
+		slidesOffsetBefore: 15,
+		slidesOffsetAfter: 15,
+	});
+
+	goTop(".go-top");
+
+
+	// 공지사항
+	var footerNotice = $(".board-area .inner ul").bxSlider({
+		auto: true,
+		slideMargin: 5,
+		pause: 5000,
+		speed:800,
+		controls:false,
+		pager:false,
+		mode:'vertical',
+		//preventDefaultSwipeY:true,
+	});
 });
+
+
+// 햄버거메뉴 내 카테고리, 브랜드 탭
+function categoryTab(a, b){
+	$(a).click(function(){
+		var tabIdx = $(this).index();
+		$(this).addClass("on").siblings().removeClass("on");
+		$(b).eq(tabIdx).stop().show().siblings(b).hide();
+	});
+}
 
 var runCheck = false;
 
@@ -208,3 +321,12 @@ function brandLikeNoMember()
 }
 
 
+
+function goTop(button){
+	$(button).click(function(){
+		$("html, body").animate({
+			scrollTop : 0
+		});
+	});
+	
+}
