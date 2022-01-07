@@ -27,6 +27,4 @@ $(function(){
         });
         
     });
-    
-    setTimeout(console.log.bind(console,"%cDESIGN BY %c디자인위브 %c1566-6681 ", "color:#4ab8ff;", "color:#4ab8ff;font-size:24px;font-weight:bold;font-family:Noto Sans KR, sans-serif;", "color:#4ab8ff;"),0);
 });

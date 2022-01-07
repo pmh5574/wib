@@ -220,6 +220,22 @@ class WibGoods
         
     }
     
+    /**
+     * 상품검색페이지 필터 카테고리 리스트 
+     * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스
+     * 
+     * @param string $orderByCheck 정렬순
+     * 
+     * @return json 브랜드 정보
+     */
+    public function getSearchBrandList($orderByCheck = null, $goodsNm)
+    {
+        $code = 1;
+        print_r($goodsNm);
+        print_r('qweqeqweqwe');
+//        return json_encode(['code' => $code,'data' => $goodsNm]);
+    }
+    
     public function setGoodsPmsNna() 
     {
         $query = "SELECT goodsNo, goodsNm, shopSetting FROM es_goods WHERE (shopSetting != '1' AND shopSetting != '2') OR shopSetting Is Null";

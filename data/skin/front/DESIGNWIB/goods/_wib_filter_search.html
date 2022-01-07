@@ -1,0 +1,61 @@
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-filter-search.js')}"></script>
+
+<div class="filter_brand filter">
+    <h1>브랜드</h1>
+    <div class="toggle">
+        <div>
+            <input type="text" id="filterBrandNm" placeholder="브랜드를 검색해주세요">
+            <button class="search"><img src="/data/skin/front/DESIGNWIB/wib/img/serch_fil.png" /></button>
+        </div>
+        <div class="brand_order_by">
+            <span class="on" data-order-by="">ABC</span>
+            <span data-order-by="kr">가나다</span>
+        </div>
+        <ul class="filterBrandList">
+        </ul>
+    </div>
+    <div class="hiddenBrand" style="display:none"></div>
+</div>
+<!--//필터 브랜드-->
+
+<!--필터 컬러-->
+<div class="filter_color filter">
+    <h1>컬러</h1>
+    <ul class="toggle">
+        <!--{ @ goodsColorList}-->
+        <li>     
+            <span data-color="{.code}" <!--{ ? .code != 'FFFFFF' }-->style="background:#{.code}; border:1px solid #{.code}"<!--{ / }-->>{.code}</span>
+        </li>
+        <!--{ / }-->
+    </ul>    
+    <div class="hiddenColor" style="display:none"></div>
+</div>
+<!--//필터 컬러-->
+
+<script>
+	$(function(){
+		// 토글
+		$(".cate_left h1").click(function(){
+			if($(this).hasClass("on")){
+				$(this).removeClass('on');
+				$(this).next().slideDown(400);
+			}else{
+				$(this).addClass('on');
+				$(this).next().slideUp(400);
+			}
+		});
+
+
+		// 카테고리
+		$('.toggle h2').click(function(){
+			
+			if($('.toggle h2').hasClass('on')){
+				$('.toggle h2').removeClass('on');
+				$('.toggle ul').slideDown(400);
+			}else{
+				$('.filter_category h2').addClass('on');
+				$('.toggle ul').slideUp(400);
+			};
+		});
+	});
+</script>

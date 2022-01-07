@@ -9,6 +9,7 @@ var wibFilter = {
     page : '',
     sort : '',
     brandCheck : '',
+    goodsNm : '',
     filterBrand : [],
     filterColor : [],
     
@@ -19,6 +20,7 @@ var wibFilter = {
         this.cateCd = option.cateCd;
         this.page = option.page;
         this.sort = option.sort;
+        this.goodsNm = option.goodsNm;
         this.brandCheck = option.brandCheck;
         
         //브랜드 필터 정렬기준
@@ -73,13 +75,13 @@ var wibFilter = {
             type : 'post',
             dataType : 'json',
             data : {
-                'mode' : 'getBrand',
+                'mode' : 'getSearchBrand',
                 'brandNm' : $('#filterBrandNm').val(),
-                'cateCd' : _this.cateCd,
+                'goodsNm' : _this.goodsNm,
                 'orderBy' : orderBy
             },
             success : function(result){
-                
+                console.log(result);
                 var data = result.data;
                 
                 if(result.code == '1'){
@@ -285,6 +287,7 @@ $(function(){
      */
     var cateCd = getParameterByName('cateCd');
     var brandCd = 'cateCd=';
+    var goodsNm = getParameterByName('keyword');
     
     if(!cateCd){
         cateCd = getParameterByName('brandCd');
@@ -295,6 +298,7 @@ $(function(){
         'url' : '/goods/filter_goods_search.php',
         'cateCd' : cateCd,
         'brandCheck' : brandCd,
+        'goodsNm' : goodsNm,
         'page' : 1
     });
 
