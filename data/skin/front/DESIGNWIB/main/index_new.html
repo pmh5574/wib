@@ -3,7 +3,121 @@
 <link type="text/css" rel="stylesheet" href="{=setBrowserCache('../wib/css/wib-main.css')}">
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/slick.js')}"></script>
 <script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main.js')}"></script>
+<div class="mcon01">
+	<div class="swiper-container swiper">
+		<div class="swiper-wrapper">
+			<!--{ @dataBanner('1578004243', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+					<div class="txt-table">
+						<div class="txt-table-cell">
+							<span>MAISON FLOFLO</span>
+							<p>메종플로플로 최대 30% SALE</p>
+							<em>세련된 컬러감과 다양한 소재, 고급스럽고 우아한 감성</em>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+					<div class="txt-table">
+						<div class="txt-table-cell">
+							<span>MAISON FLOFLO</span>
+							<p>메종플로플로 최대 30% SALE</p>
+							<em>세련된 컬러감과 다양한 소재, 고급스럽고 우아한 감성</em>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ / }-->
+		</div>
+		<div class="arrow-wrap">
+			<div class="swiper-button-prev arrow"></div>
+			<div class="swiper-button-next arrow"></div>	
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
 
+<div class="mcon02">
+	<div class="w1720">
+		<ul>
+			<li>
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon01.png" alt="유니크한 컬렉션" />
+						</div>
+						<div class="table-cell">
+							<p>유니크한 컬렉션</p>
+							<span>단 몇 벌의 기회!<br>특별한 우리 아이를 위하여 소량만 입고합니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>	
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon02.png" alt="고객만족 서비스" />
+						</div>
+						<div class="table-cell">
+							<p>고객만족 서비스</p>
+							<span>뉴니아에서 구매해주신 고객님의 소중한 상품<br>끝까지 책임져드립니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon03.png" alt="100% 정품 보장" />
+						</div>
+						<div class="table-cell">
+							<p>100% 정품 보장</p>
+							<span>합리적인 가격의 뉴니아<br>뉴니아는 직수입, 직접판매로 가격대를 낮췄습니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- 텍스트배너 -->
+<div class="mcon06">
+	<ul>
+		<!--{ @dataBanner('1055455800', true) }-->
+		<!--{ ? .index_ == '0'}-->
+		<li style="background:#62b1f3 url('{.bannerImageUrl}')no-repeat right top;">
+			<a href="javascript:;">
+				<div class="txt-box">
+					<p>프리미엄 배송 서비스 </p>
+					<span>배송과 함께 상품의 리얼패킹 검수 영상을 알림톡, 문자로 보내드립니다.</span>
+				</div>
+			</a>
+		</li>
+		<!--{ / }-->
+		<!--{ ? .index_ == '1'}-->
+		<li style="background:#ddc19e url('{.bannerImageUrl}')no-repeat right top;">
+			<a href="javascript:;">
+				<div class="txt-box">
+					<p>전국 7개의 오프라인 매장</p>
+					<span>전국 7개 매장에서 뉴니아를 만나보세요</span>
+				</div>
+			</a>
+		</li>
+		<!--{ / }-->
+		<!--{ / }-->
+	</ul>
+</div>
 
 <!-- 지금, 새로 들어왔어요 -->
 <div class="mcon03">
@@ -18,6 +132,99 @@
 			<div class="swiper-scrollbar"></div>
 		</div>
 	</div>
+	<a href="/goods/goods_main.php?sno=24" class="more-view"><span data-hover="신상품">신상품</span>  <span data-hover="더보기">더보기</span><i></i></a>
 </div>
+
+<!-- 이번주 가장 많이 팔린 상품 -->
+<div class="mcon07 tab-area">
+	<div class="w1720">
+		<p class="main-title">이번주 가장 많이 팔린 상품</p> 
+		<div class="tab">
+			<ul>
+				<li class="on"><a href="javascript:;">TOP</a></li>
+				<li><a href="javascript:;">BOTTOM</a></li>
+				<li><a href="javascript:;">OUTER</a></li>
+				<li><a href="javascript:;">SHOES</a></li>
+				<li><a href="javascript:;">BAG&ACC</a></li>
+			</ul>
+		</div>
+		<div class="contents-wrap">
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','25')}
+				<a href="/goods/goods_main.php?sno=25" class="more-view">MEN 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','26')}
+				<a href="/goods/goods_main.php?sno=26" class="more-view">WOMEN 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','27')}
+				<a href="/goods/goods_main.php?sno=27" class="more-view">SHOES 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','28')}
+				<a href="/goods/goods_main.php?sno=28" class="more-view">BAG&ACC 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','29')}
+				<a href="/goods/goods_main.php?sno=29" class="more-view">KIDS 더보기<i></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="mcon09">
+	<p class="main-title">후기로 증명하는 블루</p>	
+	<ul>
+		<!--{ @ reviews }-->
+		<li>
+			<div class='photo-box'>
+				<a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+					<p class="thumb">
+						<!--{ ? .saveFileNm }-->
+						<img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
+						<!--{ : }-->
+						<img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+						<!--{ / }-->
+					</p>
+				</a>
+				<div class="prd-box">
+					<a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+						<div class="goods-thumb">
+							<!--{ ? .imagePath }-->
+								<img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+							<!--{ : }-->
+							<img src="/data/commonimg/ico_noimg_100.gif">
+							<!--{ / }-->
+						</div>
+						<div class="goods-des">
+							<p class="brand">{.brandNm}</p>
+							<p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
+							<p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+							{? .fixedPrice > 0}
+							<p class="discount-rate">{=round((1-(.goodsPrice/.fixedPrice))*100)}<em>%</em></p>
+							{/}
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="txt-box">
+				<a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+					<p class="tit">{.subject}</p>
+					<p class="sub">{=gd_html_cut(gd_remove_tag(.contents),300,'...')}</p>
+					<p class="writer">{.writerNm}님의 후기</p>
+				</a>
+			</div>
+		</li>
+		<!--{ / }-->
+	</ul>
+	<a href="/goods/goods_main.php?sno=10" class="more-view"><span data-hover="리뷰">리뷰</span> <span data-hover="더보기">더보기</span><i></i></a>
+</div>
+
+<div class="insta-area">
+	<p class="title">Follow us<a href="javascript:;">@newnia_official<i></i></a></p>
+</div>
+
+
 
 { # footer }

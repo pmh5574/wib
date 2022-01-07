@@ -1,0 +1,413 @@
+{*** 쇼핑몰 메인본문 | main/index.php ***}
+{ # header }
+<link type="text/css" rel="stylesheet" href="{=setBrowserCache('../wib/css/wib-main.css')}">
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/slick.js')}"></script>
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main.js')}"></script>
+<div class="mcon01">
+	<div class="swiper-container swiper">
+		<div class="swiper-wrapper">
+			<!--{ @dataBanner('1578004243', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+					<div class="txt-table">
+						<div class="txt-table-cell">
+							<span>MAISON FLOFLO</span>
+							<p>메종플로플로 최대 30% SALE</p>
+							<em>세련된 컬러감과 다양한 소재, 고급스럽고 우아한 감성</em>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+					<div class="txt-table">
+						<div class="txt-table-cell">
+							<span>MAISON FLOFLO</span>
+							<p>메종플로플로 최대 30% SALE</p>
+							<em>세련된 컬러감과 다양한 소재, 고급스럽고 우아한 감성</em>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ / }-->
+		</div>
+		<div class="arrow-wrap">
+			<div class="swiper-button-prev arrow"></div>
+			<div class="swiper-button-next arrow"></div>	
+		</div>
+		<div class="swiper-pagination"></div>
+	</div>
+</div>
+
+<div class="mcon02">
+	<div class="w1720">
+		<ul>
+			<li>
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon01.png" alt="유니크한 컬렉션" />
+						</div>
+						<div class="table-cell">
+							<p>유니크한 컬렉션</p>
+							<span>단 몇 벌의 기회!<br>특별한 우리 아이를 위하여 소량만 입고합니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>	
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon02.png" alt="고객만족 서비스" />
+						</div>
+						<div class="table-cell">
+							<p>고객만족 서비스</p>
+							<span>뉴니아에서 구매해주신 고객님의 소중한 상품<br>끝까지 책임져드립니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+					<div class="table">
+						<div class="table-cell">
+							<img src="../wib/img/nw-mcon02-icon03.png" alt="100% 정품 보장" />
+						</div>
+						<div class="table-cell">
+							<p>100% 정품 보장</p>
+							<span>합리적인 가격의 뉴니아<br>뉴니아는 직수입, 직접판매로 가격대를 낮췄습니다</span>
+						</div>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- 텍스트배너 -->
+<div class="mcon06">
+	<ul>
+		<!--{ @dataBanner('1055455800', true) }-->
+		<!--{ ? .index_ == '0'}-->
+		<li style="background:#62b1f3 url('{.bannerImageUrl}')no-repeat right top;">
+			<a href="javascript:;">
+				<div class="txt-box">
+					<p>프리미엄 배송 서비스 </p>
+					<span>배송과 함께 상품의 리얼패킹 검수 영상을 알림톡, 문자로 보내드립니다.</span>
+				</div>
+			</a>
+		</li>
+		<!--{ / }-->
+		<!--{ ? .index_ == '1'}-->
+		<li style="background:#ddc19e url('{.bannerImageUrl}')no-repeat right top;">
+			<a href="javascript:;">
+				<div class="txt-box">
+					<p>전국 7개의 오프라인 매장</p>
+					<span>전국 7개 매장에서 뉴니아를 만나보세요</span>
+				</div>
+			</a>
+		</li>
+		<!--{ / }-->
+		<!--{ / }-->
+	</ul>
+</div>
+
+<!-- 지금, 새로 들어왔어요 -->
+<div class="mcon03">
+	<div class="w1720">
+		<p class="main-title">지금, 새로 들어왔어요</p>
+		<div class="prd">
+			{=includeWidget('goods/_goods_display_main.html','sno','24')}
+			<div class="arrow">
+				<div class="prev-slide"></div>
+				<div class="next-slide"></div>
+			</div>
+			<div class="swiper-scrollbar"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- 이번주 가장 많이 팔린 상품 -->
+<div class="mcon07 tab-area">
+	<div class="w1720">
+		<p class="main-title">이번주 가장 많이 팔린 상품</p> 
+		<div class="tab">
+			<ul>
+				<li class="on"><a href="javascript:;">MEN</a></li>
+				<li><a href="javascript:;">WOMEN</a></li>
+				<li><a href="javascript:;">SHOES</a></li>
+				<li><a href="javascript:;">BAG&ACC</a></li>
+				<li><a href="javascript:;">KIDS</a></li>
+			</ul>
+		</div>
+		<div class="contents-wrap">
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','12')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">MEN 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','13')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">WOMEN 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','14')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">SHOES 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','15')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">BAG&ACC 더보기<i></i></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','16')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">KIDS 더보기<i></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 개발 : 라이브쇼핑, 할인율노출, 브랜드노출 -->
+<!-- 라이브쇼핑 -->
+<div class="mcon08">
+	<p class="main-title2">라이브<i></i>쇼핑</p>
+	<div class="cont swiper-container">
+		<ul class="swiper-wrapper">
+			<!--{ @getArticles( 'live' , 20 , 25 ) }-->
+			<li class="swiper-slide">
+				<a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+					<p class="thumb">
+						<!--{ ? .attachImageSrc }-->
+						<img src="{.attachImageSrc}" alt="{.goodsNm}" />
+						<!--{ : }-->
+						<img src="{.goodsImageSrc}" alt="{.goodsNm}" />
+						<!--{ / }-->
+					</p>
+					<p class="tit">{.subject}</p>
+					<!-- <p class="sub">{=gd_html_cut(gd_remove_tag(gd_htmlspecialchars_slashes(.contents)),'55','...')}</p> -->
+				</a>
+				<div class="prd_box">
+					<a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+						<div class="goods-thumb">
+							<!--{ ? .imagePath }-->
+								<!--{ ? .imageStorage == 'local' }-->
+									<img src="/data/goods/{.imagePath}{.imageName}">
+								<!--{ : }-->
+									<img src="{.imageStorage}/data/goods/{.imagePath}{.imageName}">
+								<!--{ / }-->
+							<!--{ : }-->
+							<img src="/data/commonimg/ico_noimg_100.gif">
+							<!--{ / }-->
+						</div>
+						<div class="goods-des">
+							<p class="brand">브랜드</p>
+							<p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),30,'...')}</p>
+							<p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+							<p class="discount-rate">23<em>%</em></p>
+						</div>
+					</a>
+				</div>
+			</li>
+			<!--{ / }-->
+		</ul>
+	</div>
+</div>
+
+<div class="mcon09">
+	<p class="main-title">후기로 증명하는 블루</p>	
+	<ul>
+		<!--{ @ reviews }-->
+                <li>
+                    <div class='photo-box'>
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                            <p class="thumb">
+                                <!--{ ? .saveFileNm }-->
+                                <img src="../data/board/{.bdUploadPath}{.saveFileNm}" alt="{.goodsNm}" />
+                                <!--{ : }-->
+                                <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+                                <!--{ / }-->
+                            </p>
+                        </a>
+                        <div class="prd-box">
+                            <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+                                <div class="goods-thumb">
+                                    <!--{ ? .imagePath }-->
+                                        <img src="../data/goods/{.imagePath}{.imageName}" alt="{.goodsNm}">
+                                    <!--{ : }-->
+                                    <img src="/data/commonimg/ico_noimg_100.gif">
+                                    <!--{ / }-->
+                                </div>
+                                <div class="goods-des">
+                                    <p class="brand">{.brandNm}</p>
+                                    <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
+                                    <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+                                    {? .fixedPrice > 0}
+                                    <p class="discount-rate">{=round((1-(.goodsPrice/.fixedPrice))*100)}<em>%</em></p>
+                                    {/}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="txt-box">
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                            <p class="tit">{.subject}</p>
+                            <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),300,'...')}</p>
+                            <p class="writer">{.writerNm}님의 후기</p>
+                        </a>
+                    </div>
+                </li>
+                <!--{ / }-->
+	</ul>
+	<a href="/goods/goods_main.php?sno=10" class="more-view">리뷰 더보기<i></i></a>
+</div>
+
+<!-- LOOKBOOK -->
+<div class="mcon10">
+	<p>FW LOOK BOOK</p>
+	<div class="inner">
+		<div class="left">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<!--{ @dataBanner('2503155063', true) }-->
+					<!--{ ? .index_ == '0'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<p>미리 만나보는 겨울 패딩, 몽클레어</p>
+							<span>핫한 셀럽들의 잇템, 스윔웨어 & 래쉬가드 마지막 특가세일<br>추가 쿠폰 할인까지 UP TO 80% SALE</span>
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '1'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<p>가을 스타일에 멋을 더해줄 루이비통 토트백</p>
+							<span>오랜 세월 변함없는 우아함의 상징 구찌 루이비통에서 1991년 처음 선보였던 뱀부 핸들 토트백을 미켈레식으로 재해석한 작품</span>
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '2'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<p>보네가 베네타 신상 빅 위빙 인트레치아토 카드지갑</p>
+							<span>본딩 처리한 신축성 있는 캐벌리 울 소재의 신상 스트레이트 트라우저</span>
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>					
+					</div>
+					<!--{ / }-->
+					<!--{ / }-->
+				</div>
+				<div class="arrow">
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="swiper-container big">
+				<div class="swiper-wrapper">
+					<!--{ @dataBanner('1711278007', true) }-->
+					<!--{ ? .index_ == '0'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '1'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '2'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ / }-->
+				</div>
+			</div>
+			<div class="swiper-container small">
+				<div class="swiper-wrapper">
+					<!--{ @dataBanner('2857893896', true) }-->
+					<!--{ ? .index_ == '0'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '1'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ ? .index_ == '2'}-->
+					<div class="swiper-slide">
+						<a href="{.bannerLink}">
+							<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+						</a>
+					</div>
+					<!--{ / }-->
+					<!--{ / }-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 브랜드전 -->
+<div class="mcon11">
+	<div class="inner">
+
+
+		<!--{ @dataBanner('728988135', true) }-->
+		<!--{ ? .index_ == '0'}-->
+		<div>
+			<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+			<p>럭셔리 컨템포러리 브랜드전</p>
+			<span>아름다운 디자인에 실용성과까지 겸비하여 꾸준한 사랑을 받고있는 크로와상 백<br>유니섹스 상품으로 남성, 여성 모두 데일리로 착용할 수 있는 아이템</span>
+			<a href="{.bannerLink}">VIEW MORE</a>
+		</div>
+		<!--{ / }-->
+		<!--{ ? .index_ == '1'}-->
+		<div>
+			<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+			<p>럭셔리 컨템포러리 브랜드전</p>
+			<span>아름다운 디자인에 실용성과까지 겸비하여 꾸준한 사랑을 받고있는 크로와상 백<br>유니섹스 상품으로 남성, 여성 모두 데일리로 착용할 수 있는 아이템</span>
+			<a href="{.bannerLink}">VIEW MORE</a>
+		</div>
+		<!--{ / }-->
+		<!--{ ? .index_ == '2'}-->
+		<div>
+			<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>	
+			<p>럭셔리 컨템포러리 브랜드전</p>
+			<span>아름다운 디자인에 실용성과까지 겸비하여 꾸준한 사랑을 받고있는 크로와상 백<br>유니섹스 상품으로 남성, 여성 모두 데일리로 착용할 수 있는 아이템</span>
+			<a href="{.bannerLink}">VIEW MORE</a>
+		</div>
+		<!--{ / }-->
+		<!--{ / }-->
+
+			
+
+	</div>
+</div>
+
+
+{ # footer }
