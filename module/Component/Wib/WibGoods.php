@@ -104,6 +104,62 @@ class WibGoods
         return $data;
     }
     
+    //카테고리별 가지고 있는 컬러만 노출
+    public function getColorList($cateCd, $cateType)
+    {
+        
+        $goodsNoList = [];
+        //2차 카테고리 기준
+//        $cateCd = substr($cateCd,0,6);
+        
+        $cbNm = 'Category';
+        if($cateType == 'brand'){
+            $cbNm = 'Brnad';
+        }
+        
+        //해당 카테고리에 전체에 해당하는 goodsNo를 새롭게 배열로 만듬
+        $query = "SELECT goodsNo FROM es_goodsLink{$cbNm} WHERE cateCd = {$cateCd}";
+        $result = $this->wibSql->WibAll($query);
+        
+        
+
+        foreach ($result as $value){
+            
+            //다시 그 카테고리 전체에 해당하는 goodsNo에 color값을 호출
+            $query = "SELECT goodsColor FROM es_goods WHERE goodsNo = {$value['goodsNo']} AND goodsDisplayFl = 'y'";
+            $res = $this->wibSql->WibNobind($query);
+            
+            if(strpos($res['goodsColor'],'^|^') !== false){
+                
+                //컬러값 여러개면 체크해서 잘라서 넣어주기
+                $_color = explode('^|^',$res['goodsColor']);
+                foreach ($_color as $val){
+
+                    $goodsNoList[$val] = $val;
+                }
+                
+            }else{
+                if($res['goodsColor']){
+                    
+                    //key값을 color값으로 해서 중복되는것도 한번만 넣어줌
+                    $goodsNoList[$res['goodsColor']] = $res['goodsColor'];
+
+                }
+            }
+            
+            
+        }
+        
+        $colorList = [];
+        
+        //해당 컬러칩을 다시 배열 한개당 하나씩 만듬
+        foreach($goodsNoList as $value){
+            $colorList[]['code'] = $value;
+        }
+        
+        return $colorList;
+    }
+    
     /**
      * 상품리스트 필터 카테고리 리스트 
      * $cateCd 없으면 브랜드에서 전체 카테고리 1, 2뎁스

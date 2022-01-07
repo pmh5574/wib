@@ -38,8 +38,7 @@ class WibFilterWidget extends \Widget\Mobile\Widget
         $this->setData('cateParentLink', gd_isset($cateDisplay['parentCateCd']));
         
         
-        $goods = \App::load('\\Component\\Goods\\Goods');
-        $goodsColorList = $goods->getGoodsColorList();
+        $goodsColorList = $wibGoods->getColorList($getValue['cateCd'], $getValue['cateType']);
         $this->setData('goodsColorList', gd_isset($goodsColorList));
 
         $this->setData('getValue', $getValue);

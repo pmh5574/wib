@@ -47,14 +47,14 @@
 			<ul class="toggle">
 				<!--{ @ goodsColorList}-->
 				<li>     
-					<span data-color="{.value_}" <!--{ ? .value_ != 'FFFFFF' }-->style="background:#{.value_};"<!--{ / }-->style="border:1px solid #ECECEC">{.value_}</span>
+					<span data-color="{.code}" <!--{ ? .code != 'FFFFFF' }-->style="background:#{.code};"<!--{ / }-->style="border:1px solid #ECECEC">{.code}</span>
 				</li>
 				<!--{ / }-->
 			</ul>    
 			<div class="hiddenColor" style="display:none"></div>
 		</div>
 	</div>
-	{? cateType == 'cate'}
+	{? cateType != 'brand'}
 	<!-- 브랜드 탭 -->
 	<div class="content">
 		<div class="filter_brand">

@@ -22,6 +22,8 @@
     </div>
 </div>
 <!--//필터 카테고리-->
+{/}
+{? cateType != 'brand'}
 <!--필터 브랜드-->
 <div class="filter_brand filter">
     <h1>브랜드</h1>
@@ -47,10 +49,38 @@
     <ul class="toggle">
         <!--{ @ goodsColorList}-->
         <li>     
-            <span data-color="{.value_}" <!--{ ? .value_ != 'FFFFFF' }-->style="background:#{.value_}; border:1px solid #{.value_}"<!--{ / }-->>{.value_}</span>
+            <span data-color="{.code}" <!--{ ? .code != 'FFFFFF' }-->style="background:#{.code}; border:1px solid #{.code}"<!--{ / }-->>{.code}</span>
         </li>
         <!--{ / }-->
     </ul>    
     <div class="hiddenColor" style="display:none"></div>
 </div>
 <!--//필터 컬러-->
+
+<script>
+	$(function(){
+		// 토글
+		$(".cate_left h1").click(function(){
+			if($(this).hasClass("on")){
+				$(this).removeClass('on');
+				$(this).next().slideDown(400);
+			}else{
+				$(this).addClass('on');
+				$(this).next().slideUp(400);
+			}
+		});
+
+
+		// 카테고리
+		$('.toggle h2').click(function(){
+			
+			if($('.toggle h2').hasClass('on')){
+				$('.toggle h2').removeClass('on');
+				$('.toggle ul').slideDown(400);
+			}else{
+				$('.filter_category h2').addClass('on');
+				$('.toggle ul').slideUp(400);
+			};
+		});
+	});
+</script>
