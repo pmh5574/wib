@@ -6,6 +6,16 @@
 
 
 
+<!-- <script>
+	console.log("
+			%c ██████     ███████    ███████    ██       ██████      ███         ██     ██                ██      ██     ██████  
+			%c ██       ██    ██                 ██                  ██     ██                   ████      ██     ██                ██      ██     ██        ██ 
+			%c ██       ██    █████         ███████    ██     ██       ███    ██  ██    ██     ██      █       ██      ██     ██████  
+			%c ██       ██    ██                               ██    ██     ██          ██    ██    ██  ██        ██ ███ ██        ██     ██        ██ 
+			%c ██████     ███████    ███████    ██       ██████      ██      ████         ███ ███           ██     ██████ ")
+</script> -->
+
+
 <div class="mcon01">
 	<div class="swiper-container swiper">
 		<div class="swiper-wrapper">
@@ -93,6 +103,7 @@
 			<div class="swiper-scrollbar"></div>
 		</div>
 	</div>
+	<a href="/goods/goods_main.php?sno=7" class="more-view"><span data-hover="신상품">신상품</span>  <span data-hover="더보기">더보기</span><i></i></a>
 </div>
 
 <!-- 관이동 -->
@@ -173,7 +184,7 @@
 							</div>
 							<div class="pd">
 								{=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
-								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view">브랜드별 베스트 상품 더보기<i></i></a>
+								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view"><span data-hover="브랜드별">브랜드별</span>  <span data-hover="베스트상품">베스트상품</span>  <span data-hover="더보기">더보기</span>  <i></i></a>
 							</div>
 						</div>
 						<!--{ / }-->
@@ -228,23 +239,23 @@
 		<div class="contents-wrap">
 			<div class="content">
 				{=includeWidget('goods/_goods_display_main.html','sno','12')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">MEN 더보기<i></i></a>
+				<a href="/goods/goods_main.php?sno=12" class="more-view"><span data-hover="MEN">MEN</span>  <span data-hover="더보기">더보기</span> <i></i></a>
 			</div>
 			<div class="content">
 				{=includeWidget('goods/_goods_display_main.html','sno','13')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">WOMEN 더보기<i></i></a>
+				<a href="/goods/goods_main.php?sno=12" class="more-view"><span data-hover="WOMEN">WOMEN</span>  <span data-hover="더보기">더보기</span> <i></i></a>
 			</div>
 			<div class="content">
 				{=includeWidget('goods/_goods_display_main.html','sno','14')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">SHOES 더보기<i></i></a>
+				<a href="/goods/goods_main.php?sno=12" class="more-view"><span data-hover="SHOES">SHOES</span>  <span data-hover="더보기">더보기</span> <i></i></a>
 			</div>
 			<div class="content">
 				{=includeWidget('goods/_goods_display_main.html','sno','15')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">BAG&ACC 더보기<i></i></a>
+				<a href="/goods/goods_main.php?sno=12" class="more-view"><span data-hover="BAG&ACC">BAG&ACC</span>  <span data-hover="더보기">더보기</span> <i></i></a>
 			</div>
 			<div class="content">
 				{=includeWidget('goods/_goods_display_main.html','sno','16')}
-				<a href="/goods/goods_main.php?sno=12" class="more-view">KIDS 더보기<i></i></a>
+				<a href="/goods/goods_main.php?sno=12" class="more-view"><span data-hover="KIDS">KIDS</span>  <span data-hover="더보기">더보기</span> <i></i></a>
 			</div>
 		</div>
 	</div>
@@ -342,7 +353,7 @@
                 </li>
                 <!--{ / }-->
 	</ul>
-	<a href="/goods/goods_main.php?sno=10" class="more-view">리뷰 더보기<i></i></a>
+	<a href="/goods/goods_main.php?sno=10" class="more-view"><span data-hover="리뷰">리뷰</span> <span data-hover="더보기">더보기</span>  <i></i></a>
 </div>
 
 <!-- LOOKBOOK -->
@@ -450,8 +461,6 @@
 <!-- 브랜드전 -->
 <div class="mcon11">
 	<div class="inner">
-
-
 		<!--{ @dataBanner('728988135', true) }-->
 		<!--{ ? .index_ == '0'}-->
 		<div>
@@ -478,9 +487,21 @@
 		</div>
 		<!--{ / }-->
 		<!--{ / }-->
+	</div>
+</div>
 
-			
 
+<div class="insta-area">
+	<div class="w1720">
+		<p class="title">Follow us<a href="javascript:;">@blue_official<i></i></a></p>
+		<ul>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img01.png"></a></li>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img02.png"></a></li>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img03.png"></a></li>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img04.png"></a></li>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img05.png"></a></li>
+			<li><a href="javascript:;"><img src="../wib/img/pms-insta-img06.png"></a></li>
+		</ul>
 	</div>
 </div>
 
