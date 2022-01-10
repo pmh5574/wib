@@ -32,6 +32,7 @@
         <dt>{? shopNum == '2'}프리미엄 멀티샵{: shopNum == '3'}뉴니아{:}블루인터내셔널{/}의 추천 상품</dt>
         <dd>
 			<ul>
+                            <!--{ @ data }-->
 				<li>
 					<!--{ ? in_array('img', config.displayField) && data.img }-->
 					<a href="../goods/goods_view.php?goodsNo={=data.goodsNo}">
@@ -111,6 +112,7 @@
 					</div>
 					<!-- //recom_item_cont -->
 				</li>
+                            <!--{ / }-->    
 			</ul>
             
         </dd>
