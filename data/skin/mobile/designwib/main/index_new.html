@@ -1,6 +1,387 @@
-{*** 쇼핑몰 메인본문 | main/index.php ***}
+{*** 쇼핑몰 메인본문 | main/index_new.php ***}
 { # header }
 
-NEWNIA
+<link rel="stylesheet" href="../wib/css/wib-main.css">
+<script src="../wib/js/wib-main.js"></script>
+<script src="../wib/js/swiper.js"></script>
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-main-brand.js')}"></script>
+
+<div class="main">
+    <div class="slidelook">
+        <div class="look_t">
+            <div class="look_tx">
+              <p>기획전 전체보기</p>
+              <a href="#" class="closedd"></a>  
+            </div>
+            <!--{ @dataBanner('228306791', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+            <!--{ ? .index_ == '2'}-->
+			<div>
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			
+			<!--{ / }-->
+        </div>
+    </div>
+    <!-- 슬라이더 -->
+    <div class="swiper-container swiper-main">
+        <div class="slidebtn"><a href="#"></a></div>
+        <div class="swiper-wrapper">
+			<!--{ @dataBanner('228306791', true) }-->
+			<!--{ ? .index_ == '0'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			<!--{ ? .index_ == '1'}-->
+			<div class="swiper-slide">
+				<a href="{.bannerLink}">
+					<img src="{.bannerImageUrl}" alt="{.bannerImageAlt}"/>
+				</a>
+			</div>
+			<!--{ / }-->
+			
+			<!--{ / }-->
+		</div>
+    
+        <div class="swiper-pagination">  </div>
+        
+        <!-- Pagination -->
+    
+      </div>
+      
+
+    <!-- 인기검색어 -->
+    <div class="right popular">
+        <div class="popular-search">
+            <dl class="popwrap">
+                <dt>인기검색어</dt>
+                <dd>
+                    <!--{ @ dataHitKeyword() }-->
+                        <ul class="popular-area">
+                            <!--{ @ .value_ }-->
+                            <li class="popular-rank"><a href="/goods/goods_search.php?keyword={=urlencode(..value_)}">{=..value_}</a></li>
+                            <!--{ / }-->
+                        </ul>
+                    <!--{ / }-->
+    
+                    <a href="javascript:;" class="popular-more" style="font-size:11px;"><img src="../wib/img/poparrow.png" alt=""></a>
+                </dd>
+                <div class="rank-view">
+                    <ul></ul>
+                </div>
+          
+            
+        </div>
+        <ul>
+            <li><a href="javascript:;" class="search-toggle">서치</a></li>
+            <li><a href="javascript:;">찜</a></li>
+            <li><a href="../mypage/index.php">마이페이지</a></li>
+            <li>
+                <a href="javascript:;">
+                    <strong>{=dataCartGoodsCnt()}</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="line"></div>
+
+    <!-- 아이콘 -->
+    <ul class="icon">
+        <li>
+            <img src="/data/skin/mobile/designwib/wib/img/new01.svg" alt="매장">
+            <p>단 몇 벌의 기회!<br>유니크한 컬렉션</p>
+        </li>
+        <li>
+            <img src="/data/skin/mobile/designwib/wib/img/new02.svg" alt="책임">
+            <p>고객님의 소중한  상품<br> 끝까지 책임져드립니다.</p>
+        </li>
+        <li>
+            <img src="/data/skin/mobile/designwib/wib/img/new03.svg" alt="보장">
+            <p>100% 정품 보장 <br> 국내 최고 명품 셀렉샵</p>
+        </li>
+    </ul>
+
+
+
+
+<!-- 지금, 새로 들어왔어요 -->
+<div class="mcon03">
+    <div class="prd">
+        {=includeWidget('goods/_goods_display_main.html','sno','36')}
+
+        
+    </div>
+    <div class="view_more">
+        <a href="#">신상품 더보기<span></span> </a>
+    </div>
+</div>
+
+<!-- 센터 배너 -->
+
+<div class="cen_banner">
+    <!-- Swiper -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+          <div class="slidetxt">
+             <p>프리미엄 배송 서비스</p>
+            <p>리얼패킹 검수 영상을 보내드립니다.</p> 
+          </div>
+          <img src="/data/skin/mobile/designwib/wib/img/new04.svg" alt="배1">
+      </div>
+      <div class="swiper-slide">
+        <div class="slidetxt">
+            <p>뉴니아가 처음이신가요?</p>
+            <p>회원가입하고 혜택 받아보세요!</p> 
+         </div>
+        <img src="/data/skin/mobile/designwib/wib/img/new04.svg" alt="배1">
+      </div>
+ 
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+
+
+<!-- 개발 : 찜하기 -->
+<!-- 브랜드별 베스트 상품 -->
+<div class="mcon05">
+	<div>
+		<p class="main-title">브랜드별 베스트 상품</p>
+		<div class="brand-list">
+			<div class="swiper-container swiper">
+				<div class="swiper-wrapper">
+					<!--{ @ brandListInfo }-->
+					<div class="swiper-slide">
+						<a href="javascript:;">
+							<div class="table">
+								<div class="table-cell">
+									{? .blackBrandImg}
+									<img src="/data/category/{.blackBrandImg}" alt="{.cateNm}"/>
+									{/}
+									<p>{.cateKrNm}</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<!--{ / }-->
+				</div>
+			</div>
+		</div>
+
+		<div class="brand-product-form">
+			<div class="inner">
+				<div class="swiper-container swiper">
+					<div class="swiper-wrapper">
+						<!--{ @ brandListInfo }-->
+						<div class="swiper-slide">
+							<div class="banner-img">
+								{? .commonBrandImgMo}
+								<img src="/data/category/{.commonBrandImgMo}" alt="{.cateNm}"/>	
+								{/}
+								<div class="info">
+									<div class="info-cell">
+										{? .whiteBrandImg}
+										<img src="/data/category/{.whiteBrandImg}" alt="{.cateNm}" />
+										{/}
+										<p>{.cateHtml1}</p>
+										<!--{ ? gd_is_login() === false }-->
+										<a href='javascript:brandLikeNoMember();' class="zzim"><p></p> </a>
+										<!--{ : }-->
+										<a href="javascript:;" onclick="brandLike('{.cateCd}', this);" class="zzim {? .brandLike == 'on'}on{/}"></a>
+										<!--{ / }-->
+									</div>
+								</div>
+							</div>
+							<div class="pd">
+								{=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
+								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view brand_best_goods">브랜드별 베스트 상품 더보기<i></i></a>
+							</div>
+						</div>
+						<!--{ / }-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 이번주 가장 많이 팔린 상품 -->
+<div class="mcon06-1 ">
+    <p class="main-title">이번주 가장 많이 팔린 상품</p> 
+    <div class="contents-wrap">
+        <div class="content">
+            {=includeWidget('goods/_goods_display_main.html','sno','37')}
+            <a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p> 
+            </a>
+        </div>
+       
+    </div>
+</div>
+
+<!-- 많은 분들이 선택해주셨어요 -->
+<div class="mcon07 tab-area">
+		<p class="main-title">많은 분들이 선택해주셨어요</p> 
+		<div class="tab">
+			<ul>
+				<li class="on"><a href="javascript:;">TOP</a></li>
+				<li><a href="javascript:;">BOTTOM</a></li>
+				<li><a href="javascript:;">OUTER</a></li>
+				<li><a href="javascript:;">SHOES</a></li>
+				<li><a href="javascript:;">BAG&ACC</a></li>
+			</ul>
+		</div>
+		<div class="contents-wrap">
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','38')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p> 
+				</a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','39')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','40')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','41')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
+			</div>
+			<div class="content">
+				{=includeWidget('goods/_goods_display_main.html','sno','42')}
+				<a href="/goods/goods_main.php?sno=12" class="more-view">상품 더보기<p></p></a>
+			</div>
+		</div>
+</div>
+
+
+
+<!-- 개발 : 관리자에서 특정후기 선택해서 노출 ex)담터 -->
+<!-- 개발 : 노출 개수 3개 이상으로 늘리면 네이버후기작성 나오는데 이거 걸러야될 것 같음 -->
+<div class="mcon09 ">
+	<p class="main-title">후기로 증명하는 뉴니아</p>	
+    <div class="swiper">
+        <ul class="swiper-wrapper">
+            <!--{ @getArticles( 'goodsreview' , 7 , 255, 255 ) }-->
+            <li class="swiper-slide">
+                <div class="photo-box">
+                    <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                        <p class="thumb">
+                            <!--{ ? .attachImageSrc }-->
+                            <img src="{.attachImageSrc}" alt="{.goodsNm}" />
+                            <!--{ : }-->
+                            <img src="{.goodsImageSrc}" alt="{.goodsNm}" />
+                            <!--{ / }-->
+                            <img src="/data/skin/mobile/designwib/wib/img/new05.svg" class="icon02">
+                        </p>
+                    </a> 
+                    <div class="txt-box">
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}">
+                            <p class="tit">{.subject}</p>
+                            <p class="sub">{=gd_html_cut(gd_remove_tag(.contents),'300')}</p>
+                            <p class="writer">{.writer}님의 후기</p>
+                        </a>		
+                    </div>
+                    <div class="prd-box">
+                        <a href="/goods/goods_view.php?goodsNo={.goodsNo}" class="clearfix">
+                            <div class="goods-thumb">
+                                <!--{ ? .imagePath }-->
+                                    <!--{ ? .imageStorage == 'local' }-->
+                                        <img src="/data/goods/{.imagePath}{.imageName}">
+                                    <!--{ : }-->
+                                        <img src="{.imageStorage}/data/goods/{.imagePath}{.imageName}">
+                                    <!--{ / }-->
+                                <!--{ : }-->
+                                <img src="/data/commonimg/ico_noimg_100.gif">
+                                <!--{ / }-->
+                                
+                            </div>
+                            <div class="goods-des">
+                                <p class="brand">KENZO 겐조</p>
+                                <p class="goods-name">{=gd_html_cut(gd_remove_tag(.goodsNm),300,'...')}</p>
+                                <p class="goods-price">{=gd_global_currency_symbol()}{=gd_global_money_format(.goodsPrice)}</p>
+                                <p class="discount-rate">23<em>%</em></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+            </li>
+            <!--{ / }-->
+        </ul>
+    </div>
+	<a href="/goods/goods_main.php?sno=10" class="more-view">리뷰 더보기 <p></p></a>
+</div>
+
+
+<!-- 인스타영역 -->
+
+<div class="mcon12">
+    <div class="insta01">
+        <h2>Follow us</h2>
+        <p>@NEWNIA <i></i></p>
+        <ul>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta1.png" alt="인스타이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta2.png" alt="인스타이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta3.png" alt="인스타이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta4.png" alt="인스타이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta5.png" alt="인스타이미지1">
+                </a>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <img src="../wib/img/insta6.png" alt="인스타이미지1">
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    
+</div>
+
+
+	
+</div>
 
 { # footer }
