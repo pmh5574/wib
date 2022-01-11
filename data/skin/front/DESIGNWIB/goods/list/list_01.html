@@ -81,7 +81,7 @@
                         </div>
                         <!--{ / }-->
                         <!--{ ? in_array('goodsDiscount', themeInfo.displayField) && ..dcPrice > 0 && ..goodsPriceDisplayFl =='y' }-->
-                        <strong class="item_price">
+                        <strong class="item_price" style="display:none">
                             {=gd_global_currency_symbol()}{=gd_global_money_format(..goodsPrice - ..dcPrice)}{=gd_global_currency_string()} {=gd_global_add_currency_display(..goodsPrice - ..dcPrice)}<!--{ ? in_array('dcRate', themeInfo.displayAddField) && gd_isset(..goodsDcRate) }--> <span class="item_number_box">({=..goodsDcRate}%)</span><!--{ / }-->
                         </strong>
                         <!--{ / }-->
@@ -140,30 +140,3 @@
     <!--{ / }-->
 </div>
 <!-- //item_gallery_type -->
-
-<script>
-    $('h1').click(function(){
-        if($(this).hasClass('on')){
-            $(this).removeClass('on');
-        }else{
-            $(this).addClass('on')
-        };
-    });
-    $('.filter_category div  h2').click(function(){
-        if($(this).hasClass('on')){
-            $(this).removeClass('on');
-        }else{
-            $(this).addClass('on')
-        };
-        $('.filter_category div  h2 + ul').toggle('200');
-    });
-    $('.filter_category h1').click(function(){
-        $('.filter_category .toggle').toggle('200');
-    });
-    $('.filter_brand h1').click(function(){
-        $('.filter_brand .toggle').toggle('200');
-    });
-    $('.filter_color h1').click(function(){
-        $('.filter_color .toggle').toggle('200');
-    });
-</script>

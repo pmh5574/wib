@@ -195,7 +195,7 @@
 				<div class="swiper-container swiper">
 					<div class="swiper-wrapper">
 						<!--{ @ brandListInfo }-->
-						<div class="swiper-slide">
+						<div class="swiper-slide main_wrap_best_brand_list">
 							<div class="banner-img">
 								{? .commonBrandImgMo}
 								<img src="/data/category/{.commonBrandImgMo}" alt="{.cateNm}"/>	
@@ -215,8 +215,10 @@
 								</div>
 							</div>
 							<div class="pd">
-								{=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
-								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view brand_best_goods">브랜드별 베스트 상품 더보기<i></i></a>
+								<ul class="main_wrap_best_brand_list_{.cateCd}">
+                                                                    {=includeWidget('goods/_goods_brand_display_main.html','brandCd', .cateCd)}
+                                                                </ul>
+								<a href="/goods/goods_list.php?brandCd={.cateCd}" class="more-view brand_best_goods" data-brancd="{.cateCd}" data-page="2">브랜드별 베스트 상품 더보기<i></i></a>
 							</div>
 						</div>
 						<!--{ / }-->

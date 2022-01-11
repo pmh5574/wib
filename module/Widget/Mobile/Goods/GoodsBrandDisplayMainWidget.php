@@ -27,7 +27,7 @@ class GoodsBrandDisplayMainWidget extends \Widget\Mobile\Widget
     {
         $goods = \App::load('\\Component\\Goods\\Goods');
         $cate = \App::load('\\Component\\Category\\Brand');
-        $cateCd = '024';
+//        $cateCd = '024';
         if(!$cateCd){
             $cateCd = $this->getData('brandCd');
         }
