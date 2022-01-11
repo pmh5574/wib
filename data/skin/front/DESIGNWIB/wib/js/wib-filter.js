@@ -20,7 +20,7 @@ var wibFilter = {
         this.page = option.page;
         this.sort = option.sort;
         this.brandCheck = option.brandCheck;
-        
+
         //브랜드 필터 정렬기준
         $('.filter_brand .brand_order_by span').on('click', function(e){
             e.preventDefault();
@@ -159,6 +159,10 @@ var wibFilter = {
 
                 $('.pick_list_num strong').html(listNum);
                 $('.filter_goods_list').empty().append(result);
+
+                $('.go-top').trigger('click');
+                
+                        
             }
         });
     },
