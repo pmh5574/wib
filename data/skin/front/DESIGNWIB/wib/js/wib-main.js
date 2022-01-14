@@ -67,6 +67,7 @@
 		var options = {
 			slidesPerView: "auto",
 			centeredSlides: true,
+			slideToClickedSlide: true,
 			navigation: {
 				nextEl: ".brand-list .swiper-button-next",
 				prevEl: ".brand-list .swiper-button-prev",

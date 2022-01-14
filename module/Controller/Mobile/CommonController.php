@@ -30,9 +30,8 @@ class CommonController
         $pageName = $this->_setPageName($getURI);
         
         $shopNum = Session::get('WIB_SHOP_NUM');
-        
         if(!$shopNum){
-            $shopNum = "1";
+            $shopNum = 1;
             Session::del('WIB_SHOP_NUM');
             Session::set('WIB_SHOP_NUM', $shopNum);
         }
@@ -54,7 +53,7 @@ class CommonController
             case '/main/index_pre':
                 try {
 
-                    $shopNum = "2";
+                    $shopNum = "027";
                     Session::del('WIB_SHOP_NUM');
                     Session::set('WIB_SHOP_NUM', $shopNum);
                     
@@ -65,24 +64,9 @@ class CommonController
             case '/main/index_new':
                 try {
 
-                    $shopNum = "3";
+                    $shopNum = "028";
                     Session::del('WIB_SHOP_NUM');
                     Session::set('WIB_SHOP_NUM', $shopNum);
-                    
-                } catch (\Exception $e) {
-                    echo json_encode($e);
-                }
-                break;
-            case '/goods/goods_view':
-                try {
-
-                    $goods = \App::load('\\Component\\Wib\\WibGoods');
-                    $shopSetting = $goods->getShopNo($goodsNo);
-                    if(!$shopSetting){
-                        $shopSetting = '1';
-                    }
-                    Session::del('WIB_CATE');
-                    Session::set('WIB_CATE', $shopSetting);
                     
                 } catch (\Exception $e) {
                     echo json_encode($e);
@@ -97,12 +81,12 @@ class CommonController
                         $shopNum = "1";
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
-                    }else if($mallKey && $mallKey == '2'){
-                        $shopNum = "2";
+                    }else if($mallKey && $mallKey == '027'){
+                        $shopNum = "027";
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
-                    }else if($mallKey && $mallKey == '3'){
-                        $shopNum = "3";
+                    }else if($mallKey && $mallKey == '028'){
+                        $shopNum = "028";
                         Session::del('WIB_SHOP_NUM');
                         Session::set('WIB_SHOP_NUM', $shopNum);
                     }
@@ -112,17 +96,17 @@ class CommonController
                 }
                 break;
             default :
-                if ($getURI == "/") {
-                    try {
+                
+                try {
 
-                        $shopNum = "1";
-                        Session::del('WIB_SHOP_NUM');
-                        Session::set('WIB_SHOP_NUM', $shopNum);
-                        
-                    } catch (\Exception $e) {
-                        echo json_encode($e);
-                    }
+                    $shopNum = "1";
+                    Session::del('WIB_SHOP_NUM');
+                    Session::set('WIB_SHOP_NUM', $shopNum);
+
+                } catch (\Exception $e) {
+                    echo json_encode($e);
                 }
+                
                 break;
         }
         

@@ -2,7 +2,7 @@
 <div class="black-dim"></div>
 <div id="header_wrap">
     <!-- 네비게이터 -->
-     <!-- 서브페이지 전용 헤더 -->
+     <!-- 회사소개페이지 전용 헤더 -->
     <!--{ ? gCurrentPageName == 'service/company' }-->
     <div class="sub_top_com">
         <div class="sub_top_left">
@@ -19,11 +19,16 @@
         <!--{ ? gCurrentPageName == 'board/view' }-->
         <div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
         <!--{ / }-->
+        <div class="search">
+            <!-- 검색 폼 -->
+            {=includeWidget('proc/_header_search.html')}
+            <!-- 검색 폼 -->
+        </div>
     </div>
     <!--{ / }-->
 
     <!-- 서브페이지 전용 헤더 -->
-    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view' && gCurrentPageName != 'goods/goods_list' && gCurrentPageName != 'service/company'}-->
+    <!--{ ? gCurrentPageName != 'main/index' && gCurrentPageName != 'goods/goods_view' && gCurrentPageName != 'goods/goods_list' && gCurrentPageName != 'service/company' && gCurrentPageName != 'main/index_pre' && gCurrentPageName != 'main/index_new'}-->
     <div class="sub_top">
         <div class="sub_top_left">
             <!--{ ? gReturnUrl }-->
@@ -31,11 +36,14 @@
             <!--{ : }-->
             <a href="{=gReferer}" class="all_page_prev js_bn_back">{=__('이전')}</a>
             <!--{ / }-->
+            <p class="pagename">
+                <!--{ ? gPageName }-->{=gPageName}<!--{:}-->{=layout.page_name}<!--{/}-->
+            </p>
         </div>
         <div class="cart">
-                <a href="http://m.blue3200.godomall.com/order/cart.php">
-                    <strong>{=dataCartGoodsCnt()}</strong>
-                </a>
+			<a href="http://m.blue3200.godomall.com/order/cart.php">
+				<strong>{=dataCartGoodsCnt()}</strong>
+			</a>
         </div>
         <!--{ ? (gCurrentPageName == 'board/list' || gCurrentPageName == 'mypage/mypage_qa' || gCurrentPageName == 'mypage/mypage_goods_qa' || gCurrentPageName == 'mypage/mypage_goods_review') && bdList.cfg.auth.write == 'y'}-->
         <div class="sub_top_right2"><a href="../board/write.php?bdId={req.bdId}&mypageFl={req.mypageFl}&goodsNo={goodsView.goodsNo}&gboard=r&noheader=y" data-toggle="modal" data-target="#popupBoard" class="board_btn">{=__('글쓰기')}</a></div>
@@ -43,6 +51,14 @@
         <!--{ ? gCurrentPageName == 'board/view' }-->
         <div class="sub_top_right2"><a href="../board/list.php?bdId={req.bdId}&mypageFl={req.mypageFl}" class="board_btn">{=__('목록가기')}</a></div>
         <!--{ / }-->
+
+        <div class="search">
+            <!-- 검색 폼 -->
+            {=includeWidget('proc/_header_search.html')}
+            <!-- 검색 폼 -->
+        </div>
+
+        
     </div>
     <!--{ / }-->
 
@@ -77,6 +93,12 @@
 		<div class="depth1-menu">
 			{=includeWidget('proc/_list_category_all')}
 		</div>
+
+        <div class="search">
+            <!-- 검색 폼 -->
+            {=includeWidget('proc/_header_search.html')}
+            <!-- 검색 폼 -->
+        </div>
     </div>
     <!--{ / }-->
 
@@ -85,10 +107,25 @@
     <div class="sub_top detail_h">
          <div class="top-menu">
             <div class="shop">
-                <ul>
-                    <li><a href="javascript:;"><span>BLU</span></a></li>
-                    <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
-                    <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                <ul <!--{ ? shopNum == '1' }-->
+					<!-- 블루 -->
+					<li><a href="/"><span class="squ"></span> <span>BLU</span></a></li>
+					<li><a href="/main/ind ex_pre.php"><span>PREMIUMMULTISHOP</span></a></li>
+					<li><a href="/main/index_new.php"><span>NEWNIA</span></a></li>
+					<!-- //블루 -->
+				<!--{ : shopNum == '2' }-->
+					<!-- 프리미엄 멀티샵 -->
+					<li><a href="/main/index_pre.php"><span class="squ"></span> <span>PREMIUMMULTISHOP</span></a></li>
+					<li><a href="/"><span>BLU</span></a></li>
+					<li><a href="/main/index_new.php"><span>NEWNIA</span></a></li>
+					<!-- //프리미엄 멀티샵 -->
+				<!--{ : shopNum == '3' }-->
+					<!-- 뉴니아 -->
+					<li><a href="/main/index_new.php"><span class="spu"></span> <span>NEWNIA</span></a></li>
+					<li><a href="/"><span>BLU</span></a></li>
+					<li><a href="/main/index_pre.php"><span>PREMIUMMULTISHOP</span></a></li>
+					<!-- //뉴니아 -->
+				<!--{ / }-->
                 </ul>
             </div>
         
@@ -102,7 +139,7 @@
 				<!--{ / }-->
 			</div>
 			<div class="right_click">
-				<div class="menu_click side_menu">
+				<div class="menu_click side_menu all-menu-open">
 					
 				</div>
 				<div class="search_click input_box">
@@ -132,40 +169,49 @@
     <!--{ / }-->
 
     <!-- 메인페이지 전용 헤더 -->
-    <!--{ ? gCurrentPageName == 'main/index' }-->
+    <!--{ ? gCurrentPageName == 'main/index'  || gCurrentPageName == 'main/index_pre' || gCurrentPageName == 'main/index_new'}-->
     <header> 
         <!--탑 팝업 -->
         <div class="top_re">
             <span>Renewal</span><span>새로운 모습으로 인사드려요. 리뉴얼 이벤트!</span><button><img src="/data/skin/mobile/designwib/wib/img/topx.png"></button>
         </div>
-        <script>
-            $('.top_re button').click(function(){
-                $('.top_re').toggle();
-            });
-        </script>
+        
         <!--하단 팝업-->
+        <div class="dim_bottom"></div>
         <div class="bottom_pop">
             <div class="popcen">
-               <img src="../../wib/img/bottom_pop01.png" alt="하단 팝업">
+               <p class="img_pop"></p>
                 <h4>국내 최고 명품 셀렉샵 <br>블루 앱 설치하고<br><strong>10,000</strong>원 할인받자</h4> 
             </div>
             
             <a href="#">블루 앱으로 보기</a>
             <p class="no_ok">괜찮아요, 모바일 웹으로 볼게요</p>
         </div>
-        <script>
-            $('.bottom_pop .no_ok').click(function(){
-                $('.bottom_pop').toggle();
-            });
-        </script>
+        
         
         <div class="header-area">
             <div class="top-menu">
                 <div class="shop">
                     <ul>
-                        <li><a href="javascript:;"><span>BLU</span></a></li>
-                        <li><a href="javascript:;"><span>PREMIUMMULTISHOP</span></a></li>
-                        <li><a href="javascript:;"><span>NEWNIA</span></a></li>
+                <!--{ ? shopNum == '1' }-->
+					<!-- 블루 -->
+					<li><a href="/"><span class="squ"></span><span>BLU</span></a></li>
+					<li><a href="/main/index_pre.php"><span>PREMIUMMULTISHOP</span></a></li>
+					<li><a href="/main/index_new.php"><span>NEWNIA</span></a></li>
+					<!-- //블루 -->
+				<!--{ : shopNum == '027' }-->
+					<!-- 프리미엄 멀티샵 -->
+					<li><a href="/main/index_pre.php"><span class="squ"></span><span>PREMIUMMULTISHOP</span></a></li>
+					<li><a href="/"><span>BLU</span></a></li>
+					<li><a href="/main/index_new.php"><span>NEWNIA</span></a></li>
+					<!-- //프리미엄 멀티샵 -->
+				<!--{ : shopNum == '028' }-->
+					<!-- 뉴니아 -->
+					<li><a href="/main/index_new.php"><span class="squ"></span><span>NEWNIA</span></a></li>
+					<li><a href="/"><span>BLU</span></a></li>
+					<li><a href="/main/index_pre.php"><span>PREMIUMMULTISHOP</span></a></li>
+					<!-- //뉴니아 -->
+				<!--{ / }-->
                     </ul>
                 </div>
             
@@ -184,11 +230,11 @@
                                 <!-- 블루 -->
                                 <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
                                 <!-- //블루 -->
-                            <!--{ : shopNum == '2' }-->
+                            <!--{ : shopNum == '027' }-->
                                 <!-- 프리미엄 멀티샵 -->
                                 <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
                                 <!-- //프리미엄 멀티샵 -->
-                            <!--{ : shopNum == '3' }-->
+                            <!--{ : shopNum == '028' }-->
                                 <!-- 뉴니아 -->
                                 <h1><a href="http://m.blue3200.godomall.com/?tplMobileSkin=designwib"><img src="/data/skin/mobile/designwib/wib/img/mologo.svg" alt="로고"></a></h1>
                                 <!-- //뉴니아 -->
@@ -212,24 +258,27 @@
                                     <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
-                                    <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
-                                    <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                    <li class="swiper-slide"><a href="../goods/goods_list.php?cateCd=023">신상품</a></li>
+                                    <li class="swiper-slide"><a href="../goods/goods_list.php?cateCd=022">BEST</a></li>
                                     <!-- //블루 -->
-                                <!--{ : shopNum == '2' }-->
+                                <!--{ : shopNum == '027' }-->
                                     <!-- 프리미엄 멀티샵 -->
                                     <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
-                                    <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">MAN</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">WOMAN</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
                                     <!-- //프리미엄 멀티샵 -->
-                                <!--{ : shopNum == '3' }-->
+                                <!--{ : shopNum == '028' }-->
                                     <!-- 뉴니아 -->
-                                    <li class="swiper-slide"><a href="javascript:;">라이브 <img src="/data/skin/mobile/designwib/wib/img/livemo.png" alt="live"> 쇼핑</a></li>
-                                    <li class="swiper-slide"><a href="javascript:;">국내배송</a></li>
-                                    <li class="swiper-slide"><a href="javascript:;">해외배송</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">남아</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">여아</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">브랜드</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">신상품</a></li>
                                     <li class="swiper-slide"><a href="javascript:;">BEST</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">사이즈</a></li>
+                                    <li class="swiper-slide"><a href="javascript:;">SALE</a></li>
                                     <!-- //뉴니아 -->
                                 <!--{ / }-->
                                 
@@ -257,7 +306,8 @@
     <!--{ / }-->
 </div>
 <!-- //header_wrap -->
-<nav>
+<nav></nav>
+<div id="nav">
 	<div class="bg"></div>
 	
 	<div class="nav_bg_box">
@@ -266,7 +316,7 @@
 				<div class="nav_content_box">
 
 					<div class="nav_banner">
-                        <div class="left_close"> <img src="/data/skin/mobile/designwib/wib/img/nav02.svg"></div>
+                        <div class="nav-close"> <img src="/data/skin/mobile/designwib/wib/img/nav02.svg"></div>
 
 						<!--{ ? gd_is_login() === false }-->
 						<div class="left_logo">
@@ -287,7 +337,7 @@
 								<!--{ : }-->
                                 <li>
                                     <div class="login_txt">
-                                        {=__('%s님 반갑습니다.', '<p class="name"><strong>' + gd_get_login_name() + '</strong>', '</p>')}
+                                        {=__('%s님 반갑습니다.', '<p class="name"><strong> ' + gd_get_login_name() + '</strong>', '</p>')}
                                     </div>
                                 </li>
 								<li><a href="../member/logout.php">{=__('로그아웃')}</a></li>
@@ -313,97 +363,46 @@
 								<li class="on"><span>카테고리</span></li>
 								<li><span>브랜드</span></li>
 							</ul>
-							<div class="tab_menu0">
-								<div class="prd_cate">
-									{=includeWidget("proc/category_all.html",'cateType','category')}
+
+							<div class="contents-wrap">
+								<div>
+									<div class="prd_cate">
+										{=includeWidget("proc/category_all.html",'cateType','category')}
+									</div>
+									<!-- //prd_cate -->
 								</div>
-								<!-- //prd_cate -->
-							</div>
-							<!-- //tab_menu0 -->
-							<div class="tab_menu1" style="display:none;">
-								<!-- 브랜드 위젯 -->
-								{=includeWidget('goods/_brand')}
-								<!--// 브랜드 위젯 -->
-							</div>
-							<!-- //tab_menu1 -->
-							<div class="nav_community_box">
-								
-								<ul class="board_cate">
-									<!--{ @defaultBoardList }-->
-									<li><a href="../board/list.php?bdId={.key_}">{=__(.value_)}</a></li>
-									<!--{/}-->
-									<li><a href="../service/faq_list.php">{=__('FAQ')}</a></li>
-								</ul>
+								<!-- //tab_menu0 -->
+								<div>
+									<!-- 브랜드 위젯 -->
+									{=includeWidget('goods/_brand')}
+									<!--// 브랜드 위젯 -->
+								</div>
+								<!-- //tab_menu1 -->	
 							</div>
 						</div>
 					</div>
-
-
 					<div class="nav_language">
 						{=includeWidget('proc/_global_select.html')}
 					</div>
 					<!-- //nav_language -->
-
-
 				</div>
 				<!-- //nav_content_box -->
+				<div class="nav_community_box">		
+					<ul class="board_cate">
+					
+                        <li><a href="../board/list.php?bdId=notice">{=__('공지사항')}</a></li>
+						<li><a href="../service/faq_list.php">{=__('고객센터')}</a></li>
+                        <li><a href="http://m.blue3200.godomall.com/board/list.php?bdId=store">{=__('매장안내')}</a></li>
+                        <li><a href="#">{=__('APP다운')}</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<!-- //nav_box -->
 	</div>
 	<!-- //nav_bg_box -->
-</nav>
+</div>
 <div id="container">
 	<div id="contents_wrap">
 
 
-
-<script>
-
-    $('._header_search .layer_search_box dl dd .keyword_box input').attr("placeholder","검색어를 입력해주세요.")
-
-
-    $(" .input_box").click(function(){
-        if($('.layer_search_content').hasClass('on')){ 
-            $('.layer_search_content').removeClass('on'); 
-        }else{ $('.layer_search_content').addClass('on'); 
-        }
-        
-    });
-    $(".input_box").click(function(){
-        if($('.black_cover').hasClass('on')){ 
-            $('.black_cover').removeClass('on'); 
-        }else{ $('.black_cover').addClass('on'); 
-        }
-        
-    });
-
-    $('.black_cover').click(function(){
-        $('.layer_search_content').removeClass('on');
-        $('.black_cover').removeClass('on');
-    });
-
-
-
-
- //상세 헤더관련
-    // $(".detail_h .right_click .search_click").click(function(){
-    //         if($('.layer_search_content').hasClass('on')){ 
-    //             $('.layer_search_content').removeClass('on'); 
-    //         }else{ $('.layer_search_content').addClass('on'); 
-    //         }
-            
-    //     });
-    // $(".detail_h .right_click .search_click").click(function(){
-    //     if($('.black_cover').hasClass('on')){ 
-    //         $('.black_cover').removeClass('on'); 
-    //     }else{ $('.black_cover').addClass('on'); 
-    //     }
-        
-    // });
-
-    // $('.black_cover').click(function(){
-    //     $('.layer_search_content').removeClass('on');
-    //     $('.black_cover').removeClass('on');
-    // });
-</script>
