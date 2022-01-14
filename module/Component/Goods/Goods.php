@@ -275,7 +275,7 @@ class Goods extends \Bundle\Component\Goods\Goods
         $shopNum = Session::get('WIB_SHOP_NUM');
         
         if($shopNum != '1' && $shopNum){
-            $this->arrWhere[] = "((g.shopSettingFl = 'y' AND g.shopSetting = '{$shopNum}') or g.shopSettingFl = 'n')";
+            $this->arrWhere[] = "(g.cateCd LIKE '%{$shopNum}%')";
         }
         
         $goodsList = parent::getGoodsList($cateCd, $cateMode, $pageNum, $displayOrder, $imageType, $optionFl, $soldOutFl, $brandFl, $couponPriceFl, $imageViewSize, $displayCnt);
@@ -314,7 +314,7 @@ class Goods extends \Bundle\Component\Goods\Goods
         $shopNum = Session::get('WIB_SHOP_NUM');
         
         if($shopNum != '1' && $shopNum){
-            $this->arrWhere[] = "((g.shopSettingFl = 'y' AND g.shopSetting = '{$shopNum}') or g.shopSettingFl = 'n')";
+            $this->arrWhere[] = "(g.cateCd LIKE '%{$shopNum}%')";
         }
 
         // --- 정렬 설정

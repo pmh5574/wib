@@ -3750,33 +3750,6 @@ if ($data['mode'] == 'modify') {
             </tr>
         </table>
     </div>
-    
-    <div class="table-title gd-help-manual">
-        상점 설정
-    </div>
-
-    <div id="depth-toggle-layer-setImage">
-        <table class="table table-cols">
-            <colgroup>
-                <col class="width-lg"/>
-                <col/>
-            </colgroup>
-            <tr>
-                <th>상점 선택 여부</th>
-                <td>
-                    <label class="radio-inline"><input type="radio" name="shopSettingFl" onchange='shop_setting_fl()' <?php if($data['shopSettingFl'] == 'y') echo 'checked'; ?> value="y"/>사용함</label>
-                    <label class="radio-inline"><input type="radio" name="shopSettingFl" onchange='shop_setting_fl()' <?php if($data['shopSettingFl'] == 'n' || !$data['shopSettingFl']) echo 'checked'; ?> value="n"/>사용 안함</label>
-                </td>
-            </tr>
-            <tr class='shopSettingFl'>
-                <th>상점 선택</th>
-                <td>
-                    <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '2') echo 'checked'; ?> value="2"/>PREMIUMMULTISHOP</label>
-                    <label class="radio-inline"><input type="radio" name="shopSetting" <?php if($data['shopSetting'] == '3') echo 'checked'; ?> value="3"/>NEWNIA</label>
-                </td>
-            </tr>
-        </table>
-    </div>
 
     <?php if (gd_is_provider() === false) { ?>
         <div class="table-title gd-help-manual">
@@ -6797,18 +6770,6 @@ if ($data['mode'] == 'modify') {
     function set_add_relation_goods(value, goodsNo)
     {
         $('#relationGoodsEach_'+ goodsNo).val(value);
-    }
-    
-    /*
-    * 220104 디자인위브 mh 상점 선택
-    */
-    function shop_setting_fl()
-    {
-        if($('input[name="shopSettingFl"]:checked').val() == 'y'){
-            $('.shopSettingFl').show();
-        }else if($('input[name="shopSettingFl"]:checked').val() == 'n'){
-            $('.shopSettingFl').hide();
-        }
     }
 
     $(document).ready(function () {

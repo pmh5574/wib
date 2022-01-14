@@ -1,44 +1,12 @@
 //고객센터 클릭하면 밑에 나오게
-
-$(function() {
-    'use strict';
-
-    var color = {
-        brown: "color:#560000;font-size:11px;",
-        blue: "color:#4da4e0;font-size:24px;margin-top:20px"
-    };
-
-    if (typeof console === "object" && console.log && typeof console.log === "function") {
-        if (isUA('chrome') && !isUA('edge')) {
-            console.log(
-                "%c██████     ███████    ███████    ██       ██████      ███    ██    ██       ██w     ██████\
-                \n%c██   ██    ██         ██         ██     ██            ████   ██    ██       ██w     ██        ██\
-                \n%c██   ██    █████      ███████    ██     ██    ███     ██ ██  ██    ██   █   ██w     ██████\
-                \n%c██   ██    ██              ██    ██     ██     ██     ██  ██ ██     ██ ███ ██w     ██        ██\
-                \n%c██████     ███████    ███████    ██       ██████      ██   ████      ███ ███w     ██████\
-                \n%c디자인에 감성을 더하다.\n", 
-                
-				color.brown, 
-				color.brown, 
-				color.brown, 
-				color.brown, 
-				color.brown, 
-				color.blue, 
-            );
-        }
-        console.log("\x3e \x3e \x3e https://www.designwib.co.kr/\n")
-    }
-
-    function isUA(userAgent) {
-        return navigator.userAgent.toLowerCase().indexOf(userAgent) > -1;
-    }
-});
-
-
-
 $(function(){
     $('.custlist .cs').click(function(){
-        $(this).next().slideToggle();
+        if($(this).next().hasClass('on')){
+            $(this).next().removeClass('on');
+        }else{
+            $(this).next().addClass('on');
+        };
+        
     });
 }); 
 
@@ -83,26 +51,26 @@ $(document).ready(function(){
 
 	
 	// 탑배너 쿠키
-	if ($.cookie("topBanner") == undefined) {
-		$("header .banner-area").show();
-		$("#header_warp").removeClass("no-banner").addClass("y-banner");
-	}
-	else if ($.cookie('topBanner') == '1'){
-		$("header .banner-area").hide();
-		$("#header_warp").addClass("no-banner").removeClass("y-banner");
-	}        
-	else if ($.cookie('topBanner') == '0'){
-		$("header .banner-area").show();		
-		$("#header_warp").removeClass("no-banner").addClass("y-banner");
-	}        
-	$("header .banner-area em.close").click(function() {
-		$("header .banner-area").slideUp();
-		$("#header_warp").addClass("no-banner").removeClass("y-banner");
-		$.cookie('topBanner', '1', {
-			expires: 1,
-			path: '/'
-		});
-	});
+    if ($.cookie("topBanner") == undefined) {
+        $("header .banner-area").show();
+        $("#header_warp").removeClass("no-banner").addClass("y-banner");
+    }
+    else if ($.cookie('topBanner') == '1'){
+        $("header .banner-area").hide();
+        $("#header_warp").addClass("no-banner").removeClass("y-banner");
+    }        
+    else if ($.cookie('topBanner') == '0'){
+        $("header .banner-area").show();		
+        $("#header_warp").removeClass("no-banner").addClass("y-banner");
+    }        
+    $("header .banner-area em.close").click(function() {
+        $("header .banner-area").slideUp();
+        $("#header_warp").addClass("no-banner").removeClass("y-banner");
+        $.cookie('topBanner', '1', {
+            expires: 1,
+            path: '/'
+        });
+    });
 
 	// 스크롤시 헤더 픽스
 	$(window).on("load scroll", function(){
@@ -112,12 +80,15 @@ $(document).ready(function(){
 		else {
 			$("#header_warp").removeClass("scroll");
 		}
+
+		console.log($( document ).scrollTop());
 	});
 
 	// 헤더 고객센터 슬라이드다운 메뉴
 	csToggle = function(){
 		$csBtn.click(function(){
 			$(this).toggleClass("on");
+          
 		});
 	}();
 

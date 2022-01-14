@@ -69,8 +69,8 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         $arrField = parent::tableGoods($conf);
         
         // 211216 디자인위브 mh 추가
-        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
-        $arrField[] = ['val' => 'shopSettingFl', 'typ' => 's', 'def' => 'n',]; //상점 구분 사용 여부
+//        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+//        $arrField[] = ['val' => 'shopSettingFl', 'typ' => 's', 'def' => 'n',]; //상점 구분 사용 여부
 //        $arrField[] = ['val' => 'partnersGoodsNo', 'typ' => 's', 'def' => null]; // 협력사 상품 번호
 //        $arrField[] = ['val' => 'partnersCategory', 'typ' => 's', 'def' => null]; // API 카테고리
 //        $arrField[] = ['val' => 'partnersFixedPrice', 'typ' => 's', 'def' => null]; // 공급가(외화)
@@ -87,8 +87,8 @@ class DBTableField extends \Bundle\Component\Database\DBTableField
         $arrField = parent::tableGoodsSearch();
         
         // 211216 디자인위브 mh 추가
-        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
-        $arrField[] = ['val' => 'shopSettingFl', 'typ' => 's', 'def' => 'n',]; //상점 구분 사용 여부
+//        $arrField[] = ['val' => 'shopSetting', 'typ' => 's', 'def' => null,]; //상점 구분 2:프리미엄샵 3:뉴니아
+//        $arrField[] = ['val' => 'shopSettingFl', 'typ' => 's', 'def' => 'n',]; //상점 구분 사용 여부
 //        $arrField[] = ['val' => 'partnersGoodsNo', 'typ' => 's', 'def' => null]; // 협력사 상품 번호
 //        $arrField[] = ['val' => 'partnersCategory', 'typ' => 's', 'def' => null]; // API 카테고리
 //        $arrField[] = ['val' => 'partnersFixedPrice', 'typ' => 's', 'def' => null]; // 공급가(외화)
