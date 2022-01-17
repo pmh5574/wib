@@ -24,7 +24,7 @@
 
         switch (fileCd) {
 
-            case 'brand':
+            case 'best_brand':
                 title = "브랜드";
                 addParam['size'] = "wide";
                 addParam['dataInputNm'] = dataInputNm != '' ? dataInputNm : fileCd + "Cd";
@@ -64,10 +64,10 @@
 
         var chkCnt = $('input[name="layer_brand[]"]:checked').length;
         if (chkCnt == 0) {
-            alert('선택된 상품이 없습니다.');
+            alert('선택된 브랜드가 없습니다.');
             return;
         }
-        if (confirm('선택한 ' + chkCnt + '개 상품을 삭제하시겠습니까?')) {
+        if (confirm('선택한 ' + chkCnt + '개 브랜드를 삭제하시겠습니까?')) {
             $('input[name="layer_brand[]"]:checked').each(function () {
                 field_remove('tbl_brand_' + $(this).val());
             });

@@ -870,5 +870,41 @@ class WibBrand
 
         return $cnt;
     }
+    
+    /**
+     * 220117 디자인위브 mh 인기 브랜드 추가
+     * 
+     * @param array $postValue Description
+     */
+    public function putSaveBestBrand($postValue)
+    {
+
+        $list = serialize($postValue['brandCd']);
+        
+        $data = [
+            'wib_bestBrand',
+            [
+                'brandContent' => [$list, 's'],
+                'modDt' => [date('Y-m-d H:i:s'), 's']
+            ],
+            ['sno' => [1, 'i']]
+        ];
+        $this->wibSql->WibUpdate($data);  
+             
+
+    }
+    
+    /**
+     * 인기 브랜드 
+     * 
+     * @return array 인기 브랜드 리스트
+     */
+    public function getBestBrand()
+    {
+        $sql = "SELECT brandContent FROM wib_bestBrand WHERE sno = 1";
+        $bestData = $this->wibSql->WibNobind($sql);
+        
+        print_r(unserialize(stripslashes($bestData['brandContent'])));
+    }
 }
 

@@ -2,6 +2,7 @@
 
 namespace Controller\Admin\Goods;
 
+use Component\Wib\WibBrand;
 
 class GoodsBestBrandController extends \Controller\Admin\Controller
 {
@@ -15,5 +16,9 @@ class GoodsBestBrandController extends \Controller\Admin\Controller
                 'jquery/jquery.multi_select_box.js',
             ]
         );
+        
+        $wibBrnad = new WibBrand();
+        
+        $data = $wibBrnad->getBestBrand();
     }
 }

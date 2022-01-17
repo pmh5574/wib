@@ -127,7 +127,7 @@
             'cateNm': cateNm,
             'pagelink': pagelink
         };
-        $.get('../share/layer_brand.php', parameters, function (data) {
+        $.get('../share/layer_best_brand.php', parameters, function (data) {
             $('#<?php echo $layerFormID?>').html(data);
         });
     }
@@ -140,7 +140,7 @@
 
         var applyGoodsCnt = 0;
         var chkGoodsCnt = 0;
-        var allCnt = $("#<?= $parentFormID; ?> tbody tr").legnth;
+        var allCnt = $("#<?= $parentFormID; ?> tbody tr").length ? $("#<?= $parentFormID; ?> tbody tr").length : 0 ;
         
         var resultJson = {
             mode: "<?php echo $mode?>",
@@ -164,10 +164,10 @@
         });
         
         allCnt+=applyGoodsCnt;
-        console.log(allCnt);
-        console.log(applyGoodsCnt);
+
         if(allCnt > 10){
             alert('인기 브랜드는 최대 10개까지 등록 가능합니다.');
+            return false;
         }
 
         if (applyGoodsCnt > 0) {
@@ -263,6 +263,13 @@
         /*if($("input[name='brandNoneFl']").length > 0){
             $("input[name='brandNoneFl']").prop("checked", false);
         }*/
+
+        var number_length = $("#" + data.parentFormID + " tbody .num_reset").length;
+        
+        $("#" + data.parentFormID + " tbody .num_reset").each(function(){
+            $(this).html(number_length);
+            number_length--;
+        });
     }
     //-->
 </script>
@@ -290,8 +297,9 @@
     <tr id="tbl_brand_<%=cateCd%>">
         <td class="center">
             <input type="checkbox" id="layer_brand_<%=cateCd%>" name="layer_brand[]" value="<%=cateCd%>"/>
+            <input type="hidden" name="brandCd[]" value="<%=cateCd%>"/>
         </td>
-        <td class="center num_cnt_<%=cateCd%>"><%=num%></td>
+        <td class="center num_cnt_<%=cateCd%> num_reset"><%=num%></td>
         <td class="center">
             <label for="layer_brand_<%=cateCd%>" class="hand"><%=cateNm%></label>
             <input type="hidden" id="cateNm_<%=cateCd%>" value="<%=cateNm%>"/>
