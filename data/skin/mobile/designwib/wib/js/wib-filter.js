@@ -75,12 +75,12 @@ var wibFilter = {
         });
         
         //창 닫기시 리셋이랑 같은 효과
-        $(document).on('click', '.filter-close', function(e){
-            e.preventDefault();
-            _this.filterReset();
-            
-            $(".filter-area").hide();
-        });
+//        $(document).on('click', '.filter-close', function(e){
+//            e.preventDefault();
+//            _this.filterReset();
+//            
+//            $(".filter-area").hide();
+//        });
 
     },
     

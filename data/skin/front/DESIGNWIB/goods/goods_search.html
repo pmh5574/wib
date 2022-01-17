@@ -114,8 +114,8 @@
 					<!-- //goods_pick_list -->
 				</div>
 				
-
-				<div class="goods_list">
+                            <div class="filter_goods_list">
+                                <div class="goods_list">
 					<!-- //goods_list_tit -->
 					<div class="goods_list_cont">
 						{ # goodsTemplate }
@@ -128,6 +128,8 @@
 					{page->getPage()}
 				</div>
 				<!-- //pagination -->
+                            </div>
+				
 			</div>
 			<!-- //goods_search_cont -->
 		</div>
@@ -149,8 +151,8 @@
 
         $('input[name=sort]').click(function() {
             quickBrandFl = true;
-            $('form[name=frmSearch] input[name="sort"]').val($(this).val());
-            $('form[name=frmSearch]').submit();
+//            $('form[name=frmSearch] input[name="sort"]').val($(this).val());
+//            $('form[name=frmSearch]').submit();
         });
 
         $('input[name="sort"][value="{sort}"]').prop("checked","checked")

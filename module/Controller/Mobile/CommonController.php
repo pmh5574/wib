@@ -96,15 +96,16 @@ class CommonController
                 }
                 break;
             default :
-                
-                try {
+                if ($getURI == "/") {
+                    try {
 
-                    $shopNum = "1";
-                    Session::del('WIB_SHOP_NUM');
-                    Session::set('WIB_SHOP_NUM', $shopNum);
+                        $shopNum = "1";
+                        Session::del('WIB_SHOP_NUM');
+                        Session::set('WIB_SHOP_NUM', $shopNum);
 
-                } catch (\Exception $e) {
-                    echo json_encode($e);
+                    } catch (\Exception $e) {
+                        echo json_encode($e);
+                    }
                 }
                 
                 break;

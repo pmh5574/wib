@@ -19,7 +19,7 @@ class GoodsFilterPsController extends \Controller\Front\Controller
                 echo $data;
                 break;
             case 'getSearchBrand':
-                $data = $wibGoods->getSearchBrandList(gd_isset($postValue['orderBy']), $postValue['goodsNm']);
+                $data = $wibGoods->getSearchBrandList(gd_isset($postValue['brandNm']), gd_isset($postValue['orderBy']), $postValue['goodsNm']);
                 echo $data;
                 break;
             default :

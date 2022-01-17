@@ -1,0 +1,73 @@
+<script type="text/javascript" src="{=setBrowserCache('../wib/js/wib-filter-search.js')}"></script>
+
+<div class="filter-title">
+	<p>필터</p>
+	<a href="javascript:;" class="filter-close"></a>
+</div>
+
+<div class="tab">
+	<ul>
+            <li class="on">
+                    <a href="javascript:;">카테고리</a>
+            </li>
+
+            <li>
+                    <a href="javascript:;">브랜드</a>
+            </li>
+	</ul>	
+</div>
+
+<div class="contents-wrap">
+	
+	<!-- 카테고리 탭 -->
+	<div class="content">
+            <div class="filter_color">
+                    <h1>컬러</h1>
+                    <ul class="toggle">
+                            <!--{ @ goodsColorList}-->
+                            <li>     
+                                    <span data-color="{.code}" <!--{ ? .code != 'FFFFFF' }-->style="background:#{.code};"<!--{ / }-->style="border:1px solid #ECECEC">{.code}</span>
+                            </li>
+                            <!--{ / }-->
+                    </ul>    
+                    <div class="hiddenColor" style="display:none"></div>
+            </div>
+	</div>
+
+	<!-- 브랜드 탭 -->
+	<div class="content">
+		<div class="filter_brand">
+			<div class="toggle">
+				<div class="brand_order_by">
+					<span class="on" data-order-by="">ABC</span>
+					<span data-order-by="kr">가나다</span>
+				</div>
+				<div class="search">
+					<input type="text" id="filterBrandNm" placeholder="브랜드를 검색해주세요">
+					<button class="search"><img src="/data/skin/front/DESIGNWIB/wib/img/serch_fil.png" /></button>
+				</div>
+				<ul class="filterBrandList">
+				</ul>
+			</div>
+			<div class="hiddenBrand" style="display:none"></div>
+		</div>
+
+		<div class="filter-btn">
+			<a class="btn-reset" href="javascript:;"><i class="reset"></i>초기화</a>
+			<a class="filter-submit-button" href="javascript:;">필터적용</a>
+		</div>
+	</div>
+
+</div>
+
+<div class="filter_result">
+    <ul>
+        <li class="fBrand filterVal"></li>
+        <li class="fColor filterVal"></li>
+    </ul>
+</div>
+
+<script>
+
+</script>
+

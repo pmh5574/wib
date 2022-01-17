@@ -13,6 +13,7 @@
  */
 namespace Widget\Front\Proc;
 
+use Session;
 /**
  * Class MypageQnaController
  *
@@ -21,4 +22,32 @@ namespace Widget\Front\Proc;
  */
 class CategorySideWidget extends \Bundle\Widget\Front\Proc\CategorySideWidget
 {
+    public function post()
+    {
+        $categoryData = $this->getData('data');
+        
+        $cateCd = Session::get('WIB_SHOP_NUM');
+        
+        $data = [];
+        //2차 카테고리부터 노출
+        foreach ($categoryData as $value){
+            
+            if($cateCd != '1'){ // 프리미엄 멀티샵, 뉴니아
+                
+                if($value['cateCd'] == $cateCd){
+                    $data = $value['children'];
+                }
+                
+            }else if($cateCd == '1'){ //블루
+                
+                foreach ($value['children'] as $key => $val) {
+                    $data[] = $val;
+                }
+                
+            }
+            
+        }
+        
+        $this->setData('data', $data);
+    }
 }

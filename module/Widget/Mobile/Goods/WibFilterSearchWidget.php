@@ -11,15 +11,14 @@
  * @copyright ⓒ 2016, NHN godo: Corp.
  * @link http://www.godo.co.kr
  */
-namespace Widget\Front\Goods;
+namespace Widget\Mobile\Goods;
 
 use Component\Wib\WibGoods;
 use Request;
 
 
-class WibFilterSearchWidget extends \Widget\Front\Widget
+class WibFilterSearchWidget extends \Widget\Mobile\Widget
 {
-    
     public function index()
     {
         $wibGoods = new WibGoods();

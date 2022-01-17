@@ -104,13 +104,19 @@ class WibGoods
         return $data;
     }
     
-    //카테고리별 가지고 있는 컬러만 노출
+    /**
+     * 카테고리별 가지고 있는 컬러만 노출
+     * 
+     * @param string $cateCd 카테고리 번호
+     * @param string $cateType 카테고리 구분
+     * 
+     * @return array 컬러 리스트
+     */
     public function getColorList($cateCd, $cateType)
     {
         
         $goodsNoList = [];
         //2차 카테고리 기준
-//        $cateCd = substr($cateCd,0,6);
         
         $cbNm = 'Category';
         if($cateType == 'brand'){
@@ -122,6 +128,95 @@ class WibGoods
         $result = $this->wibSql->WibAll($query);
         
         
+
+        foreach ($result as $value){
+            
+            //다시 그 카테고리 전체에 해당하는 goodsNo에 color값을 호출
+            $query = "SELECT goodsColor FROM es_goods WHERE goodsNo = {$value['goodsNo']} AND goodsDisplayFl = 'y'";
+            $res = $this->wibSql->WibNobind($query);
+            
+            if(strpos($res['goodsColor'],'^|^') !== false){
+                
+                //컬러값 여러개면 체크해서 잘라서 넣어주기
+                $_color = explode('^|^',$res['goodsColor']);
+                foreach ($_color as $val){
+
+                    $goodsNoList[$val] = $val;
+                }
+                
+            }else{
+                if($res['goodsColor']){
+                    
+                    //key값을 color값으로 해서 중복되는것도 한번만 넣어줌
+                    $goodsNoList[$res['goodsColor']] = $res['goodsColor'];
+
+                }
+            }
+            
+            
+        }
+        
+        $colorList = [];
+        
+        //해당 컬러칩을 다시 배열 한개당 하나씩 만듬
+        foreach($goodsNoList as $value){
+            $colorList[]['code'] = $value;
+        }
+        
+        return $colorList;
+    }
+    
+    /**
+     * 검색 페이지 가지고 있는 컬러만 노출
+     * 
+     * @param string $goodsNm 검색값
+     * 
+     * @return array 컬러 리스트
+     */
+    public function getSearchColorList($goodsNm)
+    {
+        
+        $terms = gd_policy('search.terms');
+        $searchTerms = $terms['settings'] == null ? ['goodsNm'] : $terms['settings']; // 통합 검색 조건
+        
+        $arrWhereAll = [];
+        
+        //고도 기본소스 변경
+        foreach($searchTerms as $termsVal) {
+            if($termsVal == 'brandNm') {
+                
+                $arrWhereAll[] = 'cb.cateNm LIKE concat(\'%'.$goodsNm.'%\')';
+                
+            } else if($termsVal == 'goodsNm') {
+                
+                $arrWhereAll[] = '(REPLACE(g.' . $termsVal . ', \' \', \'\') LIKE concat(\'%'.$goodsNm.'%\') OR g.' . $termsVal . ' LIKE concat(\'%'.$goodsNm.'%\'))';
+
+            } else {
+                
+                $arrWhereAll[] = 'g.' . $termsVal . ' LIKE concat(\'%'.$goodsNm.'%\')';
+
+            }
+        }
+        
+        $searchWhere = '(' . implode(' OR ', $arrWhereAll) . ')';
+        
+        
+        
+        //해당 카테고리에 전체에 해당하는 goodsNo를 새롭게 배열로 만듬
+        $query = "SELECT 
+                    goodsNo 
+                FROM 
+                    es_goods g 
+                LEFT JOIN
+                    es_categoryBrand cb 
+                ON
+                    cb.cateCd = g.brandCd 
+                WHERE 
+                    {$searchWhere}
+                ";
+        $result = $this->wibSql->WibAll($query);
+        
+        $goodsNoList = [];
 
         foreach ($result as $value){
             
@@ -181,9 +276,29 @@ class WibGoods
             $orderBy = 'CASE WHEN cateKrNm Is null Then 1 WHEN cateKrNm = "" Then 1 Else 0 END, cateKrNm ASC, cateNm ASC';
         }
         
+        if(Request::isMobile()){
+            $cateDisplayMode = "cateDisplayMobileFl = 'y'";
+        }else{
+            $cateDisplayMode = "cateDisplayFl = 'y'";
+        }
+        
         if($cateCd){
             //해당 카테고리에 전체에 해당하는 goodsNo를 새롭게 배열로 만듬
-            $sql = "SELECT g.brandCd FROM  es_goods g LEFT JOIN es_goodsLinkCategory glc ON glc.goodsNo = g.goodsNo WHERE glc.cateCd = '{$cateCd}' GROUP BY g.brandCd";
+            $sql = "SELECT 
+                        g.brandCd 
+                    FROM 
+                        es_goods g 
+                    LEFT JOIN 
+                        es_goodsLinkCategory glc 
+                    ON 
+                        glc.goodsNo = g.goodsNo 
+                    WHERE 
+                        glc.cateCd = '{$cateCd}' 
+                    AND 
+                        glc.cateLinkFl = 'y' 
+                    AND 
+                        g.delFl = 'n' 
+                    GROUP BY g.brandCd";
             $result = $this->wibSql->WibAll($sql);
             
             $brandCdArr = [];
@@ -193,7 +308,18 @@ class WibGoods
             }
             $brandCdWhere = implode(' OR ', $brandCdArr);
             
-            $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 AND ({$brandCdWhere}) {$where} ORDER BY {$orderBy} ";
+            $query = "SELECT 
+                        sno, cateNm, cateKrNm, cateCd 
+                    FROM 
+                        es_categoryBrand 
+                    WHERE 
+                        length(cateCd) = 3 
+                    AND 
+                        ({$brandCdWhere}) 
+                        {$where} 
+                    AND 
+                        {$cateDisplayMode} 
+                    ORDER BY {$orderBy} ";
             $data = $this->wibSql->WibAll($query);
             
             $code = 0;
@@ -205,7 +331,7 @@ class WibGoods
             return json_encode(['code' => $code,'data' => $data]);
             
         }else{
-            $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} ORDER BY {$orderBy} ";
+            $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 {$where} AND {$cateDisplayMode} ORDER BY {$orderBy} ";
             $data = $this->wibSql->WibAll($query);
 
             $code = 0;
@@ -228,12 +354,84 @@ class WibGoods
      * 
      * @return json 브랜드 정보
      */
-    public function getSearchBrandList($orderByCheck = null, $goodsNm)
+    public function getSearchBrandList($brandNm = null, $orderByCheck = null, $goodsNm)
     {
-        $code = 1;
-        print_r($goodsNm);
-        print_r('qweqeqweqwe');
-//        return json_encode(['code' => $code,'data' => $goodsNm]);
+        if($brandNm){
+            $where = " AND cateNm LIKE '%{$brandNm}%' OR cateKrNm LIKE '%{$brandNm}%' ";
+        }
+        
+        $orderBy = 'cateNm ASC';
+        if($orderByCheck){
+            $orderBy = 'CASE WHEN cateKrNm Is null Then 1 WHEN cateKrNm = "" Then 1 Else 0 END, cateKrNm ASC, cateNm ASC';
+        }
+        
+        $terms = gd_policy('search.terms');
+        $searchTerms = $terms['settings'] == null ? ['goodsNm'] : $terms['settings']; // 통합 검색 조건
+        
+        $arrWhereAll = [];
+        
+        if(Request::isMobile()){
+            $cateDisplayMode = "cateDisplayMobileFl = 'y'";
+        }else{
+            $cateDisplayMode = "cateDisplayFl = 'y'";
+        }
+        
+        //고도 기본소스 변경
+        foreach($searchTerms as $termsVal) {
+            if($termsVal == 'brandNm') {
+                
+                $arrWhereAll[] = 'cb.cateNm LIKE concat(\'%'.$goodsNm.'%\')';
+                
+            } else if($termsVal == 'goodsNm') {
+                
+                $arrWhereAll[] = '(REPLACE(g.' . $termsVal . ', \' \', \'\') LIKE concat(\'%'.$goodsNm.'%\') OR g.' . $termsVal . ' LIKE concat(\'%'.$goodsNm.'%\'))';
+
+            } else {
+                
+                $arrWhereAll[] = 'g.' . $termsVal . ' LIKE concat(\'%'.$goodsNm.'%\')';
+
+            }
+        }
+        
+        $searchWhere = '(' . implode(' OR ', $arrWhereAll) . ')';
+        
+        //해당 카테고리에 전체에 해당하는 goodsNo를 새롭게 배열로 만듬
+        $sql = "SELECT 
+                    g.brandCd 
+                FROM 
+                    es_goods g 
+                LEFT JOIN 
+                    es_categoryBrand cb 
+                ON 
+                    cb.cateCd = g.brandCd 
+                WHERE 
+                    {$searchWhere} 
+                AND 
+                    cb.{$cateDisplayMode} 
+                AND 
+                    g.delFl = 'n' 
+                GROUP BY g.brandCd";
+        $result = $this->wibSql->WibAll($sql);
+
+        $brandCdArr = [];
+
+        foreach ($result as $value) {
+            $brandCdArr[] = " cateCd = '{$value['brandCd']}'";
+        }
+        $brandCdWhere = implode(' OR ', $brandCdArr);
+
+        $query = "SELECT sno, cateNm, cateKrNm, cateCd FROM es_categoryBrand WHERE length(cateCd) = 3 AND ({$brandCdWhere}) {$where} AND {$cateDisplayMode} ORDER BY {$orderBy} ";
+
+        $data = $this->wibSql->WibAll($query);
+
+        $code = 0;
+
+        if(count($data) == 0){
+            $code = 1;
+        }
+
+        return json_encode(['code' => $code,'data' => $data]);
+
     }
     
     public function setGoodsPmsNna() 

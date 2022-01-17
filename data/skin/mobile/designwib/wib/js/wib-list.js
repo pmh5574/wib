@@ -53,6 +53,10 @@ $(function(){
 	$(".filter-button").click(function(){
 		$(".filter-area").stop().fadeIn();
 	});
+        
+        $('.filter-submit-button, .filter-close').click(function(){
+             $(".filter-area").hide();
+        });
 	
 
 });
